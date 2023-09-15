@@ -1,14 +1,16 @@
 import React from 'react';
 import './App.sass';
 
-import Header from '../header/Header';
+import NavBar from '../navBar/NavBar';
 import SideMenu from '../sideMenu/SideMenu'
+import Header from '../header/Header';
 
 function App() {
   return (
     <div className="App">
-      <Header/>
+      <NavBar/>
       <SideMenu/>
+      <Header/>
     </div>
   );
 }

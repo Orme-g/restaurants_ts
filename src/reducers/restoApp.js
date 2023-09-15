@@ -2,19 +2,17 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 const initialState = {
-    sideMenu: false,
-    check: 0
+    sideMenu: false
 }
 
 const restoSlice = createSlice({
-    name: 'resto',
+    name: 'interactive',
     initialState,
     reducers: {
-        toggleMenu: state => { state.sideMenu = !state.sideMenu },
-        tryCheck: state => {state.check = state.check + 1}
+        toggleSideMenu: state => { state.sideMenu = !state.sideMenu }
     }
 })
 
 const {actions, reducer} = restoSlice
 export default reducer
-export const {toggleMenu, tryCheck} = actions
+export const {toggleSideMenu} = actions
