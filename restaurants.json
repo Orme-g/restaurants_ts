@@ -2,18 +2,36 @@
   "restaurants": [
     {
       "id": 1,
-      "name": "Макдональдс",
-      "description": "Фастфуд"
+      "name": "Терасса",
+      "short_description": "Видовой ресторан в самом сердце Санкт-Петербурга с видом на Казанский собор.",
+      "images": ["https://media.kudago.com/thumbs/xl/images/list/a6/75/a6759fb7190e4448f4ef24e73b151207.jpg"],
+      "cousine": ["европейская", "итальянская", "русская", "азиатская"],
+      "rating": 4.3,
+      "adress": "Улица Маяковского, 21",
+      "bill": 12500,
+      "phone": "8-(800)-555-35-35"
     },
     {
       "id": 2,
       "name": "КФС",
-      "description": "Жареная курица"
+      "short_description": "Лучшая жареная курица в городе! А может и в мире??",
+      "images": ["https://www.retail.ru/upload/medialibrary/367/kd1_3675_1.jpg"],
+      "cousine": ["американская", "жирная", "азиатская"],
+      "rating": 2.7,
+      "adress": "Петергофск, ТЦ Дам-Лама",
+      "bill": 700,
+      "phone": "8-(812)-555-75-75"
     },
     {
       "id": 3,
-      "name": "Столовая",
-      "description": "Как дома"
+      "name": "Копейка",
+      "short_description": "Когда-то лучшая столовая, но те времена давно прошли...",
+      "images": ["https://img04.rl0.ru/afisha/o/www.afisha.ru/uploads/29d6fc29c3ea45f89176f500940c1e77.jpg"],
+      "cousine": ["русская", "жирная", "дешевая"],
+      "rating": 3.4,
+      "adress": "Улица Хрючинского, 57б",
+      "bill": 300,
+      "phone": "8-(812)-155-15-15"
     }
   ],
   "filters": [
