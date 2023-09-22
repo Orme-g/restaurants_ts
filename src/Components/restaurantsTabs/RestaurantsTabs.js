@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Box, Tab } from '@mui/material'
 import {TabContext, TabList, TabPanel} from '@mui/lab'
 
-import FeedbackItem from '../feedbackItem/FeedbackItem'
+import FeedbackItem from '../feedbackItem/FeedbackCard'
 import './restaurantsTabs.sass'
 
 const RestaurantsTabs = () => {
@@ -41,18 +41,6 @@ const RestaurantsTabs = () => {
             <a href="https://ginza.ru/assets/files/20230913/27e44e1ecbae742adbd450c1b16df731.pdf">
                 Перейти для просмотра меню
             </a>
-            </div>
-            <div className='grid-container'>
-                <div className="grid-elem">1</div>
-                <div className="grid-elem">2</div>
-                <div className="grid-elem">3</div>
-                <div className="grid-elem">4</div>
-                <div className="grid-elem">5</div>
-                <div className="grid-elem">6</div>
-                <div className="grid-elem">7</div>
-                <div className="grid-elem">8</div>
-                <div className="grid-elem">9</div>
-                <div className="grid-elem">10</div>
             </div>
         </TabPanel>
         <TabPanel value="3">
