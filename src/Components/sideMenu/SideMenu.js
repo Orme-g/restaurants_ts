@@ -2,6 +2,7 @@ import { Drawer, List, ListItemButton, ListItemIcon, ListItemText, Collapse } fr
 import { useSelector, useDispatch } from "react-redux"
 import { toggleSideMenu } from "../../reducers/restoApp"
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import SearchIcon from '@mui/icons-material/Search';
@@ -32,19 +33,23 @@ const SideMenu = () => {
             open={sideMenu}
             onClose={() => dispatch(toggleSideMenu())}
             >
-            <List sx={{width: '300px'}}>
-                <ListItemButton>
-                    <ListItemIcon>
-                        <HomeOutlinedIcon fontSize="medium"/>
-                    </ListItemIcon>
-                    <ListItemText primary='Главная страница'/>
-                </ListItemButton>
-                <ListItemButton>
-                    <ListItemIcon>
-                        <SearchIcon fontSize="medium"/>
-                    </ListItemIcon>
-                    <ListItemText primary='Подобрать ресторан'/>
-                </ListItemButton>
+            <List sx={{width: '300px'}} className="side-list">
+               <Link to='/'> 
+                    <ListItemButton>
+                        <ListItemIcon>
+                            <HomeOutlinedIcon fontSize="medium"/>
+                        </ListItemIcon>
+                        <ListItemText primary='Главная страница'/>
+                    </ListItemButton>
+                 </Link>
+                <Link to='*'>  
+                    <ListItemButton>
+                        <ListItemIcon>
+                            <SearchIcon fontSize="medium"/>
+                        </ListItemIcon>
+                        <ListItemText primary='Подобрать ресторан'/>
+                    </ListItemButton>
+                </Link>
                 <ListItemButton>
                     <ListItemIcon>
                         <StarBorderOutlinedIcon fontSize="medium"/>

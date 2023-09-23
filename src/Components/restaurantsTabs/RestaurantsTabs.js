@@ -44,7 +44,11 @@ const RestaurantsTabs = () => {
             </div>
         </TabPanel>
         <TabPanel value="3">
-            <FeedbackItem/>
+            <div className='restaurants-tabs__feedback'>
+                <FeedbackItem/>
+                <FeedbackItem/>
+                
+            </div>
         </TabPanel>
       </TabContext>
     </Box>

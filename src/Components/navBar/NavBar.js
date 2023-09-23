@@ -14,10 +14,9 @@ import './navBar.sass'
 const NavBar = () => {
 
     const dispatch = useDispatch()
-    // const color = blueGrey[100]
 
     return (
-            <AppBar color='transparent'>
+            <AppBar color='inherit'>
                 <Toolbar>
                     <IconButton  onClick={() => dispatch(toggleSideMenu())} color='inherit'>
                         <MenuIcon/>

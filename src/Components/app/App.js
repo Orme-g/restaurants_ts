@@ -1,22 +1,29 @@
 import React from 'react';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+
 import './App.sass';
 
-import NavBar from '../navBar/NavBar';
-import SideMenu from '../sideMenu/SideMenu'
-import Header from '../header/Header';
-import RestaurantsGallery from '../restaurantsGallery/RestaurantsGallery';
+import Navigation from '../navigation/Navigation';
+import MainPage from '../pages/MainPage';
 import SingleRestaurantPage from '../pages/singleRestaurantPage/SingleRestaurantPage';
+import Page404 from '../pages/Page404';
 
 
 function App() {
   return (
-    <div className="App">
-      {/* <NavBar/>
-      <SideMenu/>
-      <Header/> */}
-      {/* <RestaurantsGallery/> */}
-      <SingleRestaurantPage/>
-    </div>
+    <Router>
+      <div className="App">
+        <Navigation/>
+          <Routes>
+            <Route path='/' element={<MainPage/>} />
+            <Route path='/restaurant' element={<SingleRestaurantPage/>} />
+            <Route path='*' element={<Page404/>} />
+          </Routes>
+          {/* <Header/>
+          <RestaurantsGallery/> */}
+          {/* <SingleRestaurantPage/> */}
+      </div>
+    </Router>
   );
 }
 

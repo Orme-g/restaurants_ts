@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useHttp } from '../../hooks/http.hook'
+import { Link } from 'react-router-dom'
 
 import './galleryItem.sass'
 
@@ -25,7 +26,7 @@ const GalleryItem = () => {
                     {short_description}
                 </div>
                 {/* eslint-disable-next-line */}
-                <a className='restaurant-card__link' href="#">Подробнее...</a>
+                <Link to={`/restaurant/:${id}`} className='restaurant-card__link'>Подробнее...</Link>
             </div>
         )
     }

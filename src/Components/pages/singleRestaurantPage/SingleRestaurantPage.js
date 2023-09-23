@@ -1,9 +1,11 @@
 
 
 import './singleRestaurantPage.sass'
+import NavBar from '../../navBar/NavBar'
 import Slider from '../../slider/Slider'
 import RestSideInfo from '../../restSideInfo/RestSideInfo'
 import RestaurantsTabs from '../../restaurantsTabs/RestaurantsTabs'
+
 
 
 const SingleRestaurantPage = () => {
@@ -16,7 +18,7 @@ const SingleRestaurantPage = () => {
             <RestSideInfo/>
             
         </div>
-        <RestaurantsTabs/>
+            <RestaurantsTabs/>
         </>
         
 
