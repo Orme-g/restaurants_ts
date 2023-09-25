@@ -17,7 +17,7 @@ const SingleRestaurantPage = () => {
     const {restaurantData, pageLoading} = useSelector(state => state.restaurantPage)
     const dispatch = useDispatch()
     const {restId} = useParams()
-    console.log(restId)
+    console.log('render')
 
     useEffect(() => {
         dispatch(fetchRestaurantData())
@@ -28,15 +28,15 @@ const SingleRestaurantPage = () => {
         return <Spinner/>
     }
 
-    const slidesData = restaurantData[restId-1].images
-    const tabsData = [restaurantData[restId-1].description, restaurantData[restId-1].reviews] 
+    const slidesData = restaurantData[restId].images
+    const tabsData = [restaurantData[restId].description, restaurantData[restId].reviews] 
 
 
     return (
         <>
         <div className='restaurant-info__container'>
             <Slider slides={slidesData}/>
-            <RestSideInfo data={restaurantData[restId-1]}/>
+            <RestSideInfo data={restaurantData[restId]}/>
             
         </div>
             <RestaurantsTabs data={tabsData}/>
