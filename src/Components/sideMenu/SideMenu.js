@@ -1,6 +1,6 @@
 import { Drawer, List, ListItemButton, ListItemIcon, ListItemText, Collapse } from "@mui/material"
 import { useSelector, useDispatch } from "react-redux"
-import { toggleSideMenu } from "../../reducers/restoApp"
+import { toggleSideMenu } from "../../reducers/interactive"
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -22,7 +22,7 @@ const SideMenu = () => {
 
     const [contactUs, setContactUs] = useState(false)
     const dispatch = useDispatch()
-    const {sideMenu} = useSelector(state => state.restoReducer)
+    const {sideMenu} = useSelector(state => state.interactive)
     const toggleContact = () => {
         setContactUs(!contactUs)
     }
@@ -35,7 +35,7 @@ const SideMenu = () => {
             >
             <List sx={{width: '300px'}} className="side-list">
                <Link to='/'> 
-                    <ListItemButton>
+                    <ListItemButton onClick={() => dispatch(toggleSideMenu())}>
                         <ListItemIcon>
                             <HomeOutlinedIcon fontSize="medium"/>
                         </ListItemIcon>

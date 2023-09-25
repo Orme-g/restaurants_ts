@@ -1,20 +1,24 @@
 
+
+
 import { Rating } from '@mui/material'
 
 import './restSideInfo.sass'
 
-const RestSideInfo = () => {
 
+const RestSideInfo = ({data}) => {
 
-// Верстку переписать через гриды
+    let {cousine, rating, adress, bill, phone} = data
+
+    cousine = cousine.join(', ')
+
     return (
         <div className='rest-side-info__container'>
             <div className="rest-side-info__rating">
-                {/* Рейтинг: <span className='rating'> 7.6</span> */}
-            Рейтинг: <br/>  <Rating name="read-only" value={3.7} precision={0.1} readOnly />
+            Рейтинг: <br/>  <Rating name="read-only" value={rating} precision={0.1} readOnly />
             </div>
             <div className='rest-side-info__item'>
-                Кухня: <span>Европейская, азиатская, бургеры</span>
+                Кухня: <span>{cousine}</span>
             </div>
             <div className='rest-side-info__item'>
                 Время работы: <br/> 
@@ -22,13 +26,13 @@ const RestSideInfo = () => {
                 <span>ПТ-ВС: 10:00 - 00:00</span>
             </div>
             <div className='rest-side-info__item'>
-                Адрес: <span>ул. Маяковского 11, вход со двора</span>
+                Адрес: <span>{adress}</span>
             </div>
             <div className='rest-side-info__item'>
-                Средний чек: <span>550 &#8381;</span>  
+                Средний чек: <span>{bill} &#8381;</span>  
             </div>
             <div className='rest-side-info__item'>
-                Телефон: <span>8-(800)-555-35-35</span>
+                Телефон: <span>{phone}</span>
             </div>
         </div>
     )

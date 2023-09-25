@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import restoReducer from '../reducers/restoApp'
+import interactive from '../reducers/interactive'
+import restaurantPage from '../reducers/restaurantPage'
 
 
 const store = configureStore({
   reducer: {
-    restoReducer
+    interactive,
+    restaurantPage
   },
   devTools: process.env.NODE_ENV !== 'production',
 });

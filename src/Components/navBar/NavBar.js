@@ -2,7 +2,7 @@
 
 import {AppBar, IconButton, Toolbar, Typography, Button} from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu';
-import { toggleSideMenu } from '../../reducers/restoApp';
+import { toggleSideMenu } from '../../reducers/interactive';
 import { useDispatch } from 'react-redux';
 
 import './navBar.sass'

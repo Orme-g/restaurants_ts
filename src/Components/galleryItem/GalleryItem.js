@@ -26,7 +26,7 @@ const GalleryItem = () => {
                     {short_description}
                 </div>
                 {/* eslint-disable-next-line */}
-                <Link to={`/restaurant/:${id}`} className='restaurant-card__link'>Подробнее...</Link>
+                <Link to={`/restaurant/${id}`} className='restaurant-card__link'>Подробнее...</Link>
             </div>
         )
     }

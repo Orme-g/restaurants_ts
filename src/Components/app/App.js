@@ -16,7 +16,7 @@ function App() {
         <Navigation/>
           <Routes>
             <Route path='/' element={<MainPage/>} />
-            <Route path='/restaurant' element={<SingleRestaurantPage/>} />
+            <Route path='/restaurant/:restId' element={<SingleRestaurantPage/>} />
             <Route path='*' element={<Page404/>} />
           </Routes>
           {/* <Header/>

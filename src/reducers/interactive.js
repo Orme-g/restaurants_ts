@@ -5,7 +5,7 @@ const initialState = {
     sideMenu: false
 }
 
-const restoSlice = createSlice({
+const interactiveSlice = createSlice({
     name: 'interactive',
     initialState,
     reducers: {
@@ -13,6 +13,6 @@ const restoSlice = createSlice({
     }
 })
 
-const {actions, reducer} = restoSlice
+const {actions, reducer} = interactiveSlice
 export default reducer
 export const {toggleSideMenu} = actions
