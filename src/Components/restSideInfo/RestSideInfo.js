@@ -11,7 +11,7 @@ const RestSideInfo = () => {
         <div className='rest-side-info__container'>
             <div className="rest-side-info__rating">
                 {/* Рейтинг: <span className='rating'> 7.6</span> */}
-            Рейтинг: <br/>  <Rating name="read-only" value={2.7} precision={0.1} readOnly />
+            Рейтинг: <br/>  <Rating name="read-only" value={3.7} precision={0.1} readOnly />
             </div>
             <div className='rest-side-info__item'>
                 Кухня: <span>Европейская, азиатская, бургеры</span>
