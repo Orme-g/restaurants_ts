@@ -20,7 +20,7 @@ const SingleRestaurantPage = () => {
     console.log('render')
 
     useEffect(() => {
-        dispatch(fetchRestaurantData())
+        dispatch(fetchRestaurantData(restId))
         // eslint-disable-next-line
     }, [])
 
@@ -29,15 +29,15 @@ const SingleRestaurantPage = () => {
         return <Spinner/>
     }
 
-    const slidesData = restaurantData[restId].images
-    const tabsData = [restaurantData[restId].description, restaurantData[restId].reviews] 
+    const slidesData = restaurantData.images
+    const tabsData = [restaurantData.description, restaurantData.reviews] 
 
 
     return (
         <>
         <div className='restaurant-info__container'>
             <Slider slides={slidesData}/>
-            <RestSideInfo data={restaurantData[restId]}/>
+            <RestSideInfo data={restaurantData}/>
             
         </div>
             <RestaurantsTabs data={tabsData}/>

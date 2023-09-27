@@ -7,7 +7,7 @@ const handleError = (res, error) => {
 const getRestaurants = (req, res) => {
     Restaurant
     .find()
-    .sort({name: 1})
+    // .sort({name: 1})
     .then((restaurants) => {
         res
             .status(200)

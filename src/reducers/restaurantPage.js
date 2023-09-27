@@ -2,15 +2,15 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { useHttp } from "../hooks/http.hook";
 
 const initialState = {
-    restaurantData: [],
+    restaurantData: null,
     pageLoading: 'loading'
 }
 
 export const fetchRestaurantData = createAsyncThunk(
     'restaurantPage/fetchRestaurantData',
-    () => {
+    (restId) => {
         const {request} = useHttp()
-        return request('http://localhost:3001/restaurants')
+        return request(`http://localhost:4000/restaurants/${restId}`)
     }
 )
 

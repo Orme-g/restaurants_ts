@@ -1,6 +1,4 @@
 
-
-
 import Header from "../header/Header";
 import RestaurantsGallery from "../restaurantsGallery/RestaurantsGallery";
 
@@ -15,6 +13,8 @@ const MainPage = () => {
         </>
     )
 }
+
+
 
 
 export default MainPage

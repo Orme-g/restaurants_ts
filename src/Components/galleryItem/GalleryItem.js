@@ -10,23 +10,28 @@ const GalleryItem = () => {
     const {request} = useHttp()
     const [items, setItems] = useState([])
 
+    // useEffect(() => {
+    //     request('http://localhost:3001/restaurants')
+    //     .then(data => setItems(data))
+    //     // eslint-disable-next-line
+    // }, [])
     useEffect(() => {
-        request('http://localhost:3001/restaurants')
+        request('http://localhost:4000/restaurants')
         .then(data => setItems(data))
         // eslint-disable-next-line
     }, [])
 
     const makeGalleryItem = (item) => {
-        const {id, name, short_description, images} = item
+        const {_id, name, short_description, images} = item
         return (
-            <div className='restaurant-card' key={id}>
+            <div className='restaurant-card' key={_id}>
                 <div className='restaurant-card__image' style={{backgroundImage: `url(${images[0]})`}}></div>
                 <div className='restaurant-card__title'>{name}</div>
                 <div className="restaurant-card__description">
                     {short_description}
                 </div>
                 {/* eslint-disable-next-line */}
-                <Link to={`/restaurant/${id}`} className='restaurant-card__link'>Подробнее...</Link>
+                <Link to={`/restaurant/${_id}`} className='restaurant-card__link'>Подробнее...</Link>
             </div>
         )
     }

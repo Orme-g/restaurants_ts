@@ -1,6 +1,4 @@
 
-
-
 import { Rating } from '@mui/material'
 
 import './restSideInfo.sass'
