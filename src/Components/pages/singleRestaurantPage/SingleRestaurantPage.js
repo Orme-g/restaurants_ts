@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchRestaurantData } from '../../../reducers/restaurantPage'
 import { useParams } from 'react-router-dom'
 
+
 import './singleRestaurantPage.sass'
 import Slider from '../../slider/Slider'
 import RestSideInfo from '../../restSideInfo/RestSideInfo'
 import RestaurantsTabs from '../../restaurantsTabs/RestaurantsTabs'
 import Spinner from '../../spinner/Spinner'
-
 
 
 const SingleRestaurantPage = () => {
@@ -24,6 +24,7 @@ const SingleRestaurantPage = () => {
         // eslint-disable-next-line
     }, [])
 
+    
     if (pageLoading === 'loading') {
         return <Spinner/>
     }
