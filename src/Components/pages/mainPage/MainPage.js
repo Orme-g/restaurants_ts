@@ -1,7 +1,6 @@
 
 
 import Header from "../../header/Header";
-import ModalLogin from "../../modalLogin/ModalLogin";
 import RestaurantsGallery from "../../restaurantsGallery/RestaurantsGallery";
 
 import './mainPage.sass'
@@ -13,7 +12,6 @@ const MainPage = () => {
            <Header/>
 
             <RestaurantsGallery/>
-            <ModalLogin/>
         </>
            
     )

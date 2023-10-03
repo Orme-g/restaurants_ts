@@ -1,9 +1,13 @@
-import { Drawer, List, ListItemButton, ListItemIcon, ListItemText, Collapse } from "@mui/material"
+// Common import
 import { useSelector, useDispatch } from "react-redux"
 import { toggleSideMenu } from "../../reducers/interactive"
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
+// MUI Components import
+import { Drawer, List, ListItemButton, ListItemIcon, ListItemText, Collapse } from "@mui/material"
+
+// MUI Icons import
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import SearchIcon from '@mui/icons-material/Search';
 import StarBorderOutlinedIcon from '@mui/icons-material/StarBorderOutlined';
@@ -15,6 +19,7 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 
 
+// Styles import
 import './sideMenu.sass'
 
 
@@ -43,7 +48,7 @@ const SideMenu = () => {
                     </ListItemButton>
                  </Link>
                 <Link to='*'>  
-                    <ListItemButton>
+                    <ListItemButton onClick={() => dispatch(toggleSideMenu())}>
                         <ListItemIcon>
                             <SearchIcon fontSize="medium"/>
                         </ListItemIcon>
@@ -56,12 +61,14 @@ const SideMenu = () => {
                     </ListItemIcon>
                     <ListItemText primary='Лучшая шаверма'/>
                 </ListItemButton>
-                <ListItemButton>
-                    <ListItemIcon>
-                        <ChatOutlinedIcon fontSize="small"/>
-                    </ListItemIcon>
-                    <ListItemText primary='Блог'/>
-                </ListItemButton>
+                <Link to='/blog'>
+                    <ListItemButton onClick={() => dispatch(toggleSideMenu())}>
+                        <ListItemIcon>
+                            <ChatOutlinedIcon fontSize="small"/>
+                        </ListItemIcon>
+                        <ListItemText primary='Блог'/>
+                    </ListItemButton>
+                </Link>
 
                 <ListItemButton onClick={toggleContact}>
                     <ListItemIcon>

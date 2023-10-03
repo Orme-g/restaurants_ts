@@ -9,7 +9,7 @@ import {Stack, TextField, Button} from '@mui/material'
 import {toggleModalWindowLogin} from '../../reducers/interactive'
 
 
-
+import './modalLogin.sass'
 
 
 const ModalLogin = () => {
@@ -32,44 +32,50 @@ const onSubmit = (data) => {
 
 
     return (
-        <div>
-            <Dialog open={modalWindowLogin} onClose={() => dispatch(toggleModalWindowLogin())}>
-        <DialogTitle>Вход в аккаунт</DialogTitle>
-        <DialogContent>
-          <DialogContentText mb={2}>
-            Войдите в систему, чтобы открыть все возможности Whereats
-          </DialogContentText>
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <Stack spacing={2} width={300} mb={2}>
-                <TextField 
-                label='Логин' 
-                size='small' 
-                {...register('login',{
-                    required: 'Введите логин'
-                })}
-                error={!!errors.login}
-                helperText={errors.login?.message}
-                />
-                <TextField 
-                label='Пароль' 
-                type='password' 
-                size='small'
-                {...register('password', {
-                    required: 'Введите пароль'
-                })}
-                error={!!errors.password}
-                helperText={errors.password?.message}
-                />
-            </Stack>
-            <Button type='submit'>Войти</Button>
-            <Button onClick={() => dispatch(toggleModalWindowLogin())}>Отмена</Button>
-        </form>
-        <DevTool control={control}/>
-        </DialogContent>
-        {/* <DialogActions>
-        </DialogActions> */}
-      </Dialog>
-        </div>
+        
+        <Dialog open={modalWindowLogin} onClose={() => dispatch(toggleModalWindowLogin())}>
+            <DialogTitle>Вход в аккаунт</DialogTitle>
+                <DialogContent>
+                    <DialogContentText mb={2}>
+                        Войдите в систему, чтобы открыть все возможности Whereats
+                    </DialogContentText>
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <Stack spacing={2} width={300} mb={2}>
+                            <TextField 
+                            label='Логин' 
+                            size='small' 
+                            {...register('login',{
+                                required: 'Введите логин'
+                            })}
+                            error={!!errors.login}
+                            helperText={errors.login?.message}
+                            />
+                            <TextField 
+                            label='Пароль' 
+                            type='password' 
+                            size='small'
+                            {...register('password', {
+                                required: 'Введите пароль'
+                            })}
+                            error={!!errors.password}
+                            helperText={errors.password?.message}
+                            />
+                            <div>
+                                {/* eslint-disable-next-line */}
+                                <a href="#" className='forget'>Восстановить пароль</a>
+                                {/* eslint-disable-next-line */}
+                                <a href="#" className='registration'>Регистрация</a>
+                            </div>
+                        </Stack>
+                        <Button type='submit'>Войти</Button>
+                        <Button onClick={() => dispatch(toggleModalWindowLogin())}>Отмена</Button>
+                    </form>
+                    <DevTool control={control}/>
+                </DialogContent>
+            {/* <DialogActions>
+            </DialogActions> */}
+        </Dialog>
+    
     )
 }
 

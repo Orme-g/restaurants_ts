@@ -8,6 +8,8 @@ import MainPage from '../pages/mainPage/MainPage';
 import SingleRestaurantPage from '../pages/singleRestaurantPage/SingleRestaurantPage';
 import Page404 from '../pages/Page404';
 import Footer from '../footer/Footer';
+import Blog from '../pages/blog/Blog';
+import ModalLogin from '../modalLogin/ModalLogin';
 
 
 function App() {
@@ -18,9 +20,11 @@ function App() {
           <Routes>
             <Route path='/' element={<MainPage/>} />
             <Route path='/restaurant/:restId' element={<SingleRestaurantPage/>} />
+            <Route path='/blog' element={<Blog/>} />
             <Route path='*' element={<Page404/>} />
           </Routes>
           <Footer/>
+        <ModalLogin/>
       </div>
     </Router>
   );
