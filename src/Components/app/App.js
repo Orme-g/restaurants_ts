@@ -4,9 +4,10 @@ import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import './App.sass';
 
 import Navigation from '../navigation/Navigation';
-import MainPage from '../pages/MainPage';
+import MainPage from '../pages/mainPage/MainPage';
 import SingleRestaurantPage from '../pages/singleRestaurantPage/SingleRestaurantPage';
 import Page404 from '../pages/Page404';
+import Footer from '../footer/Footer';
 
 
 function App() {
@@ -19,9 +20,7 @@ function App() {
             <Route path='/restaurant/:restId' element={<SingleRestaurantPage/>} />
             <Route path='*' element={<Page404/>} />
           </Routes>
-          {/* <Header/>
-          <RestaurantsGallery/> */}
-          {/* <SingleRestaurantPage/> */}
+          <Footer/>
       </div>
     </Router>
   );

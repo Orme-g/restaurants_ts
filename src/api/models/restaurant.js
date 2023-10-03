@@ -5,7 +5,8 @@ const Schema = mongoose.Schema
 const restaurantSchema = new Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        uppercase: true
     },
     short_description: {
         type: String,
@@ -21,7 +22,8 @@ const restaurantSchema = new Schema({
     }],
     cousine: [{
         type: String,
-        required: true
+        required: true,
+        lowercase: true
     }],
     rating: {
         type: Number,
@@ -41,7 +43,12 @@ const restaurantSchema = new Schema({
     },
     reviews: [{
         type: Object
-    }]
+    }],
+    createdAt: {
+        type: Date,
+        default: () => Date.now(),
+        immutable: true
+    }
 })
 
 const Restaurant = mongoose.model('Restaurant', restaurantSchema)

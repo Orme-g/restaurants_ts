@@ -2,11 +2,10 @@
 
 import {AppBar, IconButton, Toolbar, Typography, Button} from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu';
-import { toggleSideMenu } from '../../reducers/interactive';
+import { toggleSideMenu, toggleModalWindowLogin } from '../../reducers/interactive';
 import { useDispatch } from 'react-redux';
 
 import './navBar.sass'
-
 
 
 
@@ -24,11 +23,12 @@ const NavBar = () => {
                     <Typography 
                     marginLeft='20px'
                     variant='h5'
-                    component='span'>
-                        Ресто
+                    component='span'
+                    sx={{fontWeight: 500, letterSpacing: 1.25}}>
+                        Whereats
                     </Typography>
                     <div className='navbarItems'>
-                        <Button color='inherit'>Войти</Button>
+                        <Button color='inherit' onClick={() => dispatch(toggleModalWindowLogin())}>Войти</Button>
                         <Button color='inherit' sx={{ml: '25px'}}>Помощь</Button>
                     </div>
                 </Toolbar>

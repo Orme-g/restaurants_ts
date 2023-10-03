@@ -8,6 +8,7 @@ import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 
+
 import './slider.sass'
 
 
@@ -35,14 +36,15 @@ const Slider = ({slides}) => {
                 loop={true}
                 spaceBetween={10}
                 navigation={true}
-                thumbs={{ swiper: thumbsSwiper }}
                 modules={[FreeMode, Navigation, Thumbs]}
+                // thumbs={{ swiper: thumbsSwiper }}
+                thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
                 className="mainGallery"
-            >     
+            > 
                     {slideList}
             </Swiper>
             <Swiper
-                // onSwiper={setThumbsSwiper}
+                onSwiper={setThumbsSwiper}
                 spaceBetween={5}
                 slidesPerView={4}
                 freeMode={true}
@@ -53,7 +55,7 @@ const Slider = ({slides}) => {
             >
                 {slideList}
             </Swiper>
-        </div>
+        </div> 
     )
 }
 

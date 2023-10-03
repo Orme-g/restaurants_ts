@@ -4,9 +4,11 @@ const handleError = (res, error) => {
     res.status(500).json({error})
 }
 
+
 const getRestaurants = (req, res) => {
     Restaurant
     .find()
+    // .limit(2)
     // .sort({name: 1})
     .then((restaurants) => {
         res
@@ -28,6 +30,7 @@ const getRestaurantById = (req, res) => {
             })
         .catch((err) => handleError(res, err))
 }
+
 
 const deleteRestaurant = (req, res) => {
     Restaurant
@@ -54,6 +57,7 @@ const postRestaurant = (req, res) => {
         .catch((err) => handleError(res, err))
 }
 
+
 const updateRestaurant = (req, res) => {
     Restaurant
         .findByIdAndUpdate(req.params.id, req.body)    // (id документа, новые данные)
@@ -66,11 +70,14 @@ const updateRestaurant = (req, res) => {
         .catch((err) => handleError(res, err))
 }
 
+
+// Restaurant.findOne({name:'GOOD'}).then(rest => console.log(rest))
+
 module.exports = {
     getRestaurants,
     getRestaurantById,
     deleteRestaurant,
     postRestaurant,
     updateRestaurant,
-    
+
 }

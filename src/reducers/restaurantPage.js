@@ -31,6 +31,6 @@ const restaurantPageSlice = createSlice({
         .addCase(fetchRestaurantData.rejected, state => {state.pageLoading = 'error'})
     }
 })
-
+// eslint-disable-next-line 
 const {actions, reducer} = restaurantPageSlice
 export default reducer
