@@ -55,12 +55,14 @@ const SideMenu = () => {
                         <ListItemText primary='Подобрать ресторан'/>
                     </ListItemButton>
                 </Link>
-                <ListItemButton>
-                    <ListItemIcon>
-                        <StarBorderOutlinedIcon fontSize="medium"/>
-                    </ListItemIcon>
-                    <ListItemText primary='Лучшая шаверма'/>
-                </ListItemButton>
+                <Link to='/best-doner'>
+                    <ListItemButton onClick={() => dispatch(toggleSideMenu())}>
+                        <ListItemIcon>
+                            <StarBorderOutlinedIcon fontSize="medium"/>
+                        </ListItemIcon>
+                        <ListItemText primary='Лучшая шаверма'/>
+                    </ListItemButton>
+                </Link>
                 <Link to='/blog'>
                     <ListItemButton onClick={() => dispatch(toggleSideMenu())}>
                         <ListItemIcon>

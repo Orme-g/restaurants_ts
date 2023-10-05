@@ -22,10 +22,10 @@ const GalleryItem = () => {
     }, [])
 
     const makeGalleryItem = (item) => {
-        const {_id, name, short_description, images} = item
+        const {_id, name, short_description, title_image} = item
         return (
             <div className='restaurant-card' key={_id}>
-                <div className='restaurant-card__image' style={{backgroundImage: `url(${images[0]})`}}></div>
+                <div className='restaurant-card__image' style={{backgroundImage: `url(${title_image})`}}></div>
                 <div className='restaurant-card__title'>{name}</div>
                 <div className="restaurant-card__description">
                     {short_description}

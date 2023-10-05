@@ -9,8 +9,7 @@ const MainPage = () => {
 
     return (
         <>
-           <Header/>
-
+            <Header/>
             <RestaurantsGallery/>
         </>
            

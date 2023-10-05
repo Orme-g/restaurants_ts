@@ -1,7 +1,7 @@
 
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchRestaurantData } from '../../../reducers/restaurantPage'
+import { fetchRestaurantData } from '../../../reducers/restaurants'
 import { useParams } from 'react-router-dom'
 
 
@@ -14,7 +14,7 @@ import Spinner from '../../spinner/Spinner'
 
 const SingleRestaurantPage = () => {
 
-    const {restaurantData, pageLoading} = useSelector(state => state.restaurantPage)
+    const {restaurantData, pageLoading} = useSelector(state => state.restaurants)
     const dispatch = useDispatch()
     const {restId} = useParams()
     console.log('render')

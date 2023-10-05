@@ -7,7 +7,7 @@ const initialState = {
 }
 
 export const fetchRestaurantData = createAsyncThunk(
-    'restaurantPage/fetchRestaurantData',
+    'restaurants/fetchRestaurantData',
     (restId) => {
         const {request} = useHttp()
         return request(`http://localhost:4000/restaurants/${restId}`)
@@ -15,8 +15,8 @@ export const fetchRestaurantData = createAsyncThunk(
 )
 
 
-const restaurantPageSlice = createSlice({
-    name: 'restaurantPage',
+const restaurantsSlice = createSlice({
+    name: 'restaurants',
     initialState,
     reducers: {
         
@@ -32,5 +32,5 @@ const restaurantPageSlice = createSlice({
     }
 })
 // eslint-disable-next-line 
-const {actions, reducer} = restaurantPageSlice
+const {actions, reducer} = restaurantsSlice
 export default reducer
