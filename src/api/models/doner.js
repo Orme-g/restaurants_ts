@@ -26,10 +26,16 @@ const donerSchema = new Schema({
     title_image: {
         type: String,
         required: true
-    }
+    },
+    subtitle: String,
+    text: String,
+    bloquote: String,
+    author: String,
+
     
 })
 
 const Doner = mongoose.model('Doner', donerSchema)
 
 module.exports = Doner
+

@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux'; 
 import { useForm } from 'react-hook-form'
 import { DevTool } from '@hookform/devtools'
-// eslint-disable-next-line
-import {Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@mui/material'
+
+import {Dialog, DialogContent, DialogContentText, DialogTitle} from '@mui/material'
 import {Stack, TextField, Button} from '@mui/material'
 
 
@@ -72,8 +72,6 @@ const onSubmit = (data) => {
                     </form>
                     <DevTool control={control}/>
                 </DialogContent>
-            {/* <DialogActions>
-            </DialogActions> */}
         </Dialog>
     
     )

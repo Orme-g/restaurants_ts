@@ -36,7 +36,9 @@ const SingleRestaurantPage = () => {
     return (
         <>
         <div className='restaurant-info__container'>
-            <Slider slides={slidesData}/>
+            <div className="restaurant-info__slider">
+                <Slider images={slidesData}/>
+            </div>
             <RestSideInfo data={restaurantData}/>
             
         </div>

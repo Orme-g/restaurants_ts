@@ -13,7 +13,7 @@ import ModalLogin from '../modalLogin/ModalLogin';
 const MainPage = lazy(() => import('../pages/mainPage/MainPage'))
 const SingleRestaurantPage = lazy(() => import('../pages/singleRestaurantPage/SingleRestaurantPage'))
 const BestDoner = lazy(() => import('../pages/bestDoner/BestDoner'))
-const Blog = lazy(() => import('../pages/blog/Blog'))
+const BestDonerPage = lazy(() => import('../pages/bestDonerPage/BestDonerPage'))
 const Page404 = lazy(() => import('../pages/Page404'))
 
 
@@ -29,7 +29,7 @@ function App() {
               <Route path='/' element={<MainPage/>} />
               <Route path='/restaurant/:restId' element={<SingleRestaurantPage/>} />
               <Route path='/best-doner' element={<BestDoner/>} />
-              <Route path='/blog' element={<Blog/>} />
+              <Route path='/best-doner/:donerId' element={<BestDonerPage/>} />
               <Route path='*' element={<Page404/>} />
             </Routes>
           </Suspense>

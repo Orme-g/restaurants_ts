@@ -1,7 +1,7 @@
 
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-
+import { Link } from 'react-router-dom'
 import { Rating } from '@mui/material'
 import { fetchAllDonersData } from '../../reducers/doners'
 import Spinner from '../spinner/Spinner'
@@ -14,14 +14,16 @@ import './bestDonerCards.sass'
 const BestDonerCards = () => {
 
     const dispatch = useDispatch()
-    const {allDonersData, pageLoading} = useSelector(state => state.doners)
 
     useEffect(() => {
         dispatch(fetchAllDonersData())
     // eslint-disable-next-line 
     }, [])
 
-    if (pageLoading === 'loading') {
+
+    const {allDonersData, pageLoading} = useSelector(state => state.doners)
+
+    if (pageLoading === 'loading' || allDonersData === null) {
         return <Spinner/>
     }
 
@@ -33,7 +35,8 @@ const BestDonerCards = () => {
     function createDonerCard(card) {
         const {_id, title, rating, short_description, title_image} = card
         return (
-            <div className='best-doner-card__container' key={_id}>
+            <Link to={`/best-doner/${_id}`} key={_id}>
+            <div className='best-doner-card__container'>
                 <div className="best-doner-card__picture">
                     <img src={title_image} alt="doner" />
                 </div>
@@ -43,6 +46,7 @@ const BestDonerCards = () => {
                     <div className="best-doner-card__rating"><Rating value={rating} precision={0.5} readOnly/></div>
                 </div>
             </div>
+            </Link>
         )
 
     }

@@ -20,9 +20,9 @@ export const fetchAllDonersData = createAsyncThunk(
 
 export const fetchSingleDonerData = createAsyncThunk(
     'doners/fetchSingleDonerData',
-    () => {
+    (donerId) => {
         const {request} = useHttp()
-        return request('http://localhost:4000/best-doner/651c175ad4a20ba01f0359f5')
+        return request(`http://localhost:4000/best-doner/${donerId}`)
     }
 )
 

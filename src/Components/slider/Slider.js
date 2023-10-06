@@ -9,13 +9,13 @@ import './slider.sass'
 
 
 
-const Slider = ({slides}) => {
+const Slider = ({images}) => {
 
     // eslint-disable-next-line
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
 
-       const slideList = slides.map(item => {
+       const slideList = images.map(item => {
             const id = nanoid()
             return (<SwiperSlide key={id}>
             <img src={item} alt='restaurant'/>
@@ -23,7 +23,7 @@ const Slider = ({slides}) => {
         })
 
     return (
-        <div className="slider__container">
+        <>
             <Swiper
                 style={{
                 '--swiper-navigation-color': '#fff',
@@ -51,7 +51,7 @@ const Slider = ({slides}) => {
             >
                 {slideList}
             </Swiper>
-        </div> 
+        </>
     )
 }
 
