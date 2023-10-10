@@ -1,19 +1,26 @@
 
+import { useSelector } from 'react-redux'
+
 import { Rating } from '@mui/material'
-import { nanoid } from '@reduxjs/toolkit'
+import Spinner from '../spinner/Spinner'
 
-import './feedbackCard.sass'
+import './feedbackItem.sass'
 
 
 
-const FeedbackItem = ({data}) => {
+const FeedbackItem = () => {
 
-    console.log(data)
+    console.log('Feedback render')
 
-    const feedbackList = data.map(({name, avatar, like, dislike, rating}) => {
-        const id = nanoid()
+    const {restaurantReviews} = useSelector(state => state.restaurants)
+
+    if (restaurantReviews === null) {
+        return <Spinner/>
+    }
+
+    const feedbackList = restaurantReviews.map(({name, avatar, like, dislike, rating, _id}) => {
         return (
-            <div className='feedback-card__container' key={id}>
+            <div className='feedback-card__container' key={_id}>
             <div className="feedback-card__header">
                 <div className="feedback-card__header_avatar">
                     <img src={avatar} alt={name} />

@@ -19,7 +19,6 @@ const CommentsBlock = () => {
             setError(false)
         }
     } 
-    console.log('Bock render')
 
     return (
         <>
@@ -41,7 +40,9 @@ const CommentsBlock = () => {
                     variant='contained' 
                     sx={{display: 'block', marginTop: '20px', backgroundColor: 'rgb(137, 191, 82)'}}
                     onClick={() => handleSubmit()}
-                    >Отправить</Button>
+                    >
+                        Отправить
+                    </Button>
                 </form>
             </div>
             <div className="comments__title">Комментарии:</div>

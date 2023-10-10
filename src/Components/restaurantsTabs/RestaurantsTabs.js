@@ -3,10 +3,10 @@ import { useState } from 'react'
 import { Box, Tab } from '@mui/material'
 import {TabContext, TabList, TabPanel} from '@mui/lab'
 
-import FeedbackItem from '../feedbackItem/FeedbackCard'
+import FeedbackItem from '../feedbackItem/FeedbackItem'
 import './restaurantsTabs.sass'
 
-const RestaurantsTabs = ({data}) => {
+const RestaurantsTabs = ({description}) => {
 
     const [activeTab, setActiveTab] = useState('1')
 
@@ -14,9 +14,7 @@ const RestaurantsTabs = ({data}) => {
         setActiveTab(newActiveTab)
     }
 
-    const [description, reviews] = data
-
-
+    console.log('render')
 
     return (
         <div className="restaurants-tabs__container">
@@ -43,7 +41,7 @@ const RestaurantsTabs = ({data}) => {
         </TabPanel>
         <TabPanel value="3">
             <div className='restaurants-tabs__feedback'>
-                <FeedbackItem data={reviews}/>
+                <FeedbackItem/>
                 
             </div>
         </TabPanel>

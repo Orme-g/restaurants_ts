@@ -1,7 +1,7 @@
 
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchRestaurantData } from '../../../reducers/restaurants'
+import { fetchRestaurantData, fetchRestaurantReviews } from '../../../reducers/restaurants'
 import { useParams } from 'react-router-dom'
 
 
@@ -17,32 +17,30 @@ const SingleRestaurantPage = () => {
     const {restaurantData, pageLoading} = useSelector(state => state.restaurants)
     const dispatch = useDispatch()
     const {restId} = useParams()
-    console.log('render')
 
     useEffect(() => {
         dispatch(fetchRestaurantData(restId))
+        dispatch(fetchRestaurantReviews(restId))
         // eslint-disable-next-line
     }, [])
 
     
-    if (pageLoading === 'loading') {
+    if (pageLoading === 'loading' || restaurantData === null) {
         return <Spinner/>
     }
 
-    const slidesData = restaurantData.images
-    const tabsData = [restaurantData.description, restaurantData.reviews] 
-
+    const {images, description} = restaurantData
 
     return (
         <>
         <div className='restaurant-info__container'>
             <div className="restaurant-info__slider">
-                <Slider images={slidesData}/>
+                <Slider images={images}/>
             </div>
             <RestSideInfo data={restaurantData}/>
             
         </div>
-            <RestaurantsTabs data={tabsData}/>
+            <RestaurantsTabs description={description}/>
         </>
         
 

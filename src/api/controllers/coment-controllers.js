@@ -13,6 +13,7 @@ const getCommentsForTopic = (req, res) => {
 
     Comment
         .find({topic: req.params.topic})
+        .sort({createdAt: -1})
         .then((comments) => {
             res
             .status(200)

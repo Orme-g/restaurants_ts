@@ -26,7 +26,6 @@ const BestDonerPage = () => {
         // eslint-disable-next-line
     }, [])
 
-    console.log('Page render')
     const {pageLoading, singleDonerData} = useSelector(state => state.doners)
 
     if (pageLoading === 'loading' || singleDonerData === null) {

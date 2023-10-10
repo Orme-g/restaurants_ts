@@ -18,10 +18,10 @@ const CommentsItem = () => {
         return <Spinner/>
     }
 
-    const comments = donerTopicComments.map(({name, likes, dislikes, createdAt, text}) => {
+    const comments = donerTopicComments.map(({name, likes, dislikes, createdAt, text, _id}) => {
         const date = new Date(createdAt).toLocaleString('ru',{day:'numeric', month:'long', year:'numeric'})
         return (
-            <div className="comment-card__container">
+            <div className="comment-card__container" key={_id}>
                 <div className="comment-card__avatar">
                     <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="user" />
                 </div>
