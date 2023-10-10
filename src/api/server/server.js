@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 // const movieRoutes = require('../routes/movie-routes')
 const restaurantRoutes = require('../routes/restaurant-routes')
 const donerRoutes = require('../routes/doner-routes')
+const commentRoutes = require('../routes/comment-routes')
 
 
 
@@ -23,6 +24,7 @@ app.use(express.json())
 // app.use(movieRoutes)
 app.use(restaurantRoutes)
 app.use(donerRoutes)
+app.use(commentRoutes)
 
 
 mongoose

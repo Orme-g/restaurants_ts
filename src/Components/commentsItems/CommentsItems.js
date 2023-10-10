@@ -1,62 +1,69 @@
 
-import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import { IconButton, Badge } from '@mui/material';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
+
+import Spinner from '../spinner/Spinner';
 
 import './commentsItems.sass'
 
 
 const CommentsItem = () => {
 
-    const [like, setLike] = useState(2)
-    const [dislike, setDislike] = useState(2)
+    const {pageLoading, donerTopicComments} = useSelector(state => state.doners)
 
-
-    function handleLike() {
-        setLike(like => like +1)
+    if (pageLoading === 'loading' || donerTopicComments === null) {
+        return <Spinner/>
     }
 
-    function handleDislike() {
-            setDislike(dislike => dislike +1)
-    }
+    const comments = donerTopicComments.map(({name, likes, dislikes, createdAt, text}) => {
+        const date = new Date(createdAt).toLocaleString('ru',{day:'numeric', month:'long', year:'numeric'})
+        return (
+            <div className="comment-card__container">
+                <div className="comment-card__avatar">
+                    <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="user" />
+                </div>
+                <div className="comment-card__content">
+                    <div className="comment-card__header">
+                        <div className="comment-card__name">{name}</div>
+                        <div className="comment-card__user-status">Новичок</div>
+                    </div>
+                    <div className="comment-card__text">
+                        <p>
+                            {text}
+                        </p>
+                    </div>
+                    <div className="comment-card__footer">
+                        <div className="comment-card__like">
+                            {/* <IconButton onClick={() => handleLike()}> */}
+                            <IconButton>
+                                <Badge badgeContent={likes} color='success'>
+                                    <ThumbUpIcon/>
+                                </Badge>
+                            </IconButton>  
+                        </div>
+                        <div className="comment-card__dislike">
+                            {/* <IconButton onClick={() => handleDislike()}> */}
+                            <IconButton>
+                                <Badge badgeContent={-dislikes} color='error'>
+                                    <ThumbDownIcon/>
+                                </Badge>
+                            </IconButton> 
+                        </div>
+                        <div className="comment-card__date">{date}</div>
+                    </div>
+                </div>
+            </div>
+        )
+    })
+
+
 
     return (
         <>
-        <div className="comment-card__container">
-            <div className="comment-card__avatar">
-                <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="user" />
-            </div>
-            <div className="comment-card__content">
-                <div className="comment-card__header">
-                    <div className="comment-card__name">Владислав</div>
-                    <div className="comment-card__user-status">Новичок</div>
-                </div>
-                <div className="comment-card__text">
-                    <p>
-                        Хорошая статья, спасибо, попробую
-                    </p>
-                </div>
-                <div className="comment-card__footer">
-                    <div className="comment-card__like">
-                        <IconButton onClick={() => handleLike()}>
-                            <Badge badgeContent={like} color='success'>
-                                <ThumbUpIcon/>
-                            </Badge>
-                        </IconButton>  
-                    </div>
-                    <div className="comment-card__dislike">
-                        <IconButton onClick={() => handleDislike()}>
-                            <Badge badgeContent={-dislike} color='error'>
-                                <ThumbDownIcon/>
-                            </Badge>
-                        </IconButton> 
-                    </div>
-                    <div className="comment-card__date">24.04.2023</div>
-                </div>
-            </div>
-        </div>
+            {comments}
         </>
     )
 }

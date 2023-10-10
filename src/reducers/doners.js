@@ -5,6 +5,7 @@ import { useHttp } from '../hooks/http.hook'
 const initialState = {
     allDonersData: null,
     singleDonerData: null,
+    donerTopicComments: null,
     pageLoading: 'loading'
     
 }
@@ -26,6 +27,14 @@ export const fetchSingleDonerData = createAsyncThunk(
     }
 )
 
+export const fetchTopicComments = createAsyncThunk(
+    'doners/fetchTopicComments',
+    (donerId) => {
+        const {request} = useHttp()
+        return request(`http://localhost:4000/best-doner/comments/${donerId}`)
+    }
+)
+
 const donersSlice = createSlice({
     name: 'doners',
     initialState,
@@ -34,19 +43,27 @@ const donersSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+            // All Doners
             .addCase(fetchAllDonersData.pending, state => {state.pageLoading = 'loading'})
             .addCase(fetchAllDonersData.fulfilled, (state, action) => {
                 state.pageLoading = 'idle'
                 state.allDonersData = action.payload
             })
             .addCase(fetchAllDonersData.rejected, state => {state.pageLoading = 'error'})
-
+            // Single Doner
             .addCase(fetchSingleDonerData.pending, state => {state.pageLoading = 'loading'})
             .addCase(fetchSingleDonerData.fulfilled, (state, action) => {
                 state.pageLoading = 'idle'
                 state.singleDonerData = action.payload
             })
             .addCase(fetchSingleDonerData.rejected, state => {state.pageLoading = 'error'})
+            // Comments
+            .addCase(fetchTopicComments.pending, state => {state.pageLoading = 'loading'})
+            .addCase(fetchTopicComments.fulfilled, (state, action) => {
+                state.pageLoading = 'idle'
+                state.donerTopicComments = action.payload
+            })
+            .addCase(fetchTopicComments.rejected, state => {state.pageLoading = 'error'})
 
     }
 })

@@ -19,6 +19,7 @@ const CommentsBlock = () => {
             setError(false)
         }
     } 
+    console.log('Bock render')
 
     return (
         <>
