@@ -23,6 +23,33 @@ const getCommentsForTopic = (req, res) => {
 
 }
 
+const postComment = (req, res) => {
+    const comment = new Comment(req.body)
+    comment
+        .save()
+        .then((result) => {
+            res
+            .status(201)
+            .json(result)
+
+        })
+        .catch((err) => handleError(res, err))
+
+}
+
+const deleteComment = (req, res) => {
+    Comment
+        .findByIdAndDelete(req.params.id)
+        .then((result) => {
+            res
+            .status(200)
+            .json(result)
+        })
+        .catch((err) => handleError(res, err))
+}
+
 module.exports = {
-    getCommentsForTopic
+    getCommentsForTopic,
+    postComment,
+    deleteComment
 }

@@ -10,6 +10,7 @@ import Slider from '../../slider/Slider'
 import Spinner from '../../spinner/Spinner'
 
 
+
 import './bestDonerPage.sass'
 
 
@@ -22,17 +23,21 @@ const BestDonerPage = () => {
 
     useEffect(() => {
         dispatch(fetchSingleDonerData(donerId))
-        dispatch(fetchTopicComments(donerId))
+        // dispatch(fetchTopicComments(donerId))
         // eslint-disable-next-line
     }, [])
+
 
     const {pageLoading, singleDonerData} = useSelector(state => state.doners)
 
     if (pageLoading === 'loading' || singleDonerData === null) {
         return <Spinner/>
     }
+    
+  
 
-    const {title, rating, title_image, text, bloquote, author, images, subtitle, createdAt} = singleDonerData
+    const {title, rating, title_image, text, bloquote, author, images, subtitle, createdAt, _id} = singleDonerData
+
     const date = new Date(createdAt).toLocaleString('ru',{day:'numeric', month:'long', year:'numeric'})
     return (
         <>
@@ -58,7 +63,7 @@ const BestDonerPage = () => {
                     Опубликовано: <span>{date}</span> 
                 </div>
             </section>
-            <CommentsBlock/>
+            <CommentsBlock currentTopicId = {_id} />
         </>
     )
 }

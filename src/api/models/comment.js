@@ -12,7 +12,7 @@ const commentSchema = new Schema({
 
     likes: Number,
 
-    Dislikes: Number,
+    dislikes: Number,
 
     text: String,
 
