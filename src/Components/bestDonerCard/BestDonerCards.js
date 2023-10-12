@@ -1,9 +1,7 @@
 
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Rating } from '@mui/material'
-import { fetchAllDonersData } from '../../reducers/doners'
+import { useGetDonersListQuery } from '../../services/apiSlice'
 import Spinner from '../spinner/Spinner'
 
 import './bestDonerCards.sass'
@@ -13,17 +11,13 @@ import './bestDonerCards.sass'
 
 const BestDonerCards = () => {
 
-    const dispatch = useDispatch()
+    const { 
+        data: allDonersData,
+        isLoading
 
-    useEffect(() => {
-        dispatch(fetchAllDonersData())
-    // eslint-disable-next-line 
-    }, [])
+    } = useGetDonersListQuery()
 
-
-    const {allDonersData, pageLoading} = useSelector(state => state.doners)
-
-    if (pageLoading === 'loading' || allDonersData === null) {
+    if (isLoading) {
         return <Spinner/>
     }
 

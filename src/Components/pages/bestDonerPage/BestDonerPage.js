@@ -1,36 +1,26 @@
 
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchSingleDonerData, fetchTopicComments } from '../../../reducers/doners'
 import { useParams } from 'react-router-dom'
+import { useGetSingleDonerRestaurantQuery } from '../../../services/apiSlice'
 
 import CommentsBlock from '../../commentsBlock/CommentsBlock'
 import { Rating } from '@mui/material'
 import Slider from '../../slider/Slider'
 import Spinner from '../../spinner/Spinner'
 
-
-
 import './bestDonerPage.sass'
-
-
-
 
 const BestDonerPage = () => {
 
-    const dispatch = useDispatch()
     const {donerId} = useParams()
 
-    useEffect(() => {
-        dispatch(fetchSingleDonerData(donerId))
-        // dispatch(fetchTopicComments(donerId))
-        // eslint-disable-next-line
-    }, [])
+    const {
+        data: singleDonerData,
+        isLoading
+
+    } = useGetSingleDonerRestaurantQuery(donerId)
 
 
-    const {pageLoading, singleDonerData} = useSelector(state => state.doners)
-
-    if (pageLoading === 'loading' || singleDonerData === null) {
+    if (isLoading) {
         return <Spinner/>
     }
     
