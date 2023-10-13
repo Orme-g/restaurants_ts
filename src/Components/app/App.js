@@ -1,5 +1,5 @@
 
-import {lazy, Suspense} from 'react'
+import {lazy, Suspense } from 'react'
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import Spinner from '../spinner/Spinner';
 
@@ -7,7 +7,9 @@ import './App.sass';
 
 import Navigation from '../navigation/Navigation';
 import Footer from '../footer/Footer';
-import ModalLogin from '../modalLogin/ModalLogin';
+import ModalLogin from '../modals/modalLogin/ModalLogin';
+import ModalRegister from '../modals/modalRegister/ModalRegister';
+import Snack from '../snackbar/Snackbar';
 
 
 const MainPage = lazy(() => import('../pages/mainPage/MainPage'))
@@ -35,6 +37,8 @@ function App() {
           </Suspense>
           <Footer/>
         <ModalLogin/>
+        <ModalRegister/>
+        <Snack/>
       </div>
     </Router>
   );

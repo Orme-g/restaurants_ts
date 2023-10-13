@@ -31,6 +31,20 @@ export const apiSlice = createApi({
         }),
         getSingleDonerRestaurant: builder.query({
             query: (id) => `/best-doner/${id}`
+        }),
+        login: builder.mutation({
+            query: (loginData) => ({
+                url: '/login',
+                method: 'POST',
+                body: loginData
+            })
+        }),
+        registration: builder.mutation({
+            query: (userData) => ({
+                url: '/register',
+                method: 'POST',
+                body: userData
+            })
         })
     })
 })
@@ -40,5 +54,8 @@ export const {
     usePostCommentMutation, 
     useDeleteCommentMutation,
     useGetDonersListQuery,
-    useGetSingleDonerRestaurantQuery
+    useGetSingleDonerRestaurantQuery,
+    useLoginMutation,
+    useRegistrationMutation
+
 } = apiSlice

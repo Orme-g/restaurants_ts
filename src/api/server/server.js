@@ -7,6 +7,7 @@ const restaurantRoutes = require('../routes/restaurant-routes')
 const donerRoutes = require('../routes/doner-routes')
 const commentRoutes = require('../routes/comment-routes')
 const reviewRoutes = require('../routes/review-routes')
+const authRoutes = require('../routes/auth-routes')
 
 
 
@@ -27,6 +28,7 @@ app.use(restaurantRoutes)
 app.use(donerRoutes)
 app.use(commentRoutes)
 app.use(reviewRoutes)
+app.use(authRoutes)
 
 
 mongoose

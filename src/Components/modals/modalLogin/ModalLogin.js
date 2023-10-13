@@ -1,12 +1,15 @@
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'; 
 import { useForm } from 'react-hook-form'
 import { DevTool } from '@hookform/devtools'
 
+
+
 import {Dialog, DialogContent, DialogContentText, DialogTitle} from '@mui/material'
 import {Stack, TextField, Button} from '@mui/material'
 
-
-import {toggleModalWindowLogin} from '../../reducers/interactive'
+import {toggleModalWindowLogin, toggleRegisterWindowModal, callSnackbar } from '../../../reducers/interactive'
+import { useLoginMutation } from '../../../services/apiSlice';
 
 
 import './modalLogin.sass'
@@ -14,8 +17,10 @@ import './modalLogin.sass'
 
 const ModalLogin = () => {
 
+const [errorMessage, setErrorMessage] = useState(null)
 const dispatch = useDispatch()
 const {modalWindowLogin} = useSelector(state => state.interactive)
+const [sendLogin] = useLoginMutation()
 
 const {register, reset, handleSubmit, formState: {errors}, control} = useForm({
     defaultValues: {
@@ -26,14 +31,35 @@ const {register, reset, handleSubmit, formState: {errors}, control} = useForm({
 
 
 const onSubmit = (data) => {
-    console.log(`${JSON.stringify(data)} registered`)
+    const {login, password} = data
+    const loginData = {
+        username: login,
+        password
+    }
+    sendLogin(loginData)
+    .unwrap()
+    .then(({message}) => {
+    dispatch(callSnackbar({text: message, type: 'success'}))
+    dispatch(toggleModalWindowLogin())
+    })
+    .catch((error) => setErrorMessage(error.data))
     reset()
+}
+
+const handleClose = () => {
+    dispatch(toggleModalWindowLogin())
+    setErrorMessage(null)
+}
+
+const passToRegistration = () => {
+    dispatch(toggleModalWindowLogin())
+    dispatch(toggleRegisterWindowModal())
 }
 
 
     return (
         
-        <Dialog open={modalWindowLogin} onClose={() => dispatch(toggleModalWindowLogin())}>
+        <Dialog open={modalWindowLogin} onClose={() => handleClose()}>
             <DialogTitle>Вход в аккаунт</DialogTitle>
                 <DialogContent>
                     <DialogContentText mb={2}>
@@ -55,20 +81,22 @@ const onSubmit = (data) => {
                             type='password' 
                             size='small'
                             {...register('password', {
-                                required: 'Введите пароль'
+                                required: 'Введите пароль',
+                                minLength: 4
                             })}
                             error={!!errors.password}
                             helperText={errors.password?.message}
                             />
+                            <div className='error-message'>{errorMessage}</div>
                             <div>
-                                {/* eslint-disable-next-line */}
-                                <a href="#" className='forget'>Восстановить пароль</a>
-                                {/* eslint-disable-next-line */}
-                                <a href="#" className='registration'>Регистрация</a>
+                                <Button size='small' sx={{fontSize: '12px'}}>Восстановить пароль</Button>
+                                <Button size='small' sx={{fontSize: '12px'}} onClick={() => passToRegistration()}>
+                                    Регистрация
+                                </Button>
                             </div>
                         </Stack>
                         <Button type='submit'>Войти</Button>
-                        <Button onClick={() => dispatch(toggleModalWindowLogin())}>Отмена</Button>
+                        <Button onClick={() => handleClose()}>Отмена</Button>
                     </form>
                     <DevTool control={control}/>
                 </DialogContent>
