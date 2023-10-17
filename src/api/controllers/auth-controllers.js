@@ -58,7 +58,7 @@ const login = async (req, res) => {
         }
         const {name} = user
         const token = generateAccessToken(user._id)
-        return res.status(200).json({token, name, message: `Здравствуйте, ${name}`})
+        return res.status(200).json({token, name, username, message: `Здравствуйте, ${name}`})
     } catch(err) {
         res.status(500).json(`Ошибка входа ${err}`)
     }

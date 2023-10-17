@@ -26,6 +26,21 @@ export const apiSlice = createApi({
             }),
             invalidatesTags: ['Comments']
         }),
+        likeComment: builder.mutation({
+            query: (id) => ({
+                url:`/best-doner/comments/like/${id}`,
+                method: 'PATCH'
+            }),
+            invalidatesTags: ['Comments']
+            
+        }),
+        dislikeComment: builder.mutation({
+            query: (id) => ({
+                url: `/best-doner/comments/dislike/${id}`,
+                method: 'PATCH'
+            }),
+            invalidatesTags: ['Comments']
+        }),
         getDonersList: builder.query({
             query: () => '/best-doner'
         }),
@@ -56,6 +71,8 @@ export const {
     useGetDonersListQuery,
     useGetSingleDonerRestaurantQuery,
     useLoginMutation,
-    useRegistrationMutation
+    useRegistrationMutation,
+    useLikeCommentMutation,
+    useDislikeCommentMutation
 
 } = apiSlice

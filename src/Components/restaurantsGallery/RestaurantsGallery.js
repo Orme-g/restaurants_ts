@@ -1,6 +1,6 @@
 
-
 import GalleryItem from '../galleryItem/GalleryItem'
+
 
 import './restaurantsGallery.sass'
 
@@ -12,6 +12,7 @@ const RestaurantsGallery = () => {
         <section className='restaurant-gallery'>
             <GalleryItem/>
         </section>
+
     )
 }
 

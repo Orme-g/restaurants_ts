@@ -48,8 +48,26 @@ const deleteComment = (req, res) => {
         .catch((err) => handleError(res, err))
 }
 
+const likeComment = (req, res) => {
+    Comment
+        .findByIdAndUpdate(req.params.id, {$inc: {likes: 1}})
+        .then(() => res.status(200).json('Liked'))
+        .catch((err) => handleError(res, err))
+}
+
+const dislikeComment = (req, res) => {
+    Comment 
+        .findByIdAndUpdate(req.params.id, {$inc: {dislikes: 1}})
+        .then((result) => res.status(200).json(result))
+        .catch((err) => handleError(res, err))
+}
+
+
 module.exports = {
     getCommentsForTopic,
     postComment,
-    deleteComment
+    deleteComment,
+    likeComment,
+    dislikeComment
+    
 }

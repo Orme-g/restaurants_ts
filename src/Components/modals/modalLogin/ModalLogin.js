@@ -8,8 +8,9 @@ import { DevTool } from '@hookform/devtools'
 import {Dialog, DialogContent, DialogContentText, DialogTitle} from '@mui/material'
 import {Stack, TextField, Button} from '@mui/material'
 
-import {toggleModalWindowLogin, toggleRegisterWindowModal, callSnackbar } from '../../../reducers/interactive'
+import {toggleModalWindowLogin, toggleRegisterWindowModal, callSnackbar, setPassAuth } from '../../../reducers/interactive'
 import { useLoginMutation } from '../../../services/apiSlice';
+import useLocalStorage from '../../../hooks/useLocalStorage';
 
 
 import './modalLogin.sass'
@@ -21,6 +22,7 @@ const [errorMessage, setErrorMessage] = useState(null)
 const dispatch = useDispatch()
 const {modalWindowLogin} = useSelector(state => state.interactive)
 const [sendLogin] = useLoginMutation()
+const {setData} = useLocalStorage()
 
 const {register, reset, handleSubmit, formState: {errors}, control} = useForm({
     defaultValues: {
@@ -38,17 +40,20 @@ const onSubmit = (data) => {
     }
     sendLogin(loginData)
     .unwrap()
-    .then(({message}) => {
-    dispatch(callSnackbar({text: message, type: 'success'}))
-    dispatch(toggleModalWindowLogin())
+    .then(({message, name, token, username}) => {
+        dispatch(callSnackbar({text: message, type: 'success'}))
+        setData({name, username, token})
+        handleClose()
+        dispatch(setPassAuth())
     })
     .catch((error) => setErrorMessage(error.data))
-    reset()
+    
 }
 
 const handleClose = () => {
     dispatch(toggleModalWindowLogin())
     setErrorMessage(null)
+    reset()
 }
 
 const passToRegistration = () => {

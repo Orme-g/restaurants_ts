@@ -3,7 +3,7 @@ import { IconButton, Badge } from '@mui/material';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import CloseIcon from '@mui/icons-material/Close';
-import { useGetCommentsQuery, useDeleteCommentMutation } from '../../services/apiSlice';
+import { useGetCommentsQuery, useDeleteCommentMutation, useLikeCommentMutation, useDislikeCommentMutation } from '../../services/apiSlice';
 
 import Spinner from '../spinner/Spinner';
 
@@ -12,12 +12,15 @@ import { memo } from 'react';
 
 
 const CommentsItem = memo(({topicId}) => {
-
+    
     const [deleteComment] = useDeleteCommentMutation() 
+    const [likeComment] = useLikeCommentMutation()
+    const [dislikeComment] = useDislikeCommentMutation()
 
     const onDelete = (id) => {
         deleteComment(id).unwrap()
     }
+    
 
     const {
         data: topicComments,    
@@ -53,14 +56,14 @@ const CommentsItem = memo(({topicId}) => {
                     </div>
                     <div className="comment-card__footer">
                         <div className="comment-card__like">
-                            <IconButton>
+                            <IconButton onClick={() => likeComment(_id)}>
                                 <Badge badgeContent={likes} color='success'>
                                     <ThumbUpIcon/>
                                 </Badge>
                             </IconButton>  
                         </div>
                         <div className="comment-card__dislike">
-                            <IconButton>
+                            <IconButton onClick={() => dislikeComment(_id)}>
                                 <Badge badgeContent={-dislikes} color='error'>
                                     <ThumbDownIcon/>
                                 </Badge>

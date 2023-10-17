@@ -9,12 +9,6 @@ const GalleryItem = () => {
 
     const {request} = useHttp()
     const [items, setItems] = useState([])
-
-    // useEffect(() => {
-    //     request('http://localhost:3001/restaurants')
-    //     .then(data => setItems(data))
-    //     // eslint-disable-next-line
-    // }, [])
     useEffect(() => {
         request('http://localhost:4000/restaurants')
         .then(data => setItems(data))
@@ -30,7 +24,6 @@ const GalleryItem = () => {
                 <div className="restaurant-card__description">
                     {short_description}
                 </div>
-                {/* eslint-disable-next-line */}
                 <Link to={`/restaurant/${_id}`} className='restaurant-card__link'>Подробнее...</Link>
             </div>
         )

@@ -5,7 +5,7 @@ const initialState = {
     sideMenu: false,
     modalWindowLogin: false,
     modalWindowRegister: false,
-    userToken: null,
+    passAuth: false,
     showSnackbar: false,
     snackBarData: {}
 }
@@ -18,11 +18,11 @@ const interactiveSlice = createSlice({
         toggleModalWindowLogin: state => { state.modalWindowLogin = !state.modalWindowLogin},
         toggleRegisterWindowModal: state => { state.modalWindowRegister = !state.modalWindowRegister},
         toggleSnackbar: state => {state.showSnackbar = !state.showSnackbar},
-        getUserToken: (state, action) => {state.userToken = action.payload},
         callSnackbar: (state, action) => {
             state.snackBarData = action.payload;
             state.showSnackbar = !state.showSnackbar
-        }
+        },
+        setPassAuth: state => { state.passAuth = !state.passAuth}
 
 
     }
@@ -35,6 +35,6 @@ export const {
     toggleModalWindowLogin,
     toggleRegisterWindowModal,
     toggleSnackbar,
-    getUserToken,
+    setPassAuth,
     callSnackbar
 } = actions
