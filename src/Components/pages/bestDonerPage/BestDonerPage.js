@@ -4,7 +4,7 @@ import { useGetSingleDonerRestaurantQuery } from '../../../services/apiSlice'
 
 import CommentsBlock from '../../commentsBlock/CommentsBlock'
 import { Rating } from '@mui/material'
-import Slider from '../../slider/Slider'
+import Slider from '../../sliderImages/Slider'
 import Spinner from '../../spinner/Spinner'
 
 import './bestDonerPage.sass'

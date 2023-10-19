@@ -47,6 +47,9 @@ export const apiSlice = createApi({
         getSingleDonerRestaurant: builder.query({
             query: (id) => `/best-doner/${id}`
         }),
+        getSortedRestaurants: builder.query({
+            query: (sort) => `/sorted-restaurants/${sort}`
+        }),
         login: builder.mutation({
             query: (loginData) => ({
                 url: '/login',
@@ -73,6 +76,7 @@ export const {
     useLoginMutation,
     useRegistrationMutation,
     useLikeCommentMutation,
-    useDislikeCommentMutation
+    useDislikeCommentMutation,
+    useGetSortedRestaurantsQuery
 
 } = apiSlice

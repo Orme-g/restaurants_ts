@@ -47,7 +47,11 @@ const FeedbackItem = () => {
 
     return (
         <>
-            {feedbackList}
+            {feedbackList.length === 0 ? 
+                <div>Отзывов пока нет.</div> 
+                :
+                feedbackList
+            }
         </>
     )
 }

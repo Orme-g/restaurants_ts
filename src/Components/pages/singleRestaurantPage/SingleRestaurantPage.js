@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom'
 
 
 import './singleRestaurantPage.sass'
-import Slider from '../../slider/Slider'
+import Slider from '../../sliderImages/Slider'
 import RestSideInfo from '../../restSideInfo/RestSideInfo'
 import RestaurantsTabs from '../../restaurantsTabs/RestaurantsTabs'
 import Spinner from '../../spinner/Spinner'

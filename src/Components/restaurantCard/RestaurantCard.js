@@ -1,21 +1,28 @@
-import { useEffect, useState } from 'react'
-import { useHttp } from '../../hooks/http.hook'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { fetchLastAddedRestaurants } from '../../reducers/restaurants'
+import Spinner from '../spinner/Spinner'
 
-import './galleryItem.sass'
+import './restaurantCard.sass'
 
 
-const GalleryItem = () => {
+const RestaurantCard = ({wrapper}) => {
 
-    const {request} = useHttp()
-    const [items, setItems] = useState([])
+    const dispatch = useDispatch()
+    const {lastAddedRestaurants, pageLoading} = useSelector(state => state.restaurants)
     useEffect(() => {
-        request('http://localhost:4000/restaurants')
-        .then(data => setItems(data))
+        dispatch(fetchLastAddedRestaurants())
         // eslint-disable-next-line
     }, [])
 
-    const makeGalleryItem = (item) => {
+    if (pageLoading === 'loading' || !lastAddedRestaurants) {
+        return <Spinner/>
+    }
+
+
+
+    const makeRestaurantCard = (item) => {
         const {_id, name, short_description, title_image} = item
         return (
             <div className='restaurant-card' key={_id}>
@@ -29,8 +36,8 @@ const GalleryItem = () => {
         )
     }
 
-    const elements = items.map(item => {
-       return makeGalleryItem(item)
+    const elements = lastAddedRestaurants.map(item => {
+       return makeRestaurantCard(item)
     })
 
     return (
@@ -42,4 +49,4 @@ const GalleryItem = () => {
 
 
 
-export default GalleryItem
+export default RestaurantCard

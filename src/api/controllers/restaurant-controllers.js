@@ -7,16 +7,16 @@ const handleError = (res, error) => {
 
 const getRestaurants = (req, res) => {
     Restaurant
-    .find()
-    // .limit(2)
-    // .sort({name: 1})
-    .then((restaurants) => {
-        res
-            .status(200)
-            .json(restaurants)
+        .find()
+        .sort({createdAt: -1})
+        .limit(6)
+        .then((restaurants) => {
+            res
+                .status(200)
+                .json(restaurants)
 
-    })
-    .catch((err) => handleError(res, err))
+        })
+        .catch((err) => handleError(res, err))
 }
 
 const getRestaurantById = (req, res) => {
@@ -70,6 +70,34 @@ const updateRestaurant = (req, res) => {
         .catch((err) => handleError(res, err))
 }
 
+const getSortedRestaurants = (req, res) => {
+    let sortType
+    switch (req.params.sort) {
+        case 'expensive':
+            sortType = {bill: -1}
+            break
+        case 'cheap':
+            sortType = {bill: 1}
+            break
+        case 'best':
+            sortType = {rating: -1}
+            break
+        default:
+            sortType = null
+    }
+    Restaurant
+        .find()
+        .sort(sortType)
+        .limit(10)
+        .then((restaurants) => {
+            res
+                .status(200)
+                .json(restaurants)
+
+        })
+        .catch((err) => handleError(res, err))
+        
+}
 
 // Restaurant.findOne({name:'GOOD'}).then(rest => console.log(rest))
 
@@ -79,5 +107,6 @@ module.exports = {
     deleteRestaurant,
     postRestaurant,
     updateRestaurant,
+    getSortedRestaurants,
 
 }

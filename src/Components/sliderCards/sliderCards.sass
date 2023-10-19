@@ -1,0 +1,58 @@
+@import '../../style/mixins'
+@import '../../style/variables'
+
+@import 'swiper/css'
+@import 'swiper/css/pagination'
+@import 'swiper/css/navigation'
+
+
+.swiper
+    height: 100%
+    width: 100%
+
+.swiper-slide
+    font-size: 16px
+    background: #fff
+    display: flex
+    align-items: center
+    background-size: cover
+    background-position: center
+
+
+
+.selection-card 
+    overflow: hidden
+    height: 320px
+    width: 250px
+    border-radius: 2px
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2)
+    position: relative
+    margin: 0 auto
+
+
+    &__image
+        height: 70%
+        background-size: cover
+        background-repeat: no-repeat
+        background-position: center
+
+    &__title
+        margin-top: 10px
+        margin-left: 15px
+        font-size: 20px
+        font-weight: 300
+
+    &__rating
+        margin-top: 5px
+        margin-left: 12px
+        .MuiRating-root
+            color: $green-color
+
+    &__link
+        font-size: 15px
+        position: absolute
+        bottom: 15px
+        left: 15px
+        text-decoration: none
+        color: #366cc9
+

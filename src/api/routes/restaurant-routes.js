@@ -5,6 +5,7 @@ const {
     deleteRestaurant,
     postRestaurant,
     updateRestaurant,
+    getSortedRestaurants
 
 
 } = require('../controllers/restaurant-controllers')
@@ -16,5 +17,7 @@ router.get('/restaurants/:id', getRestaurantById)
 router.delete('/restaurants/:id', deleteRestaurant)
 router.post('/restaurants', postRestaurant)
 router.patch('/restaurants/:id', updateRestaurant)
+router.get('/sorted-restaurants/:sort', getSortedRestaurants)
+
 
 module.exports = router
