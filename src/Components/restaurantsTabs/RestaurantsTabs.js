@@ -1,9 +1,8 @@
 import { useState, memo } from "react"
+import { useSelector } from "react-redux"
 
 import { Box, Tab } from "@mui/material"
 import { TabContext, TabList, TabPanel } from "@mui/lab"
-
-import useLocalStorage from "../../hooks/useLocalStorage"
 
 import FeedbackItem from "../feedbackItem/FeedbackItem"
 import ReviewForm from "../forms/reviewForm/ReviewForm"
@@ -12,8 +11,7 @@ import "./restaurantsTabs.sass"
 const RestaurantsTabs = memo(({ description, restId }) => {
     const [activeTab, setActiveTab] = useState("1")
 
-    const { getUserData } = useLocalStorage()
-    const { name } = getUserData
+    const checkAuth = useSelector((state) => state.interactive.passAuth)
 
     const handleChange = (event, newActiveTab) => {
         setActiveTab(newActiveTab)
@@ -51,8 +49,11 @@ const RestaurantsTabs = memo(({ description, restId }) => {
                     </TabPanel>
                     <TabPanel value="3">
                         <div className="restaurants-tabs__feedback">
-                            {/* {name? isAuth : unAuth} */}
-                            <ReviewForm restId={restId} />
+                            {checkAuth ? (
+                                <ReviewForm restId={restId} />
+                            ) : (
+                                unAuth
+                            )}
                             <FeedbackItem />
                         </div>
                     </TabPanel>
