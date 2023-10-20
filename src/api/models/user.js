@@ -35,6 +35,14 @@ const userSchema = new Schema({
         default: () => Date.now(),
         immutable: true
     },
+    status: {
+        type: String,
+        default: 'Новичок'
+    },
+    avatar: {
+        type: String,
+        default: 'https://cdn-icons-png.flaticon.com/512/149/149071.png'
+    }
 })
 
 const User = mongoose.model('User', userSchema)

@@ -16,11 +16,23 @@ Review
         .json(reviews)
     })
     .catch((err) => handleError(res, err))
+}
+
+const postRestaurantReview = (req, res) => {
+
+    const review = new Review(req.body)
+    review
+        .save()
+        .then(() => {
+            res.status(200).json({message: 'Ваш отзыв отправлен!'})
+        })
+        .catch((err) => handleError(res, err))
 
 }
 
 
 module.exports = {
     getRestaurantReviews,
+    postRestaurantReview
 
 }

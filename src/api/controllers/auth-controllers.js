@@ -56,9 +56,9 @@ const login = async (req, res) => {
         if (!checkPassword) {
             return res.status(400).json('Неправильный пароль')
         }
-        const {name} = user
+        const {name, avatar, status} = user
         const token = generateAccessToken(user._id)
-        return res.status(200).json({token, name, username, message: `Здравствуйте, ${name}`})
+        return res.status(200).json({token, name, username, avatar, status, message: `Здравствуйте, ${name}`})
     } catch(err) {
         res.status(500).json(`Ошибка входа ${err}`)
     }

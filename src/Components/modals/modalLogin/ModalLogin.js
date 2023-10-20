@@ -40,9 +40,9 @@ const onSubmit = (data) => {
     }
     sendLogin(loginData)
     .unwrap()
-    .then(({message, name, token, username}) => {
+    .then(({message, ...data}) => {
         dispatch(callSnackbar({text: message, type: 'success'}))
-        setData({name, username, token})
+        setData(data)
         handleClose()
         dispatch(setPassAuth())
     })

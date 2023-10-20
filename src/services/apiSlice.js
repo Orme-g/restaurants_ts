@@ -77,6 +77,7 @@ export const {
     useRegistrationMutation,
     useLikeCommentMutation,
     useDislikeCommentMutation,
-    useGetSortedRestaurantsQuery
+    useGetSortedRestaurantsQuery,
+
 
 } = apiSlice

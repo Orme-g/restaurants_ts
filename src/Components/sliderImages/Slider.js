@@ -1,43 +1,45 @@
-import { useState } from 'react';
-import { nanoid } from '@reduxjs/toolkit';
+import { useState } from "react"
+import { nanoid } from "@reduxjs/toolkit"
 
-import {Swiper, SwiperSlide} from 'swiper/react'
-import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
+import { Swiper, SwiperSlide } from "swiper/react"
+import { FreeMode, Navigation, Thumbs } from "swiper/modules"
 
+import "./slider.sass"
 
-import './slider.sass'
-
-
-
-const Slider = ({images}) => {
-
+const Slider = ({ images }) => {
     // eslint-disable-next-line
-    const [thumbsSwiper, setThumbsSwiper] = useState(null);
+    const [thumbsSwiper, setThumbsSwiper] = useState(null)
 
-
-       const slideList = images.map(item => {
-            const id = nanoid()
-            return (<SwiperSlide key={id}>
-            <img src={item} alt='restaurant'/>
-            </SwiperSlide>)
-        })
+    const slideList = images.map((item) => {
+        const id = nanoid()
+        return (
+            <SwiperSlide key={id}>
+                <img src={item} alt="restaurant" />
+            </SwiperSlide>
+        )
+    })
 
     return (
         <>
             <Swiper
                 style={{
-                '--swiper-navigation-color': '#fff',
-                '--swiper-pagination-color': '#fff',
+                    "--swiper-navigation-color": "#fff",
+                    "--swiper-pagination-color": "#fff",
                 }}
                 loop={true}
                 spaceBetween={10}
                 navigation={true}
                 modules={[FreeMode, Navigation, Thumbs]}
                 // thumbs={{ swiper: thumbsSwiper }}
-                thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
+                thumbs={{
+                    swiper:
+                        thumbsSwiper && !thumbsSwiper.destroyed
+                            ? thumbsSwiper
+                            : null,
+                }}
                 className="mainGallery"
-            > 
-                    {slideList}
+            >
+                {slideList}
             </Swiper>
             <Swiper
                 onSwiper={setThumbsSwiper}
@@ -54,6 +56,5 @@ const Slider = ({images}) => {
         </>
     )
 }
-
 
 export default Slider

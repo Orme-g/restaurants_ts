@@ -40,7 +40,7 @@ const SingleRestaurantPage = () => {
             <RestSideInfo data={restaurantData}/>
             
         </div>
-            <RestaurantsTabs description={description}/>
+            <RestaurantsTabs description={description} restId={restId}/>
         </>
         
 
