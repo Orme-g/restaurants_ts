@@ -10,7 +10,6 @@ import "./restaurantsTabs.sass"
 
 const RestaurantsTabs = memo(({ description, restId }) => {
     const [activeTab, setActiveTab] = useState("1")
-
     const checkAuth = useSelector((state) => state.interactive.passAuth)
 
     const handleChange = (event, newActiveTab) => {

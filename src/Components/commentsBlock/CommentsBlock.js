@@ -7,7 +7,6 @@ import "./commentsBlock.sass"
 
 const CommentsBlock = ({ currentTopicId }) => {
     const checkAuth = useSelector((state) => state.interactive.passAuth)
-
     const unAuth = (
         <div className="comments__unauth">
             Войдите или зарегистрируйтесь, чтобы оставлять комментарии.

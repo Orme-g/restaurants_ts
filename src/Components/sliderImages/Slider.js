@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, memo } from "react"
 import { nanoid } from "@reduxjs/toolkit"
 
 import { Swiper, SwiperSlide } from "swiper/react"
@@ -6,8 +6,7 @@ import { FreeMode, Navigation, Thumbs } from "swiper/modules"
 
 import "./slider.sass"
 
-const Slider = ({ images }) => {
-    // eslint-disable-next-line
+const Slider = memo(({ images }) => {
     const [thumbsSwiper, setThumbsSwiper] = useState(null)
 
     const slideList = images.map((item) => {
@@ -55,6 +54,6 @@ const Slider = ({ images }) => {
             </Swiper>
         </>
     )
-}
+})
 
 export default Slider
