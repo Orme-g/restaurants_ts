@@ -1,4 +1,5 @@
 import SliderCards from "../sliderCards/SliderCards"
+
 import "./restaurantsSelections.sass"
 
 const RestaurantsSelections = () => {

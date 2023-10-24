@@ -38,15 +38,9 @@ function App() {
                 <Suspense fallback={<Spinner />}>
                     <Routes>
                         <Route path="/" element={<MainPage />} />
-                        <Route
-                            path="/restaurant/:restId"
-                            element={<SingleRestaurantPage />}
-                        />
+                        <Route path="/restaurant/:restId" element={<SingleRestaurantPage />} />
                         <Route path="/best-doner" element={<BestDoner />} />
-                        <Route
-                            path="/best-doner/:donerId"
-                            element={<BestDonerPage />}
-                        />
+                        <Route path="/best-doner/:donerId" element={<BestDonerPage />} />
                         <Route path="*" element={<Page404 />} />
                     </Routes>
                 </Suspense>
