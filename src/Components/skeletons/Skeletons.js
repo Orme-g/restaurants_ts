@@ -83,3 +83,20 @@ export const DonerCardsSkeleton = () => {
         </div>
     )
 }
+
+export const PageSkeleton = () => {
+    return (
+        <div className="page-skeleton">
+            <Stack spacing={2}>
+                <Skeleton variant="rectangular" height={400} />
+                <Skeleton variant="rounded" sx={{ width: "50%" }} />
+                <Skeleton variant="rounded" sx={{ width: "80%" }} />
+                <Skeleton variant="rounded" sx={{ width: "80%" }} />
+                <Skeleton variant="rounded" sx={{ width: "80%" }} />
+                <Skeleton variant="rounded" sx={{ width: "80%" }} />
+                <Skeleton variant="rounded" sx={{ width: "65%" }} />
+                <Skeleton variant="rounded" sx={{ width: "65%" }} />
+            </Stack>
+        </div>
+    )
+}

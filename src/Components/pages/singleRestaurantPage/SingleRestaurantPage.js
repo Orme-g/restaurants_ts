@@ -1,21 +1,16 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import {
-    fetchRestaurantData,
-    fetchRestaurantReviews,
-} from "../../../reducers/restaurants"
+import { fetchRestaurantData, fetchRestaurantReviews } from "../../../reducers/restaurants"
 import { useParams } from "react-router-dom"
 
 import "./singleRestaurantPage.sass"
 import Slider from "../../sliderImages/Slider"
 import RestSideInfo from "../../restSideInfo/RestSideInfo"
 import RestaurantsTabs from "../../restaurantsTabs/RestaurantsTabs"
-import Spinner from "../../spinner/Spinner"
+import { PageSkeleton } from "../../skeletons/Skeletons"
 
 const SingleRestaurantPage = () => {
-    const { restaurantData, pageLoading } = useSelector(
-        (state) => state.restaurants
-    )
+    const { restaurantData, pageLoading } = useSelector((state) => state.restaurants)
     const dispatch = useDispatch()
     const { restId } = useParams()
 
@@ -26,7 +21,7 @@ const SingleRestaurantPage = () => {
     }, [])
 
     if (pageLoading === "loading" || restaurantData === null) {
-        return <Spinner />
+        return <PageSkeleton />
     }
 
     const { images, description } = restaurantData

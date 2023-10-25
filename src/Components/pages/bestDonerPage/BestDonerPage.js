@@ -4,31 +4,20 @@ import { useGetSingleDonerRestaurantQuery } from "../../../services/apiSlice"
 import CommentsBlock from "../../commentsBlock/CommentsBlock"
 import { Rating } from "@mui/material"
 import Slider from "../../sliderImages/Slider"
-import Spinner from "../../spinner/Spinner"
+import { PageSkeleton } from "../../skeletons/Skeletons"
 
 import "./bestDonerPage.sass"
 
 const BestDonerPage = () => {
     const { donerId } = useParams()
-    const { data: singleDonerData, isLoading } =
-        useGetSingleDonerRestaurantQuery(donerId)
+    const { data: singleDonerData, isLoading } = useGetSingleDonerRestaurantQuery(donerId)
 
     if (isLoading) {
-        return <Spinner />
+        return <PageSkeleton />
     }
 
-    const {
-        title,
-        rating,
-        title_image,
-        text,
-        bloquote,
-        author,
-        images,
-        subtitle,
-        createdAt,
-        _id,
-    } = singleDonerData
+    const { title, rating, title_image, text, bloquote, author, images, subtitle, createdAt, _id } =
+        singleDonerData
 
     const date = new Date(createdAt).toLocaleString("ru", {
         day: "numeric",
