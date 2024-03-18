@@ -5,14 +5,7 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 
 // MUI Components import
-import {
-    Drawer,
-    List,
-    ListItemButton,
-    ListItemIcon,
-    ListItemText,
-    Collapse,
-} from "@mui/material"
+import { Drawer, List, ListItemButton, ListItemIcon, ListItemText, Collapse } from "@mui/material"
 
 // MUI Icons import
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined"
@@ -37,11 +30,7 @@ const SideMenu = () => {
     }
 
     return (
-        <Drawer
-            anchor="left"
-            open={sideMenu}
-            onClose={() => dispatch(toggleSideMenu())}
-        >
+        <Drawer anchor="left" open={sideMenu} onClose={() => dispatch(toggleSideMenu())}>
             <List sx={{ width: "300px" }} className="side-list">
                 <Link to="/">
                     <ListItemButton onClick={() => dispatch(toggleSideMenu())}>

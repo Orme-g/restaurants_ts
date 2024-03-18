@@ -6,6 +6,7 @@ const initialState = {
     restaurantData: null,
     restaurantReviews: null,
     pageLoading: "loading",
+    serverReply: null,
 }
 
 export const fetchLastAddedRestaurants = createAsyncThunk(
@@ -16,13 +17,10 @@ export const fetchLastAddedRestaurants = createAsyncThunk(
     }
 )
 
-export const fetchRestaurantData = createAsyncThunk(
-    "restaurants/fetchRestaurantData",
-    (restId) => {
-        const { request } = useHttp()
-        return request(`http://localhost:4000/restaurants/${restId}`)
-    }
-)
+export const fetchRestaurantData = createAsyncThunk("restaurants/fetchRestaurantData", (restId) => {
+    const { request } = useHttp()
+    return request(`http://localhost:4000/restaurants/${restId}`)
+})
 
 export const fetchRestaurantReviews = createAsyncThunk(
     "restaurants/fetchRestaurantReviews",
@@ -31,6 +29,11 @@ export const fetchRestaurantReviews = createAsyncThunk(
         return request(`http://localhost:4000/reviews/${restId}`)
     }
 )
+
+export const addNewRestaurant = createAsyncThunk("restaurants/addNewRestaurant", (restData) => {
+    const { request } = useHttp()
+    return request("http://localhost:4000/restaurants/add", "POST", restData)
+})
 
 const restaurantsSlice = createSlice({
     name: "restaurants",
@@ -70,6 +73,16 @@ const restaurantsSlice = createSlice({
             })
             .addCase(fetchRestaurantReviews.rejected, (state) => {
                 state.pageLoading = "error"
+            })
+            // Add New Restaurant
+            .addCase(addNewRestaurant.pending, (state) => {
+                state.serverReply = "Sending"
+            })
+            .addCase(addNewRestaurant.fulfilled, (state, action) => {
+                state.serverReply = action.payload
+            })
+            .addCase(addNewRestaurant.rejected, (state) => {
+                state.serverReply = "Failed"
             })
     },
 })

@@ -4,6 +4,8 @@ import { Link } from "react-router-dom"
 import { fetchLastAddedRestaurants } from "../../reducers/restaurants"
 import { CardsSkeleton } from "../skeletons/Skeletons"
 
+// import pic from "../../assets/rest_photos/birch/bir_1.jpeg"
+
 import "./restaurantCard.sass"
 
 const RestaurantCard = () => {
@@ -25,6 +27,7 @@ const RestaurantCard = () => {
                 <div
                     className="restaurant-card__image"
                     style={{ backgroundImage: `url(${title_image})` }}
+                    // style={{ backgroundImage: `url(${pic})` }}
                 ></div>
                 <div className="restaurant-card__title">{name}</div>
                 <div className="restaurant-card__description">{short_description}</div>

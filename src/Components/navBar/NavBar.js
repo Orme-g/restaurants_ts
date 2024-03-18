@@ -13,11 +13,8 @@ import MenuIcon from "@mui/icons-material/Menu"
 import AccountCircleIcon from "@mui/icons-material/AccountCircle"
 import PersonIcon from "@mui/icons-material/Person"
 import LogoutIcon from "@mui/icons-material/Logout"
-import {
-    toggleSideMenu,
-    toggleModalWindowLogin,
-    setPassAuth,
-} from "../../reducers/interactive"
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings"
+import { toggleSideMenu, toggleModalWindowLogin, setPassAuth } from "../../reducers/interactive"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import useLocalStorage from "../../hooks/useLocalStorage"
@@ -27,7 +24,7 @@ import "./navBar.sass"
 const NavBar = () => {
     const [anchorEl, setAnchorEl] = useState(null)
     const dispatch = useDispatch()
-    const { clearData } = useLocalStorage()
+    const { clearData, getUserData } = useLocalStorage()
     const passAuth = useSelector((state) => state.interactive.passAuth)
     const handleProfile = (event) => {
         setAnchorEl(event.currentTarget)
@@ -40,13 +37,25 @@ const NavBar = () => {
         dispatch(setPassAuth())
         handleClose()
     }
+
+    const name = getUserData()?.name
+    const _id = getUserData()?._id
+    const isAdmin = getUserData()?.role.includes("admin")
+
     const unAuth = (
-        <Button
-            color="inherit"
-            onClick={() => dispatch(toggleModalWindowLogin())}
-        >
+        <Button color="inherit" onClick={() => dispatch(toggleModalWindowLogin())}>
             Войти
         </Button>
+    )
+    const admin = (
+        <Link to={`/admin`} onClick={handleClose}>
+            <MenuItem>
+                <ListItemIcon>
+                    <AdminPanelSettingsIcon />
+                </ListItemIcon>
+                Админ панель
+            </MenuItem>
+        </Link>
     )
     const isAuth = (
         <>
@@ -58,23 +67,25 @@ const NavBar = () => {
             >
                 <AccountCircleIcon />
             </IconButton>
-            <Menu
-                anchorEl={anchorEl}
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-            >
-                <MenuItem onClick={handleClose}>
-                    <ListItemIcon>
-                        <PersonIcon />
-                    </ListItemIcon>
-                    Посмотреть профиль
-                </MenuItem>
-                <MenuItem onClick={handleLogout}>
-                    <ListItemIcon>
-                        <LogoutIcon />
-                    </ListItemIcon>
-                    Выйти
-                </MenuItem>
+            <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
+                <div className="navbar-menu__username">{name}</div>
+                <Link to={`/profile/${_id}`} onClick={handleClose}>
+                    <MenuItem>
+                        <ListItemIcon>
+                            <PersonIcon />
+                        </ListItemIcon>
+                        Посмотреть профиль
+                    </MenuItem>
+                </Link>
+                {isAdmin ? admin : null}
+                <Link to={"/"}>
+                    <MenuItem onClick={handleLogout}>
+                        <ListItemIcon>
+                            <LogoutIcon />
+                        </ListItemIcon>
+                        Выйти
+                    </MenuItem>
+                </Link>
             </Menu>
         </>
     )
@@ -82,10 +93,7 @@ const NavBar = () => {
     return (
         <AppBar color="inherit">
             <Toolbar>
-                <IconButton
-                    onClick={() => dispatch(toggleSideMenu())}
-                    color="inherit"
-                >
+                <IconButton onClick={() => dispatch(toggleSideMenu())} color="inherit">
                     <MenuIcon />
                 </IconButton>
                 <Link to={"/"}>

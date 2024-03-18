@@ -11,6 +11,7 @@ import Spinner from "../spinner/Spinner"
 
 import useLocalStorage from "../../hooks/useLocalStorage"
 import { setUserData, setPassAuth } from "../../reducers/interactive"
+import { ScrollToTop } from "../../services/ScrollToTop"
 
 import "./App.sass"
 
@@ -20,6 +21,9 @@ const SingleRestaurantPage = lazy(() =>
 )
 const BestDoner = lazy(() => import("../pages/bestDoner/BestDoner"))
 const BestDonerPage = lazy(() => import("../pages/bestDonerPage/BestDonerPage"))
+const InfoPage = lazy(() => import("../pages/infoPage/InfoPage"))
+const ProfilePage = lazy(() => import("../pages/profilePage/ProfilePage"))
+const AdminPage = lazy(() => import("../pages/adminPage/AdminPage"))
 const Page404 = lazy(() => import("../pages/Page404"))
 
 function App() {
@@ -33,6 +37,7 @@ function App() {
 
     return (
         <Router>
+            <ScrollToTop />
             <div className="App">
                 <Navigation />
                 <Suspense fallback={<Spinner />}>
@@ -41,6 +46,9 @@ function App() {
                         <Route path="/restaurant/:restId" element={<SingleRestaurantPage />} />
                         <Route path="/best-doner" element={<BestDoner />} />
                         <Route path="/best-doner/:donerId" element={<BestDonerPage />} />
+                        <Route path="/info/:infoType" element={<InfoPage />} />
+                        <Route path="/profile/:userId" element={<ProfilePage />} />
+                        <Route path="/admin" element={<AdminPage />} />
                         <Route path="*" element={<Page404 />} />
                     </Routes>
                 </Suspense>

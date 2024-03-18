@@ -3,12 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useForm } from "react-hook-form"
 import { DevTool } from "@hookform/devtools"
 
-import {
-    Dialog,
-    DialogContent,
-    DialogContentText,
-    DialogTitle,
-} from "@mui/material"
+import { Dialog, DialogContent, DialogContentText, DialogTitle } from "@mui/material"
 import { Stack, TextField, Button } from "@mui/material"
 
 import {
@@ -94,7 +89,6 @@ const ModalLogin = () => {
                             size="small"
                             {...register("password", {
                                 required: "Введите пароль",
-                                minLength: 4,
                             })}
                             error={!!errors.password}
                             helperText={errors.password?.message}

@@ -3,7 +3,8 @@ import { nanoid } from "@reduxjs/toolkit"
 
 import { Swiper, SwiperSlide } from "swiper/react"
 import { FreeMode, Navigation, Thumbs } from "swiper/modules"
-
+// import pic from "../../assets/rest_photos/terrase/terr_2.jpeg"
+// import * as data from "../../services/importModule"
 import "./slider.sass"
 
 const Slider = memo(({ images }) => {
@@ -14,9 +15,19 @@ const Slider = memo(({ images }) => {
         return (
             <SwiperSlide key={id}>
                 <img src={item} alt="restaurant" />
+                {/* <img src={pic} alt="restaurant" /> */}
             </SwiperSlide>
         )
     })
+    // const imgList = Object.values(data)
+    // const slideList = imgList.map((item) => {
+    //     const id = nanoid()
+    //     return (
+    //         <SwiperSlide key={id}>
+    //             <img src={item} alt="restaurant" />
+    //         </SwiperSlide>
+    //     )
+    // })
 
     return (
         <>
@@ -31,10 +42,7 @@ const Slider = memo(({ images }) => {
                 modules={[FreeMode, Navigation, Thumbs]}
                 // thumbs={{ swiper: thumbsSwiper }}
                 thumbs={{
-                    swiper:
-                        thumbsSwiper && !thumbsSwiper.destroyed
-                            ? thumbsSwiper
-                            : null,
+                    swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
                 }}
                 className="mainGallery"
             >

@@ -34,12 +34,11 @@ const BestDonerPage = () => {
                 </div>
                 <div className="doner-topic__image">
                     <img src={title_image} alt="doner" />
+                    {/* <img src={pic} alt="doner" /> */}
                 </div>
                 <div className="doner-topic__content">
-                    <blockquote>
-                        <p>{bloquote}</p>
-                    </blockquote>
-                    {text}
+                    <blockquote>{bloquote}</blockquote>
+                    <p>{text}</p>
                 </div>
                 <div className="doner-topic__slider">
                     <Slider images={images} />

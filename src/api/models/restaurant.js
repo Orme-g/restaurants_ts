@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose")
 
 const Schema = mongoose.Schema
 
@@ -6,56 +6,61 @@ const restaurantSchema = new Schema({
     name: {
         type: String,
         required: true,
-        uppercase: true
+        uppercase: true,
     },
     short_description: {
         type: String,
-        required: true
+        required: true,
     },
     description: {
         type: String,
-        required: true
-    },
-    images: [{
-        type: String,
-        required: true
-    }],
-    cousine: [{
-        type: String,
         required: true,
-        lowercase: true
-    }],
+    },
+    images: [
+        {
+            type: String,
+            required: true,
+        },
+    ],
+    cousine: [
+        {
+            type: String,
+            required: true,
+            lowercase: true,
+        },
+    ],
     rating: {
         type: Number,
-        required: true
+        required: true,
+        default: 4,
     },
     adress: {
         type: String,
-        required: true
+        required: true,
     },
     bill: {
         type: Number,
-        required: true
+        required: true,
     },
     phone: {
         type: String,
-        required: true
+        required: true,
     },
-    reviews: [{
-        type: Object
-    }],
+    reviews: [
+        {
+            type: Object,
+        },
+    ],
     createdAt: {
         type: Date,
         default: () => Date.now(),
-        immutable: true
-    }
+        immutable: true,
+    },
 })
 
-const Restaurant = mongoose.model('Restaurant', restaurantSchema)
+const Restaurant = mongoose.model("Restaurant", restaurantSchema)
 
 module.exports = Restaurant
-
-
 
 // db.restaurants.insertOne({
 //     name: 'БАНЩИКИ',
@@ -67,7 +72,7 @@ module.exports = Restaurant
 //     adress: 'Ул. Куйбышевского, 34',
 //     bill: 3200,
 //     phone: "8-(812)-527-22-72",
-//     createdAt: ISODate(),     
+//     createdAt: ISODate(),
 //     title_image: 'https://banshiki.spb.ru/images/slider/1.jpg'
 // })
 

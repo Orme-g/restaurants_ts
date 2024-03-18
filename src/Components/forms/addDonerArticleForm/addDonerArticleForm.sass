@@ -1,0 +1,43 @@
+@import '../../../style/variables'
+@import '../../../style/mixins'
+
+.add-doner-article-form
+    margin: 50px 0 50px 0
+    padding: 40px 30px 30px 30px
+    width: 65%
+    border: 1px solid grey
+    border-radius: 10px
+
+    &__title
+        font-size: 22px
+        font-weight: 300
+        margin-bottom: 30px
+        color: $primary-text
+
+    &__btn-submit
+        margin: 30px 0 
+        height: 50px
+        width: 160px
+        color: $primary-text
+        display: flex
+        justify-content: space-evenly
+        border: 1px solid grey
+        border-radius: 5px
+
+    &__icon
+        color: $green-color
+
+    &__wrapper
+        display: flex
+
+    &__alert
+        height: 50px
+        margin-top: 30px
+        margin-left: 20px
+        font-size: 16px
+
+    &__spinner
+        height: 50px
+        width: 50px
+        transform: translateY(60%)
+

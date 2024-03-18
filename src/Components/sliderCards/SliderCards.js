@@ -6,13 +6,15 @@ import { Rating } from "@mui/material"
 import { useGetSortedRestaurantsQuery } from "../../services/apiSlice"
 
 import { CardsSliderSkeleton } from "../skeletons/Skeletons"
+// import ServerError from "../pages/ServerError"
 
+// import pic from "../../assets/rest_photos/cristal/cris_1.jpeg"
 import "./sliderCards.sass"
 
 const SliderCards = ({ type }) => {
-    const { data: sortedRestaurants, isLoading } = useGetSortedRestaurantsQuery(type)
+    const { data: sortedRestaurants, isLoading, isError } = useGetSortedRestaurantsQuery(type)
 
-    if (isLoading) {
+    if (isLoading || isError) {
         return <CardsSliderSkeleton />
     }
 
@@ -24,6 +26,7 @@ const SliderCards = ({ type }) => {
                     <div
                         className="selection-card__image"
                         style={{ backgroundImage: `url(${title_image})` }}
+                        // style={{ backgroundImage: `url(${pic})` }}
                     ></div>
                     <div className="selection-card__title">{name}</div>
                     <div className="selection-card__rating">
