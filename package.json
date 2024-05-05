@@ -1,6 +1,6 @@
 {
-  "name": "whereats-app",
-  "version": "0.1.0",
+  "name": "whereats-app_ts",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -63,8 +63,17 @@
   },
   "devDependencies": {
     "@hookform/devtools": "^4.3.1",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.12.8",
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.0",
     "concurrently": "^8.2.1",
     "nodemon": "^3.0.1",
-    "sass": "^1.66.1"
-  }
+    "sass": "^1.66.1",
+    "typescript": "^5.4.5"
+  },
+  "description": "Pet project.",
+  "main": "Hook-Form.js",
+  "author": "",
+  "license": "ISC"
 }
