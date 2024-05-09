@@ -1,22 +1,28 @@
-import { useState } from "react"
-import { useSelector } from "react-redux"
+import React from "react";
+import { useState } from "react";
+import { useAppSelector } from "../../types/store";
 
-import CommentsItems from "../commentsItems/CommentsItems"
-import CommentForm from "../forms/commentForm/CommentForm"
+import CommentsItems from "../commentsItems/CommentsItems";
+import CommentForm from "../forms/commentForm/CommentForm";
+import type { IReplyData, TCommentReplyFunction } from "../../types/commentsTypes";
 
-import "./commentsBlock.sass"
+import "./commentsBlock.sass";
 
-const CommentsBlock = ({ currentTopicId }) => {
-    const [replyData, setReplyData] = useState(null)
-    const checkAuth = useSelector((state) => state.interactive.passAuth)
+export interface CommentBlockProps {
+    currentTopicId: string;
+}
+
+const CommentsBlock: React.FC<CommentBlockProps> = ({ currentTopicId }) => {
+    const [replyData, setReplyData] = useState<IReplyData>({ name: null, text: null });
+    const checkAuth = useAppSelector((state) => state.interactive.passAuth);
     const unAuth = (
         <div className="comments__unauth">
             Войдите или зарегистрируйтесь, чтобы оставлять комментарии.
         </div>
-    )
-    const commentReply = (name, text) => {
-        setReplyData({ name, text })
-    }
+    );
+    const commentReply: TCommentReplyFunction = ({ name, text }) => {
+        setReplyData({ name, text });
+    };
     return (
         <>
             <section className="comments__container">
@@ -38,7 +44,7 @@ const CommentsBlock = ({ currentTopicId }) => {
                 </div>
             </section>
         </>
-    )
-}
+    );
+};
 
-export default CommentsBlock
+export default CommentsBlock;

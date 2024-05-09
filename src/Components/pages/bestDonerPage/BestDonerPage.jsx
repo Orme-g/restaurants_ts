@@ -1,29 +1,30 @@
-import { useParams } from "react-router-dom"
-import { useGetSingleDonerRestaurantQuery } from "../../../services/apiSlice"
+import React from "react";
+import { useParams } from "react-router-dom";
+import { useGetSingleDonerRestaurantQuery } from "../../../services/apiSlice";
 
-import CommentsBlock from "../../commentsBlock/CommentsBlock"
-import { Rating } from "@mui/material"
-import Slider from "../../sliderImages/Slider"
-import { PageSkeleton } from "../../skeletons/Skeletons"
+import CommentsBlock from "../../commentsBlock/CommentsBlock";
+import { Rating } from "@mui/material";
+import Slider from "../../sliderImages/Slider";
+import { PageSkeleton } from "../../skeletons/Skeletons";
 
-import "./bestDonerPage.sass"
+import "./bestDonerPage.sass";
 
 const BestDonerPage = () => {
-    const { donerId } = useParams()
-    const { data: singleDonerData, isLoading } = useGetSingleDonerRestaurantQuery(donerId)
+    const { donerId } = useParams();
+    const { data: singleDonerData, isLoading } = useGetSingleDonerRestaurantQuery(donerId);
 
     if (isLoading) {
-        return <PageSkeleton />
+        return <PageSkeleton />;
     }
 
     const { title, rating, title_image, text, bloquote, author, images, subtitle, createdAt, _id } =
-        singleDonerData
+        singleDonerData;
 
     const date = new Date(createdAt).toLocaleString("ru", {
         day: "numeric",
         month: "long",
         year: "numeric",
-    })
+    });
     return (
         <>
             <section className="doner-topic__container">
@@ -65,7 +66,7 @@ const BestDonerPage = () => {
             </section>
             <CommentsBlock currentTopicId={_id} />
         </>
-    )
-}
+    );
+};
 
-export default BestDonerPage
+export default BestDonerPage;

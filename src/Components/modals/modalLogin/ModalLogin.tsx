@@ -1,28 +1,35 @@
-import { useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { useForm } from "react-hook-form"
-import { DevTool } from "@hookform/devtools"
+import React from "react";
+import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../../types/store";
+// import { useDispatch, useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
+import { DevTool } from "@hookform/devtools";
 
-import { Dialog, DialogContent, DialogContentText, DialogTitle } from "@mui/material"
-import { Stack, TextField, Button } from "@mui/material"
+import { Dialog, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
+import { Stack, TextField, Button } from "@mui/material";
 
 import {
     toggleModalWindowLogin,
     toggleRegisterWindowModal,
     callSnackbar,
     setPassAuth,
-} from "../../../reducers/interactive"
-import { useLoginMutation } from "../../../services/apiSlice"
-import useLocalStorage from "../../../hooks/useLocalStorage"
+} from "../../../reducers/interactive";
+import { useLoginMutation } from "../../../services/apiSlice";
+import useLocalStorage from "../../../hooks/useLocalStorage";
 
-import "./modalLogin.sass"
+import "./modalLogin.sass";
+
+interface IFormData {
+    login: string;
+    password: string;
+}
 
 const ModalLogin = () => {
-    const [errorMessage, setErrorMessage] = useState(null)
-    const dispatch = useDispatch()
-    const { modalWindowLogin } = useSelector((state) => state.interactive)
-    const [sendLogin] = useLoginMutation()
-    const { setData } = useLocalStorage()
+    const [errorMessage, setErrorMessage] = useState(null);
+    const dispatch = useAppDispatch();
+    const { modalWindowLogin } = useAppSelector((state) => state.interactive);
+    const [sendLogin] = useLoginMutation();
+    const { setData } = useLocalStorage();
 
     const {
         register,
@@ -35,35 +42,36 @@ const ModalLogin = () => {
             login: "",
             password: "",
         },
-    })
+    });
 
-    const onSubmit = (data) => {
-        const { login, password } = data
+    const onSubmit = (data: IFormData) => {
+        const { login, password } = data;
         const loginData = {
             username: login,
             password,
-        }
+        };
         sendLogin(loginData)
             .unwrap()
             .then(({ message, ...data }) => {
-                dispatch(callSnackbar({ text: message, type: "success" }))
-                setData(data)
-                handleClose()
-                dispatch(setPassAuth(true))
+                dispatch(callSnackbar({ text: message, type: "success" }));
+                console.log(data);
+                setData(data);
+                handleClose();
+                dispatch(setPassAuth(true));
             })
-            .catch((error) => setErrorMessage(error.data))
-    }
+            .catch((error) => setErrorMessage(error.data));
+    };
 
     const handleClose = () => {
-        dispatch(toggleModalWindowLogin())
-        setErrorMessage(null)
-        reset()
-    }
+        dispatch(toggleModalWindowLogin());
+        setErrorMessage(null);
+        reset();
+    };
 
     const passToRegistration = () => {
-        dispatch(toggleModalWindowLogin())
-        dispatch(toggleRegisterWindowModal())
-    }
+        dispatch(toggleModalWindowLogin());
+        dispatch(toggleRegisterWindowModal());
+    };
 
     return (
         <Dialog open={modalWindowLogin} onClose={() => handleClose()}>
@@ -113,7 +121,7 @@ const ModalLogin = () => {
                 <DevTool control={control} />
             </DialogContent>
         </Dialog>
-    )
-}
+    );
+};
 
-export default ModalLogin
+export default ModalLogin;

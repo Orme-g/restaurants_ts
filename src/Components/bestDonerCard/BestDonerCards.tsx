@@ -1,29 +1,30 @@
-import { Link } from "react-router-dom"
-import { Rating } from "@mui/material"
-import { useGetDonersListQuery } from "../../services/apiSlice"
-import { DonerCardsSkeleton } from "../skeletons/Skeletons"
+import React from "react";
+import { Link } from "react-router-dom";
+import { Rating } from "@mui/material";
+import { useGetDonersListQuery } from "../../services/apiSlice";
+import { DonerCardsSkeleton } from "../skeletons/Skeletons";
 
 // import pic from "../../assets/rest_photos/ille/ille_1.jpeg"
-import "./bestDonerCards.sass"
+import "./bestDonerCards.sass";
 
-const BestDonerCards = () => {
-    const { data: allDonersData, isLoading, isError } = useGetDonersListQuery()
+const BestDonerCards: React.FC = () => {
+    const { data: allDonersData, isLoading, isError } = useGetDonersListQuery(null);
 
     if (isLoading || isError) {
-        return <DonerCardsSkeleton />
+        return <DonerCardsSkeleton />;
     }
 
-    const donerCards = allDonersData.map((item) => {
-        return createDonerCard(item)
-    })
+    const donerCards = allDonersData.map((item: any) => {
+        return createDonerCard(item);
+    });
 
-    function createDonerCard(card) {
-        const { _id, title, rating, short_description, title_image, createdAt } = card
+    function createDonerCard(card: any) {
+        const { _id, title, rating, short_description, title_image, createdAt } = card;
         const date = new Date(createdAt).toLocaleString("ru", {
             day: "numeric",
             month: "short",
             year: "numeric",
-        })
+        });
         return (
             <Link to={`/best-doner/${_id}`} key={_id}>
                 <div className="best-doner-card__container">
@@ -43,10 +44,10 @@ const BestDonerCards = () => {
                     </div>
                 </div>
             </Link>
-        )
+        );
     }
 
-    return <>{donerCards}</>
-}
+    return <>{donerCards}</>;
+};
 
-export default BestDonerCards
+export default BestDonerCards;

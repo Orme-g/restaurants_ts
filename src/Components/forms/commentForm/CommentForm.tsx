@@ -1,46 +1,62 @@
-import { useState } from "react"
+import React from "react";
+import { useState } from "react";
 
-import { useSelector } from "react-redux"
+import { useAppSelector } from "../../../types/store";
+// import { useSelector } from "react-redux";
 
-import { TextField, Button, IconButton } from "@mui/material"
-import CloseIcon from "@mui/icons-material/Close"
+import { TextField, Button, IconButton } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
-import { usePostCommentMutation } from "../../../services/apiSlice"
+import { usePostCommentMutation } from "../../../services/apiSlice";
 
-import "./commentForm.sass"
+import type { IReplyData, TCommentReplyFunction } from "../../../types/commentsTypes";
+import "./commentForm.sass";
 
-const CommentForm = ({ replyData, topicId, setReplyData }) => {
-    const [commentText, setCommentText] = useState("")
+interface ICommentProps {
+    replyData: IReplyData;
+    topicId: string;
+    setReplyData: TCommentReplyFunction;
+}
+
+const CommentForm: React.FC<ICommentProps> = ({ replyData, topicId, setReplyData }) => {
+    const [commentText, setCommentText] = useState("");
     // const [reply, setReplyData] = useState({})
-    const [valid, setValid] = useState(false)
-    const { username } = useSelector((state) => state.interactive.userData)
-    const [postComment] = usePostCommentMutation()
+    const [valid, setValid] = useState(false);
+    const userData = useAppSelector((state) => state.interactive.userData);
+    let nameFromUserData: string;
+    if (userData) {
+        const { username } = userData;
+        nameFromUserData = username;
+    }
+
+    const [postComment] = usePostCommentMutation();
     // useEffect(() => {
     //     setReplyData(replyData)
     // }, [replyData])
 
-    console.log(replyData)
+    console.log(replyData);
 
     function handleSubmit() {
         // const reply = replyData ? replyData : null
         if (commentText.length < 10) {
-            setValid(true)
+            setValid(true);
         } else {
-            setValid(false)
+            setValid(false);
             let newComment = {
-                name: username,
+                name: nameFromUserData,
                 topic: topicId,
                 likes: 0,
                 dislikes: 0,
                 text: commentText,
-            }
+                reply: {},
+            };
             if (replyData) {
-                newComment = { ...newComment, reply: replyData }
+                newComment = { ...newComment, reply: replyData };
             }
             // console.log(newComment)
-            postComment(newComment).unwrap()
-            setCommentText("")
-            setReplyData(null)
+            postComment(newComment).unwrap();
+            setCommentText("");
+            setReplyData({ name: null, text: null });
         }
     }
     const replyBlock = (
@@ -48,15 +64,18 @@ const CommentForm = ({ replyData, topicId, setReplyData }) => {
             Ответ на:
             <div className="comments__reply_name">{replyData?.name}</div>
             <div className="comments__reply_text">{replyData?.text}</div>
-            <IconButton className="comments__reply_cancel" onClick={() => setReplyData(null)}>
+            <IconButton
+                className="comments__reply_cancel"
+                onClick={() => setReplyData({ name: null, text: null })}
+            >
                 <CloseIcon />
             </IconButton>
         </div>
-    )
+    );
 
     return (
         <form className="comments__add-form">
-            {replyData ? replyBlock : null}
+            {replyData.name ? replyBlock : null}
             <TextField
                 sx={{ width: "500px" }}
                 label="Комментарий"
@@ -79,7 +98,7 @@ const CommentForm = ({ replyData, topicId, setReplyData }) => {
                 Отправить
             </Button>
         </form>
-    )
-}
+    );
+};
 
-export default CommentForm
+export default CommentForm;
