@@ -1,6 +1,6 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
 const restaurantSchema = new Schema({
     name: {
@@ -46,21 +46,16 @@ const restaurantSchema = new Schema({
         type: String,
         required: true,
     },
-    reviews: [
-        {
-            type: Object,
-        },
-    ],
     createdAt: {
         type: Date,
         default: () => Date.now(),
         immutable: true,
     },
-})
+});
 
-const Restaurant = mongoose.model("Restaurant", restaurantSchema)
+const Restaurant = mongoose.model("Restaurant", restaurantSchema);
 
-module.exports = Restaurant
+module.exports = Restaurant;
 
 // db.restaurants.insertOne({
 //     name: 'БАНЩИКИ',

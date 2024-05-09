@@ -1,6 +1,8 @@
-import { useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { useForm } from "react-hook-form"
+import React from "react";
+import { useState } from "react";
+import { useAppSelector, useAppDispatch } from "../../../types/store";
+// import { useDispatch, useSelector } from "react-redux"
+import { useForm } from "react-hook-form";
 import {
     TextField,
     Stack,
@@ -11,19 +13,19 @@ import {
     InputLabel,
     OutlinedInput,
     Alert,
-} from "@mui/material"
-import PublishIcon from "@mui/icons-material/Publish"
-import { addNewRestaurant } from "../../../reducers/restaurants"
+} from "@mui/material";
+import PublishIcon from "@mui/icons-material/Publish";
+import { addNewRestaurant } from "../../../reducers/restaurants";
 
-import SmallSpinner from "../../spinner/SmallSpinner"
+import SmallSpinner from "../../spinner/SmallSpinner";
 
-import "./addRestaurantForm.sass"
+import "./addRestaurantForm.sass";
 
 const AddRestaurantForm = ({ displayState, toggleDisplay }) => {
-    const displayForm = displayState ? "show" : "hide"
-    const [cousine, setCousine] = useState([])
-    const { serverReply } = useSelector((state) => state.restaurants)
-    const dispatch = useDispatch()
+    const displayForm = displayState ? "show" : "hide";
+    const [cousine, setCousine] = useState([]);
+    const { serverReply } = useAppSelector((state) => state.restaurants);
+    const dispatch = useAppDispatch();
     const {
         register,
         handleSubmit,
@@ -38,7 +40,7 @@ const AddRestaurantForm = ({ displayState, toggleDisplay }) => {
             bill: "",
             phone: "",
         },
-    })
+    });
 
     const cousines = [
         "Итальянская",
@@ -54,35 +56,35 @@ const AddRestaurantForm = ({ displayState, toggleDisplay }) => {
         "Мексиканская",
         "Грузинская",
         "Средиземноморская",
-    ]
+    ];
 
     const postAlert = (type, text) => {
         return (
             <Alert severity={type} className="add-restaurant-form__alert">
                 {text}
             </Alert>
-        )
-    }
+        );
+    };
 
     const loading = (
         <div className="add-restaurant-form__spinner">
             <SmallSpinner />
         </div>
-    )
+    );
     const handleSelect = (event) => {
         const {
             target: { value },
-        } = event
-        setCousine(typeof value === "string" ? value.split(",") : value)
-    }
+        } = event;
+        setCousine(typeof value === "string" ? value.split(",") : value);
+    };
 
     const onSubmit = (data) => {
-        console.log(data)
-        dispatch(addNewRestaurant(JSON.stringify(data)))
-        reset()
-        setCousine([])
+        console.log(data);
+        dispatch(addNewRestaurant(JSON.stringify(data)));
+        reset();
+        setCousine([]);
         // toggleDisplay()
-    }
+    };
     return (
         <form className={`add-restaurant-form ${displayForm}`} onSubmit={handleSubmit(onSubmit)}>
             <div className="add-restaurant-form__title">Форма добавления ресторана:</div>
@@ -182,11 +184,11 @@ const AddRestaurantForm = ({ displayState, toggleDisplay }) => {
                     Отправить <PublishIcon className="add-restaurant-form__icon" />
                 </Button>
                 {serverReply === "Sending" ? loading : null}
-                {serverReply === "Success" ? postAlert("success", "Статья добавлена") : null}
+                {serverReply === "Success" ? postAlert("success", "Ресторан добавлен") : null}
                 {serverReply === "Failed" ? postAlert("error", "Ошибка добавления") : null}
             </div>
         </form>
-    )
-}
+    );
+};
 
-export default AddRestaurantForm
+export default AddRestaurantForm;
