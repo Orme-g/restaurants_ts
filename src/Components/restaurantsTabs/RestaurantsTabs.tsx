@@ -10,7 +10,7 @@ import "./restaurantsTabs.sass";
 
 interface IRestaurantsTabsProps {
     description: string;
-    restId: string | undefined;
+    restId: string;
 }
 
 const RestaurantsTabs: React.FC<IRestaurantsTabsProps> = memo(({ description, restId }) => {

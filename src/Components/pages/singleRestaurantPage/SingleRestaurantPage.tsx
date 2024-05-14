@@ -14,7 +14,7 @@ import { PageSkeleton } from "../../skeletons/Skeletons";
 const SingleRestaurantPage: React.FC = () => {
     const { restaurantData, pageLoading } = useAppSelector((state) => state.restaurants);
     const dispatch = useAppDispatch();
-    const { restId } = useParams();
+    const { restId } = useParams<string>();
 
     useEffect(() => {
         if (restId) {
@@ -39,7 +39,7 @@ const SingleRestaurantPage: React.FC = () => {
                 </div>
                 <RestSideInfo data={restaurantData} />
             </div>
-            <RestaurantsTabs description={description} restId={restId} />
+            <RestaurantsTabs description={description} restId={restId!} />
         </>
     );
 };

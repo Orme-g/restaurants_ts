@@ -1,17 +1,27 @@
-import { useState } from "react"
-import { useForm } from "react-hook-form"
-import { TextField, Stack, Button, Alert } from "@mui/material"
-import PublishIcon from "@mui/icons-material/Publish"
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { TextField, Stack, Button, Alert } from "@mui/material";
+import PublishIcon from "@mui/icons-material/Publish";
 
-import SmallSpinner from "../../spinner/SmallSpinner"
+import SmallSpinner from "../../spinner/SmallSpinner";
 
-import { useAddDonerArticleMutation } from "../../../services/apiSlice"
+import { useAddDonerArticleMutation } from "../../../services/apiSlice";
 
-import "./addDonerArticleForm.sass"
+import "./addDonerArticleForm.sass";
 
-const AddDonerArticleForm = ({ displayState, toggleDisplay }) => {
-    const displayForm = displayState ? "show" : "hide"
-    const [btnStatus, setBtnStatus] = useState(false)
+interface IAddDonerArticleFormProps {
+    displayState: boolean;
+    toggleDisplay: () => void;
+}
+
+type TAlerts = "success" | "info" | "warning" | "error";
+
+const AddDonerArticleForm: React.FC<IAddDonerArticleFormProps> = ({
+    displayState,
+    toggleDisplay,
+}) => {
+    const displayForm = displayState ? "show" : "hide";
+    const [btnStatus, setBtnStatus] = useState(false);
     const {
         register,
         handleSubmit,
@@ -27,40 +37,40 @@ const AddDonerArticleForm = ({ displayState, toggleDisplay }) => {
             rating: "",
             author: "",
         },
-    })
+    });
 
-    const [addDonerArticle, { isLoading, isSuccess, isError }] = useAddDonerArticleMutation()
+    const [addDonerArticle, { isLoading, isSuccess, isError }] = useAddDonerArticleMutation();
 
-    const onSubmit = (formData) => {
-        setBtnStatus(true)
+    const onSubmit = (formData: any) => {
+        setBtnStatus(true);
         addDonerArticle(formData)
             .unwrap()
             .then((response) => {
                 if (response === "Success") {
-                    reset()
-                    setBtnStatus(false)
-                    toggleDisplay()
+                    reset();
+                    setBtnStatus(false);
+                    toggleDisplay();
                 }
             })
             .catch((error) => {
-                console.log(error)
-                setBtnStatus(false)
-            })
-    }
+                console.log(error);
+                setBtnStatus(false);
+            });
+    };
 
-    const postAlert = (type, text) => {
+    const postAlert = (type: TAlerts, text: string) => {
         return (
             <Alert severity={type} className="add-doner-article-form__alert">
                 {text}
             </Alert>
-        )
-    }
+        );
+    };
 
     const loading = (
         <div className="add-doner-article-form__spinner">
             <SmallSpinner />
         </div>
-    )
+    );
 
     return (
         <form className={`add-doner-article-form ${displayForm}`} onSubmit={handleSubmit(onSubmit)}>
@@ -156,7 +166,7 @@ const AddDonerArticleForm = ({ displayState, toggleDisplay }) => {
                 {isError ? postAlert("error", "Ошибка добавления") : null}
             </div>
         </form>
-    )
-}
+    );
+};
 
-export default AddDonerArticleForm
+export default AddDonerArticleForm;

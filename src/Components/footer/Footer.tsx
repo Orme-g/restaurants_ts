@@ -1,17 +1,18 @@
-import { Link } from "react-router-dom"
+import React from "react";
+import { Link } from "react-router-dom";
 
-import SupportAgentOutlinedIcon from "@mui/icons-material/SupportAgentOutlined"
-import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined"
-import ShowChartOutlinedIcon from "@mui/icons-material/ShowChartOutlined"
-import AccessibilityNewOutlinedIcon from "@mui/icons-material/AccessibilityNewOutlined"
-import QuizOutlinedIcon from "@mui/icons-material/QuizOutlined"
+import SupportAgentOutlinedIcon from "@mui/icons-material/SupportAgentOutlined";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import ShowChartOutlinedIcon from "@mui/icons-material/ShowChartOutlined";
+import AccessibilityNewOutlinedIcon from "@mui/icons-material/AccessibilityNewOutlined";
+import QuizOutlinedIcon from "@mui/icons-material/QuizOutlined";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faTwitter, faVk, faInstagram, faGithub } from "@fortawesome/free-brands-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTwitter, faVk, faInstagram, faGithub } from "@fortawesome/free-brands-svg-icons";
 
-import "./footer.sass"
+import "./footer.sass";
 
-const Footer = () => {
+const Footer: React.FC = () => {
     return (
         <div className="footer">
             <div className="footer__information">
@@ -88,7 +89,7 @@ const Footer = () => {
                 </ul>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Footer
+export default Footer;

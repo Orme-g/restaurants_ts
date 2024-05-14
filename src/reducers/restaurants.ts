@@ -2,11 +2,12 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { useHttp } from "../hooks/http.hook";
 
 import type { IRestaurant } from "../types/restaurantsTypes";
+import type { IReview } from "../types/reviewsTypes";
 
 interface IInitialState {
     lastAddedRestaurants: null | IRestaurant[];
     restaurantData: IRestaurant | null;
-    restaurantReviews: null;
+    restaurantReviews: IReview[] | null;
     pageLoading: "loading" | "error" | "idle";
     serverReply: "Sending" | "Failed" | "Success" | null;
 }

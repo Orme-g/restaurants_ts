@@ -1,5 +1,4 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useAppSelector, useAppDispatch } from "../../../types/store";
 // import { useDispatch, useSelector } from "react-redux"
 import { useForm } from "react-hook-form";
@@ -20,6 +19,13 @@ import { addNewRestaurant } from "../../../reducers/restaurants";
 import SmallSpinner from "../../spinner/SmallSpinner";
 
 import "./addRestaurantForm.sass";
+
+// interface IAddRestaurantFormProps {
+//     displayState: boolean,
+//     toggleDisplay: () => void
+// }
+
+// type TAlerts = "success" | "info" | "warning" | "error";
 
 const AddRestaurantForm = ({ displayState, toggleDisplay }) => {
     const displayForm = displayState ? "show" : "hide";
@@ -173,7 +179,6 @@ const AddRestaurantForm = ({ displayState, toggleDisplay }) => {
                     label="Номер телефона"
                     {...register("phone", {
                         required: "Обязательное поле",
-                        pattern: {},
                     })}
                     error={!!errors.phone}
                     helperText={errors.phone?.message}

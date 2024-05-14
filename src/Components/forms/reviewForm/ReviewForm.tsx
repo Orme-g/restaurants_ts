@@ -1,31 +1,45 @@
-import { useState } from "react"
-import { useDispatch } from "react-redux"
-import classNames from "classnames"
-import { useForm } from "react-hook-form"
+import React, { useState } from "react";
+// import { useDispatch } from "react-redux"
+import { useAppDispatch } from "../../../types/store";
+import classNames from "classnames";
+import { useForm } from "react-hook-form";
 
-import { Button, Stack, TextField, Rating } from "@mui/material"
-import { fetchRestaurantReviews } from "../../../reducers/restaurants"
+import { Button, Stack, TextField, Rating } from "@mui/material";
+import { fetchRestaurantReviews } from "../../../reducers/restaurants";
 
-import { useHttp } from "../../../hooks/http.hook"
-import useLocalStorage from "../../../hooks/useLocalStorage"
+import { useHttp } from "../../../hooks/http.hook";
+import useLocalStorage from "../../../hooks/useLocalStorage";
 
-import { callSnackbar } from "../../../reducers/interactive"
+import { callSnackbar } from "../../../reducers/interactive";
 
-import "./reviewForm.sass"
+import "./reviewForm.sass";
 
-const ReviewForm = ({ restId }) => {
-    const [rating, setRating] = useState(1)
-    const [display, setDisplay] = useState(false)
+interface IReviewForm {
+    restId: string;
+}
 
-    const dispatch = useDispatch()
-    const { request } = useHttp()
-    const { getUserData } = useLocalStorage()
-    const { name, avatar } = getUserData()
+interface INewReview {
+    name: string;
+    avatar: string;
+    like: string;
+    dislike: string;
+    rating: number;
+    restaurant: string;
+}
+
+const ReviewForm: React.FC<IReviewForm> = ({ restId }) => {
+    const [rating, setRating] = useState<number>(1);
+    const [display, setDisplay] = useState(false);
+
+    const dispatch = useAppDispatch();
+    const { request } = useHttp();
+    const { getUserData } = useLocalStorage();
+    const { name, avatar } = getUserData();
 
     const displayForm = classNames("add-review__container", {
         show: display,
         hide: !display,
-    })
+    });
 
     const {
         register,
@@ -37,36 +51,32 @@ const ReviewForm = ({ restId }) => {
             like: "",
             dislike: "",
         },
-    })
+    });
 
-    const onSubmit = (data) => {
-        const { like, dislike } = data
-        const review = {
+    const onSubmit = (data: any) => {
+        const { like, dislike } = data;
+        const review: INewReview = {
             name,
             avatar,
             like,
             dislike,
             rating,
             restaurant: restId,
-        }
+        };
         request("http://localhost:4000/reviews", "POST", JSON.stringify(review))
-            .then(({ message }) =>
-                dispatch(callSnackbar({ text: message, type: "success" }))
-            )
-            .then(() => dispatch(fetchRestaurantReviews(restId)), reset())
-            .catch((err) => console.log(err))
-    }
+            .then(({ message }) => dispatch(callSnackbar({ text: message, type: "success" })))
+            .then(() => dispatch(fetchRestaurantReviews(restId)))
+            .then(() => reset())
+            .catch((err) => console.log(err));
+    };
 
     const toggleDisplay = () => {
-        setDisplay((display) => !display)
-    }
+        setDisplay((display) => !display);
+    };
 
     return (
         <>
-            <Button
-                className="post-feedback show"
-                onClick={() => toggleDisplay()}
-            >
+            <Button className="post-feedback show" onClick={() => toggleDisplay()}>
                 Написать отзыв
             </Button>
             <div className={displayForm}>
@@ -76,10 +86,7 @@ const ReviewForm = ({ restId }) => {
                     </div>
                     <div className="add-review__header_username">{name}</div>
                 </div>
-                <form
-                    className="add-review__form"
-                    onSubmit={handleSubmit(onSubmit)}
-                >
+                <form className="add-review__form" onSubmit={handleSubmit(onSubmit)}>
                     <Stack spacing={3} width={450} mb={2}>
                         <TextField
                             label="Что понравилось"
@@ -109,21 +116,19 @@ const ReviewForm = ({ restId }) => {
                                 value={rating}
                                 precision={0.5}
                                 onChange={(event, newValue) => {
-                                    setRating(newValue)
+                                    setRating(newValue as number);
                                 }}
                             />
                             <Button type="submit" sx={{ marginLeft: "auto" }}>
                                 Отправить
                             </Button>
-                            <Button onClick={() => toggleDisplay()}>
-                                Отмена
-                            </Button>
+                            <Button onClick={() => toggleDisplay()}>Отмена</Button>
                         </Stack>
                     </Stack>
                 </form>
             </div>
         </>
-    )
-}
+    );
+};
 
-export default ReviewForm
+export default ReviewForm;
