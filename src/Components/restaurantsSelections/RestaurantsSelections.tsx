@@ -1,13 +1,12 @@
-import SliderCards from "../sliderCards/SliderCards"
+import React from "react";
+import SliderCards from "../sliderCards/SliderCards";
 
-import "./restaurantsSelections.sass"
+import "./restaurantsSelections.sass";
 
 const RestaurantsSelections = () => {
     return (
         <section className="restaurants-selections">
-            <div className="restaurants-selections__title">
-                Наши подборки для вас
-            </div>
+            <div className="restaurants-selections__title">Наши подборки для вас</div>
             <article className="selection expensive">
                 <div className="selection__title">Самые дорогие рестораны</div>
                 <SliderCards type="expensive" />
@@ -21,7 +20,7 @@ const RestaurantsSelections = () => {
                 <SliderCards type="best" />
             </article>
         </section>
-    )
-}
+    );
+};
 
-export default RestaurantsSelections
+export default RestaurantsSelections;

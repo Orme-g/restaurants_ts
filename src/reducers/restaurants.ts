@@ -27,14 +27,17 @@ export const fetchLastAddedRestaurants = createAsyncThunk(
     }
 );
 
-export const fetchRestaurantData = createAsyncThunk("restaurants/fetchRestaurantData", (restId) => {
-    const { request } = useHttp();
-    return request(`http://localhost:4000/restaurants/${restId}`);
-});
+export const fetchRestaurantData = createAsyncThunk(
+    "restaurants/fetchRestaurantData",
+    (restId: string) => {
+        const { request } = useHttp();
+        return request(`http://localhost:4000/restaurants/${restId}`);
+    }
+);
 
 export const fetchRestaurantReviews = createAsyncThunk(
     "restaurants/fetchRestaurantReviews",
-    (restId) => {
+    (restId: string) => {
         const { request } = useHttp();
         return request(`http://localhost:4000/reviews/${restId}`);
     }

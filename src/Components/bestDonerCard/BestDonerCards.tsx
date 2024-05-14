@@ -4,6 +4,7 @@ import { Rating } from "@mui/material";
 import { useGetDonersListQuery } from "../../services/apiSlice";
 import { DonerCardsSkeleton } from "../skeletons/Skeletons";
 
+import type { IDonerRestaurant } from "../../types/donersTypes";
 // import pic from "../../assets/rest_photos/ille/ille_1.jpeg"
 import "./bestDonerCards.sass";
 
@@ -14,11 +15,13 @@ const BestDonerCards: React.FC = () => {
         return <DonerCardsSkeleton />;
     }
 
-    const donerCards = allDonersData.map((item: any) => {
-        return createDonerCard(item);
-    });
+    const donerCards = allDonersData
+        ? allDonersData.map((item) => {
+              return createDonerCard(item);
+          })
+        : null;
 
-    function createDonerCard(card: any) {
+    function createDonerCard(card: IDonerRestaurant) {
         const { _id, title, rating, short_description, title_image, createdAt } = card;
         const date = new Date(createdAt).toLocaleString("ru", {
             day: "numeric",

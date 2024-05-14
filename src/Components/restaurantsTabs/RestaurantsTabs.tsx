@@ -1,22 +1,27 @@
-import { useState, memo } from "react"
-import { useSelector } from "react-redux"
+import React, { useState, memo } from "react";
+import { useAppSelector } from "../../types/store";
 
-import { Box, Tab } from "@mui/material"
-import { TabContext, TabList, TabPanel } from "@mui/lab"
+import { Box, Tab } from "@mui/material";
+import { TabContext, TabList, TabPanel } from "@mui/lab";
 
-import FeedbackItem from "../feedbackItem/FeedbackItem"
-import ReviewForm from "../forms/reviewForm/ReviewForm"
-import "./restaurantsTabs.sass"
+import FeedbackItem from "../feedbackItem/FeedbackItem";
+import ReviewForm from "../forms/reviewForm/ReviewForm";
+import "./restaurantsTabs.sass";
 
-const RestaurantsTabs = memo(({ description, restId }) => {
-    const [activeTab, setActiveTab] = useState("1")
-    const checkAuth = useSelector((state) => state.interactive.passAuth)
+interface IRestaurantsTabsProps {
+    description: string;
+    restId: string | undefined;
+}
 
-    const handleChange = (event, newActiveTab) => {
-        setActiveTab(newActiveTab)
-    }
+const RestaurantsTabs: React.FC<IRestaurantsTabsProps> = memo(({ description, restId }) => {
+    const [activeTab, setActiveTab] = useState("1");
+    const checkAuth = useAppSelector((state) => state.interactive.passAuth);
 
-    const unAuth = <div className="unAuthorised">Войдите, чтобы оставить отзыв</div>
+    const handleChange = (event: any, newActiveTab: any) => {
+        setActiveTab(newActiveTab);
+    };
+
+    const unAuth = <div className="unAuthorised">Войдите, чтобы оставить отзыв</div>;
 
     return (
         <div className="restaurants-tabs__container">
@@ -48,7 +53,7 @@ const RestaurantsTabs = memo(({ description, restId }) => {
                 </TabContext>
             </Box>
         </div>
-    )
-})
+    );
+});
 
-export default RestaurantsTabs
+export default RestaurantsTabs;

@@ -1,8 +1,9 @@
-import BestDonerCards from "../../bestDonerCard/BestDonerCards"
+import React from "react";
+import BestDonerCards from "../../bestDonerCard/BestDonerCards";
 
-import "./bestDoner.sass"
+import "./bestDoner.sass";
 
-const BestDoner = () => {
+const BestDoner: React.FC = () => {
     return (
         <section className="best-doner__container">
             <div className="best-doner__title">
@@ -17,7 +18,7 @@ const BestDoner = () => {
             </div>
             <BestDonerCards />
         </section>
-    )
-}
+    );
+};
 
-export default BestDoner
+export default BestDoner;

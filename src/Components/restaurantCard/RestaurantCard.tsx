@@ -11,7 +11,7 @@ import { CardsSkeleton } from "../skeletons/Skeletons";
 import "./restaurantCard.sass";
 import { IRestaurant } from "../../types/restaurantsTypes";
 
-const RestaurantCard = () => {
+const RestaurantCard: React.FC = () => {
     const dispatch = useAppDispatch();
     const { lastAddedRestaurants, pageLoading } = useAppSelector((state) => state.restaurants);
     useEffect(() => {

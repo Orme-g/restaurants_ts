@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
+import React from "react";
+import { useParams } from "react-router-dom";
 
-import "./infoPage.sass"
+import "./infoPage.sass";
 
 const InfoPage = () => {
-    const { infoType } = useParams()
-    console.log(infoType)
+    const { infoType } = useParams();
+    console.log(infoType);
     return (
         <section className="info-page">
             <h1 className="info-page__main-header">О нашем сайте</h1>
@@ -48,7 +48,7 @@ const InfoPage = () => {
                 </p>
             </div>
         </section>
-    )
-}
+    );
+};
 
-export default InfoPage
+export default InfoPage;

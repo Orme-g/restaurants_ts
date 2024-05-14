@@ -1,12 +1,16 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+
+import type { IComment } from "../types/commentsTypes";
+import type { IDonerRestaurant } from "../types/donersTypes";
+import { IRestaurant, TSortRestaurants } from "../types/restaurantsTypes";
 
 export const apiSlice = createApi({
     reducerPath: "api",
     baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:4000" }),
     tagTypes: ["Comments"],
     endpoints: (builder) => ({
-        getComments: builder.query({
-            query: (id) => `/best-doner/comments/${id}`,
+        getComments: builder.query<IComment[], string>({
+            query: (id: string) => `/best-doner/comments/${id}`,
             providesTags: ["Comments"],
         }),
         postComment: builder.mutation({
@@ -38,11 +42,11 @@ export const apiSlice = createApi({
             }),
             invalidatesTags: ["Comments"],
         }),
-        getDonersList: builder.query({
+        getDonersList: builder.query<IDonerRestaurant[], null>({
             query: () => "/best-doner",
         }),
-        getSingleDonerRestaurant: builder.query({
-            query: (id) => `/best-doner/${id}`,
+        getSingleDonerRestaurant: builder.query<IDonerRestaurant, string>({
+            query: (id: string) => `/best-doner/${id}`,
         }),
         addDonerArticle: builder.mutation({
             query: (data) => ({
@@ -51,8 +55,8 @@ export const apiSlice = createApi({
                 body: data,
             }),
         }),
-        getSortedRestaurants: builder.query({
-            query: (sort) => `/sorted-restaurants/${sort}`,
+        getSortedRestaurants: builder.query<IRestaurant[], string>({
+            query: (sort: TSortRestaurants) => `/sorted-restaurants/${sort}`,
         }),
         login: builder.mutation({
             query: (loginData) => ({
@@ -76,7 +80,7 @@ export const apiSlice = createApi({
             }),
         }),
     }),
-})
+});
 
 export const {
     useGetCommentsQuery,
@@ -91,4 +95,4 @@ export const {
     useGetSortedRestaurantsQuery,
     useChangePasswordMutation,
     useAddDonerArticleMutation,
-} = apiSlice
+} = apiSlice;

@@ -1,33 +1,33 @@
 // Common import
-import { useSelector, useDispatch } from "react-redux"
-import { toggleSideMenu } from "../../reducers/interactive"
-import { useState } from "react"
-import { Link } from "react-router-dom"
+import React, { useState } from "react";
+import { useAppSelector, useAppDispatch } from "../../types/store";
+import { toggleSideMenu } from "../../reducers/interactive";
+import { Link } from "react-router-dom";
 
 // MUI Components import
-import { Drawer, List, ListItemButton, ListItemIcon, ListItemText, Collapse } from "@mui/material"
+import { Drawer, List, ListItemButton, ListItemIcon, ListItemText, Collapse } from "@mui/material";
 
 // MUI Icons import
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined"
-import SearchIcon from "@mui/icons-material/Search"
-import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined"
-import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined"
-import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined"
-import SendOutlinedIcon from "@mui/icons-material/SendOutlined"
-import PhoneInTalkOutlinedIcon from "@mui/icons-material/PhoneInTalkOutlined"
-import ExpandLess from "@mui/icons-material/ExpandLess"
-import ExpandMore from "@mui/icons-material/ExpandMore"
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import SearchIcon from "@mui/icons-material/Search";
+import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
+import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import SendOutlinedIcon from "@mui/icons-material/SendOutlined";
+import PhoneInTalkOutlinedIcon from "@mui/icons-material/PhoneInTalkOutlined";
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
 
 // Styles import
-import "./sideMenu.sass"
+import "./sideMenu.sass";
 
 const SideMenu = () => {
-    const [contactUs, setContactUs] = useState(false)
-    const dispatch = useDispatch()
-    const { sideMenu } = useSelector((state) => state.interactive)
+    const [contactUs, setContactUs] = useState(false);
+    const dispatch = useAppDispatch();
+    const { sideMenu } = useAppSelector((state) => state.interactive);
     const toggleContact = () => {
-        setContactUs(!contactUs)
-    }
+        setContactUs(!contactUs);
+    };
 
     return (
         <Drawer anchor="left" open={sideMenu} onClose={() => dispatch(toggleSideMenu())}>
@@ -90,7 +90,7 @@ const SideMenu = () => {
                 </Collapse>
             </List>
         </Drawer>
-    )
-}
+    );
+};
 
-export default SideMenu
+export default SideMenu;

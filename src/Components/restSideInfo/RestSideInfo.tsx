@@ -1,26 +1,26 @@
-import { memo } from "react"
-import { Rating } from "@mui/material"
+import React from "react";
+import { memo } from "react";
+import { Rating } from "@mui/material";
 
-import "./restSideInfo.sass"
+import type { IRestaurant } from "../../types/restaurantsTypes";
+import "./restSideInfo.sass";
 
-const RestSideInfo = memo(({ data }) => {
-    let { cousine, rating, adress, bill, phone } = data
+interface ISideInfoProps {
+    data: IRestaurant;
+}
 
-    cousine = cousine.join(", ")
+const RestSideInfo: React.FC<ISideInfoProps> = memo(({ data }) => {
+    let { cousine, rating, adress, bill, phone } = data;
+
+    const cousineList: string = cousine.join(", ");
 
     return (
         <div className="rest-side-info__container">
             <div className="rest-side-info__rating">
-                Рейтинг: <br />{" "}
-                <Rating
-                    name="read-only"
-                    value={rating}
-                    precision={0.1}
-                    readOnly
-                />
+                Рейтинг: <br /> <Rating name="read-only" value={rating} precision={0.1} readOnly />
             </div>
             <div className="rest-side-info__item">
-                Кухня: <span>{cousine}</span>
+                Кухня: <span>{cousineList}</span>
             </div>
             <div className="rest-side-info__item">
                 Время работы: <br />
@@ -38,7 +38,7 @@ const RestSideInfo = memo(({ data }) => {
                 Телефон: <span>{phone}</span>
             </div>
         </div>
-    )
-})
+    );
+});
 
-export default RestSideInfo
+export default RestSideInfo;

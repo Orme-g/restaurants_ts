@@ -1,39 +1,39 @@
-import { useState } from "react"
-import { Button, TextField, Stack } from "@mui/material"
-import { useParams } from "react-router-dom"
-import { useDispatch } from "react-redux"
-import { callSnackbar } from "../../../reducers/interactive"
+import React, { useState } from "react";
+import { Button, TextField, Stack } from "@mui/material";
+import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { callSnackbar } from "../../../reducers/interactive";
 
-import useLocalStorage from "../../../hooks/useLocalStorage"
-import { useChangePasswordMutation } from "../../../services/apiSlice"
+import useLocalStorage from "../../../hooks/useLocalStorage";
+import { useChangePasswordMutation } from "../../../services/apiSlice";
 
-import avatar from "../../../assets/avatar.jpg"
+import avatar from "../../../assets/avatar.jpg";
 
-import "./profilePage.sass"
+import "./profilePage.sass";
 
-const ProfilePage = () => {
+const ProfilePage: React.FC = () => {
     const changePassButton = () => {
-        const passwordFields = document.querySelector(".password-fields")
-        const changeButton = document.querySelector(".show-change-fields")
+        const passwordFields = document.querySelector(".password-fields") as HTMLElement;
+        const changeButton = document.querySelector(".show-change-fields") as HTMLButtonElement;
         if (passwordFields.classList.contains("hide")) {
-            passwordFields.classList.remove("hide")
-            passwordFields.classList.add("show")
-            changeButton.textContent = "Отменить изменения"
+            passwordFields.classList.remove("hide");
+            passwordFields.classList.add("show");
+            changeButton.textContent = "Отменить изменения";
         } else {
-            passwordFields.classList.remove("show")
-            passwordFields.classList.add("hide")
-            changeButton.textContent = "Изменить пароль"
+            passwordFields.classList.remove("show");
+            passwordFields.classList.add("hide");
+            changeButton.textContent = "Изменить пароль";
         }
-    }
-    const { userId } = useParams()
+    };
+    const { userId } = useParams();
 
-    const { getUserData } = useLocalStorage()
-    const { name, registeredAt, status, username, email, comments, reviews } = getUserData()
+    const { getUserData } = useLocalStorage();
+    const { name, registeredAt, status, username, email, comments, reviews } = getUserData();
     const date = new Date(registeredAt).toLocaleString("ru", {
         day: "numeric",
         month: "short",
         year: "numeric",
-    })
+    });
 
     // if (isLoading) {
     //     return
@@ -88,60 +88,65 @@ const ProfilePage = () => {
                 </div>
             </div>
         </div>
-    )
+    );
+};
+
+export default ProfilePage;
+
+interface IPasswordFormProps {
+    userId: string | undefined;
 }
 
-export default ProfilePage
-
-const PasswordForm = ({ userId }) => {
-    const [oldPass, setOldPass] = useState("")
-    const [newPass, setNewPass] = useState("")
-    const [newPassRepeat, setNewPassRepeat] = useState("")
+const PasswordForm: React.FC<IPasswordFormProps> = ({ userId }) => {
+    const [oldPass, setOldPass] = useState("");
+    const [newPass, setNewPass] = useState("");
+    const [newPassRepeat, setNewPassRepeat] = useState("");
     const [error, setError] = useState({
         oldPassError: "",
         newPassError: "",
         newPassRepeatError: "",
-    })
-    const [sendData] = useChangePasswordMutation()
+    });
+    const [sendData] = useChangePasswordMutation();
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     const clearForm = () => {
-        setOldPass("")
-        setNewPass("")
-        setNewPassRepeat("")
-    }
+        setOldPass("");
+        setNewPass("");
+        setNewPassRepeat("");
+    };
     const clearErrors = () => {
         setError({
             oldPassError: "",
             newPassError: "",
             newPassRepeatError: "",
-        })
-    }
+        });
+    };
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
+    const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+        e.preventDefault();
+
         if (newPass !== newPassRepeat) {
-            setError({ ...error, newPassRepeatError: "Пароли не совпадают" })
+            setError({ ...error, newPassRepeatError: "Пароли не совпадают" });
         } else if (oldPass === "" || oldPass === null || oldPass === undefined) {
-            setError({ ...error, oldPassError: "Обязательное поле" })
+            setError({ ...error, oldPassError: "Обязательное поле" });
         } else {
             const data = {
                 userId,
                 oldPass,
                 newPass,
-            }
+            };
 
             sendData(data)
                 .unwrap()
                 .then((res) => {
-                    dispatch(callSnackbar({ text: res, type: "success" }))
-                    clearForm()
+                    dispatch(callSnackbar({ text: res, type: "success" }));
+                    clearForm();
                 })
-                .catch((err) => setError({ ...error, oldPassError: err.data }))
-            clearErrors()
+                .catch((err) => setError({ ...error, oldPassError: err.data }));
+            clearErrors();
         }
-    }
+    };
 
     return (
         <>
@@ -186,5 +191,5 @@ const PasswordForm = ({ userId }) => {
                 </Stack>
             </form>
         </>
-    )
-}
+    );
+};

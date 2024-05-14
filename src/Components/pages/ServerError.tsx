@@ -1,4 +1,5 @@
-import serverError from "../../assets/server_error.png"
+import React from "react";
+import serverError from "../../assets/server_error.png";
 
 const ServerError = () => {
     return (
@@ -7,7 +8,7 @@ const ServerError = () => {
             src={serverError}
             alt="error"
         />
-    )
-}
+    );
+};
 
-export default ServerError
+export default ServerError;
