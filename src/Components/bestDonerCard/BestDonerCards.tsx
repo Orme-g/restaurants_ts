@@ -22,7 +22,7 @@ const BestDonerCards: React.FC = () => {
         : null;
 
     function createDonerCard(card: IDonerRestaurant) {
-        const { _id, title, rating, short_description, title_image, createdAt } = card;
+        const { _id, name, rating, short_description, title_image, createdAt } = card;
         const date = new Date(createdAt).toLocaleString("ru", {
             day: "numeric",
             month: "short",
@@ -37,7 +37,7 @@ const BestDonerCards: React.FC = () => {
                     </div>
                     <div className="best-doner-card__info">
                         <div className="best-doner-card__header">
-                            <div className="best-doner-card__title">{title}</div>
+                            <div className="best-doner-card__title">{name}</div>
                             <div className="best-doner-card__added">{date}</div>
                         </div>
                         <div className="best-doner-card__description">{short_description}</div>

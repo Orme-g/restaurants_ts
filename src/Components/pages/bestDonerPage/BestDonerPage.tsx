@@ -21,10 +21,10 @@ const BestDonerPage = () => {
 
     if (singleDonerData) {
         const {
-            title,
+            name,
             rating,
             title_image,
-            text,
+            description,
             bloquote,
             author,
             images,
@@ -43,7 +43,7 @@ const BestDonerPage = () => {
                 <section className="doner-topic__container">
                     <div className="doner-topic__title">
                         {" "}
-                        {title}
+                        {name}
                         <div className="doner-topic__subtitle"> {subtitle} </div>
                     </div>
                     <div className="doner-topic__image">
@@ -52,7 +52,7 @@ const BestDonerPage = () => {
                     </div>
                     <div className="doner-topic__content">
                         <blockquote>{bloquote}</blockquote>
-                        <p>{text}</p>
+                        <p>{description}</p>
                     </div>
                     <div className="doner-topic__slider">
                         <Slider images={images} />

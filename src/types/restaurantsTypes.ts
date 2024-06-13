@@ -11,6 +11,7 @@ export interface IRestaurant {
     phone: string;
     createdAt: Date;
     title_image: string;
+    city: string;
 }
 
 export type TSortRestaurants = "expensive" | "cheap" | "best";

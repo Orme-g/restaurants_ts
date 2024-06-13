@@ -3,7 +3,7 @@ import type { IUserData } from "../types/userData";
 
 interface ISnackBarData {
     text: string;
-    type: string;
+    type: "error" | "info" | "success" | "warning";
 }
 interface IinitialSTate {
     sideMenu: boolean;
@@ -22,7 +22,7 @@ const initialState: IinitialSTate = {
     passAuth: false,
     userData: null,
     showSnackbar: false,
-    snackBarData: { text: "", type: "" },
+    snackBarData: { text: "", type: "success" },
 };
 
 const interactiveSlice = createSlice({

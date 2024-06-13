@@ -51,6 +51,10 @@ const restaurantSchema = new Schema({
         default: () => Date.now(),
         immutable: true,
     },
+    city: {
+        type: String,
+        required: true,
+    },
 });
 
 const Restaurant = mongoose.model("Restaurant", restaurantSchema);
