@@ -13,7 +13,7 @@ import {
 
 import type { TCommentReplyFunction, IComment } from "../../types/commentsTypes";
 
-import Spinner from "../spinner/Spinner";
+import Spinner from "../svg/Spinner";
 
 import "./commentsItems.sass";
 

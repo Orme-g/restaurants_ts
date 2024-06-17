@@ -3,7 +3,7 @@ import React from "react";
 import { useAppSelector } from "../../types/store";
 
 import { Rating } from "@mui/material";
-import Spinner from "../spinner/Spinner";
+import Spinner from "../svg/Spinner";
 
 import "./feedbackItem.sass";
 

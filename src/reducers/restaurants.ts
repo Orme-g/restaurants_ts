@@ -46,7 +46,7 @@ export const fetchRestaurantReviews = createAsyncThunk(
 
 export const addNewRestaurant = createAsyncThunk(
     "restaurants/addNewRestaurant",
-    (restData: null) => {
+    (restData: string) => {
         const { request } = useHttp();
         return request("http://localhost:4000/restaurants/add", "POST", restData);
     }

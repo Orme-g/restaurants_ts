@@ -55,6 +55,7 @@ const restaurantSchema = new Schema({
         type: String,
         required: true,
     },
+    subway: [{ type: String }],
 });
 
 const Restaurant = mongoose.model("Restaurant", restaurantSchema);

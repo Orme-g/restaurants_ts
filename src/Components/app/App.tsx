@@ -8,7 +8,7 @@ import Footer from "../footer/Footer";
 import ModalLogin from "../modals/modalLogin/ModalLogin";
 import ModalRegister from "../modals/modalRegister/ModalRegister";
 import Snack from "../snackbar/Snackbar";
-import Spinner from "../spinner/Spinner";
+import Spinner from "../svg/Spinner";
 
 import useLocalStorage from "../../hooks/useLocalStorage";
 import { setUserData, setPassAuth } from "../../reducers/interactive";

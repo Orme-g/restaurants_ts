@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { TextField, Stack, Button, Alert } from "@mui/material";
 import PublishIcon from "@mui/icons-material/Publish";
 
-import SmallSpinner from "../../spinner/SmallSpinner";
+import SmallSpinner from "../../svg/SmallSpinner";
 
 import { useAddDonerArticleMutation } from "../../../services/apiSlice";
 
