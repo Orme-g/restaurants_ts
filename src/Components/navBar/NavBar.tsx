@@ -1,4 +1,4 @@
-import { useState } from "react"
+import React, { useState } from "react";
 import {
     AppBar,
     IconButton,
@@ -8,45 +8,46 @@ import {
     Menu,
     MenuItem,
     ListItemIcon,
-} from "@mui/material"
-import MenuIcon from "@mui/icons-material/Menu"
-import AccountCircleIcon from "@mui/icons-material/AccountCircle"
-import PersonIcon from "@mui/icons-material/Person"
-import LogoutIcon from "@mui/icons-material/Logout"
-import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings"
-import { toggleSideMenu, toggleModalWindowLogin, setPassAuth } from "../../reducers/interactive"
-import { useDispatch, useSelector } from "react-redux"
-import { Link } from "react-router-dom"
-import useLocalStorage from "../../hooks/useLocalStorage"
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import PersonIcon from "@mui/icons-material/Person";
+import LogoutIcon from "@mui/icons-material/Logout";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import { toggleSideMenu, toggleModalWindowLogin, setPassAuth } from "../../reducers/interactive";
+import { useAppDispatch, useAppSelector } from "../../types/store";
+// import { useDispatch, useSelector } from "react-redux"
+import { Link } from "react-router-dom";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
-import "./navBar.sass"
+import "./navBar.sass";
 
-const NavBar = () => {
-    const [anchorEl, setAnchorEl] = useState(null)
-    const dispatch = useDispatch()
-    const { clearData, getUserData } = useLocalStorage()
-    const passAuth = useSelector((state) => state.interactive.passAuth)
-    const handleProfile = (event) => {
-        setAnchorEl(event.currentTarget)
-    }
+const NavBar: React.FC = () => {
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const dispatch = useAppDispatch();
+    const { clearData, getUserData } = useLocalStorage();
+    const passAuth = useAppSelector((state) => state.interactive.passAuth);
+    const handleProfile = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorEl(event.currentTarget);
+    };
     const handleClose = () => {
-        setAnchorEl(null)
-    }
+        setAnchorEl(null);
+    };
     const handleLogout = () => {
-        clearData("userData")
-        dispatch(setPassAuth())
-        handleClose()
-    }
+        clearData("userData");
+        dispatch(setPassAuth(false));
+        handleClose();
+    };
 
-    const name = getUserData()?.name
-    const _id = getUserData()?._id
-    const isAdmin = getUserData()?.role.includes("admin")
+    const name = getUserData()?.name;
+    const _id = getUserData()?._id;
+    const isAdmin = getUserData()?.role.includes("admin");
 
     const unAuth = (
         <Button color="inherit" onClick={() => dispatch(toggleModalWindowLogin())}>
             Войти
         </Button>
-    )
+    );
     const admin = (
         <Link to={`/admin`} onClick={handleClose}>
             <MenuItem>
@@ -56,7 +57,7 @@ const NavBar = () => {
                 Админ панель
             </MenuItem>
         </Link>
-    )
+    );
     const isAuth = (
         <>
             <IconButton
@@ -88,7 +89,7 @@ const NavBar = () => {
                 </Link>
             </Menu>
         </>
-    )
+    );
 
     return (
         <AppBar color="inherit">
@@ -115,7 +116,7 @@ const NavBar = () => {
                 </div>
             </Toolbar>
         </AppBar>
-    )
-}
+    );
+};
 
-export default NavBar
+export default NavBar;

@@ -10,4 +10,5 @@ export interface IUserData {
     token: string;
     username: string;
     _id: string;
+    birthday: Date;
 }

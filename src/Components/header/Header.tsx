@@ -1,9 +1,10 @@
-import { TextField } from "@mui/material/"
-import { styled } from "@mui/material/styles"
+import React from "react";
+import { TextField } from "@mui/material/";
+import { styled } from "@mui/material/styles";
 
-import "./header.sass"
+import "./header.sass";
 
-const Header = () => {
+const Header: React.FC = () => {
     const SearchBar = styled(TextField)({
         "& label.Mui-focused": {
             color: "#464744",
@@ -22,19 +23,15 @@ const Header = () => {
                 borderColor: "#6F7E8C",
             },
         },
-    })
+    });
 
     return (
         <div className="main-page-header">
             <div className="search-bar">
-                <SearchBar
-                    fullWidth
-                    label="Поиск ресторана..."
-                    variant="outlined"
-                />
+                <SearchBar fullWidth label="Поиск ресторана..." variant="outlined" />
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Header
+export default Header;

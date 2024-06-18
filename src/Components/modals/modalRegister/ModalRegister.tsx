@@ -1,27 +1,39 @@
-import { useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { useForm } from "react-hook-form"
-import { DevTool } from "@hookform/devtools"
+import React, { useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../../types/store";
+// import { useDispatch, useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
+import { DevTool } from "@hookform/devtools";
 
-import { Dialog, DialogContent, DialogContentText, DialogTitle } from "@mui/material"
-import { Button } from "@mui/material"
+import { Dialog, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
+import { Button } from "@mui/material";
 
 import {
     toggleRegisterWindowModal,
     toggleModalWindowLogin,
     callSnackbar,
-} from "../../../reducers/interactive"
-import { useRegistrationMutation } from "../../../services/apiSlice"
+} from "../../../reducers/interactive";
+import { useRegistrationMutation } from "../../../services/apiSlice";
 
-import "./modalRegister.sass"
+import "./modalRegister.sass";
 
-const ModalRegister = () => {
-    const [passError, setPassError] = useState(null)
-    const [userExistError, setUserExistError] = useState(null)
-    const dispatch = useDispatch()
-    const modalWindowRegister = useSelector((state) => state.interactive.modalWindowRegister)
+interface IRegisterData {
+    username: string;
+    name: string;
+    surname: string;
+    birthday: null | Date;
+    email: string;
+    password: string;
+    password1: string;
+    password2: string;
+}
 
-    const [registerUser] = useRegistrationMutation()
+const ModalRegister: React.FC = () => {
+    const [passError, setPassError] = useState<null | string>(null);
+    const [userExistError, setUserExistError] = useState<null | string>(null);
+    const dispatch = useAppDispatch();
+    const modalWindowRegister = useAppSelector((state) => state.interactive.modalWindowRegister);
+
+    const [registerUser] = useRegistrationMutation();
 
     const {
         register,
@@ -30,14 +42,23 @@ const ModalRegister = () => {
         formState: { errors },
         control,
     } = useForm({
-        defaultValues: {},
-    })
+        defaultValues: {
+            username: "",
+            name: "",
+            surname: "",
+            birthday: null,
+            email: "",
+            password: "",
+            password1: "",
+            password2: "",
+        },
+    });
 
-    function onSubmit(data) {
+    function onSubmit(data: IRegisterData) {
         if (data.password1 !== data.password2) {
-            return setPassError("Пароли не совпадают")
+            return setPassError("Пароли не совпадают");
         }
-        const { username, name, surname, birthday, email, password1 } = data
+        const { username, name, surname, birthday, email, password1 } = data;
         const newUser = {
             username,
             name,
@@ -45,24 +66,24 @@ const ModalRegister = () => {
             birthday,
             email,
             password: password1,
-        }
+        };
         registerUser(newUser)
             .unwrap()
             .then(({ message }) => {
-                reset()
-                setPassError(null)
-                setUserExistError(null)
-                dispatch(callSnackbar({ text: message, type: "success" }))
-                dispatch(toggleRegisterWindowModal())
-                dispatch(toggleModalWindowLogin())
+                reset();
+                setPassError(null);
+                setUserExistError(null);
+                dispatch(callSnackbar({ text: message, type: "success" }));
+                dispatch(toggleRegisterWindowModal());
+                dispatch(toggleModalWindowLogin());
             })
-            .catch(({ data }) => setUserExistError(data))
+            .catch(({ data }) => setUserExistError(data));
     }
 
     function handleClose() {
-        dispatch(toggleRegisterWindowModal())
-        setUserExistError(null)
-        reset()
+        dispatch(toggleRegisterWindowModal());
+        setUserExistError(null);
+        reset();
     }
 
     return (
@@ -81,7 +102,6 @@ const ModalRegister = () => {
                         <input
                             className="form-input"
                             placeholder="Имя пользователя"
-                            name="username"
                             {...register("username", {
                                 required: "Введите имя пользователя",
                             })}
@@ -95,7 +115,6 @@ const ModalRegister = () => {
                         <input
                             className="form-input"
                             placeholder="Ваше имя"
-                            name="name"
                             {...register("name", {
                                 required: "Введите ваше имя",
                             })}
@@ -109,7 +128,6 @@ const ModalRegister = () => {
                         <input
                             className="form-input"
                             placeholder="Фамилия"
-                            name="surname"
                             {...register("surname", {})}
                         />
                     </div>
@@ -122,7 +140,6 @@ const ModalRegister = () => {
                             type="date"
                             className="form-input"
                             placeholder="Дата рождения"
-                            name="birthday"
                             {...register("birthday", {
                                 required: "Выберите дату рождения",
                             })}
@@ -137,7 +154,6 @@ const ModalRegister = () => {
                             type="email"
                             className="form-input"
                             placeholder="Email"
-                            name="email"
                             {...register("email", {
                                 pattern: /^\S+@\S+\.\S+$/,
                             })}
@@ -152,7 +168,6 @@ const ModalRegister = () => {
                             type="password"
                             className="form-input"
                             placeholder="Пароль"
-                            name="password1"
                             {...register("password1", {
                                 minLength: 8,
                             })}
@@ -169,7 +184,6 @@ const ModalRegister = () => {
                             type="password"
                             className="form-input"
                             placeholder="Повторите пароль"
-                            name="password2"
                             {...register("password2", {
                                 minLength: 8,
                             })}
@@ -188,7 +202,7 @@ const ModalRegister = () => {
                 <DevTool control={control} />
             </DialogContent>
         </Dialog>
-    )
-}
+    );
+};
 
-export default ModalRegister
+export default ModalRegister;
