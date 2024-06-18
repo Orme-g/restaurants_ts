@@ -29,11 +29,12 @@ const SingleRestaurantPage: React.FC = () => {
         return <PageSkeleton />;
     }
 
-    const { images, description } = restaurantData;
+    const { name, images, description } = restaurantData;
 
     return (
         <>
             <div className="restaurant-info__container">
+                <div className="restaurant-info__name">{name}</div>
                 <div className="restaurant-info__slider">
                     <Slider images={images} />
                 </div>

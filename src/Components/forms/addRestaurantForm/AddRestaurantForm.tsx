@@ -23,6 +23,9 @@ import { addNewRestaurant } from "../../../reducers/restaurants";
 
 import SmallSpinner from "../../svg/SmallSpinner";
 import SubwayIcon from "../../svg/subwayIcon";
+import { subwaySpb } from "../../../data/subwaysLists";
+import { cousines } from "../../../data/cousines";
+// import SubwaySelectList from "../../../utils/subwayLists/subwaySelectList";
 
 import "./addRestaurantForm.sass";
 
@@ -44,103 +47,8 @@ enum TSubwayColors {
 type TAlerts = "success" | "info" | "warning" | "error";
 
 const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, toggleDisplay }) => {
-    const cousines = [
-        "Итальянская",
-        "Японская",
-        "Французская",
-        "Русская",
-        "Сербская",
-        "Вегетарианская",
-        "Азиатская",
-        "Американская",
-        "Индийская",
-        "Паназиатская",
-        "Мексиканская",
-        "Грузинская",
-        "Средиземноморская",
-    ];
-    const line1 = [
-        "Девяткино",
-        "Гражданский проспект",
-        "Академическая",
-        "Политехническая",
-        "Площадь Мужества",
-        "Лесная",
-        "Выборгская",
-        "Площадь Ленина",
-        "Чернышевская",
-        "Площадь Восстания",
-        "Владимирская",
-        "Пушкинская",
-        "Технологический институт",
-        "Балтийская",
-        "Нарвская",
-        "Кировский завод",
-        "Автово",
-        "Ленинский проспект",
-        "Проспект Ветеранов",
-    ];
-    const line2 = [
-        "Парнас",
-        "Проспект Просвещения",
-        "Озерки",
-        "Удельная",
-        "Пионерская",
-        "Чёрная речка",
-        "Петроградская",
-        "Горьковская",
-        "Невский проспект",
-        "Сенная площадь",
-        "Технологический институт",
-        "Фрунзенская",
-        "Московские ворота",
-        "Электросила",
-        "Парк Победы",
-        "Московская",
-        "Звёздная",
-        "Купчино",
-    ];
-    const line3 = [
-        "Беговая",
-        "Зенит",
-        "Приморская",
-        "Василеостровская",
-        "Гостиный двор",
-        "Маяковская",
-        "Площадь Александра Невского",
-        "Елизаровская",
-        "Ломоносовская",
-        "Пролетарская",
-        "Обухово",
-        "Рыбацкое",
-    ];
-    const line4 = [
-        "Спасская",
-        "Достоевская",
-        "Лиговский проспект",
-        "Площадь Александра Невского",
-        "Новочеркасская",
-        "Ладожская",
-        "Проспект Большевиков",
-        "Улица Дыбенко",
-    ];
-    const line5 = [
-        "Комендантский проспект",
-        "Старая Деревня",
-        "Крестовский остров",
-        "Чкаловская",
-        "Спортивная",
-        "Адмиралтейская",
-        "Садовая",
-        "Звенигородская",
-        "Обводный канал",
-        "Волковская",
-        "Бухарестская",
-        "Международная",
-        "Проспект Славы",
-        "Дунайская",
-        "Шушары",
-    ];
+    const { line1, line2, line3, line4, line5 } = subwaySpb;
+
     const displayForm = displayState ? "show" : "hide";
     const [cousine, setCousine] = useState([]);
     const [city, setCity] = useState("");
@@ -165,7 +73,6 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, to
             subway: [""],
         },
     });
-
     const postAlert = (type: TAlerts, text: string) => {
         return (
             <Alert severity={type} className="add-restaurant-form__alert">
@@ -324,6 +231,7 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, to
                                 />
                             }
                         >
+                            {/* <SubwaySelectList stationsList={subwaySpb} /> */}
                             <ListSubheader>Линия 1</ListSubheader>
                             {line1.map((station) => (
                                 <MenuItem value={station} key={station}>
@@ -350,7 +258,7 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, to
                                     </ListItemIcon>
                                     <ListItemText>{station}</ListItemText>
                                 </MenuItem>
-                            ))}
+                            ))}{" "}
                             <ListSubheader>Линия 4</ListSubheader>
                             {line4.map((station) => (
                                 <MenuItem value={station} key={station}>

@@ -40,7 +40,7 @@ const SideMenu = () => {
                         <ListItemText primary="Главная страница" />
                     </ListItemButton>
                 </Link>
-                <Link to="*">
+                <Link to="/find-restaurant">
                     <ListItemButton onClick={() => dispatch(toggleSideMenu())}>
                         <ListItemIcon>
                             <SearchIcon fontSize="medium" />

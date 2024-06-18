@@ -10,7 +10,7 @@ interface ISideInfoProps {
 }
 
 const RestSideInfo: React.FC<ISideInfoProps> = memo(({ data }) => {
-    let { cousine, rating, adress, bill, phone } = data;
+    let { cousine, rating, adress, subway, bill, phone } = data;
 
     const cousineList: string = cousine.join(", ");
 
@@ -30,6 +30,13 @@ const RestSideInfo: React.FC<ISideInfoProps> = memo(({ data }) => {
             </div>
             <div className="rest-side-info__item">
                 Адрес: <span>{adress}</span>
+            </div>
+            <div className="rest-side-info__item">
+                {/* Метро: <span>{subway}</span> */}
+                Метро:
+                {subway.map((station) => (
+                    <span className="subway">{station}</span>
+                ))}
             </div>
             <div className="rest-side-info__item">
                 Средний чек: <span>{bill} &#8381;</span>
