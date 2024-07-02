@@ -73,6 +73,18 @@ const getSortedRestaurants = (req, res) => {
         .catch((err) => handleError(res, err));
 };
 
+const findRestaurant = (req, res) => {
+    const { subway, cousine, sortBy } = req.body;
+    const sort = sortBy === "expensive" ? -1 : 1;
+    // const subway = "Старая Деревня";
+    // const cousine = ["Французская", "Японская", "Итальянская"];
+    Restaurant.find({ cousine: { $in: cousine }, subway: { $in: [subway] } })
+        // Restaurant.find({ cousine: { $in: cousine } })
+        .sort({ bill: sort })
+        .then((restaurants) => res.status(200).json(restaurants))
+        .catch((err) => handleError(res, err));
+};
+
 // Restaurant.findOne({name:'GOOD'}).then(rest => console.log(rest))
 
 module.exports = {
@@ -82,4 +94,5 @@ module.exports = {
     addRestaurant,
     updateRestaurant,
     getSortedRestaurants,
+    findRestaurant,
 };

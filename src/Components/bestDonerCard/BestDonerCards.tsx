@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Rating } from "@mui/material";
-import { useGetDonersListQuery } from "../../services/apiSlice";
+import { useGetDonersListQuery } from "../../services/donersApi";
 import { DonerCardsSkeleton } from "../skeletons/Skeletons";
 
 import type { IDonerRestaurant } from "../../types/donersTypes";

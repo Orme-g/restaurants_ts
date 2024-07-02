@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useGetSingleDonerRestaurantQuery } from "../../../services/apiSlice";
+import { useGetSingleDonerRestaurantQuery } from "../../../services/donersApi";
 
 import CommentsBlock from "../../commentsBlock/CommentsBlock";
 import { Rating } from "@mui/material";

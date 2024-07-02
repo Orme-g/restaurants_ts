@@ -22,7 +22,7 @@ const restaurantSchema = new Schema({
             required: true,
         },
     ],
-    cousine: [
+    cousines: [
         {
             type: String,
             required: true,

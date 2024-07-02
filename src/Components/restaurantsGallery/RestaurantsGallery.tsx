@@ -1,5 +1,5 @@
 import React from "react";
-import RestaurantCard from "../restaurantCard/RestaurantCard";
+import RestaurantCard from "../restaurantCardBig/RestaurantCardBig";
 
 import "./restaurantsGallery.sass";
 

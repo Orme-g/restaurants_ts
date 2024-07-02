@@ -28,3 +28,9 @@ export interface IAddRestaurant {
 }
 
 export type TSortRestaurants = "expensive" | "cheap" | "best";
+
+export interface IFindRestaurantCriterias {
+    subway: string;
+    cousine: string[];
+    sortBy: "cheaper" | "expensive";
+}

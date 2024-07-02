@@ -11,4 +11,5 @@ export interface IUserData {
     username: string;
     _id: string;
     birthday: Date;
+    reviewedRestaurants: string[];
 }

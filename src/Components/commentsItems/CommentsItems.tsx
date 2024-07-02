@@ -9,7 +9,7 @@ import {
     useDeleteCommentMutation,
     useLikeCommentMutation,
     useDislikeCommentMutation,
-} from "../../services/apiSlice";
+} from "../../services/commentsApi";
 
 import type { TCommentReplyFunction, IComment } from "../../types/commentsTypes";
 

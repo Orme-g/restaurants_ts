@@ -7,7 +7,7 @@ import { useAppSelector } from "../../../types/store";
 import { TextField, Button, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
-import { usePostCommentMutation } from "../../../services/apiSlice";
+import { usePostCommentMutation } from "../../../services/commentsApi";
 
 import type { IReplyData, TCommentReplyFunction } from "../../../types/commentsTypes";
 import "./commentForm.sass";

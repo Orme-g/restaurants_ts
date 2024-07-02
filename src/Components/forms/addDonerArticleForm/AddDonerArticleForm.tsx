@@ -5,7 +5,7 @@ import PublishIcon from "@mui/icons-material/Publish";
 
 import SmallSpinner from "../../svg/SmallSpinner";
 
-import { useAddDonerArticleMutation } from "../../../services/apiSlice";
+import { useAddDonerArticleMutation } from "../../../services/donersApi";
 
 import "./addDonerArticleForm.sass";
 

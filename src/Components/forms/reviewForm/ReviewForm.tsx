@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // import { useDispatch } from "react-redux"
 import { useAppDispatch } from "../../../types/store";
 import classNames from "classnames";
@@ -30,6 +30,8 @@ interface INewReview {
 const ReviewForm: React.FC<IReviewForm> = ({ restId }) => {
     const [rating, setRating] = useState<number>(1);
     const [display, setDisplay] = useState(false);
+
+    useEffect(() => {});
 
     const dispatch = useAppDispatch();
     const { request } = useHttp();

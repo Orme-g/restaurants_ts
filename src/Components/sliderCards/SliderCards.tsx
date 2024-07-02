@@ -1,11 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, FreeMode } from "swiper/modules";
-import { Rating } from "@mui/material";
 import { useGetSortedRestaurantsQuery } from "../../services/apiSlice";
 
 import { CardsSliderSkeleton } from "../skeletons/Skeletons";
+import RestaurantCardSmall from "../restaurantCardSmall/RestaurantCardSmall";
 // import ServerError from "../pages/ServerError"
 
 // import pic from "../../assets/rest_photos/cristal/cris_1.jpeg"
@@ -24,23 +23,10 @@ const SliderCards: React.FC<ISliderCardsProps> = ({ type }) => {
 
     const slides = sortedRestaurants
         ? sortedRestaurants.map((item) => {
-              const { _id, title_image, name, rating } = item;
+              const { _id } = item;
               return (
                   <SwiperSlide className="card-slide" key={_id}>
-                      <div className="selection-card">
-                          <div
-                              className="selection-card__image"
-                              style={{ backgroundImage: `url(${title_image})` }}
-                              // style={{ backgroundImage: `url(${pic})` }}
-                          ></div>
-                          <div className="selection-card__title">{name}</div>
-                          <div className="selection-card__rating">
-                              <Rating value={rating} size="small" readOnly precision={0.5} />
-                          </div>
-                          <Link to={`/restaurant/${_id}`} className="selection-card__link">
-                              Подробнее...
-                          </Link>
-                      </div>
+                      <RestaurantCardSmall restData={item} />
                   </SwiperSlide>
               );
           })

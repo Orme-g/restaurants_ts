@@ -12,10 +12,13 @@ import {
 import { cousines } from "../../../data/cousines";
 
 // import SubwaySelectList from "../../../utils/subwayLists/subwaySelectList";
-
+import { useFindRestaurantMutation } from "../../../services/apiSlice";
 import { subwaySpb } from "../../../data/subwaysLists";
 import SubwayIcon from "../../svg/subwayIcon";
+import RestaurantCardSmall from "../../restaurantCardSmall/RestaurantCardSmall";
 import "./findRestaurant.sass";
+
+import type { IFindRestaurantCriterias, IRestaurant } from "../../../types/restaurantsTypes";
 
 enum TSubwayColors {
     Red = "#D70138",
@@ -27,9 +30,24 @@ enum TSubwayColors {
 
 const FindRestaurant: React.FC = () => {
     const { line1, line2, line3, line4, line5 } = subwaySpb;
+    const criterias: IFindRestaurantCriterias = {
+        subway: "",
+        cousine: [""],
+        sortBy: "cheaper",
+    };
     const [subway, setSubway] = useState("");
     const [cousine, setCousine] = useState([]);
-    const [sortBy, setSortBy] = useState("");
+    const [sortBy, setSortBy] = useState<"cheaper" | "expensive">("cheaper");
+    const [findRestaurant, { data, isLoading, isError }] = useFindRestaurantMutation();
+    console.log(data);
+    const findRest = () => {
+        criterias.subway = subway;
+        criterias.cousine = cousine;
+        criterias.sortBy = sortBy;
+        findRestaurant(criterias)
+            .unwrap()
+            .then((response) => console.log(response));
+    };
     const handleSelectSubway = (event: SelectChangeEvent) => {
         setSubway(event.target.value as string);
     };
@@ -40,7 +58,7 @@ const FindRestaurant: React.FC = () => {
         setCousine(typeof value === "string" ? value.split(",") : value);
     };
     const handleSelectSortBy = (event: SelectChangeEvent) => {
-        setSortBy(event.target.value as string);
+        setSortBy(event.target.value as "cheaper" | "expensive");
     };
     return (
         <section className="find-restaurant__container">
@@ -108,7 +126,7 @@ const FindRestaurant: React.FC = () => {
                 предпочтительная кухня
                 <FormControl variant="standard" sx={{ minWidth: 200, maxWidth: 300 }}>
                     <Select
-                        id="cousine-select"
+                        style={{ fontSize: "20px", fontWeight: 300 }}
                         value={cousine}
                         multiple
                         onChange={handleSelectCousine}
@@ -132,7 +150,7 @@ const FindRestaurant: React.FC = () => {
                 сначала рестораны
                 <FormControl variant="standard" sx={{ width: 150 }}>
                     <Select
-                        id="city-select"
+                        style={{ fontSize: "20px", fontWeight: 300 }}
                         value={sortBy}
                         onChange={handleSelectSortBy}
                         // input={
@@ -149,6 +167,13 @@ const FindRestaurant: React.FC = () => {
                         <MenuItem value={"expensive"}>Дороже</MenuItem>
                     </Select>
                 </FormControl>
+            </div>
+            <button onClick={() => findRest()}>Check</button>
+            <div className="find-restaurant__results">
+                {/* {data ? <RestaurantCardSmall restData={data} /> : null} */}
+                {data
+                    ? data.map((item: IRestaurant) => <RestaurantCardSmall restData={item} />)
+                    : null}
             </div>
         </section>
     );
