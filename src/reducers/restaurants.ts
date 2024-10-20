@@ -52,6 +52,14 @@ export const addNewRestaurant = createAsyncThunk(
     }
 );
 
+export const addAdditionalReview = createAsyncThunk(
+    "restaurants/addAdditionalReview",
+    (reviewData: string) => {
+        const { request } = useHttp();
+        return request("http://localhost:4000/reviews/addAdditional", "PATCH", reviewData);
+    }
+);
+
 const restaurantsSlice = createSlice({
     name: "restaurants",
     initialState,

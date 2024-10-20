@@ -5,6 +5,7 @@ import { IRestaurant, TSortRestaurants, IFindRestaurantCriterias } from "../type
 export const apiSlice = createApi({
     reducerPath: "api",
     baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:4000" }),
+    tagTypes: ["Review", "Favourite"],
     endpoints: (builder) => ({
         getSortedRestaurants: builder.query<IRestaurant[], string>({
             query: (sort: TSortRestaurants) => `/sorted-restaurants/${sort}`,
@@ -30,6 +31,10 @@ export const apiSlice = createApi({
                 body: userData,
             }),
         }),
+        getUserData: builder.query({
+            query: (userId: string) => `/user/getdata/${userId}`,
+            providesTags: ["Favourite"],
+        }),
         changePassword: builder.mutation({
             query: (data) => ({
                 url: `/profile`,
@@ -37,16 +42,51 @@ export const apiSlice = createApi({
                 body: data,
             }),
         }),
+        changeAvatar: builder.mutation({
+            query: (data) => ({
+                url: `/changeAvatar`,
+                method: "PATCH",
+                body: data,
+            }),
+        }),
         getReviewedRestaurantsList: builder.query<string[], string>({
             query: (userId: string) => `/reviewedRestaurants/${userId}`,
+            providesTags: ["Review"],
         }),
+        addReviewedRestaurantToUser: builder.mutation({
+            query: (data) => ({
+                url: "/addReviewedRestaurant",
+                method: "PATCH",
+                body: data,
+            }),
+            invalidatesTags: ["Review"],
+        }),
+        handleFavouriteRestaurants: builder.mutation({
+            query: (data) => ({
+                url: "/handleFavouriteRestaurant",
+                method: "PATCH",
+                body: data,
+            }),
+            invalidatesTags: ["Favourite"],
+        }),
+        // getFavouriteRestNames: builder.query({
+        //     query: (userId) => ({
+        //         url: `/get-favourite-restaurants-names/${userId}`,
+        //     }),
+        // }),
     }),
 });
 
 export const {
     useLoginMutation,
     useRegistrationMutation,
+    useGetUserDataQuery,
     useGetSortedRestaurantsQuery,
     useFindRestaurantMutation,
     useChangePasswordMutation,
+    useGetReviewedRestaurantsListQuery,
+    useAddReviewedRestaurantToUserMutation,
+    useChangeAvatarMutation,
+    useHandleFavouriteRestaurantsMutation,
+    // useGetFavouriteRestNamesQuery,
 } = apiSlice;

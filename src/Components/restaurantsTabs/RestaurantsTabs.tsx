@@ -1,10 +1,9 @@
 import React, { useState, memo } from "react";
 import { useAppSelector } from "../../types/store";
-
 import { Box, Tab } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 
-import FeedbackItem from "../feedbackItem/FeedbackItem";
+import ReviewsList from "../reviewsList/ReviewsList";
 import ReviewForm from "../forms/reviewForm/ReviewForm";
 import "./restaurantsTabs.sass";
 
@@ -14,12 +13,12 @@ interface IRestaurantsTabsProps {
 }
 
 const RestaurantsTabs: React.FC<IRestaurantsTabsProps> = memo(({ description, restId }) => {
-    const [activeTab, setActiveTab] = useState("1");
+    const [activeTab, setActiveTab] = useState("3");
     const checkAuth = useAppSelector((state) => state.interactive.passAuth);
-
-    const handleChange = (event: any, newActiveTab: any) => {
+    const handleChange = (event: any, newActiveTab: string) => {
         setActiveTab(newActiveTab);
     };
+    console.log("render tabs");
 
     const unAuth = <div className="unAuthorised">Войдите, чтобы оставить отзыв</div>;
 
@@ -47,7 +46,7 @@ const RestaurantsTabs: React.FC<IRestaurantsTabsProps> = memo(({ description, re
                     <TabPanel value="3">
                         <div className="restaurants-tabs__feedback">
                             {checkAuth ? <ReviewForm restId={restId} /> : unAuth}
-                            <FeedbackItem />
+                            <ReviewsList />
                         </div>
                     </TabPanel>
                 </TabContext>

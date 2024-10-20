@@ -81,11 +81,16 @@ const findRestaurant = (req, res) => {
     Restaurant.find({ cousine: { $in: cousine }, subway: { $in: [subway] } })
         // Restaurant.find({ cousine: { $in: cousine } })
         .sort({ bill: sort })
-        .then((restaurants) => res.status(200).json(restaurants))
+        .then((restaurants) => {
+            if (restaurants.length > 0) {
+                return res.status(200).json(restaurants);
+            } else {
+                return res.status(200).json(null);
+            }
+        })
+        // .then((restaurants) => res.status(200).json(restaurants))
         .catch((err) => handleError(res, err));
 };
-
-// Restaurant.findOne({name:'GOOD'}).then(rest => console.log(rest))
 
 module.exports = {
     getRestaurants,

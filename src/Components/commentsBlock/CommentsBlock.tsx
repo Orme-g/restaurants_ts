@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useAppSelector } from "../../types/store";
 
-import CommentsItems from "../commentsItems/CommentsItems";
+import CommentsList from "../commentsList/CommentsList";
 import CommentForm from "../forms/commentForm/CommentForm";
 import type { IReplyData, TCommentReplyFunction } from "../../types/commentsTypes";
 
@@ -40,7 +40,7 @@ const CommentsBlock: React.FC<CommentBlockProps> = ({ currentTopicId }) => {
                 </div>
                 <div className="comments__title">Комментарии:</div>
                 <div className="comments__list">
-                    <CommentsItems commentReply={commentReply} topicId={currentTopicId} />
+                    <CommentsList commentReply={commentReply} topicId={currentTopicId} />
                 </div>
             </section>
         </>

@@ -7,6 +7,7 @@ const commentSchema = new Schema({
         type: String,
         default: "Гость",
     },
+    userId: String,
     topic: String,
 
     likes: Number,

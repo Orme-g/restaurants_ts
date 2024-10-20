@@ -11,3 +11,7 @@ export interface IDonerRestaurant {
     images: string[];
     subtitle: string;
 }
+export type INewDonerArticle = Omit<
+    IDonerRestaurant,
+    "_id" | "images" | "title_image" | "createdAt"
+>;

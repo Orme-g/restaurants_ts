@@ -1,10 +1,8 @@
+const mongoose = require("mongoose");
 
-const mongoose = require('mongoose')
-
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
 const reviewSchema = new Schema({
-
     name: String,
     avatar: String,
     like: String,
@@ -14,10 +12,17 @@ const reviewSchema = new Schema({
     createdAt: {
         type: Date,
         default: () => Date.now(),
-        immutable: true
-    }
-})
+        immutable: true,
+    },
+    userId: String,
+    additionalReview: {
+        like: String,
+        dislike: String,
+        rating: Number,
+        added: Date,
+    },
+});
 
-const Review = mongoose.model('Review', reviewSchema)
+const Review = mongoose.model("Review", reviewSchema);
 
-module.exports = Review
+module.exports = Review;

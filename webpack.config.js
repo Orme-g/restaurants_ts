@@ -1,13 +1,20 @@
+const path = require("path");
+
 module.exports = {
     // change to .tsx if necessary
+    resolve: {
+        alias: {
+            Components: path.resolve(__dirname, "src/Components"),
+            Pages: path.resolve(__dirname, "whereats-app_TS/restaurants/src/pages/"),
+        },
+        // changed from extensions: [".js", ".jsx"]
+        extensions: [".ts", ".tsx", ".js", ".jsx"],
+    },
     entry: "./src/app.jsx",
     output: {
         filename: "./bundle.js",
     },
-    resolve: {
-        // changed from extensions: [".js", ".jsx"]
-        extensions: [".ts", ".tsx", ".js", ".jsx"],
-    },
+
     module: {
         rules: [
             // changed from { test: /\.jsx?$/, use: { loader: 'babel-loader' }, exclude: /node_modules/ },

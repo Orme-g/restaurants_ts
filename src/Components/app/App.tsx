@@ -1,6 +1,7 @@
 import React from "react";
 import { lazy, Suspense } from "react";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../../types/store";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Navigation from "../navigation/Navigation";
@@ -11,30 +12,35 @@ import Snack from "../snackbar/Snackbar";
 import Spinner from "../svg/Spinner";
 
 import useLocalStorage from "../../hooks/useLocalStorage";
-import { setUserData, setPassAuth } from "../../reducers/interactive";
+import { setUserData, setPassAuth, updateUserData } from "../../reducers/interactive";
 import { ScrollToTop } from "../../services/ScrollToTop";
 
 import "./App.sass";
 
-const MainPage = lazy(() => import("../pages/mainPage/MainPage"));
+const MainPage = lazy(() => import("../../pages/mainPage/MainPage"));
 const SingleRestaurantPage = lazy(
-    () => import("../pages/singleRestaurantPage/SingleRestaurantPage")
+    () => import("../../pages/singleRestaurantPage/SingleRestaurantPage")
 );
-const FindRestaurant = lazy(() => import("../pages/findRestaurant/FindRestaurant"));
-const BestDoner = lazy(() => import("../pages/bestDoner/BestDoner"));
-const BestDonerPage = lazy(() => import("../pages/bestDonerPage/BestDonerPage"));
-const InfoPage = lazy(() => import("../pages/infoPage/InfoPage"));
-const ProfilePage = lazy(() => import("../pages/profilePage/ProfilePage"));
-const AdminPage = lazy(() => import("../pages/adminPage/AdminPage"));
-const Page404 = lazy(() => import("../pages/Page404"));
+const RestaurantSelectionPage = lazy(
+    () => import("../../pages/restaurantSelectionPage/RestaurantSelectionPage")
+);
+const BestDonersListPage = lazy(() => import("../../pages/BestDonersListPage/BestDonersListPage"));
+const SingleDonerPage = lazy(() => import("../../pages/singleDonerPage/SingleDonerPage"));
+const InfoPage = lazy(() => import("../../pages/infoPage/InfoPage"));
+const ProfilePage = lazy(() => import("../../pages/profilePage/ProfilePage"));
+const AdminPage = lazy(() => import("../../pages/adminPage/AdminPage"));
+const Page404 = lazy(() => import("../../pages/Page404"));
 
 export const App: React.FC = () => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const { getUserData } = useLocalStorage();
     if (getUserData()) {
         const userData = getUserData();
-        dispatch(setUserData(userData));
+        const { _id } = userData;
+        // dispatch(setUserData(userData));
+        dispatch(updateUserData(_id));
         dispatch(setPassAuth(true));
+        // dispatch(updateUserData(_id));
     }
 
     return (
@@ -46,9 +52,9 @@ export const App: React.FC = () => {
                     <Routes>
                         <Route path="/" element={<MainPage />} />
                         <Route path="/restaurant/:restId" element={<SingleRestaurantPage />} />
-                        <Route path="/find-restaurant" element={<FindRestaurant />} />
-                        <Route path="/best-doner" element={<BestDoner />} />
-                        <Route path="/best-doner/:donerId" element={<BestDonerPage />} />
+                        <Route path="/find-restaurant" element={<RestaurantSelectionPage />} />
+                        <Route path="/best-doner" element={<BestDonersListPage />} />
+                        <Route path="/best-doner/:donerId" element={<SingleDonerPage />} />
                         <Route path="/info/:infoType" element={<InfoPage />} />
                         <Route path="/profile/:userId" element={<ProfilePage />} />
                         <Route path="/admin" element={<AdminPage />} />

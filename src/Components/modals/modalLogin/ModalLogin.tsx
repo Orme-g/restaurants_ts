@@ -13,6 +13,7 @@ import {
     toggleRegisterWindowModal,
     callSnackbar,
     setPassAuth,
+    updateUserData,
 } from "../../../reducers/interactive";
 import { useLoginMutation } from "../../../services/apiSlice";
 import useLocalStorage from "../../../hooks/useLocalStorage";
@@ -53,11 +54,12 @@ const ModalLogin = () => {
         sendLogin(loginData)
             .unwrap()
             .then(({ message, ...data }) => {
+                const { _id } = data;
                 dispatch(callSnackbar({ text: message, type: "success" }));
-                console.log(data);
                 setData(data);
                 handleClose();
                 dispatch(setPassAuth(true));
+                dispatch(updateUserData(_id));
             })
             .catch((error) => setErrorMessage(error.data));
     };

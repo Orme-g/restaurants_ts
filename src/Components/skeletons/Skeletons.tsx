@@ -60,7 +60,7 @@ export const CardsSliderSkeleton = () => {
     );
 };
 
-export const DonerCardsSkeleton = () => {
+export const LongCardsSkeleton = () => {
     return (
         <div className="doner-cards-skeleton">
             <Stack direction={"row"} spacing={2} sx={{ height: "45%", width: "100%" }}>
@@ -97,6 +97,33 @@ export const PageSkeleton = () => {
                 <Skeleton variant="rounded" sx={{ width: "80%" }} />
                 <Skeleton variant="rounded" sx={{ width: "65%" }} />
                 <Skeleton variant="rounded" sx={{ width: "65%" }} />
+            </Stack>
+        </div>
+    );
+};
+
+export const ShortLineSkeleton = () => {
+    return (
+        <div className="line-skeleton">
+            <Skeleton variant="text" height={30} sx={{ width: "300px" }} />
+        </div>
+    );
+};
+
+export const ReviewItemSkeleton = () => {
+    return (
+        <div className="review-item-skeleton">
+            <Stack className="review-item-skeleton__header" direction={"row"} spacing={2}>
+                <Skeleton variant="circular" height={70} width={70} />
+                <Skeleton variant="rounded" height={50} width={"80%"} />
+            </Stack>
+            <Stack className="review-item-skeleton__text" direction={"row"}>
+                <Skeleton variant="text" height={50} width={"25%"} />
+                <Skeleton variant="text" height={50} width={"60%"} />
+            </Stack>
+            <Stack className="review-item-skeleton__text" direction={"row"}>
+                <Skeleton variant="text" height={50} width={"25%"} />
+                <Skeleton variant="text" height={50} width={"60%"} />
             </Stack>
         </div>
     );

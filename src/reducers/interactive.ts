@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { useHttp } from "../hooks/http.hook";
 import type { IUserData } from "../types/userData";
 
 interface ISnackBarData {
@@ -14,6 +15,11 @@ interface IinitialSTate {
     showSnackbar: boolean;
     snackBarData: ISnackBarData;
 }
+
+export const updateUserData = createAsyncThunk("interactive/updateUserData", (userId: string) => {
+    const { request } = useHttp();
+    return request(`http://localhost:4000/user/getdata/${userId}`);
+});
 
 const initialState: IinitialSTate = {
     sideMenu: false,
@@ -48,9 +54,14 @@ const interactiveSlice = createSlice({
         setPassAuth: (state, action: PayloadAction<boolean>) => {
             state.passAuth = action.payload;
         },
-        setUserData: (state, action: PayloadAction<IUserData>) => {
+        setUserData: (state, action: PayloadAction<IUserData | null>) => {
             state.userData = action.payload;
         },
+    },
+    extraReducers: (builder) => {
+        builder.addCase(updateUserData.fulfilled, (state, action: PayloadAction<IUserData>) => {
+            state.userData = action.payload;
+        });
     },
 });
 

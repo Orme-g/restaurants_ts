@@ -38,8 +38,8 @@ const SliderCards: React.FC<ISliderCardsProps> = ({ type }) => {
             spaceBetween={30}
             style={
                 {
-                    // "--swiper-navigation-color": "#c9c9c9",
-                }
+                    "--swiper-navigation-color": "#c9c9c9",
+                } as React.CSSProperties
             }
             loop={true}
             navigation={true}

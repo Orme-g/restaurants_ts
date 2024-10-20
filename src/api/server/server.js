@@ -1,5 +1,6 @@
 const cors = require("cors");
 const express = require("express");
+const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
 // const movieRoutes = require('../routes/movie-routes')
@@ -7,7 +8,7 @@ const restaurantRoutes = require("../routes/restaurant-routes");
 const donerRoutes = require("../routes/doner-routes");
 const commentRoutes = require("../routes/comment-routes");
 const reviewRoutes = require("../routes/review-routes");
-const authRoutes = require("../routes/auth-routes");
+const userRoutes = require("../routes/user-routes");
 
 const PORT = 4000;
 const URL = "mongodb://localhost:27017/restaurants_db";
@@ -20,13 +21,15 @@ app.use(
     })
 );
 
-app.use(express.json());
+// app.use(express.json());
+app.use(bodyParser.json({ limit: "10mb" }));
+app.use(bodyParser.urlencoded({ extended: true, limit: "10mb" }));
 // app.use(movieRoutes)
 app.use(restaurantRoutes);
 app.use(donerRoutes);
 app.use(commentRoutes);
 app.use(reviewRoutes);
-app.use(authRoutes);
+app.use(userRoutes);
 
 mongoose
     .connect(URL)

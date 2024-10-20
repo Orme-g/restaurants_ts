@@ -14,9 +14,13 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import PersonIcon from "@mui/icons-material/Person";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
-import { toggleSideMenu, toggleModalWindowLogin, setPassAuth } from "../../reducers/interactive";
+import {
+    toggleSideMenu,
+    toggleModalWindowLogin,
+    setPassAuth,
+    setUserData,
+} from "../../reducers/interactive";
 import { useAppDispatch, useAppSelector } from "../../types/store";
-// import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom";
 import useLocalStorage from "../../hooks/useLocalStorage";
 
@@ -36,6 +40,7 @@ const NavBar: React.FC = () => {
     const handleLogout = () => {
         clearData("userData");
         dispatch(setPassAuth(false));
+        dispatch(setUserData(null));
         handleClose();
     };
 

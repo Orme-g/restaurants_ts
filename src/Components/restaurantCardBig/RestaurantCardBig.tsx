@@ -6,12 +6,12 @@ import { Link } from "react-router-dom";
 import { fetchLastAddedRestaurants } from "../../reducers/restaurants";
 import { CardsSkeleton } from "../skeletons/Skeletons";
 
-// import pic from "../../assets/rest_photos/birch/bir_1.jpeg"
+import pic from "../../assets/rest.jpeg";
 
-import "./restaurantCard.sass";
+import "./restaurantCardBig.sass";
 import { IRestaurant } from "../../types/restaurantsTypes";
 
-const RestaurantCard: React.FC = () => {
+const RestaurantCardBig: React.FC = () => {
     const dispatch = useAppDispatch();
     const { lastAddedRestaurants, pageLoading } = useAppSelector((state) => state.restaurants);
     useEffect(() => {
@@ -29,8 +29,8 @@ const RestaurantCard: React.FC = () => {
             <div className="restaurant-card" key={_id}>
                 <div
                     className="restaurant-card__image"
-                    style={{ backgroundImage: `url(${title_image})` }}
-                    // style={{ backgroundImage: `url(${pic})` }}
+                    // style={{ backgroundImage: `url(${title_image})` }}
+                    style={{ backgroundImage: `url(${pic})` }}
                 ></div>
                 <div className="restaurant-card__title">{name}</div>
                 <div className="restaurant-card__description">{short_description}</div>
@@ -48,4 +48,4 @@ const RestaurantCard: React.FC = () => {
     return <>{elements}</>;
 };
 
-export default RestaurantCard;
+export default RestaurantCardBig;

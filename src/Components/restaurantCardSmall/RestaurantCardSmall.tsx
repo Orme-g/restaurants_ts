@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Rating } from "@mui/material";
 
+import pic from "../../assets/rest.jpeg";
+
 import type { IRestaurant } from "../../types/restaurantsTypes";
 
 import "./restaurantCardSmall.sass";
@@ -17,8 +19,10 @@ interface IRestaurantDataProps {
     restData: IRestaurant;
 }
 const RestaurantCardSmall: React.FC<IRestaurantDataProps> = ({ restData }) => {
-    const { _id, title_image, name, rating, bill, cousine } = restData;
+    const { _id, name, rating, bill, cousine } = restData;
     const cousinesList = cousine.join(", ");
+    const { marks, overallRating } = rating;
+    const calculatedRating = marks === 0 ? 0 : overallRating / marks;
     let displCousines: string;
     if (cousinesList.length < 40) {
         displCousines = cousinesList;
@@ -29,14 +33,14 @@ const RestaurantCardSmall: React.FC<IRestaurantDataProps> = ({ restData }) => {
         <div className="selection-card">
             <div
                 className="selection-card__image"
-                style={{ backgroundImage: `url(${title_image})` }}
-                // style={{ backgroundImage: `url(${pic})` }}
+                // style={{ backgroundImage: `url(${title_image})` }}
+                style={{ backgroundImage: `url(${pic})` }}
             ></div>
             <div className="selection-card__title">{name}</div>
             <div className="selection-card__cousines">{displCousines}</div>
             <div className="selection-card__bill">{bill}₽</div>
             <div className="selection-card__rating">
-                <Rating value={rating} size="small" readOnly precision={0.5} />
+                <Rating value={calculatedRating} size="small" readOnly precision={0.5} />
             </div>
             <Link to={`/restaurant/${_id}`} className="selection-card__link">
                 Подробнее...

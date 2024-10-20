@@ -1,12 +1,9 @@
 import React from "react";
 import { useState } from "react";
 
-import { useAppSelector } from "../../../types/store";
-// import { useSelector } from "react-redux";
-
 import { TextField, Button, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-
+import useLocalStorage from "../../../hooks/useLocalStorage";
 import { usePostCommentMutation } from "../../../services/commentsApi";
 
 import type { IReplyData, TCommentReplyFunction } from "../../../types/commentsTypes";
@@ -20,30 +17,19 @@ interface ICommentProps {
 
 const CommentForm: React.FC<ICommentProps> = ({ replyData, topicId, setReplyData }) => {
     const [commentText, setCommentText] = useState("");
-    // const [reply, setReplyData] = useState({})
     const [valid, setValid] = useState(false);
-    const userData = useAppSelector((state) => state.interactive.userData);
-    let nameFromUserData: string;
-    if (userData) {
-        const { username } = userData;
-        nameFromUserData = username;
-    }
-
+    const { getUserData } = useLocalStorage();
+    const { username, _id } = getUserData();
     const [postComment] = usePostCommentMutation();
-    // useEffect(() => {
-    //     setReplyData(replyData)
-    // }, [replyData])
-
-    console.log(replyData);
 
     function handleSubmit() {
-        // const reply = replyData ? replyData : null
         if (commentText.length < 10) {
             setValid(true);
         } else {
             setValid(false);
             let newComment = {
-                name: nameFromUserData,
+                name: username,
+                userId: _id,
                 topic: topicId,
                 likes: 0,
                 dislikes: 0,
@@ -53,7 +39,6 @@ const CommentForm: React.FC<ICommentProps> = ({ replyData, topicId, setReplyData
             if (replyData) {
                 newComment = { ...newComment, reply: replyData };
             }
-            // console.log(newComment)
             postComment(newComment).unwrap();
             setCommentText("");
             setReplyData({ name: null, text: null });

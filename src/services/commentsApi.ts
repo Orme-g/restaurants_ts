@@ -4,16 +4,16 @@ import type { IComment } from "../types/commentsTypes";
 
 export const commentsApi = createApi({
     reducerPath: "commentsApi",
-    baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:4000" }),
+    baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:4000/best-doner/comments" }),
     tagTypes: ["Comments"],
     endpoints: (builder) => ({
         getComments: builder.query<IComment[], string>({
-            query: (id: string) => `/best-doner/comments/${id}`,
+            query: (id: string) => `/${id}`,
             providesTags: ["Comments"],
         }),
         postComment: builder.mutation({
             query: (comment) => ({
-                url: "/best-doner/comments",
+                url: "/",
                 method: "POST",
                 body: comment,
             }),
@@ -21,22 +21,30 @@ export const commentsApi = createApi({
         }),
         deleteComment: builder.mutation({
             query: (id) => ({
-                url: `/best-doner/comments/${id}`,
+                url: `/${id}`,
                 method: "DELETE",
             }),
             invalidatesTags: ["Comments"],
         }),
-        likeComment: builder.mutation({
-            query: (id) => ({
-                url: `/best-doner/comments/like/${id}`,
+        // likeComment: builder.mutation({
+        //     query: (id) => ({
+        //         url: `/like/${id}`,
+        //         method: "PATCH",
+        //     }),
+        //     invalidatesTags: ["Comments"],
+        // }),
+        // dislikeComment: builder.mutation({
+        //     query: (id) => ({
+        //         url: `/dislike/${id}`,
+        //         method: "PATCH",
+        //     }),
+        //     invalidatesTags: ["Comments"],
+        // }),
+        evaluateComment: builder.mutation({
+            query: (data) => ({
+                url: "/evaluate",
                 method: "PATCH",
-            }),
-            invalidatesTags: ["Comments"],
-        }),
-        dislikeComment: builder.mutation({
-            query: (id) => ({
-                url: `/best-doner/comments/dislike/${id}`,
-                method: "PATCH",
+                body: data,
             }),
             invalidatesTags: ["Comments"],
         }),
@@ -47,6 +55,5 @@ export const {
     useGetCommentsQuery,
     usePostCommentMutation,
     useDeleteCommentMutation,
-    useLikeCommentMutation,
-    useDislikeCommentMutation,
+    useEvaluateCommentMutation,
 } = commentsApi;

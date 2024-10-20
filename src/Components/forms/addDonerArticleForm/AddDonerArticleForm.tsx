@@ -9,6 +9,8 @@ import { useAddDonerArticleMutation } from "../../../services/donersApi";
 
 import "./addDonerArticleForm.sass";
 
+import type { INewDonerArticle } from "../../../types/donersTypes";
+
 interface IAddDonerArticleFormProps {
     displayState: boolean;
     toggleDisplay: () => void;
@@ -21,7 +23,7 @@ const AddDonerArticleForm: React.FC<IAddDonerArticleFormProps> = ({
     toggleDisplay,
 }) => {
     const displayForm = displayState ? "show" : "hide";
-    const [btnStatus, setBtnStatus] = useState(false);
+    const [btnStatus, setBtnStatus] = useState<boolean>(false);
     const {
         register,
         handleSubmit,
@@ -29,19 +31,19 @@ const AddDonerArticleForm: React.FC<IAddDonerArticleFormProps> = ({
         reset,
     } = useForm({
         defaultValues: {
-            title: "",
+            name: "",
             subtitle: "",
             short_description: "",
-            text: "",
+            description: "",
             bloquote: "",
-            rating: "",
+            rating: 1,
             author: "",
         },
     });
 
     const [addDonerArticle, { isLoading, isSuccess, isError }] = useAddDonerArticleMutation();
 
-    const onSubmit = (formData: any) => {
+    const onSubmit = (formData: INewDonerArticle) => {
         setBtnStatus(true);
         addDonerArticle(formData)
             .unwrap()
@@ -49,7 +51,7 @@ const AddDonerArticleForm: React.FC<IAddDonerArticleFormProps> = ({
                 if (response === "Success") {
                     reset();
                     setBtnStatus(false);
-                    toggleDisplay();
+                    // toggleDisplay();
                 }
             })
             .catch((error) => {
@@ -78,12 +80,12 @@ const AddDonerArticleForm: React.FC<IAddDonerArticleFormProps> = ({
             <Stack spacing={3} width={"100%"}>
                 <TextField
                     label="Название заведения"
-                    {...register("title", {
+                    {...register("name", {
                         required: "Обязательное поле",
                         minLength: { value: 2, message: "Слишком короткое название" },
                     })}
-                    error={!!errors.title}
-                    helperText={errors.title?.message}
+                    error={!!errors.name}
+                    helperText={errors.name?.message}
                 />
                 <TextField
                     label="Подзаголовок"
@@ -111,12 +113,12 @@ const AddDonerArticleForm: React.FC<IAddDonerArticleFormProps> = ({
                     label="Полное описание"
                     multiline
                     minRows={4}
-                    {...register("text", {
+                    {...register("description", {
                         required: "Обязательное поле",
                         minLength: { value: 2, message: "Минимум 200 символов" },
                     })}
-                    error={!!errors.text}
-                    helperText={errors.text?.message}
+                    error={!!errors.description}
+                    helperText={errors.description?.message}
                 />
                 <TextField
                     label="Цитата"
