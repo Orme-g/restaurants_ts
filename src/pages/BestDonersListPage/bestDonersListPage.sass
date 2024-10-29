@@ -1,21 +1,30 @@
 @import '../../style/mixins'
 @import '../../style/variables'
 
+.page_wrapper
+    background-color: $wrapper-color
+    padding: 100px 0 
+
 
 .best-doner
     &__container
-        margin: 150px auto 0 auto
-        width: 70%
+        margin: 0 auto
+        padding: 50px 40px 
+        width: 75%
         height: fit-content
         display: flex
         flex-direction: column
         gap: 50px
+        border-radius: 10px
+        background-color: $container-color
 
     &__title
         font-size: 40px
         font-weight: 400
         margin-bottom: 30px
         border-bottom: 1.2px solid #e0e0e0
+
+
 
     &__about
         margin-top: 20px

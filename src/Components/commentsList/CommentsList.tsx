@@ -12,6 +12,8 @@ import {
 import { updateUserData, callSnackbar } from "../../reducers/interactive";
 import { useAppSelector, useAppDispatch } from "../../types/store";
 
+import transformDate from "../../utils/transformDate";
+
 import type { TCommentReplyFunction, IComment } from "../../types/commentsTypes";
 
 import Spinner from "../svg/Spinner";
@@ -35,7 +37,7 @@ const CommentsList: React.FC<ICommentItemProps> = memo(({ topicId, commentReply 
         deleteComment(id).unwrap();
     };
     const dispatch = useAppDispatch();
-
+    const noComments = <div className="no-comments">Комментариев пока нет. Отсавьте первый!</div>;
     function handleLike(id: string) {
         if (isAuth && userId) {
             let body = { userId, id, type: "like" };
@@ -74,11 +76,7 @@ const CommentsList: React.FC<ICommentItemProps> = memo(({ topicId, commentReply 
     if (topicComments) {
         comments = topicComments.map(
             ({ name, likes, dislikes, createdAt, text, _id, reply }: IComment) => {
-                const date = new Date(createdAt).toLocaleString("ru", {
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric",
-                });
+                const date = transformDate(createdAt);
                 let beingRated = false;
                 if (ratedComments) {
                     beingRated = ratedComments.includes(_id);
@@ -146,7 +144,7 @@ const CommentsList: React.FC<ICommentItemProps> = memo(({ topicId, commentReply 
         );
     }
 
-    return <>{comments}</>;
+    return <>{topicComments && topicComments?.length > 0 ? comments : noComments}</>;
 });
 
 export default CommentsList;

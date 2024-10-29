@@ -5,6 +5,7 @@ import { TabContext, TabList, TabPanel } from "@mui/lab";
 
 import ReviewsList from "../reviewsList/ReviewsList";
 import ReviewForm from "../forms/reviewForm/ReviewForm";
+import EventsList from "../eventsList/EventsList";
 import "./restaurantsTabs.sass";
 
 interface IRestaurantsTabsProps {
@@ -31,6 +32,8 @@ const RestaurantsTabs: React.FC<IRestaurantsTabsProps> = memo(({ description, re
                             <Tab label="О Ресторане" value="1" />
                             <Tab label="Меню" value="2" />
                             <Tab label="Отзывы" value="3" />
+                            <Tab label="События" value="4" />
+                            <Tab label="Карта" value="5" />
                         </TabList>
                     </Box>
                     <TabPanel value="1">
@@ -49,6 +52,12 @@ const RestaurantsTabs: React.FC<IRestaurantsTabsProps> = memo(({ description, re
                             <ReviewsList />
                         </div>
                     </TabPanel>
+                    <TabPanel value="4">
+                        <div className="restaurants-tabs__events">
+                            <EventsList />
+                        </div>
+                    </TabPanel>
+                    <TabPanel value="5"></TabPanel>
                 </TabContext>
             </Box>
         </div>

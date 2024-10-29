@@ -1,5 +1,5 @@
 import React from "react";
-import serverError from "../../assets/server_error.png";
+import serverError from "../assets/server_error.png";
 
 const ServerError = () => {
     return (

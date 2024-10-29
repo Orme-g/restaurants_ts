@@ -26,6 +26,7 @@ const RestaurantSelectionPage = lazy(
 );
 const BestDonersListPage = lazy(() => import("../../pages/BestDonersListPage/BestDonersListPage"));
 const SingleDonerPage = lazy(() => import("../../pages/singleDonerPage/SingleDonerPage"));
+const EventPage = lazy(() => import("../../pages/singleEventPage/SingleEventPage"));
 const InfoPage = lazy(() => import("../../pages/infoPage/InfoPage"));
 const ProfilePage = lazy(() => import("../../pages/profilePage/ProfilePage"));
 const AdminPage = lazy(() => import("../../pages/adminPage/AdminPage"));
@@ -55,6 +56,7 @@ export const App: React.FC = () => {
                         <Route path="/find-restaurant" element={<RestaurantSelectionPage />} />
                         <Route path="/best-doner" element={<BestDonersListPage />} />
                         <Route path="/best-doner/:donerId" element={<SingleDonerPage />} />
+                        <Route path="/event/:eventId" element={<EventPage />} />
                         <Route path="/info/:infoType" element={<InfoPage />} />
                         <Route path="/profile/:userId" element={<ProfilePage />} />
                         <Route path="/admin" element={<AdminPage />} />

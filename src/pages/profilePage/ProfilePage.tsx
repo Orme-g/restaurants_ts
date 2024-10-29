@@ -14,7 +14,7 @@ import calculateExperience from "../../utils/calculateExperience";
 
 import { convertToBase64 } from "../../hooks/convertToBase64";
 import { PageSkeleton } from "../../Components/skeletons/Skeletons";
-
+import ServerError from "../ServerError";
 // import avatar from "../../../assets/avatar.jpg";
 
 import "./profilePage.sass";
@@ -36,10 +36,16 @@ const ProfilePage: React.FC = () => {
     };
     const { userId } = useParams<string>();
     const [sendAvatar] = useChangeAvatarMutation();
-    const { data: userData, isLoading } = useGetUserDataQuery(userId as string, {
-        skip: !!userId,
+    const {
+        data: userData,
+        isLoading,
+        isError,
+    } = useGetUserDataQuery(userId as string, {
+        skip: !!!userId,
     });
-    // const { data: favouriteRestNames } = useGetFavouriteRestNamesQuery(userId);
+    if (isError) {
+        return <ServerError />;
+    }
     if (isLoading) {
         return <PageSkeleton />;
     }

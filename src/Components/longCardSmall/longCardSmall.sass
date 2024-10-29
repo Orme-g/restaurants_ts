@@ -1,0 +1,35 @@
+@import '../../style/mixins'
+@import '../../style/variables'
+
+
+.long-card-small
+    &__container
+        height: 120px
+        box-shadow: 5px 3px 5px 0px rgba(34, 60, 80, 0.24)
+        width: 100%
+        border-radius: 5px
+        background-color: #f8f8f8
+        color: $primary-text
+        display: flex
+        overflow: hidden
+    &__image
+        width: 22%
+        img
+            height: 100%
+            width: 100%
+            object-fit: cover
+
+    &__info
+        width: 78%
+        padding: 10px 10px 10px 20px
+        display: flex
+        flex-direction: column
+        justify-content: space-evenly
+        &_name
+
+        &_description
+            font-weight: 300
+            font-size: 16px
+        &_valid-dates
+            font-weight: 300
+            font-style: italic

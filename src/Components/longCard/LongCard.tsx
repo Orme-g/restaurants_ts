@@ -1,12 +1,24 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import { Rating } from "@mui/material";
-
+import transformDate from "../../utils/transformDate";
 import pic from "../../assets/rest.jpeg";
 import "./longCard.sass";
 
-const LongCard = ({ data, link, type, date }) => {
-    const { name, short_description, rating, cousine, bill } = data;
-    const textField = (type) => {
+interface ILongCardProps {
+    data: any;
+    type: "restaurant" | "doner";
+}
+
+const LongCard: React.FC<ILongCardProps> = ({ data, type }) => {
+    const { name, short_description, rating, cousine, bill, createdAt, _id } = data;
+    console.log(_id);
+    const link = type === "doner" ? `/best-doner/${_id}` : `/restaurant/${_id}`;
+
+    const donerOrRestRating =
+        type === "restaurant" ? rating.overallRating : type === "doner" ? rating : null;
+    const date = transformDate(createdAt);
+    const textField = (type: "restaurant" | "doner") => {
         switch (type) {
             case "restaurant":
                 return (
@@ -42,7 +54,7 @@ const LongCard = ({ data, link, type, date }) => {
                     </div>
                     <div className="long-card__textfield">{textField(type)}</div>
                     <div className="long-card__rating">
-                        <Rating value={rating} precision={0.5} readOnly />
+                        <Rating value={donerOrRestRating} precision={0.5} readOnly />
                     </div>
                 </div>
             </div>

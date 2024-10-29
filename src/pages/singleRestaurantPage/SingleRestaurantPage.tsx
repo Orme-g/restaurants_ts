@@ -51,7 +51,7 @@ const SingleRestaurantPage: React.FC = () => {
         // eslint-disable-next-line
     }, [data]);
 
-    if (pageLoading === "loading" || !restaurantData) {
+    if (pageLoading === "loading" || !restaurantData || !restId) {
         return <PageSkeleton />;
     }
     if (data) {
@@ -74,7 +74,7 @@ const SingleRestaurantPage: React.FC = () => {
                     isRegistered={passAuth}
                 />
             </div>
-            <RestaurantsTabs description={description} restId={restId!} />
+            <RestaurantsTabs description={description} restId={restId} />
         </>
     );
 };

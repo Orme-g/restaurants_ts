@@ -11,14 +11,14 @@ import {
 } from "@mui/material";
 import { cousines } from "../../data/cousines";
 
-// import SubwaySelectList from "../../../utils/subwayLists/subwaySelectList";
 import { useFindRestaurantMutation } from "../../services/apiSlice";
 import { subwaySpb } from "../../data/subwaysLists";
-import RestaurantSelectionRenderList from "../../Components/restaurantSelectionRenderList/RestaurantSelectionRenderList";
+import LongCard from "../../Components/longCard/LongCard";
+import RenderListWithPagination from "../../Components/renderListWithPagination/RenderListWithPagination";
 import SubwayIcon from "../../Components/svg/subwayIcon";
 import "./restaurantSelectionPage.sass";
 
-import type { IFindRestaurantCriterias } from "../../types/restaurantsTypes";
+import type { IFindRestaurantCriterias, IRestaurant } from "../../types/restaurantsTypes";
 
 enum TSubwayColors {
     Red = "#D70138",
@@ -74,7 +74,11 @@ const RestaurantSelectionPage: React.FC = () => {
         searchResults = <span>Поиск не дал результатов...</span>;
     }
     if (data) {
-        searchResults = <RestaurantSelectionRenderList restaurantsData={data} displayItems={3} />;
+        const renderList = data.map((data: IRestaurant) => {
+            const { _id } = data;
+            return <LongCard type="restaurant" data={data} key={_id} />;
+        });
+        searchResults = <RenderListWithPagination displayItems={3} list={renderList} />;
     }
     return (
         <section className="find-restaurant__container">

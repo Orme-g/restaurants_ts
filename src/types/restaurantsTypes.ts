@@ -13,6 +13,7 @@ export interface IRestaurant {
     title_image: string;
     city: string;
     subway: string[];
+    events: string[];
 }
 
 export interface IAddRestaurant {

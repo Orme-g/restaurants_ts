@@ -8,10 +8,11 @@ import Slider from "../../Components/sliderImages/Slider";
 import { PageSkeleton } from "../../Components/skeletons/Skeletons";
 import tranfsormDate from "../../utils/transformDate";
 
+import pic from "../../assets/event.JPG";
 import "./singleDonerPage.sass";
 
 const SingleDonerPage = () => {
-    const { donerId } = useParams();
+    const { donerId } = useParams<string>();
     const { data: singleDonerData, isLoading } = useGetSingleDonerRestaurantQuery(
         donerId as string
     );
@@ -37,44 +38,46 @@ const SingleDonerPage = () => {
         const date = tranfsormDate(createdAt);
         return (
             <>
-                <section className="doner-topic__container">
-                    <div className="doner-topic__title">
-                        {" "}
-                        {name}
-                        <div className="doner-topic__subtitle"> {subtitle} </div>
-                    </div>
-                    <div className="doner-topic__image">
-                        <img src={title_image} alt="doner" />
-                        {/* <img src={pic} alt="doner" /> */}
-                    </div>
-                    <div className="doner-topic__content">
-                        <blockquote>{bloquote}</blockquote>
-                        <p>{description}</p>
-                    </div>
-                    <div className="doner-topic__slider">
-                        <Slider images={images} />
-                    </div>
-                    <div className="doner-topic__rating">
-                        Наша оценка:{" "}
-                        <Rating
-                            value={rating}
-                            readOnly
-                            precision={0.1}
-                            sx={{
-                                marginLeft: "15px",
-                                transform: "translateY(5px)",
-                            }}
-                            size="large"
-                        />
-                    </div>
-                    <div className="doner-topic__author">
-                        Автор статьи: <span>{author}</span>
-                    </div>
-                    <div className="doner-topic__published">
-                        Опубликовано: <span>{date}</span>
-                    </div>
-                </section>
-                <CommentsBlock currentTopicId={_id} />
+                <div className="page-wrapper">
+                    <section className="doner-topic__container">
+                        <div className="doner-topic__title">
+                            {" "}
+                            {name}
+                            <div className="doner-topic__subtitle"> {subtitle} </div>
+                        </div>
+                        <div className="doner-topic__image">
+                            {/* <img src={title_image} alt="doner" /> */}
+                            <img src={pic} alt="doner" />
+                        </div>
+                        <div className="doner-topic__content">
+                            <blockquote>{bloquote}</blockquote>
+                            <p>{description}</p>
+                        </div>
+                        <div className="doner-topic__slider">
+                            <Slider images={images} />
+                        </div>
+                        <div className="doner-topic__rating">
+                            Наша оценка:{" "}
+                            <Rating
+                                value={rating}
+                                readOnly
+                                precision={0.1}
+                                sx={{
+                                    marginLeft: "15px",
+                                    transform: "translateY(5px)",
+                                }}
+                                size="large"
+                            />
+                        </div>
+                        <div className="doner-topic__author">
+                            Автор статьи: <span>{author}</span>
+                        </div>
+                        <div className="doner-topic__published">
+                            Опубликовано: <span>{date}</span>
+                        </div>
+                    </section>
+                    <CommentsBlock currentTopicId={_id} />
+                </div>
             </>
         );
     }

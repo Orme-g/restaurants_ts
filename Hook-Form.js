@@ -1,9 +1,9 @@
 //React Hook Form
 
-import { useForm } from "react-hook-form"
+import { useForm } from "react-hook-form";
 
 const ReactHookForm = () => {
-    const values = async () => await fetch("api") // получение данных формы с сервера
+    const values = async () => await fetch("api"); // получение данных формы с сервера
     const {
         register,
         handleSubmit,
@@ -18,17 +18,17 @@ const ReactHookForm = () => {
             surname: "",
         },
         values, // Значения полей, получаемые извне. Обновит значения полей, когда переменная values будет обновлена данными с сервера и тд
-    })
+    });
 
-    console.log(watch("name")) // Вывод в консоль данных поля из ввода name
+    console.log(watch("name")); // Вывод в консоль данных поля из ввода name
 
     const onSubmit = () => {
-        console.log("Form submitted!")
-    }
+        console.log("Form submitted!");
+    };
 
     const validation = (value) => {
-        return `Validation function for ${value}`
-    }
+        return `Validation function for ${value}`;
+    };
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -37,7 +37,7 @@ const ReactHookForm = () => {
                 {...register("name", {
                     onChange: (e) => {
                         // Выполнить функцию при изменении поля onChange. Ещё есть onBlur (уход фокуса с поля)
-                        console.log(e.target.value)
+                        console.log(e.target.value);
                     },
                     validate: {
                         // Кастомная валидация, принимает колбэк или объект колбэков
@@ -61,7 +61,7 @@ const ReactHookForm = () => {
             <input />
             <button type="submit">Submit</button>
         </form>
-    )
-}
+    );
+};
 
-export default ReactHookForm
+export default ReactHookForm;

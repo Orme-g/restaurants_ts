@@ -9,6 +9,7 @@ const donerRoutes = require("../routes/doner-routes");
 const commentRoutes = require("../routes/comment-routes");
 const reviewRoutes = require("../routes/review-routes");
 const userRoutes = require("../routes/user-routes");
+const eventRoutes = require("../routes/event-routes");
 
 const PORT = 4000;
 const URL = "mongodb://localhost:27017/restaurants_db";
@@ -30,6 +31,7 @@ app.use(donerRoutes);
 app.use(commentRoutes);
 app.use(reviewRoutes);
 app.use(userRoutes);
+app.use(eventRoutes);
 
 mongoose
     .connect(URL)

@@ -21,15 +21,8 @@ const BestDonerCards: React.FC = () => {
         : null;
 
     function createDonerCard(card: IDonerRestaurant) {
-        const { _id, createdAt } = card;
-        const date = new Date(createdAt).toLocaleString("ru", {
-            day: "numeric",
-            month: "short",
-            year: "numeric",
-        });
-        return (
-            <LongCard type="doner" link={`/best-doner/${_id}`} data={card} key={_id} date={date} />
-        );
+        const { _id } = card;
+        return <LongCard type="doner" data={card} key={_id} />;
     }
 
     return <>{donerCards}</>;

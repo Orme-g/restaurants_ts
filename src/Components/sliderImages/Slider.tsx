@@ -9,7 +9,7 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
-// import pic from "../../assets/rest_photos/terrase/terr_2.jpeg"
+import pic from "../../assets/rest.jpeg";
 // import * as data from "../../services/importModule"
 import "./slider.sass";
 
@@ -29,7 +29,8 @@ const Slider: React.FC<ISliderProps> = memo(({ images }) => {
         const id = nanoid();
         return (
             <SwiperSlide key={id}>
-                <img src={item} alt="restaurant" />
+                {/* <img src={item} alt="restaurant" /> */}
+                <img src={pic} alt="restaurant" />
             </SwiperSlide>
         );
     });
