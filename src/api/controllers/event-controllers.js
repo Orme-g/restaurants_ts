@@ -10,7 +10,7 @@ const getEvent = (req, res) => {
 const getRestaurantEvents = (req, res) => {
     const restaurantId = req.params.id;
     Event.find({ restaurantId })
-        .sort({ addedDate: -1 })
+        .sort({ createdAt: -1 })
         .then((result) => res.status(200).json(result))
         .catch((error) => res.status(500).json({ error }));
 };

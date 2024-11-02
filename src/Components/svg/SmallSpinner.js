@@ -1,4 +1,4 @@
-const Spinner = () => {
+const SmallSpinner = () => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -157,7 +157,7 @@ const Spinner = () => {
                 </rect>
             </g>
         </svg>
-    )
-}
+    );
+};
 
-export default Spinner
+export default SmallSpinner;

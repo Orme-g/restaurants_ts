@@ -12,7 +12,7 @@ import Snack from "../snackbar/Snackbar";
 import Spinner from "../svg/Spinner";
 
 import useLocalStorage from "../../hooks/useLocalStorage";
-import { setUserData, setPassAuth, updateUserData } from "../../reducers/interactive";
+import { setPassAuth, updateUserData } from "../../reducers/interactive";
 import { ScrollToTop } from "../../services/ScrollToTop";
 
 import "./App.sass";
@@ -25,6 +25,7 @@ const RestaurantSelectionPage = lazy(
     () => import("../../pages/restaurantSelectionPage/RestaurantSelectionPage")
 );
 const BestDonersListPage = lazy(() => import("../../pages/BestDonersListPage/BestDonersListPage"));
+const BlogPage = lazy(() => import("../../pages/blogPage/BlogPage"));
 const SingleDonerPage = lazy(() => import("../../pages/singleDonerPage/SingleDonerPage"));
 const EventPage = lazy(() => import("../../pages/singleEventPage/SingleEventPage"));
 const InfoPage = lazy(() => import("../../pages/infoPage/InfoPage"));
@@ -56,6 +57,7 @@ export const App: React.FC = () => {
                         <Route path="/find-restaurant" element={<RestaurantSelectionPage />} />
                         <Route path="/best-doner" element={<BestDonersListPage />} />
                         <Route path="/best-doner/:donerId" element={<SingleDonerPage />} />
+                        <Route path="/blog" element={<BlogPage />} />
                         <Route path="/event/:eventId" element={<EventPage />} />
                         <Route path="/info/:infoType" element={<InfoPage />} />
                         <Route path="/profile/:userId" element={<ProfilePage />} />

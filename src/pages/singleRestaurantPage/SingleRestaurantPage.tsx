@@ -40,7 +40,7 @@ const SingleRestaurantPage: React.FC = () => {
         skip: !!!userId,
     });
     const [handleFavourite] = useHandleFavouriteRestaurantsMutation();
-    let isFavourite: boolean = false;
+    let isFavourite: "idle" | boolean = "idle";
 
     const handleFavouriteButton = useCallback(() => {
         const type = isFavourite ? "remove" : "add";

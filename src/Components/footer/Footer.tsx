@@ -16,9 +16,9 @@ const Footer: React.FC = () => {
     return (
         <div className="footer">
             <div className="footer__information">
-                <div className="footer__title">Whereats</div>
+                <div className="footer__title">Weats</div>
                 <div className="footer__reg">
-                    <p>&#169; Whereats.ru - est. 2023. Все права защищены.</p>
+                    <p>&#169; Weats.ru - est. 2023. Все права защищены.</p>
                     <p>
                         Использование материалов сайта разрешено только со ссылкой на первоисточник.
                     </p>

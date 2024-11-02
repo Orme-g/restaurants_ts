@@ -109,7 +109,7 @@ const NavBar: React.FC = () => {
                         component="span"
                         sx={{ fontWeight: 500, letterSpacing: 1.25 }}
                     >
-                        Whereats
+                        Weats
                     </Typography>
                 </Link>
                 <div className="navbarItems">
