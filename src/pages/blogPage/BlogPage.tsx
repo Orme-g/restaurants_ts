@@ -1,12 +1,10 @@
 import React from "react";
 
-import ChatIcon from "@mui/icons-material/Chat";
-import FavoriteIcon from "@mui/icons-material/Favorite";
+import BlogAuthorBadge from "../../Components/blogAuthorBadge/BlogAuthorBadge";
+import BlogPostCard from "../../Components/blogPostCard/BlogPostCard";
 
 import "./blogPage.sass";
 
-import avatar from "../../assets/avatar.jpg";
-import pic from "../../assets/event.JPG";
 import diet from "../../assets/collage/diet.JPG";
 import food from "../../assets/collage/food.jpg";
 import restaurant from "../../assets/collage/restaurant.JPG";
@@ -14,6 +12,11 @@ import recipe from "../../assets/collage/recipe.JPG";
 import breakfast from "../../assets/collage/breakfast.JPG";
 import beverage from "../../assets/collage/beverage.JPG";
 import healthy from "../../assets/collage/healthy.JPG";
+
+import bloger1 from "../../assets/blogers/bloger1.jpg";
+import bloger2 from "../../assets/blogers/bloger2.jpg";
+import bloger3 from "../../assets/blogers/bloger3.JPG";
+import bloger4 from "../../assets/blogers/bloger4.jpg";
 
 const BlogPage: React.FC = () => {
     return (
@@ -23,16 +26,16 @@ const BlogPage: React.FC = () => {
                     <div className="blog-page__top-authors">
                         <div className="blog-page__top-authors_title">Топовые Блогеры:</div>
                         <div className="blog-page__top-authors_card">
-                            <AuthorCard />
+                            <BlogAuthorBadge avatar={bloger1} />
                         </div>
                         <div className="blog-page__top-authors_card">
-                            <AuthorCard />
+                            <BlogAuthorBadge avatar={bloger2} />
                         </div>
                         <div className="blog-page__top-authors_card">
-                            <AuthorCard />
+                            <BlogAuthorBadge avatar={bloger3} />
                         </div>
                         <div className="blog-page__top-authors_card">
-                            <AuthorCard />
+                            <BlogAuthorBadge avatar={bloger4} />
                         </div>
                     </div>
                     <div className="blog-page__popular-themes">
@@ -64,24 +67,24 @@ const BlogPage: React.FC = () => {
                         Последние популярные статьи блога:
                     </div>
                     <div className="blog-page__right-side_list">
-                        <BlogItemCard />
-                        <BlogItemCard />
-                        <BlogItemCard />
-                        <BlogItemCard />
+                        <BlogPostCard />
+                        <BlogPostCard />
+                        <BlogPostCard />
+                        <BlogPostCard />
                     </div>
                 </div>
             </section>
             <section className="blog-page__last-topics">
                 <div className="blog-page__last-topics_title">Самые недавние статьи:</div>
                 <div className="blog-page__last-topics_list">
-                    <BlogItemCard />
-                    <BlogItemCard />
-                    <BlogItemCard />
-                    <BlogItemCard />
-                    <BlogItemCard />
-                    <BlogItemCard />
-                    <BlogItemCard />
-                    <BlogItemCard />
+                    <BlogPostCard />
+                    <BlogPostCard />
+                    <BlogPostCard />
+                    <BlogPostCard />
+                    <BlogPostCard />
+                    <BlogPostCard />
+                    <BlogPostCard />
+                    <BlogPostCard />
                 </div>
             </section>
             <section className="blog-page__themes">
@@ -122,47 +125,3 @@ const BlogPage: React.FC = () => {
 };
 
 export default BlogPage;
-
-const AuthorCard: React.FC = () => {
-    return (
-        <div className="author-card__container">
-            <div className="author-card__avatar">
-                <img src={avatar} alt="avatar" />
-            </div>
-            <div className="author-card__name-occupation">
-                <div className="author-card__name">Екатерина К.</div>
-                <div className="author-card__occupation">Топ блогер</div>
-            </div>
-        </div>
-    );
-};
-
-const BlogItemCard: React.FC = () => {
-    return (
-        <div className="blog-item-card__container">
-            <div className="blog-item-card__author">
-                <AuthorCard />
-            </div>
-            <div className="blog-item-card__image">
-                <img src={pic} alt="title" />
-            </div>
-            <div className="blog-item-card__title">Почему бы не поесть?</div>
-            <div className="blog-item-card__description">
-                Вот мы задались вопросом, почему бы не поесть, если можно поесть??
-            </div>
-            <div className="blog-item-card__data">
-                <div className="blog-item-card__data_likes">
-                    <FavoriteIcon />
-                    <span>43</span>
-                </div>
-                <div className="blog-item-card__data_comments">
-                    <ChatIcon />
-                    <span>126</span>
-                </div>
-                <div className="blog-item-card__data_themes">
-                    <span>Еда, Напитки</span>{" "}
-                </div>
-            </div>
-        </div>
-    );
-};

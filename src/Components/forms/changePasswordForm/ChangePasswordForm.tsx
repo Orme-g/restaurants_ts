@@ -9,7 +9,7 @@ import { callSnackbar } from "../../../reducers/interactive";
 import "./changePasswordForm.sass";
 
 interface IPasswordFormProps {
-    userId: string | undefined;
+    userId: string;
 }
 
 const PasswordForm: React.FC<IPasswordFormProps> = ({ userId }) => {

@@ -10,12 +10,13 @@ import {
     useGetUserDataQuery,
     // useGetFavouriteRestNamesQuery,
 } from "../../services/apiSlice";
-import calculateExperience from "../../utils/calculateExperience";
+import { calculateExperience } from "../../utils/calculateExperience";
 
 import { convertToBase64 } from "../../hooks/convertToBase64";
 import { PageSkeleton } from "../../Components/skeletons/Skeletons";
 import ServerError from "../ServerError";
-// import avatar from "../../../assets/avatar.jpg";
+import StartBlogForm from "../../Components/forms/startBlogForm/StartBlogForm";
+import BlogProfileData from "../../Components/blogProfileData/BlogProfileData";
 
 import "./profilePage.sass";
 
@@ -49,8 +50,9 @@ const ProfilePage: React.FC = () => {
     if (isLoading) {
         return <PageSkeleton />;
     }
-    console.log(userData);
-    const { avatar, name, registeredAt, username, email, comments, reviews } = userData;
+    const { avatar, name, registeredAt, username, email, comments, reviews, blogData, bloger } =
+        userData!;
+    console.log(blogData);
     const status = calculateExperience(reviews);
     const date = new Date(registeredAt).toLocaleString("ru", {
         day: "numeric",
@@ -86,6 +88,7 @@ const ProfilePage: React.FC = () => {
                     <div className="profile-page__data-field">Логин:</div>
                     <div className="profile-page__data-value">{username}</div>
                 </div>
+
                 <div className="profile-page__userdata_item">
                     <div className="profile-page__data-field">Электронная почта:</div>
                     <div className="profile-page__data-value email">{email}</div>
@@ -125,7 +128,7 @@ const ProfilePage: React.FC = () => {
                     </div>
                 </div>
 
-                <div className="profile-page__userdata_item">
+                <div className="profile-page__userdata_item change-password">
                     <div className="profile-page__data-field">
                         <Button className="show-change-fields" onClick={() => changePassButton()}>
                             Изменить пароль
@@ -133,10 +136,19 @@ const ProfilePage: React.FC = () => {
                     </div>
                     <div className="profile-page__data-value">
                         <div className="password-fields hide">
-                            <ChangePasswordForm userId={userId} />
+                            <ChangePasswordForm userId={userId!} />
                         </div>
                     </div>
                 </div>
+
+                <div className="profile-page__blog-title">Блог</div>
+                {bloger ? (
+                    <BlogProfileData blogData={blogData!} />
+                ) : (
+                    <StartBlogForm userId={userId!} />
+                )}
+
+                {/* <StartBlogForm userId={userId!} /> */}
             </div>
         </div>
     );

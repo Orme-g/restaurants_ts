@@ -5,6 +5,7 @@ import { apiSlice } from "../services/apiSlice";
 import { donersApi } from "../services/donersApi";
 import { commentsApi } from "../services/commentsApi";
 import { eventsApi } from "../services/eventsApi";
+import { blogApi } from "../services/blogApi";
 
 const store = configureStore({
     reducer: {
@@ -14,13 +15,15 @@ const store = configureStore({
         [donersApi.reducerPath]: donersApi.reducer,
         [commentsApi.reducerPath]: commentsApi.reducer,
         [eventsApi.reducerPath]: eventsApi.reducer,
+        [blogApi.reducerPath]: blogApi.reducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(
             apiSlice.middleware,
             donersApi.middleware,
             commentsApi.middleware,
-            eventsApi.middleware
+            eventsApi.middleware,
+            blogApi.middleware
         ),
     devTools: process.env.NODE_ENV !== "production",
 });

@@ -1,10 +1,7 @@
 const User = require("../models/user");
-const Restaurant = require("../models/restaurant");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { secret } = require("../config");
-const { resolve } = require("path");
-const { rejects } = require("assert");
 
 const generateAccessToken = (id) => {
     const payload = {
@@ -37,6 +34,8 @@ const getUserData = (req, res) => {
                 favouriteRestaurants,
                 ratedComments,
                 _id,
+                bloger,
+                blogData,
             }) => {
                 res.status(200).json({
                     avatar,
@@ -49,6 +48,8 @@ const getUserData = (req, res) => {
                     favouriteRestaurants,
                     ratedComments,
                     _id,
+                    bloger,
+                    blogData,
                 });
             }
         );
@@ -177,16 +178,29 @@ const handleFavouriteRestaurant = (req, res) => {
         res.status(500).json(e);
     }
 };
-
-// const getFavouriteRestNames = (req, res) => {
-//     try {
-//         const userId = req.params.userId;
-//         let restIds = [];
-//         User.findById(userId).then((res) => (restIds = [...res.favouriteRestaurants]));
-//     } catch (e) {
-//         res.status(500).json(e);
-//     }
-// };
+const setBlogerData = (req, res) => {
+    try {
+        const { blogerName, blogCity, aboutMe, blogAvatar, userId } = req.body;
+        User.findByIdAndUpdate(userId, {
+            $set: {
+                blogData: {
+                    blogerName,
+                    blogCity,
+                    aboutMe,
+                    blogAvatar,
+                    blogPosts: [],
+                    blogPostsCount: 0,
+                    blogerRating: 0,
+                },
+                bloger: true,
+            },
+        })
+            .then(() => res.status(200).json("Success"))
+            .catch((e) => res.status(500).json(e));
+    } catch (e) {
+        res.status(500).json(`Error: ${e}`);
+    }
+};
 
 module.exports = {
     getUsers,
@@ -197,6 +211,7 @@ module.exports = {
     getReviewedRestaurantsList,
     addReviewedRestaurant,
     changeAvatar,
+    setBlogerData,
     handleFavouriteRestaurant,
     // getFavouriteRestNames,
 };

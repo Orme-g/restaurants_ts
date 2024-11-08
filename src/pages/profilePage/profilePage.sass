@@ -36,36 +36,101 @@
         margin-top: 50px
         display: flex
         flex-direction: column
-        width: 60%
+        width: 90%
 
         &_item
             display: flex
-            line-height: 40px
-        
-        &_item:last-child
-            margin-top: 50px
+            min-height: 30px
+            margin: 5px 0
+            img
+                height: 200px
+                width: 200px
+                margin-left: 70px
+                object-fit: cover
+                margin-bottom: 30px
+                border-radius: 7px
 
-    // &__userdata .email::after
-    //         content: ''
-    //         height: 10px
-    //         width: 10px
-    //         background-color: red
+        .change-password
+            margin-top: 30px
+    
 
     &__data-field
-        width: 40%
+        width: 25%
         font-size: 17px
         text-align: right
         
 
     &__data-value
-        width: 60%
+        width: 75%
         font-size: 17px
         font-style: italic
         font-weight: 300
         padding-left: 40px
+        // display: flex
+        // align-items: flex-end
+
+    &__blog-title
+        font-weight: 300
+        font-size: 40px
+        margin: 50px 0 10px 100px
+    &__blog-subtitle
+        font-weight: 300
+        font-size: 22px
+        font-style: italic
+        margin-left: 100px
+        margin-bottom: 30px
+        color: #848484
+
+
+    &__blog-start
         display: flex
-        align-items: flex-end
-        transition: 1s
+        flex-direction: row
+        line-height: 30px
+        margin-bottom: 30px
+        &_label
+            margin-left: 100px
+            font-size: 20px
+            font-weight: 300
+        &_checkbox
+            display: flex
+            align-items: center
+            margin-left: 15px
+            input
+                height: 16px
+                width: 16px
+    &__blog_form
+        margin-left: 100px
+        &.hide-with-animation
+            visibility: hidden
+            max-height: 0
+            opacity: 0
+            transform: translateY(-50px)
+            transition: opacity 0.5s, max-height 0.2s, transform 1s 
+            margin-top: -50px
+        &.show-with-animation
+            visibility: visible
+            max-height: 100vh
+            opacity: 1
+            transform: translateY(0)
+            transition: opacity 0.5s 0.2s, max-height 1s, transform 1s 
+        .upload-image
+            display: flex
+            flex-direction: row
+            align-items: center
+            &_label
+                font-size: 19px
+                font-weight: 300
+                font-style: italic
+            &_button
+                margin-left: 20px
+            &_name
+                margin-left: 10px
+                font-style: italic
+                color: #525252
+                text-decoration: underline
+
+
+
 
 
 

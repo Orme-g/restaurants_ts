@@ -4,7 +4,7 @@
 .comment-card
     &__container
         display: flex
-        min-height: 150px
+        height: fit-content
         box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2)
         background-color: #ffffff
         border-radius: 10px
@@ -24,6 +24,7 @@
         width: 85%
         display: flex
         flex-direction: column
+        margin: 15px 10px 5px 20px
         
 
     &__header
@@ -33,9 +34,12 @@
         justify-content: flex-start
         align-items: center
         position: relative
+    &__text
+        min-height: 30px
+        margin-bottom: 20px
+
 
     &__name
-        margin-left: 30px
         color: $primary-text
         font-size: 20px
         font-weight: 400
@@ -45,8 +49,6 @@
         position: absolute
         right: 10px
 
-    &__content
-        margin: 10px 5px 10px 5px
 
     &__reply
         background-color: #f6f6f6
@@ -74,7 +76,7 @@
 
     &__footer
         flex: 0.8
-        min-height: 50px
+        height: fit-content
         display: flex
         align-items: center
         position: relative

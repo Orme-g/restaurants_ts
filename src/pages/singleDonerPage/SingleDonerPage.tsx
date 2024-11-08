@@ -76,7 +76,9 @@ const SingleDonerPage = () => {
                             Опубликовано: <span>{date}</span>
                         </div>
                     </section>
-                    <CommentsBlock currentTopicId={_id} />
+                    <div className="doner-topic__comments">
+                        <CommentsBlock currentTopicId={_id} />
+                    </div>
                 </div>
             </>
         );

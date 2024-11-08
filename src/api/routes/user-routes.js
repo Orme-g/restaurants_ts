@@ -9,6 +9,7 @@ const {
     getReviewedRestaurantsList,
     addReviewedRestaurant,
     changeAvatar,
+    setBlogerData,
     handleFavouriteRestaurant,
     // getFavouriteRestNames,
 } = require("../controllers/user-controllers");
@@ -23,7 +24,9 @@ router.patch("/profile", changePassword);
 router.get("/reviewedRestaurants/:userId", getReviewedRestaurantsList);
 router.patch("/addReviewedRestaurant", addReviewedRestaurant);
 router.patch("/changeAvatar", changeAvatar);
+router.patch("/user/setBlogerData", setBlogerData);
 router.patch("/handleFavouriteRestaurant", handleFavouriteRestaurant);
+
 // router.get("/get-favourite-restaurants-names/:userId", getFavouriteRestNames);
 
 module.exports = router;

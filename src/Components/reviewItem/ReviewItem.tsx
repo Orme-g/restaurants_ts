@@ -3,7 +3,7 @@ import { Rating, Button } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 
 import { useGetUserDataQuery } from "../../services/apiSlice";
-import calculateExperience from "../../utils/calculateExperience";
+import { calculateExperience } from "../../utils/calculateExperience";
 import { ReviewItemSkeleton } from "../skeletons/Skeletons";
 import tranfsormDate from "../../utils/transformDate";
 import AdditionalReviewItem from "../additionalReviewItem/AdditionalReviewItem";
@@ -33,14 +33,14 @@ const ReviewItem: React.FC<ReviewItemProps> = ({ data }) => {
         setDisplayAdditionForm((displayAdditionForm) => !displayAdditionForm);
     };
     const date = tranfsormDate(createdAt);
-    const { data: userData = {}, isLoading } = useGetUserDataQuery(userId);
+    const { data: userData, isLoading } = useGetUserDataQuery(userId);
     const _id = useAppSelector((state) => state.interactive.userData?._id);
     const isMyReview = _id === userId;
     if (isLoading) {
         return <ReviewItemSkeleton />;
     }
 
-    const { name, avatar, reviews } = userData;
+    const { name, avatar, reviews } = userData!;
     return (
         <>
             <div className="feedback-card__container">

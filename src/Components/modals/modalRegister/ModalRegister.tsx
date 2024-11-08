@@ -145,6 +145,7 @@ const ModalRegister: React.FC = () => {
                             })}
                         />
                     </div>
+
                     <p className="helper-text">{errors.birthday?.message}</p>
                     <div className="form-line">
                         <label className="form-label" htmlFor="email">
@@ -160,6 +161,7 @@ const ModalRegister: React.FC = () => {
                         />
                     </div>
                     <p className="helper-text">{errors.email?.message}</p>
+
                     <div className="form-line">
                         <label className="form-label" htmlFor="password1">
                             Придумайте пароль:<sup>*</sup>

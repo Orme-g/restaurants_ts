@@ -26,20 +26,6 @@ export const commentsApi = createApi({
             }),
             invalidatesTags: ["Comments"],
         }),
-        // likeComment: builder.mutation({
-        //     query: (id) => ({
-        //         url: `/like/${id}`,
-        //         method: "PATCH",
-        //     }),
-        //     invalidatesTags: ["Comments"],
-        // }),
-        // dislikeComment: builder.mutation({
-        //     query: (id) => ({
-        //         url: `/dislike/${id}`,
-        //         method: "PATCH",
-        //     }),
-        //     invalidatesTags: ["Comments"],
-        // }),
         evaluateComment: builder.mutation({
             query: (data) => ({
                 url: "/evaluate",

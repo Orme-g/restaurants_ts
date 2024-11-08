@@ -47,7 +47,9 @@ const SingleEventPage: React.FC = () => {
                         Уже побывали на событии? Пoделитесь впечатлениями!
                     </div>
                 </div>
-                <CommentsBlock currentTopicId={eventId!} />
+                <div className="event-info__comments">
+                    <CommentsBlock currentTopicId={eventId!} />
+                </div>
             </div>
         </>
     );

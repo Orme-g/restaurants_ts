@@ -53,9 +53,9 @@ const CommentsItem: React.FC<ICommentItem> = ({
                         </IconButton>
                     </div>
                 </div>
-                <div className="comment-card__content">
+                <div className="comment-card__text">
                     {reply?.text ? replyBlock : null}
-                    <div className="comment-card__text">{text}</div>
+                    {text}
                 </div>
                 <div className="comment-card__footer">
                     <div className="comment-card__like">

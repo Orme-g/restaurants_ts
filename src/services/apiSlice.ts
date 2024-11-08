@@ -1,6 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-import { IRestaurant, TSortRestaurants, IFindRestaurantCriterias } from "../types/restaurantsTypes";
+import type {
+    IRestaurant,
+    TSortRestaurants,
+    IFindRestaurantCriterias,
+} from "../types/restaurantsTypes";
+import type { IUserData } from "../types/userData";
+import { setBlogerData } from "../api/controllers/user-controllers";
 
 export const apiSlice = createApi({
     reducerPath: "api",
@@ -31,7 +37,7 @@ export const apiSlice = createApi({
                 body: userData,
             }),
         }),
-        getUserData: builder.query({
+        getUserData: builder.query<IUserData, string>({
             query: (userId: string) => `/user/getdata/${userId}`,
             providesTags: ["Favourite"],
         }),
@@ -45,6 +51,13 @@ export const apiSlice = createApi({
         changeAvatar: builder.mutation({
             query: (data) => ({
                 url: `/changeAvatar`,
+                method: "PATCH",
+                body: data,
+            }),
+        }),
+        setBlogerData: builder.mutation({
+            query: (data) => ({
+                url: `/user/setBlogerData`,
                 method: "PATCH",
                 body: data,
             }),
@@ -87,6 +100,7 @@ export const {
     useGetReviewedRestaurantsListQuery,
     useAddReviewedRestaurantToUserMutation,
     useChangeAvatarMutation,
+    useSetBlogerDataMutation,
     useHandleFavouriteRestaurantsMutation,
     // useGetFavouriteRestNamesQuery,
 } = apiSlice;

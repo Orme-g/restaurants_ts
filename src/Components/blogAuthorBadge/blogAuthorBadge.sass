@@ -1,0 +1,46 @@
+@import '../../style/mixins'
+@import '../../style/variables'
+
+
+.author-card
+    &__container
+        cursor: pointer
+        height: 60px
+        width: 100%
+        display: flex
+        flex-direction: row
+        background-color: rgba(218, 218, 218, 0.7)
+        border-radius: 30px 5px 5px 30px
+        overflow: hidden
+        color: $primary-text
+
+    &__avatar
+        width: 30%
+        overflow: hidden
+        display: flex
+        img
+            height: 60px
+            width: 60px
+            object-fit: cover
+            background-color: #dadada
+            border-radius: 100%
+
+
+    &__name-occupation
+        width: 70%
+        display: flex
+        flex-direction: column
+
+    &__name
+        height: 50%
+        border-bottom: 1px solid #999999
+        display: flex
+        align-items: center
+
+    
+    &__status
+        height: 50%
+        display: flex
+        align-items: center
+        font-weight: 300
+        font-style: italic

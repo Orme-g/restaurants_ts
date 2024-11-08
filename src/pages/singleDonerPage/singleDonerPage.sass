@@ -3,25 +3,7 @@
 
 
 blockquote
-    margin: 25px 20px 25px 20px
-    padding: 20px 
-    font-style: italic
-    position: relative
-    line-height: 1.8
-    background-image: linear-gradient(to right, rgb(215, 215, 215) 70%, rgb(230, 230, 230)) 
-    border-radius: 10px
-    overflow: hidden
-    
-
-    &::before
-        content: ""
-        display: block
-        height: 100%
-        width: 4px
-        position: absolute
-        left: 0
-        top: 0
-        background-color: rgb(137, 191, 82)
+    @include blockquote
 
 
 .page-wrapper 
@@ -63,7 +45,6 @@ blockquote
     &__content
         @include light-text
         margin: 50px 20px 50px 20px
-        line-height: 1.7
         p
             text-indent: 30px
 
@@ -97,4 +78,7 @@ blockquote
         border-bottom: $divider-style
         span
             font-weight: 300
+    &__comments
+        margin: 0 auto
+        width: 60%
 
