@@ -88,15 +88,15 @@ export const LongCardsSkeleton = () => {
 export const PageSkeleton = () => {
     return (
         <div className="page-skeleton">
-            <Stack spacing={2}>
+            <Stack spacing={2} margin={"0 auto"} width={"80%"}>
                 <Skeleton variant="rectangular" height={400} />
-                <Skeleton variant="rounded" sx={{ width: "50%" }} />
-                <Skeleton variant="rounded" sx={{ width: "80%" }} />
-                <Skeleton variant="rounded" sx={{ width: "80%" }} />
-                <Skeleton variant="rounded" sx={{ width: "80%" }} />
-                <Skeleton variant="rounded" sx={{ width: "80%" }} />
-                <Skeleton variant="rounded" sx={{ width: "65%" }} />
-                <Skeleton variant="rounded" sx={{ width: "65%" }} />
+                <Skeleton variant="rounded" width={"50%"} />
+                <Skeleton variant="rounded" width={"80%"} />
+                <Skeleton variant="rounded" width={"80%"} />
+                <Skeleton variant="rounded" width={"80%"} />
+                <Skeleton variant="rounded" width={"80%"} />
+                <Skeleton variant="rounded" width={"65%"} />
+                <Skeleton variant="rounded" width={"65%"} />
             </Stack>
         </div>
     );
@@ -124,6 +124,32 @@ export const ReviewItemSkeleton = () => {
             <Stack className="review-item-skeleton__text" direction={"row"}>
                 <Skeleton variant="text" height={50} width={"25%"} />
                 <Skeleton variant="text" height={50} width={"60%"} />
+            </Stack>
+        </div>
+    );
+};
+
+export const BlogerProfilePageSkeleton = () => {
+    return (
+        <div className="bloger-profile-page-skeleton">
+            <Stack marginBottom={7}>
+                <Skeleton variant="rounded" height={250} width={"55%"} />
+            </Stack>
+            <Stack marginBottom={3}>
+                <Skeleton variant="text" height={50} width={"40%"} />
+            </Stack>
+            <Stack direction={"row"} spacing={4} justifyContent={"space-between"}>
+                <Skeleton variant="rounded" height={250} width={"20%"} />
+                <Skeleton variant="rounded" height={250} width={"20%"} />
+                <Skeleton variant="rounded" height={250} width={"20%"} />
+                <Skeleton variant="rounded" height={250} width={"20%"} />
+            </Stack>
+            <Stack marginTop={10} spacing={4}>
+                <Skeleton variant="text" height={50} width={"40%"} />
+                <Skeleton variant="rounded" height={120} width={"60%"} />
+                <Skeleton variant="rounded" height={120} width={"60%"} />
+                <Skeleton variant="rounded" height={120} width={"60%"} />
+                <Skeleton variant="rounded" height={120} width={"60%"} />
             </Stack>
         </div>
     );

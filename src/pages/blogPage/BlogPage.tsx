@@ -26,16 +26,16 @@ const BlogPage: React.FC = () => {
                     <div className="blog-page__top-authors">
                         <div className="blog-page__top-authors_title">Топовые Блогеры:</div>
                         <div className="blog-page__top-authors_card">
-                            <BlogAuthorBadge avatar={bloger1} />
+                            <BlogAuthorBadge avatar={bloger1} userId="672ea035fbe6099f7c51ee08" />
                         </div>
                         <div className="blog-page__top-authors_card">
-                            <BlogAuthorBadge avatar={bloger2} />
+                            <BlogAuthorBadge avatar={bloger2} userId="672ea035fbe6099f7c51ee08" />
                         </div>
                         <div className="blog-page__top-authors_card">
-                            <BlogAuthorBadge avatar={bloger3} />
+                            <BlogAuthorBadge avatar={bloger3} userId="672ea035fbe6099f7c51ee08" />
                         </div>
                         <div className="blog-page__top-authors_card">
-                            <BlogAuthorBadge avatar={bloger4} />
+                            <BlogAuthorBadge avatar={bloger4} userId="672ea035fbe6099f7c51ee08" />
                         </div>
                     </div>
                     <div className="blog-page__popular-themes">

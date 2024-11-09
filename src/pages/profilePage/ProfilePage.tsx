@@ -12,7 +12,7 @@ import {
 } from "../../services/apiSlice";
 import { calculateExperience } from "../../utils/calculateExperience";
 
-import { convertToBase64 } from "../../hooks/convertToBase64";
+import { convertToBase64 } from "../../utils/convertToBase64";
 import { PageSkeleton } from "../../Components/skeletons/Skeletons";
 import ServerError from "../ServerError";
 import StartBlogForm from "../../Components/forms/startBlogForm/StartBlogForm";

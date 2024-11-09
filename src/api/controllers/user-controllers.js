@@ -22,22 +22,9 @@ const getUsers = (req, res) => {
 
 const getUserData = (req, res) => {
     try {
-        User.findById(req.params.userId).then(
-            ({
-                avatar,
-                name,
-                registeredAt,
-                username,
-                email,
-                comments,
-                reviews,
-                favouriteRestaurants,
-                ratedComments,
-                _id,
-                bloger,
-                blogData,
-            }) => {
-                res.status(200).json({
+        User.findById(req.params.userId)
+            .then(
+                ({
                     avatar,
                     name,
                     registeredAt,
@@ -50,9 +37,24 @@ const getUserData = (req, res) => {
                     _id,
                     bloger,
                     blogData,
-                });
-            }
-        );
+                }) => {
+                    res.status(200).json({
+                        avatar,
+                        name,
+                        registeredAt,
+                        username,
+                        email,
+                        comments,
+                        reviews,
+                        favouriteRestaurants,
+                        ratedComments,
+                        _id,
+                        bloger,
+                        blogData,
+                    });
+                }
+            )
+            .catch((error) => res.status(500).json("Ошибка"));
     } catch (e) {
         res.status(500).json(`Что-то пошло не так ${e}`);
     }

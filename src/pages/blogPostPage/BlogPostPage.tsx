@@ -1,24 +1,36 @@
 import React from "react";
 
+import { useParams } from "react-router-dom";
 import ChatIcon from "@mui/icons-material/Chat";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Button } from "@mui/material";
+
+import { useGetBlogPostQuery } from "../../services/blogApi";
+
 import "./blogPostPage.sass";
 
 import BlogAuthorBadge from "../../Components/blogAuthorBadge/BlogAuthorBadge";
 import CommentsBlock from "../../Components/commentsBlock/CommentsBlock";
+import { PageSkeleton } from "../../Components/skeletons/Skeletons";
 
 import avatar from "../../assets/blogers/bloger4.jpg";
 import pic from "../../assets/collage/IMG_6572.JPG";
 
 const BlogPostPage: React.FC = () => {
-    const eventId = "999";
+    const { postId } = useParams();
+    console.log(postId);
+    const { data: postData, isLoading } = useGetBlogPostQuery(postId);
+    if (isLoading) {
+        return <PageSkeleton />; // Make skeleton for Post/Topic
+    }
+    console.log(postData);
+
     return (
         <>
             <div className="blog-post-page__container">
                 {/* <div className="blog-post-page__title">Очередной пост. Уже не знаю о чём писать.</div> */}
                 <div className="blog-post-page__author">
-                    <BlogAuthorBadge avatar={avatar} />
+                    <BlogAuthorBadge avatar={avatar} userId="672ea035fbe6099f7c51ee08" />
                 </div>
                 <div className="blog-post-page__title">
                     Очередной пост. Уже не знаю о чём писать.
@@ -76,7 +88,7 @@ const BlogPostPage: React.FC = () => {
                 </Button>
 
                 <div className="blog-post-page__comments">
-                    <CommentsBlock currentTopicId={eventId} />
+                    <CommentsBlock currentTopicId={postId!} />
                 </div>
             </div>
         </>

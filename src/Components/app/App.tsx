@@ -60,8 +60,11 @@ export const App: React.FC = () => {
                         <Route path="/best-doner" element={<BestDonersListPage />} />
                         <Route path="/best-doner/:donerId" element={<SingleDonerPage />} />
                         <Route path="/blog" element={<BlogPage />} />
-                        <Route path="/blog-post" element={<BlogPostPage />} />
-                        <Route path="/bloger-profile/" element={<BlogerProfilePage />} />
+                        <Route path="/blog/blog-post/:postId" element={<BlogPostPage />} />
+                        <Route
+                            path="/blog/bloger-profile/:userId"
+                            element={<BlogerProfilePage />}
+                        />
                         <Route path="/event/:eventId" element={<EventPage />} />
                         <Route path="/info/:infoType" element={<InfoPage />} />
                         <Route path="/profile/:userId" element={<ProfilePage />} />

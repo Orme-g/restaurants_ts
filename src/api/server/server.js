@@ -10,6 +10,7 @@ const commentRoutes = require("../routes/comment-routes");
 const reviewRoutes = require("../routes/review-routes");
 const userRoutes = require("../routes/user-routes");
 const eventRoutes = require("../routes/event-routes");
+const blogRoutes = require("../routes/blog-routes");
 
 const PORT = 4000;
 const URL = "mongodb://localhost:27017/restaurants_db";
@@ -32,6 +33,7 @@ app.use(commentRoutes);
 app.use(reviewRoutes);
 app.use(userRoutes);
 app.use(eventRoutes);
+app.use(blogRoutes);
 
 mongoose
     .connect(URL)

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { useForm } from "react-hook-form";
 import { TextField, Stack, Button } from "@mui/material";
-import { convertToBase64 } from "../../../hooks/convertToBase64";
+import { convertToBase64 } from "../../../utils/convertToBase64";
 import { useSetBlogerDataMutation } from "../../../services/apiSlice";
 import "./startBlogForm.sass";
 

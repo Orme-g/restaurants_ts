@@ -6,7 +6,6 @@ import type {
     IFindRestaurantCriterias,
 } from "../types/restaurantsTypes";
 import type { IUserData } from "../types/userData";
-import { setBlogerData } from "../api/controllers/user-controllers";
 
 export const apiSlice = createApi({
     reducerPath: "api",

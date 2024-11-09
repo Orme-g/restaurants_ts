@@ -3,7 +3,7 @@ import React from "react";
 import ChatIcon from "@mui/icons-material/Chat";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
-import BlogAuthorCard from "../blogAuthorBadge/BlogAuthorBadge";
+import BlogAuthorBadge from "../blogAuthorBadge/BlogAuthorBadge";
 
 import "./blogPostCard.sass";
 
@@ -14,7 +14,7 @@ const BlogPostCard: React.FC = () => {
     return (
         <div className="blog-item-card__container">
             <div className="blog-item-card__author">
-                <BlogAuthorCard avatar={bloger} />
+                <BlogAuthorBadge avatar={bloger} userId="672ea035fbe6099f7c51ee08" />
             </div>
             <div className="blog-item-card__image">
                 <img src={pic} alt="title" />
