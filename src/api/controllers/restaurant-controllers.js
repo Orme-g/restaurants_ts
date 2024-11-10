@@ -92,6 +92,17 @@ const findRestaurant = (req, res) => {
         .catch((err) => handleError(res, err));
 };
 
+const getRestNamesAndIds = (req, res) => {
+    Restaurant.find()
+        .then((result) =>
+            result.map((rest) => {
+                return { name: rest.name, id: rest._id };
+            })
+        )
+        .then((result) => res.status(200).json(result))
+        .catch((e) => res.status(500).json("Server errro :("));
+};
+
 module.exports = {
     getRestaurants,
     getRestaurantById,
@@ -100,4 +111,5 @@ module.exports = {
     updateRestaurant,
     getSortedRestaurants,
     findRestaurant,
+    getRestNamesAndIds,
 };

@@ -7,33 +7,37 @@ import BlogAuthorBadge from "../blogAuthorBadge/BlogAuthorBadge";
 
 import "./blogPostCard.sass";
 
-import pic from "../../assets/event.JPG";
 import bloger from "../../assets/blogers/bloger2.jpg";
 
-const BlogPostCard: React.FC = () => {
+import type { IBlogPost } from "../../types/blogPost";
+interface IBlogPostCard {
+    data: IBlogPost;
+}
+
+const BlogPostCard: React.FC<IBlogPostCard> = ({ data }) => {
+    const { title_image, title, short_description, likes, themes, userId } = data;
+    const displayThemes = themes.join(", ");
     return (
         <div className="blog-item-card__container">
             <div className="blog-item-card__author">
-                <BlogAuthorBadge avatar={bloger} userId="672ea035fbe6099f7c51ee08" />
+                <BlogAuthorBadge userId={userId} />
             </div>
             <div className="blog-item-card__image">
-                <img src={pic} alt="title" />
+                <img src={title_image} alt="title" />
             </div>
-            <div className="blog-item-card__title">Почему бы не поесть?</div>
-            <div className="blog-item-card__description">
-                Вот мы задались вопросом, почему бы не поесть, если можно поесть??
-            </div>
+            <div className="blog-item-card__title">{title}</div>
+            <div className="blog-item-card__description">{short_description}</div>
             <div className="blog-item-card__data">
                 <div className="blog-item-card__data_likes">
                     <FavoriteIcon />
-                    <span>43</span>
+                    <span>{likes}</span>
                 </div>
                 <div className="blog-item-card__data_comments">
                     <ChatIcon />
                     <span>126</span>
                 </div>
                 <div className="blog-item-card__data_themes">
-                    <span>Еда, Напитки</span>{" "}
+                    <span>{displayThemes}</span>{" "}
                 </div>
             </div>
         </div>

@@ -56,18 +56,10 @@ const BlogerProfilePage: React.FC = () => {
             <div className="bloger-profile__top-posts">
                 <div className="bloger-profile__top-posts_title">Самые популярные посты:</div>
                 <div className="bloger-profile__top-posts_list">
-                    <div className="bloger-profile__top-posts_card">
-                        <BlogPostCard />
-                    </div>
-                    <div className="bloger-profile__top-posts_card">
-                        <BlogPostCard />
-                    </div>
-                    <div className="bloger-profile__top-posts_card">
-                        <BlogPostCard />
-                    </div>
-                    <div className="bloger-profile__top-posts_card">
-                        <BlogPostCard />
-                    </div>
+                    <div className="bloger-profile__top-posts_card">{/* <BlogPostCard /> */}</div>
+                    <div className="bloger-profile__top-posts_card">{/* <BlogPostCard /> */}</div>
+                    <div className="bloger-profile__top-posts_card">{/* <BlogPostCard /> */}</div>
+                    <div className="bloger-profile__top-posts_card">{/* <BlogPostCard /> */}</div>
                 </div>
             </div>
             <div className="bloger-profile__all-posts">

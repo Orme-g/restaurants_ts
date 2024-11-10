@@ -1,7 +1,8 @@
 import React from "react";
 
 import BlogAuthorBadge from "../../Components/blogAuthorBadge/BlogAuthorBadge";
-import BlogPostCard from "../../Components/blogPostCard/BlogPostCard";
+import BlogCardsList from "../../Components/blogListTop/BlogCardsList";
+import BlogTopAuthorsList from "../../Components/blogTopAuthorsList/BlogTopAuthorsList";
 
 import "./blogPage.sass";
 
@@ -25,18 +26,11 @@ const BlogPage: React.FC = () => {
                 <div className="blog-page__left-side">
                     <div className="blog-page__top-authors">
                         <div className="blog-page__top-authors_title">Топовые Блогеры:</div>
-                        <div className="blog-page__top-authors_card">
-                            <BlogAuthorBadge avatar={bloger1} userId="672ea035fbe6099f7c51ee08" />
-                        </div>
-                        <div className="blog-page__top-authors_card">
-                            <BlogAuthorBadge avatar={bloger2} userId="672ea035fbe6099f7c51ee08" />
-                        </div>
-                        <div className="blog-page__top-authors_card">
-                            <BlogAuthorBadge avatar={bloger3} userId="672ea035fbe6099f7c51ee08" />
-                        </div>
-                        <div className="blog-page__top-authors_card">
-                            <BlogAuthorBadge avatar={bloger4} userId="672ea035fbe6099f7c51ee08" />
-                        </div>
+                        {/* <BlogAuthorBadge avatar={bloger1} userId="672ea035fbe6099f7c51ee08" />
+                        <BlogAuthorBadge avatar={bloger2} userId="672ea035fbe6099f7c51ee08" />
+                        <BlogAuthorBadge avatar={bloger3} userId="672ea035fbe6099f7c51ee08" />
+                        <BlogAuthorBadge avatar={bloger4} userId="672ea035fbe6099f7c51ee08" /> */}
+                        <BlogTopAuthorsList />
                     </div>
                     <div className="blog-page__popular-themes">
                         <div className="blog-page__popular-themes_title">Популярные темы:</div>
@@ -62,29 +56,19 @@ const BlogPage: React.FC = () => {
                         </div>
                     </div>
                 </div>
-                <div className="blog-page__right-side">
-                    <div className="blog-page__right-side_title">
+                <div className="blog-page__popular-posts">
+                    <div className="blog-page__popular-posts_title">
                         Последние популярные статьи блога:
                     </div>
-                    <div className="blog-page__right-side_list">
-                        <BlogPostCard />
-                        <BlogPostCard />
-                        <BlogPostCard />
-                        <BlogPostCard />
+                    <div className="blog-page__popular-posts_list">
+                        <BlogCardsList type="top" />
                     </div>
                 </div>
             </section>
             <section className="blog-page__last-topics">
                 <div className="blog-page__last-topics_title">Самые недавние статьи:</div>
                 <div className="blog-page__last-topics_list">
-                    <BlogPostCard />
-                    <BlogPostCard />
-                    <BlogPostCard />
-                    <BlogPostCard />
-                    <BlogPostCard />
-                    <BlogPostCard />
-                    <BlogPostCard />
-                    <BlogPostCard />
+                    <BlogCardsList type="last" />
                 </div>
             </section>
             <section className="blog-page__themes">
