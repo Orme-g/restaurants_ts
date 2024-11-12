@@ -3,11 +3,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useGetDataForBadgeQuery } from "../../services/blogApi";
 
-import "./blogAuthorBadge.sass";
-
+import { AuthorBadgeSkeleton } from "../skeletons/Skeletons";
 import { calculateStatus } from "../../utils/calculateExperience";
 // import avatar from "../../assets/blogers/bloger3.JPG";
-
+import "./blogAuthorBadge.sass";
 interface IAuthorBadge {
     userId: string;
 }
@@ -15,7 +14,7 @@ interface IAuthorBadge {
 const BlogAuthorBadge: React.FC<IAuthorBadge> = ({ userId }) => {
     const { data: blogData, isLoading } = useGetDataForBadgeQuery(userId);
     if (isLoading) {
-        return;
+        return <AuthorBadgeSkeleton />;
     }
     const { blogAvatar, blogerName, blogerRating } = blogData!;
     const displayStatus = calculateStatus(blogerRating);

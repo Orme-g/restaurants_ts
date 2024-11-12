@@ -32,6 +32,9 @@ const EventPage = lazy(() => import("../../pages/singleEventPage/SingleEventPage
 const InfoPage = lazy(() => import("../../pages/infoPage/InfoPage"));
 const ProfilePage = lazy(() => import("../../pages/profilePage/ProfilePage"));
 const BlogerProfilePage = lazy(() => import("../../pages/blogerProfilePage/BlogerProfilePage"));
+const BlogPageThemeSelection = lazy(
+    () => import("../../pages/blogPageThemeSelection/BlogPageThemeSelection")
+);
 const AdminPage = lazy(() => import("../../pages/adminPage/AdminPage"));
 const Page404 = lazy(() => import("../../pages/Page404"));
 
@@ -64,6 +67,10 @@ export const App: React.FC = () => {
                         <Route
                             path="/blog/bloger-profile/:userId"
                             element={<BlogerProfilePage />}
+                        />
+                        <Route
+                            path="/blog/blog-theme/:theme"
+                            element={<BlogPageThemeSelection />}
                         />
                         <Route path="/event/:eventId" element={<EventPage />} />
                         <Route path="/info/:infoType" element={<InfoPage />} />

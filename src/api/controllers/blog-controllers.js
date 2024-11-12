@@ -4,10 +4,8 @@ const User = require("../models/user");
 const getPostData = (req, res) => {
     try {
         const { postId } = req.params;
-        // console.log(postId);
         BlogPost.findById(postId)
             .then((result) => res.status(200).json(result))
-            // .then((result) => console.log(result))
             .catch((e) => res.status(500).json(e));
     } catch (e) {
         res.status(500).json(e);
@@ -63,6 +61,24 @@ const getDataForBadge = (req, res) => {
     }
 };
 
+const getUserPosts = (req, res) => {
+    try {
+        const { userId } = req.params;
+        BlogPost.find({ userId }).then((result) => res.status(200).json(result));
+    } catch (e) {
+        res.status(500).json(e);
+    }
+};
+
+const getPostsByTheme = (req, res) => {
+    try {
+        const { theme } = req.params;
+        BlogPost.find({ themes: { $in: theme } }).then((result) => res.status(200).json(result));
+    } catch (e) {
+        res.status(500).json(e);
+    }
+};
+
 const getAllPosts = (req, res) => {
     // BlogPost.find().then((result) => res.status(200).json(result));
     // return res.status(200).json("All ok");
@@ -74,4 +90,6 @@ module.exports = {
     getAllPosts,
     getTopAuthors,
     getDataForBadge,
+    getUserPosts,
+    getPostsByTheme,
 };

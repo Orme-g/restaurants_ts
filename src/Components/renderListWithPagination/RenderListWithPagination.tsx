@@ -13,16 +13,16 @@ const RenderListWithPagination: React.FC<IRenderList> = ({ displayItems = 3, lis
     const [endWith, setEndWith] = useState<number>(displayItems * 2);
     const [buttonStatus, setButtonStatus] = useState<boolean>(true);
     const [buttonText, setButtonText] = useState<string>("Пока это всё");
-    const totalRestaurants = list.length;
+    const totalItems = list.length;
     useEffect(() => {
-        if (renderData.length <= totalRestaurants) {
+        if (renderData.length <= totalItems) {
             setButtonStatus(false);
             setButtonText("Загрузить ещё");
         }
         // eslint-disable-next-line
     }, []);
     useEffect(() => {
-        if (renderData.length >= totalRestaurants) {
+        if (renderData.length >= totalItems) {
             setButtonStatus((buttonStatus) => !buttonStatus);
             setButtonText("Пока это всё");
         }

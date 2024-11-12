@@ -1,7 +1,7 @@
 import React from "react";
 
-import BlogAuthorBadge from "../../Components/blogAuthorBadge/BlogAuthorBadge";
-import BlogCardsList from "../../Components/blogListTop/BlogCardsList";
+import { Link } from "react-router-dom";
+import BlogCardsSelection from "../../Components/blogListTop/BlogCardsSelection";
 import BlogTopAuthorsList from "../../Components/blogTopAuthorsList/BlogTopAuthorsList";
 
 import "./blogPage.sass";
@@ -14,11 +14,6 @@ import breakfast from "../../assets/collage/breakfast.JPG";
 import beverage from "../../assets/collage/beverage.JPG";
 import healthy from "../../assets/collage/healthy.JPG";
 
-import bloger1 from "../../assets/blogers/bloger1.jpg";
-import bloger2 from "../../assets/blogers/bloger2.jpg";
-import bloger3 from "../../assets/blogers/bloger3.JPG";
-import bloger4 from "../../assets/blogers/bloger4.jpg";
-
 const BlogPage: React.FC = () => {
     return (
         <div className="blog-page__container">
@@ -26,22 +21,26 @@ const BlogPage: React.FC = () => {
                 <div className="blog-page__left-side">
                     <div className="blog-page__top-authors">
                         <div className="blog-page__top-authors_title">Топовые Блогеры:</div>
-                        {/* <BlogAuthorBadge avatar={bloger1} userId="672ea035fbe6099f7c51ee08" />
-                        <BlogAuthorBadge avatar={bloger2} userId="672ea035fbe6099f7c51ee08" />
-                        <BlogAuthorBadge avatar={bloger3} userId="672ea035fbe6099f7c51ee08" />
-                        <BlogAuthorBadge avatar={bloger4} userId="672ea035fbe6099f7c51ee08" /> */}
                         <BlogTopAuthorsList />
                     </div>
                     <div className="blog-page__popular-themes">
                         <div className="blog-page__popular-themes_title">Популярные темы:</div>
-                        <div className="blog-page__popular-themes_item">
-                            <div className="blog-page__popular-themes_item_name">Рестораны</div>
-                            <div className="blog-page__popular-themes_item_posts-count">357</div>
-                        </div>
-                        <div className="blog-page__popular-themes_item">
-                            <div className="blog-page__popular-themes_item_name">Еда</div>
-                            <div className="blog-page__popular-themes_item_posts-count">220</div>
-                        </div>
+                        <Link to={`/blog/blog-theme/Еда`}>
+                            <div className="blog-page__popular-themes_item">
+                                <div className="blog-page__popular-themes_item_name">Рестораны</div>
+                                <div className="blog-page__popular-themes_item_posts-count">
+                                    357
+                                </div>
+                            </div>
+                        </Link>
+                        <Link to={`/blog/blog-theme/Еда`}>
+                            <div className="blog-page__popular-themes_item">
+                                <div className="blog-page__popular-themes_item_name">Еда</div>
+                                <div className="blog-page__popular-themes_item_posts-count">
+                                    220
+                                </div>
+                            </div>
+                        </Link>
                         <div className="blog-page__popular-themes_item">
                             <div className="blog-page__popular-themes_item_name">Напитки</div>
                             <div className="blog-page__popular-themes_item_posts-count">138</div>
@@ -61,14 +60,14 @@ const BlogPage: React.FC = () => {
                         Последние популярные статьи блога:
                     </div>
                     <div className="blog-page__popular-posts_list">
-                        <BlogCardsList type="top" />
+                        <BlogCardsSelection type="top" />
                     </div>
                 </div>
             </section>
             <section className="blog-page__last-topics">
                 <div className="blog-page__last-topics_title">Самые недавние статьи:</div>
                 <div className="blog-page__last-topics_list">
-                    <BlogCardsList type="last" />
+                    <BlogCardsSelection type="last" />
                 </div>
             </section>
             <section className="blog-page__themes">

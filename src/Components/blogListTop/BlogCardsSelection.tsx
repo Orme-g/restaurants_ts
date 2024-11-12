@@ -6,7 +6,7 @@ import BlogPostCard from "../blogPostCard/BlogPostCard";
 interface IBlogList {
     type: "top" | "last";
 }
-const BlogCardsList: React.FC<IBlogList> = ({ type }) => {
+const BlogCardsSelection: React.FC<IBlogList> = ({ type }) => {
     let renderList;
     const { data: postsData, isLoading } = useGetSortedPostsQuery(type);
     if (isLoading) {
@@ -25,4 +25,4 @@ const BlogCardsList: React.FC<IBlogList> = ({ type }) => {
     return <>{renderList}</>;
 };
 
-export default BlogCardsList;
+export default BlogCardsSelection;

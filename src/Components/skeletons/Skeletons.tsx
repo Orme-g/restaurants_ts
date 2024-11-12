@@ -154,3 +154,22 @@ export const BlogerProfilePageSkeleton = () => {
         </div>
     );
 };
+
+export const AuthorBadgeSkeleton = () => {
+    return (
+        // <div className="bloger-badge-skeleton">
+        <Stack direction={"row"} className="bloger-badge-skeleton">
+            <Skeleton variant="circular" className="bloger-badge-skeleton__circle" />
+            <Stack
+                direction={"column"}
+                marginLeft={"10px"}
+                justifyContent={"space-evenly"}
+                width={"100%"}
+            >
+                <Skeleton variant="text" />
+                <Skeleton variant="text" />
+            </Stack>
+        </Stack>
+        // </div>
+    );
+};

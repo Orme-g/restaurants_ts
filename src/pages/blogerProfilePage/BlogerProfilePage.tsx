@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { useParams } from "react-router-dom";
 
-import BlogPostCard from "../../Components/blogPostCard/BlogPostCard";
+// import BlogPostCard from "../../Components/blogPostCard/BlogPostCard";
 import BlogPostCardLong from "../../Components/blogPostCardLong/BlogPostCardLong";
+import BlogPostCard from "../../Components/blogPostCard/BlogPostCard";
+import RenderListWithPagination from "../../Components/renderListWithPagination/RenderListWithPagination";
 
 import { useGetUserDataQuery } from "../../services/apiSlice";
+import { useGetUserPostsQuery } from "../../services/blogApi";
 
 import { BlogerProfilePageSkeleton } from "../../Components/skeletons/Skeletons";
 import Page404 from "../Page404";
@@ -14,24 +17,39 @@ import { calculateStatus } from "../../utils/calculateExperience";
 
 import "./blogerProfilePage.sass";
 
-// import status from "../../assets/status1.PNG";
-
 const BlogerProfilePage: React.FC = () => {
     const { userId } = useParams();
-    console.log(userId);
-
     const { data: userData, isLoading } = useGetUserDataQuery(userId!);
-    if (isLoading) {
+    const { currentData: posts, isLoading: isPostsLoading } = useGetUserPostsQuery(userId!);
+
+    if (isLoading || isPostsLoading) {
         return <BlogerProfilePageSkeleton />;
     }
-    console.log(userData);
-    if (!userData) {
+    if (!userData || !posts) {
         return <Page404 />;
     }
 
-    const { blogerName, blogAvatar, blogCity, blogPostsCount, blogPosts, blogerRating, aboutMe } =
+    let allPostsList;
+    let displTop4Posts;
+
+    const { blogerName, blogAvatar, blogCity, blogPostsCount, blogerRating, aboutMe } =
         userData?.blogData!;
     const status = calculateStatus(blogerRating);
+    if (posts) {
+        let postsCopy = [...posts];
+        postsCopy.sort((a, b) => b.likes - a.likes);
+        let top4Posts = postsCopy.slice(0, 4);
+        displTop4Posts = top4Posts.map((item) => {
+            console.log("Calc");
+            const { _id } = item;
+            return <BlogPostCard key={_id} data={item} />;
+        });
+
+        allPostsList = posts.map((post) => {
+            const { _id } = post;
+            return <BlogPostCardLong key={_id} data={post} />;
+        });
+    }
 
     return (
         <div className="bloger-profile__container">
@@ -45,9 +63,6 @@ const BlogerProfilePage: React.FC = () => {
                     </div>
                     <div className="bloger-profile__info_status">
                         <div className="status-title">{status}</div>
-                        {/* <div className="status-image">
-                            <img src={status} alt="status" />
-                        </div> */}
                     </div>
                     <div className="bloger-profile__info_posts-count">Cтатей: {blogPostsCount}</div>
                     <div className="bloger-profile__info_about-me">{aboutMe}</div>
@@ -55,28 +70,14 @@ const BlogerProfilePage: React.FC = () => {
             </div>
             <div className="bloger-profile__top-posts">
                 <div className="bloger-profile__top-posts_title">Самые популярные посты:</div>
-                <div className="bloger-profile__top-posts_list">
-                    <div className="bloger-profile__top-posts_card">{/* <BlogPostCard /> */}</div>
-                    <div className="bloger-profile__top-posts_card">{/* <BlogPostCard /> */}</div>
-                    <div className="bloger-profile__top-posts_card">{/* <BlogPostCard /> */}</div>
-                    <div className="bloger-profile__top-posts_card">{/* <BlogPostCard /> */}</div>
-                </div>
+                <div className="bloger-profile__top-posts_list">{displTop4Posts}</div>
             </div>
             <div className="bloger-profile__all-posts">
                 <div className="bloger-profile__all-posts_title">Все посты:</div>
                 <div className="bloger-profile__all-posts_list">
-                    <div className="bloger-profile__all-posts_list_item">
-                        <BlogPostCardLong />
-                    </div>
-                    <div className="bloger-profile__all-posts_list_item">
-                        <BlogPostCardLong />
-                    </div>
-                    <div className="bloger-profile__all-posts_list_item">
-                        <BlogPostCardLong />
-                    </div>
-                    <div className="bloger-profile__all-posts_list_item">
-                        <BlogPostCardLong />
-                    </div>
+                    {/* <BlogUserAllPostsList userId={userId!} /> */}
+                    <RenderListWithPagination list={allPostsList!} displayItems={5} />
+                    {/* {allPostsList} */}
                 </div>
             </div>
         </div>

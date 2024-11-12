@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import type { IBlogPost } from "../types/blogPost";
-import type { IUserData, IBlogData } from "../types/userData";
+import type { IBlogData } from "../types/userData";
 
 export const blogApi = createApi({
     reducerPath: "blogApi",
@@ -20,6 +20,12 @@ export const blogApi = createApi({
         getDataForBadge: builder.query<IBlogData, string>({
             query: (userId: string) => `/badge-data/${userId}`,
         }),
+        getUserPosts: builder.query<IBlogPost[], string>({
+            query: (userId) => `/user-posts/${userId}`,
+        }),
+        getPostsByTheme: builder.query<IBlogPost[], string>({
+            query: (theme: string) => `/blog-posts/${theme}`,
+        }),
     }),
 });
 
@@ -28,4 +34,6 @@ export const {
     useGetSortedPostsQuery,
     useGetTopAuthorsIdsQuery,
     useGetDataForBadgeQuery,
+    useGetUserPostsQuery,
+    useGetPostsByThemeQuery,
 } = blogApi;

@@ -95,13 +95,12 @@
             margin-bottom: 30px
 
         &_list
-            display: flex
-            flex-direction: row
-            height: 400px
-            justify-content: space-evenly
+            display: grid
+            grid-template: 400px / repeat(auto-fit, minmax(250px, 1fr))
             gap: 25px
-        &_card
-            width: 25%
+
+
+
 
     &__all-posts
         width: 90%
@@ -117,5 +116,6 @@
             display: flex
             flex-direction: column
             gap: 30px
-            &_item
-                width: 65%
+            width: 65%
+            // &_item
+            //     width: 65%
