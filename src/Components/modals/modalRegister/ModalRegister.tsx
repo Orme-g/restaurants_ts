@@ -91,7 +91,7 @@ const ModalRegister: React.FC = () => {
             <DialogTitle>Регистрация</DialogTitle>
             <DialogContent>
                 <DialogContentText>Регистрация нового пользователя</DialogContentText>
-                <DialogContentText sx={{ fontSize: "14px" }} mt={1}>
+                <DialogContentText sx={{ fontSize: "0.9rem" }} mt={1}>
                     Поля со звёздочкой<sup>*</sup> обязательные к заполнению
                 </DialogContentText>
                 <form onSubmit={handleSubmit(onSubmit)}>

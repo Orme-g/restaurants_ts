@@ -2,7 +2,7 @@ import React from "react";
 
 import { useParams } from "react-router-dom";
 import { useGetPostsByThemeQuery } from "../../services/blogApi";
-import RenderListWithPagination from "../../Components/renderListWithPagination/RenderListWithPagination";
+// import RenderListWithPagination from "../../Components/renderListWithPagination/RenderListWithPagination";
 import BlogPostCard from "../../Components/blogPostCard/BlogPostCard";
 
 import "./blogPageThemeSelection.sass";
@@ -25,10 +25,7 @@ const BlogPageThemeSelection: React.FC = () => {
     return (
         <div className="blog-page-selection">
             <div className="blog-page-selection__title">Все посты на тему: {theme}</div>
-            <div className="blog-page-selection__list">
-                <RenderListWithPagination list={renderList!} />
-                {/* {renderList} */}
-            </div>
+            <div className="blog-page-selection__list">{renderList}</div>
         </div>
     );
 };

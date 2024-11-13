@@ -68,6 +68,7 @@ const CommentsList: React.FC<ICommentItemProps> = memo(({ topicId, commentReply 
     let comments;
     if (topicComments) {
         comments = topicComments.map((data) => {
+            const { _id } = data;
             return (
                 <CommentsItem
                     commentData={data}
@@ -76,6 +77,7 @@ const CommentsList: React.FC<ICommentItemProps> = memo(({ topicId, commentReply 
                     handleLike={handleLike}
                     ratedComments={ratedComments}
                     commentReply={commentReply}
+                    key={_id}
                 />
             );
         });

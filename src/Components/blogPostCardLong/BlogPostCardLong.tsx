@@ -19,7 +19,6 @@ const BlogPostCardLong: React.FC<IBlogPostCardLong> = ({ data }) => {
         <Link to={`/blog/blog-post/${_id}`}>
             <div className="blog-card-long__container">
                 <div className="blog-card-long__info">
-                    {/* <div className="blog-card-long__info_author">Екатерина П.</div> */}
                     <div className="blog-card-long__info_title">{title}</div>
                     <div className="blog-card-long__info_description">{short_description}</div>
                     <div className="blog-card-long__footer">

@@ -5,7 +5,6 @@ import LongCard from "../longCard/LongCard";
 import { LongCardsSkeleton } from "../skeletons/Skeletons";
 
 import type { IDonerRestaurant } from "../../types/donersTypes";
-import "./bestDonerCards.sass";
 
 const BestDonerCards: React.FC = () => {
     const { data: allDonersData, isLoading, isError } = useGetDonersListQuery(null);
