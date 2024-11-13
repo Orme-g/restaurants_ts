@@ -24,11 +24,11 @@ const SingleEventPage: React.FC = () => {
                 <div className="event-info__container">
                     <div className="event-info__name">{eventName}</div>
                     <div className="event-info__wrapper">
-                        <div className="event-info__place_title">Где проходит: </div>
-                        <div className="event-info__restaurant">Ресторан {restaurantName}</div>
+                        <div className="event-info__title">Где проходит: </div>
+                        <div className="event-info__text">Ресторан {restaurantName}</div>
 
-                        <div className="event-info__dates_title">Когда проходит:</div>
-                        <div className="event-info__dates">
+                        <div className="event-info__title">Когда проходит:</div>
+                        <div className="event-info__text">
                             C <span>{start}</span> до <span>{finish}</span>
                         </div>
                     </div>

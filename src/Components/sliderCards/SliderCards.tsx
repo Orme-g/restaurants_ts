@@ -8,7 +8,6 @@ import RestaurantCardSmall from "../restaurantCardSmall/RestaurantCardSmall";
 // import ServerError from "../pages/ServerError"
 
 // import pic from "../../assets/rest_photos/cristal/cris_1.jpeg"
-import "./sliderCards.sass";
 
 interface ISliderCardsProps {
     type: string;

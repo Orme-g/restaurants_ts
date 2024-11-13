@@ -4,8 +4,6 @@ import { useAppSelector } from "../../types/store";
 import ReviewItem from "../reviewItem/ReviewItem";
 import Spinner from "../svg/Spinner";
 
-import "./reviewsList.sass";
-
 const ReviewsList: React.FC = () => {
     const { restaurantReviews } = useAppSelector((state) => state.restaurants);
 

@@ -5,7 +5,6 @@ import { Snackbar } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 
 import { toggleSnackbar } from "../../reducers/interactive";
-import "./snackbar.sass";
 
 const Snack = () => {
     const dispatch = useAppDispatch();
