@@ -25,7 +25,9 @@ const postRestaurantReview = (req, res) => {
         .catch((err) => handleError(res, err));
     Restaurant.findByIdAndUpdate(restaurant, {
         $inc: { "rating.overallRating": rating, "rating.marks": 1 },
-    }).then(() => res.status(200));
+    })
+        .then(() => res.status(200))
+        .catch((error) => handleError(res, error));
 };
 
 const addAdditionalReview = (req, res) => {
@@ -39,7 +41,9 @@ const addAdditionalReview = (req, res) => {
             .catch((error) => res.status(500).json({ message: "Что-то пошло не так" }, error));
         Restaurant.findByIdAndUpdate(restaurant, {
             $inc: { "rating.overallRating": rating, "rating.marks": 1 },
-        }).then(() => res.status(200));
+        })
+            .then(() => res.status(200))
+            .catch((error) => handleError(res, error));
     } catch (error) {
         return res.status(500).json(error);
     }

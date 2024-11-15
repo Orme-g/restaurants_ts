@@ -22,6 +22,7 @@ import "./profilePage.sass";
 
 const ProfilePage: React.FC = () => {
     const [avatarData, setAvatarData] = useState<string | null>(null);
+    const [imageName, setImageName] = useState<string | null>(null);
     const changePassButton = () => {
         const passwordFields = document.querySelector(".password-fields") as HTMLElement;
         const changeButton = document.querySelector(".show-change-fields") as HTMLButtonElement;
@@ -52,7 +53,6 @@ const ProfilePage: React.FC = () => {
     }
     const { avatar, name, registeredAt, username, email, comments, reviews, blogData, bloger } =
         userData!;
-    console.log(blogData);
     const status = calculateExperience(reviews);
     const date = new Date(registeredAt).toLocaleString("ru", {
         day: "numeric",
@@ -62,6 +62,7 @@ const ProfilePage: React.FC = () => {
 
     const handleFileUpload = async (e: any) => {
         const uploadedFile = e.target.files[0];
+        setImageName(`"${uploadedFile.name}"`);
         const base64Image = await convertToBase64(uploadedFile);
         setAvatarData(base64Image as string);
     };
@@ -113,15 +114,28 @@ const ProfilePage: React.FC = () => {
                     <div className="profile-page__data-field">Изменить фото профиля:</div>
                     <div className="profile-page__data-value">
                         <form>
+                            <div className="change-avatar-wrapper">
+                                <Button
+                                    variant="outlined"
+                                    component="label"
+                                    onChange={(e) => handleFileUpload(e)}
+                                >
+                                    Загрузить фото
+                                    <input
+                                        type="file"
+                                        accept=".png, .jpg, .jpeg, .svg, .ico"
+                                        hidden
+                                    />
+                                </Button>
+                                <div className="upload-image_name">{imageName}</div>
+                            </div>
+
                             <Button
-                                variant="outlined"
-                                component="label"
-                                onChange={(e) => handleFileUpload(e)}
+                                type="submit"
+                                style={{ marginTop: 10 }}
+                                variant="contained"
+                                onClick={(e) => handleSubmit(e)}
                             >
-                                Загрузить фото
-                                <input type="file" accept=".png, .jpg, .jpeg, .svg, .ico" hidden />
-                            </Button>
-                            <Button variant="text" onClick={(e) => handleSubmit(e)}>
                                 Отправить
                             </Button>
                         </form>
@@ -147,8 +161,6 @@ const ProfilePage: React.FC = () => {
                 ) : (
                     <StartBlogForm userId={userId!} />
                 )}
-
-                {/* <StartBlogForm userId={userId!} /> */}
             </div>
         </div>
     );

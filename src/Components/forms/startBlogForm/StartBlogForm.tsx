@@ -15,11 +15,13 @@ const StartBlogForm: React.FC<IStartBlogForm> = ({ userId }) => {
     const [imageName, setImageName] = useState<string | null>(null);
     const [displayBlogForm, setDisplayBlogForm] = useState<boolean>(false);
     const [sendData] = useSetBlogerDataMutation();
-
+    let margin;
     const {
         register,
+        watch,
         handleSubmit,
         reset,
+        setError,
         formState: { errors },
     } = useForm({
         defaultValues: {
@@ -29,6 +31,13 @@ const StartBlogForm: React.FC<IStartBlogForm> = ({ userId }) => {
             // blogAvatar: null,
         },
     });
+    const aboutMe = watch("aboutMe");
+    const lettersLeft = 1000 - aboutMe.length;
+    if (errors.aboutMe) {
+        margin = "extra-margin";
+    } else {
+        margin = null;
+    }
 
     const handleFileUpload = async (e: any) => {
         const uploadedFile = e.target.files[0];
@@ -44,7 +53,8 @@ const StartBlogForm: React.FC<IStartBlogForm> = ({ userId }) => {
                 console.log(response);
                 reset();
                 setImageName(null);
-            });
+            })
+            .catch(({ data }) => setError("blogerName", { message: data }, { shouldFocus: true }));
     };
     const handleCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
         setDisplayBlogForm(e.target.checked);
@@ -75,6 +85,7 @@ const StartBlogForm: React.FC<IStartBlogForm> = ({ userId }) => {
                         error={!!errors.blogerName}
                         helperText={errors.blogerName?.message}
                     />
+
                     <TextField
                         label="Откуда вы"
                         style={{ width: 250 }}
@@ -86,18 +97,24 @@ const StartBlogForm: React.FC<IStartBlogForm> = ({ userId }) => {
                         error={!!errors.blogCity}
                         helperText={errors.blogCity?.message}
                     />
-                    <TextField
-                        label="Несколько строк о себе"
-                        multiline
-                        minRows={3}
-                        style={{ width: 500 }}
-                        {...register("aboutMe", {
-                            required: "Напишите кратко что-нибудь о себе",
-                            minLength: { value: 10, message: "Минимум 10 символов" },
-                        })}
-                        error={!!errors.aboutMe}
-                        helperText={errors.aboutMe?.message}
-                    />
+                    <div className="about-me_field">
+                        <TextField
+                            label="Несколько строк о себе"
+                            multiline
+                            minRows={3}
+                            style={{ width: 500 }}
+                            {...register("aboutMe", {
+                                required: "Напишите кратко что-нибудь о себе",
+                                minLength: { value: 10, message: "Минимум 10 символов" },
+                                maxLength: { value: 1000, message: "Максимум 1000 символов" },
+                            })}
+                            error={!!errors.aboutMe}
+                            helperText={errors.aboutMe?.message}
+                        />
+                        <div className={`about-me_field letters-count ${margin}`}>
+                            {lettersLeft}/1000
+                        </div>
+                    </div>
 
                     <div className="profile-page__blog_form upload-image">
                         <div className="upload-image_label">Фото для блога:</div>

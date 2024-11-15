@@ -25,7 +25,9 @@ const postComment = (req, res) => {
         .catch((err) => handleError(res, err));
     User.findByIdAndUpdate(userId, {
         $inc: { comments: 1 },
-    }).then(() => {});
+    })
+        .then((result) => res.status(200).json(result))
+        .catch((error) => handleError(res, error));
 };
 
 const deleteComment = (req, res) => {
@@ -52,24 +54,30 @@ const evaluateComment = (req, res) => {
         const { type, id: commentId, userId } = req.body;
         switch (type) {
             case "like":
-                Comment.findByIdAndUpdate(commentId, { $inc: { likes: 1 } }).then(() => {});
+                Comment.findByIdAndUpdate(commentId, { $inc: { likes: 1 } })
+                    .then(() => {})
+                    .catch((e) => handleError(res, e));
                 User.findByIdAndUpdate(userId, {
                     $addToSet: { ratedComments: commentId },
                     $inc: { rating: 1 },
-                }).then((result) => res.status(200).json(result));
+                })
+                    .then((result) => res.status(200).json(result))
+                    .catch((e) => handleError(res, e));
                 break;
             case "dislike":
                 Comment.findByIdAndUpdate(commentId, { $inc: { dislikes: 1 } }).then(() => {});
                 User.findByIdAndUpdate(userId, {
                     $addToSet: { ratedComments: commentId },
                     $inc: { rating: -1 },
-                }).then((result) => res.status(200).json(result));
+                })
+                    .then((result) => res.status(200).json(result))
+                    .catch((e) => handleError(res, e));
                 break;
             default:
                 return;
         }
     } catch (err) {
-        res.status(500).json(err);
+        handleError(res, err);
     }
 };
 

@@ -10,14 +10,16 @@ const generateAccessToken = (id) => {
     return jwt.sign(payload, secret, { expiresIn: "24h" });
 };
 
-// const handleError = (res, error) => {
-//     res.status(500).json({error})
-// }
+const handleError = (res, error) => {
+    res.status(500).json(error);
+};
 
 const getUsers = (req, res) => {
-    User.find().then((data) => {
-        res.status(200).json(data);
-    });
+    User.find()
+        .then((data) => {
+            res.status(200).json(data);
+        })
+        .catch((error) => handleError(res, error));
 };
 
 const getUserData = (req, res) => {
@@ -69,7 +71,9 @@ const registration = async (req, res) => {
         }
         const hashPassword = bcrypt.hashSync(password, 7);
         const user = new User({ ...req.body, password: hashPassword });
-        user.save().then(res.status(200).json({ message: "Регистрация прошла успешно" }));
+        user.save()
+            .then(res.status(200).json({ message: "Вы зарегистрированы в Блоге" }))
+            .catch((error) => handleError(res, error));
     } catch (err) {
         res.status(500).json(`Ошибка регистрации ${err}`);
     }
@@ -124,7 +128,7 @@ const changePassword = async (req, res) => {
 
         // res.status(200).json(user)
     } catch (error) {
-        res.status(500).json(error);
+        handleError(res, error);
     }
 };
 
@@ -135,14 +139,14 @@ const changeAvatar = async (req, res) => {
             .then(() => res.status(200).json("Аватар успешно изменён"))
             .catch((err) => res.status(500).json({ err }));
     } catch (error) {
-        res.status(500).json(error);
+        handleError(res, error);
     }
 };
 
 const getReviewedRestaurantsList = (req, res) => {
     User.findById(req.params.userId)
         .then((user) => res.status(200).json(user.reviewedRestaurants))
-        .catch((err) => res.status(500).json(err));
+        .catch((error) => handleError(res, error));
 };
 
 const addReviewedRestaurant = (req, res) => {
@@ -151,9 +155,11 @@ const addReviewedRestaurant = (req, res) => {
         User.findByIdAndUpdate(userId, {
             $addToSet: { reviewedRestaurants: restId },
             $inc: { reviews: 1 },
-        }).then(() => {});
+        })
+            .then(() => res.status(200))
+            .catch((error) => handleError(res, error));
     } catch (error) {
-        res.status(500).json(error);
+        handleError(res, error);
     }
 };
 
@@ -164,25 +170,33 @@ const handleFavouriteRestaurant = (req, res) => {
             case "add":
                 User.findByIdAndUpdate(userId, {
                     $addToSet: { favouriteRestaurants: restId },
-                }).then(() =>
-                    res.status(200).json({ message: "Добавлен в избранное", type: "success" })
-                );
+                })
+                    .then(() =>
+                        res.status(200).json({ message: "Добавлен в избранное", type: "success" })
+                    )
+                    .catch((error) => handleError(res, error));
                 break;
             case "remove":
-                User.findByIdAndUpdate(userId, { $pull: { favouriteRestaurants: restId } }).then(
-                    () => res.status(200).json({ message: "Убран из избранного", type: "warning" })
-                );
+                User.findByIdAndUpdate(userId, { $pull: { favouriteRestaurants: restId } })
+                    .then(() =>
+                        res.status(200).json({ message: "Убран из избранного", type: "warning" })
+                    )
+                    .catch((error) => handleError(res, error));
                 break;
             default:
                 break;
         }
-    } catch (e) {
-        res.status(500).json(e);
+    } catch (error) {
+        handleError(res, error);
     }
 };
-const setBlogerData = (req, res) => {
+const setBlogerData = async (req, res) => {
     try {
         const { blogerName, blogCity, aboutMe, blogAvatar, userId } = req.body;
+        const checkUsername = await User.findOne({ "blogData.blogerName": blogerName });
+        if (checkUsername) {
+            return res.status(400).json("Имя уже занято");
+        }
         User.findByIdAndUpdate(userId, {
             $set: {
                 blogData: {
@@ -198,7 +212,7 @@ const setBlogerData = (req, res) => {
             },
         })
             .then(() => res.status(200).json("Success"))
-            .catch((e) => res.status(500).json(e));
+            .catch((error) => handleError(res, error));
     } catch (e) {
         res.status(500).json(`Error: ${e}`);
     }

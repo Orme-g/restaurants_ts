@@ -76,6 +76,7 @@ const PasswordForm: React.FC<IPasswordFormProps> = ({ userId }) => {
                         error={!!error.oldPassError}
                         helperText={error.oldPassError}
                         onChange={(e) => setOldPass(e.target.value)}
+                        autoComplete="current-password"
                     />
                     {/* {errors.oldPass && <div>Some error came</div>} */}
                     <TextField
@@ -87,6 +88,7 @@ const PasswordForm: React.FC<IPasswordFormProps> = ({ userId }) => {
                         error={!!error.newPassError}
                         helperText={error.newPassError}
                         onChange={(e) => setNewPass(e.target.value)}
+                        autoComplete="new-password"
                     />
 
                     <TextField
@@ -98,6 +100,7 @@ const PasswordForm: React.FC<IPasswordFormProps> = ({ userId }) => {
                         error={!!error.newPassRepeatError}
                         helperText={error.newPassRepeatError}
                         onChange={(e) => setNewPassRepeat(e.target.value)}
+                        autoComplete="new-password-repeat"
                     />
 
                     <Button variant="outlined" onClick={(e) => handleSubmit(e)}>

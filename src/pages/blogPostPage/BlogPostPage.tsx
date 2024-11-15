@@ -19,7 +19,7 @@ const BlogPostPage: React.FC = () => {
     const { postId } = useParams();
     const { data: postData, isLoading } = useGetBlogPostQuery(postId!);
     if (isLoading) {
-        return <PageSkeleton />; // Make skeleton for Post/Topic
+        return <PageSkeleton />;
     }
     if (!postData) {
         <Page404 />;

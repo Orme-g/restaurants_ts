@@ -33,9 +33,12 @@ const deleteRestaurant = (req, res) => {
 const addRestaurant = (req, res) => {
     try {
         const restaurant = new Restaurant(req.body); // Добавляем новый элемент который берем из тела запроса
-        restaurant.save().then(() => {
-            res.status(201).json("Success");
-        });
+        restaurant
+            .save()
+            .then(() => {
+                res.status(201).json("Success");
+            })
+            .catch((error) => handleError(res, error));
     } catch (err) {
         res.status(500).json("Error");
     }
@@ -100,7 +103,7 @@ const getRestNamesAndIds = (req, res) => {
             })
         )
         .then((result) => res.status(200).json(result))
-        .catch((e) => res.status(500).json("Server errro :("));
+        .catch((e) => res.status(500).json("Server error :("));
 };
 
 module.exports = {

@@ -173,3 +173,27 @@ export const AuthorBadgeSkeleton = () => {
         // </div>
     );
 };
+
+export const BlogPostCardSkeleton = () => {
+    return (
+        <Stack direction={"column"}>
+            <Skeleton variant="rounded" height={"50%"} />
+            <Stack direction={"column"} height={"50%"}>
+                <Stack direction={"column"} height={"80%"} justifyContent={"space-evenly"}>
+                    <Skeleton variant="text" width={"80%"} height={"20%"} />
+                    <Skeleton variant="rounded" height={"40%"} />
+                </Stack>
+
+                <Stack
+                    direction={"row"}
+                    marginTop={"auto"}
+                    height={"20%"}
+                    justifyContent={"space-between"}
+                >
+                    <Skeleton variant="text" width={"30%"} height={"100%"} />
+                    <Skeleton variant="text" width={"30%"} height={"100%"} />
+                </Stack>
+            </Stack>
+        </Stack>
+    );
+};

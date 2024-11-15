@@ -2,6 +2,7 @@ import React from "react";
 
 import { useGetSortedPostsQuery } from "../../services/blogApi";
 import BlogPostCard from "../blogPostCard/BlogPostCard";
+import { BlogPostCardSkeleton } from "../skeletons/Skeletons";
 
 interface IBlogList {
     type: "top" | "last";
@@ -10,10 +11,14 @@ const BlogCardsSelection: React.FC<IBlogList> = ({ type }) => {
     let renderList;
     const { data: postsData, isLoading } = useGetSortedPostsQuery(type);
     if (isLoading) {
-        return;
-    }
-    if (!postsData) {
-        return;
+        return (
+            <>
+                <BlogPostCardSkeleton />
+                <BlogPostCardSkeleton />
+                <BlogPostCardSkeleton />
+                <BlogPostCardSkeleton />
+            </>
+        );
     }
     if (postsData) {
         renderList = postsData.map((item) => {
