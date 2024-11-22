@@ -2,19 +2,18 @@ import React from "react";
 
 import { useParams } from "react-router-dom";
 import { useGetPostsByThemeQuery } from "../../services/blogApi";
-// import RenderListWithPagination from "../../Components/renderListWithPagination/RenderListWithPagination";
 import BlogPostCard from "../../Components/blogPostCard/BlogPostCard";
+import { CardsSkeleton } from "../../Components/skeletons/Skeletons";
 
 import "./blogPageThemeSelection.sass";
 
 const BlogPageThemeSelection: React.FC = () => {
-    const { theme } = useParams();
+    const { theme } = useParams<string>();
     const { data: posts, isLoading } = useGetPostsByThemeQuery(theme!);
     let renderList;
     if (isLoading) {
-        return;
+        return <CardsSkeleton />;
     }
-    // console.log(posts);
     if (posts) {
         renderList = posts.map((post) => {
             const { _id } = post;

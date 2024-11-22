@@ -39,6 +39,7 @@ const getUserData = (req, res) => {
                     _id,
                     bloger,
                     blogData,
+                    ratedBlogPosts,
                 }) => {
                     res.status(200).json({
                         avatar,
@@ -53,6 +54,7 @@ const getUserData = (req, res) => {
                         _id,
                         bloger,
                         blogData,
+                        ratedBlogPosts,
                     });
                 }
             )
@@ -72,7 +74,7 @@ const registration = async (req, res) => {
         const hashPassword = bcrypt.hashSync(password, 7);
         const user = new User({ ...req.body, password: hashPassword });
         user.save()
-            .then(res.status(200).json({ message: "Вы зарегистрированы в Блоге" }))
+            .then(res.status(200).json({ message: "Регистрация прошла успешно" }))
             .catch((error) => handleError(res, error));
     } catch (err) {
         res.status(500).json(`Ошибка регистрации ${err}`);
@@ -211,10 +213,33 @@ const setBlogerData = async (req, res) => {
                 bloger: true,
             },
         })
-            .then(() => res.status(200).json("Success"))
+            .then(() =>
+                res.status(200).json({ message: "Вы зарегистрированы в Блоге", type: "success" })
+            )
             .catch((error) => handleError(res, error));
     } catch (e) {
         res.status(500).json(`Error: ${e}`);
+    }
+};
+
+const updateSingleBlogerDataField = (req, res) => {
+    try {
+        const { userId, field, data } = req.body;
+        switch (field) {
+            case "aboutMe":
+                User.findByIdAndUpdate(userId, { $set: { "blogData.aboutMe": data } })
+                    .then(() => res.status(200).json("Field Updated"))
+                    .catch((error) => handleError(res, error));
+                break;
+            case "blogCity":
+                User.findByIdAndUpdate(userId, { $set: { "blogData.blogCity": data } })
+                    .then(() => res.status(200).json("Field Updated"))
+                    .catch((error) => handleError(res, error));
+                break;
+            default:
+        }
+    } catch (error) {
+        handleError(res, error);
     }
 };
 
@@ -229,5 +254,6 @@ module.exports = {
     changeAvatar,
     setBlogerData,
     handleFavouriteRestaurant,
+    updateSingleBlogerDataField,
     // getFavouriteRestNames,
 };

@@ -11,6 +11,7 @@ const {
     changeAvatar,
     setBlogerData,
     handleFavouriteRestaurant,
+    updateSingleBlogerDataField,
     // getFavouriteRestNames,
 } = require("../controllers/user-controllers");
 
@@ -26,6 +27,7 @@ router.patch("/addReviewedRestaurant", addReviewedRestaurant);
 router.patch("/changeAvatar", changeAvatar);
 router.patch("/user/setBlogerData", setBlogerData);
 router.patch("/handleFavouriteRestaurant", handleFavouriteRestaurant);
+router.patch("/user/update-data-field", updateSingleBlogerDataField);
 
 // router.get("/get-favourite-restaurants-names/:userId", getFavouriteRestNames);
 

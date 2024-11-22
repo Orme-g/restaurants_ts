@@ -106,6 +106,20 @@ const getRestNamesAndIds = (req, res) => {
         .catch((e) => res.status(500).json("Server error :("));
 };
 
+const searchRestaurant = (req, res) => {
+    try {
+        const { input } = req.params;
+        Restaurant.find(
+            {
+                name: { $regex: RegExp(input), $options: "i" },
+            },
+            { name: 1, _id: 1 }
+        ).then((result) => res.status(200).json(result));
+    } catch (error) {
+        handleError(res, error);
+    }
+};
+
 module.exports = {
     getRestaurants,
     getRestaurantById,
@@ -115,4 +129,5 @@ module.exports = {
     getSortedRestaurants,
     findRestaurant,
     getRestNamesAndIds,
+    searchRestaurant,
 };

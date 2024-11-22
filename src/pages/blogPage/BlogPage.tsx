@@ -25,7 +25,7 @@ const BlogPage: React.FC = () => {
                     </div>
                     <div className="blog-page__popular-themes">
                         <div className="blog-page__popular-themes_title">Популярные темы:</div>
-                        <Link to={`/blog/blog-theme/Еда`}>
+                        <Link to={`/blog/blog-theme/Рестораны`}>
                             <div className="blog-page__popular-themes_item">
                                 <div className="blog-page__popular-themes_item_name">Рестораны</div>
                                 <div className="blog-page__popular-themes_item_posts-count">
@@ -41,18 +41,29 @@ const BlogPage: React.FC = () => {
                                 </div>
                             </div>
                         </Link>
-                        <div className="blog-page__popular-themes_item">
-                            <div className="blog-page__popular-themes_item_name">Напитки</div>
-                            <div className="blog-page__popular-themes_item_posts-count">138</div>
-                        </div>
-                        <div className="blog-page__popular-themes_item">
-                            <div className="blog-page__popular-themes_item_name">Готовим дома</div>
-                            <div className="blog-page__popular-themes_item_posts-count">81</div>
-                        </div>
-                        <div className="blog-page__popular-themes_item">
-                            <div className="blog-page__popular-themes_item_name">Рецепты</div>
-                            <div className="blog-page__popular-themes_item_posts-count">65</div>
-                        </div>
+                        <Link to={`/blog/blog-theme/Напитки`}>
+                            <div className="blog-page__popular-themes_item">
+                                <div className="blog-page__popular-themes_item_name">Напитки</div>
+                                <div className="blog-page__popular-themes_item_posts-count">
+                                    138
+                                </div>
+                            </div>
+                        </Link>
+                        <Link to={`/blog/blog-theme/Готовим дома`}>
+                            <div className="blog-page__popular-themes_item">
+                                <div className="blog-page__popular-themes_item_name">
+                                    Готовим дома
+                                </div>
+                                <div className="blog-page__popular-themes_item_posts-count">81</div>
+                            </div>
+                        </Link>
+
+                        <Link to={`/blog/blog-theme/Рецепты`}>
+                            <div className="blog-page__popular-themes_item">
+                                <div className="blog-page__popular-themes_item_name">Рецепты</div>
+                                <div className="blog-page__popular-themes_item_posts-count">65</div>
+                            </div>
+                        </Link>
                     </div>
                 </div>
                 <div className="blog-page__popular-posts">

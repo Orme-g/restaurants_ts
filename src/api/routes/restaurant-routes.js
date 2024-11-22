@@ -8,6 +8,7 @@ const {
     getSortedRestaurants,
     findRestaurant,
     getRestNamesAndIds,
+    searchRestaurant,
 } = require("../controllers/restaurant-controllers");
 
 const router = express.Router();
@@ -21,5 +22,6 @@ router.get("/sorted-restaurants/:sort", getSortedRestaurants);
 router.post("/find-restaurant/selection", findRestaurant);
 router.get("/find-restaurant/selection", findRestaurant);
 router.get("/pairs", getRestNamesAndIds);
+router.get("/search-restaurant/:input", searchRestaurant);
 
 module.exports = router;

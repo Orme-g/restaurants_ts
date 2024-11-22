@@ -60,6 +60,7 @@ const userSchema = new Schema({
         type: Object,
         default: null,
     },
+    ratedBlogPosts: Array,
     // blogData: {
     //     blogerName: String,
     //     blogPosts: Array,

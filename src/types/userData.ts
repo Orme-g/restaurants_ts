@@ -26,4 +26,5 @@ export interface IUserData {
     rating: number;
     bloger: boolean;
     blogData?: IBlogData;
+    ratedBlogPosts: string[];
 }

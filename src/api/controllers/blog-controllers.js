@@ -87,6 +87,25 @@ const getPostsByTheme = (req, res) => {
     }
 };
 
+const updateLikesOrCommentsCount = (req, res) => {
+    try {
+        const { postId, field, userId } = req.body;
+        switch (field) {
+            case "likes":
+                BlogPost.findByIdAndUpdate(postId, { $inc: { likes: 1 } })
+                    .then(() => {})
+                    .catch((error) => handleError(res, error));
+                User.findByIdAndUpdate(userId, { $addToSet: { ratedBlogPosts: postId } })
+                    .then((result) => res.status(200).json(result))
+                    .catch((error) => handleError(res, error));
+                break;
+            default:
+        }
+    } catch (error) {
+        handleError(res, error);
+    }
+};
+
 const getAllPosts = (req, res) => {
     // BlogPost.find().then((result) => res.status(200).json(result));
     // return res.status(200).json("All ok");
@@ -100,4 +119,5 @@ module.exports = {
     getDataForBadge,
     getUserPosts,
     getPostsByTheme,
+    updateLikesOrCommentsCount,
 };

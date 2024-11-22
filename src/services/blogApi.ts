@@ -6,9 +6,11 @@ import type { IBlogData } from "../types/userData";
 export const blogApi = createApi({
     reducerPath: "blogApi",
     baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:4000/blog" }),
+    tagTypes: ["PostData"],
     endpoints: (builder) => ({
         getBlogPost: builder.query<IBlogPost, string>({
             query: (postId: string) => `/blog-post/${postId}`,
+            providesTags: ["PostData"],
         }),
         getSortedPosts: builder.query<IBlogPost[], string>({
             query: (type: string) => `/posts/${type}`,
@@ -26,6 +28,14 @@ export const blogApi = createApi({
         getPostsByTheme: builder.query<IBlogPost[], string>({
             query: (theme: string) => `/blog-posts/${theme}`,
         }),
+        updateLikesOrCommentsCount: builder.mutation({
+            query: (data) => ({
+                url: "/update-likes-comments",
+                method: "PATCH",
+                body: data,
+            }),
+            invalidatesTags: ["PostData"],
+        }),
     }),
 });
 
@@ -36,4 +46,5 @@ export const {
     useGetDataForBadgeQuery,
     useGetUserPostsQuery,
     useGetPostsByThemeQuery,
+    useUpdateLikesOrCommentsCountMutation,
 } = blogApi;

@@ -10,7 +10,7 @@ import type { IUserData } from "../types/userData";
 export const apiSlice = createApi({
     reducerPath: "api",
     baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:4000" }),
-    tagTypes: ["Review", "Favourite"],
+    tagTypes: ["Review", "Favourite", "UserData"],
     endpoints: (builder) => ({
         getSortedRestaurants: builder.query<IRestaurant[], string>({
             query: (sort: TSortRestaurants) => `/sorted-restaurants/${sort}`,
@@ -21,6 +21,9 @@ export const apiSlice = createApi({
                 method: "POST",
                 body: criterias,
             }),
+        }),
+        searchRestaurant: builder.query({
+            query: (input: string) => `/search-restaurant/${input}`,
         }),
         login: builder.mutation({
             query: (loginData) => ({
@@ -38,7 +41,7 @@ export const apiSlice = createApi({
         }),
         getUserData: builder.query<IUserData, string>({
             query: (userId: string) => `/user/getdata/${userId}`,
-            providesTags: ["Favourite"],
+            providesTags: ["Favourite", "UserData"],
         }),
         changePassword: builder.mutation({
             query: (data) => ({
@@ -60,6 +63,14 @@ export const apiSlice = createApi({
                 method: "PATCH",
                 body: data,
             }),
+        }),
+        updateBlogerDataSingleField: builder.mutation({
+            query: (data) => ({
+                url: "/user/update-data-field",
+                method: "PATCH",
+                body: data,
+            }),
+            invalidatesTags: ["UserData"],
         }),
         getReviewedRestaurantsList: builder.query<string[], string>({
             query: (userId: string) => `/reviewedRestaurants/${userId}`,
@@ -95,11 +106,13 @@ export const {
     useGetUserDataQuery,
     useGetSortedRestaurantsQuery,
     useFindRestaurantMutation,
+    useSearchRestaurantQuery,
     useChangePasswordMutation,
     useGetReviewedRestaurantsListQuery,
     useAddReviewedRestaurantToUserMutation,
     useChangeAvatarMutation,
     useSetBlogerDataMutation,
+    useUpdateBlogerDataSingleFieldMutation,
     useHandleFavouriteRestaurantsMutation,
     // useGetFavouriteRestNamesQuery,
 } = apiSlice;

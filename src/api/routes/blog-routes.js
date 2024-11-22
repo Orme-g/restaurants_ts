@@ -8,6 +8,7 @@ const {
     getDataForBadge,
     getUserPosts,
     getPostsByTheme,
+    updateLikesOrCommentsCount,
 } = require("../controllers/blog-controllers");
 
 const router = express.Router();
@@ -19,5 +20,6 @@ router.get("/blog/top-authors", getTopAuthors);
 router.get("/blog/badge-data/:userId", getDataForBadge);
 router.get("/blog/user-posts/:userId", getUserPosts);
 router.get("/blog/blog-posts/:theme", getPostsByTheme);
+router.patch("/blog/update-likes-comments", updateLikesOrCommentsCount);
 
 module.exports = router;

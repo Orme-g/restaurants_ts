@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import { useParams } from "react-router-dom";
 
@@ -75,9 +75,7 @@ const BlogerProfilePage: React.FC = () => {
             <div className="bloger-profile__all-posts">
                 <div className="bloger-profile__all-posts_title">Все посты:</div>
                 <div className="bloger-profile__all-posts_list">
-                    {/* <BlogUserAllPostsList userId={userId!} /> */}
                     <RenderListWithPagination list={allPostsList!} displayItems={5} />
-                    {/* {allPostsList} */}
                 </div>
             </div>
         </div>

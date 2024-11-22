@@ -4,25 +4,48 @@ import { useParams } from "react-router-dom";
 import ChatIcon from "@mui/icons-material/Chat";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Button } from "@mui/material";
-
+import { useAppDispatch, useAppSelector } from "../../types/store";
+import { updateUserData } from "../../reducers/interactive";
 import { useGetBlogPostQuery } from "../../services/blogApi";
 import transformDate from "../../utils/transformDate";
 import Page404 from "../Page404";
 
 import "./blogPostPage.sass";
-
+import useLocalStorage from "../../hooks/useLocalStorage";
+import { useUpdateLikesOrCommentsCountMutation } from "../../services/blogApi";
 import CommentsBlock from "../../Components/commentsBlock/CommentsBlock";
 import BlogAuthorBadge from "../../Components/blogAuthorBadge/BlogAuthorBadge";
 import { PageSkeleton } from "../../Components/skeletons/Skeletons";
+import { callSnackbar } from "../../reducers/interactive";
 
 const BlogPostPage: React.FC = () => {
     const { postId } = useParams();
     const { data: postData, isLoading } = useGetBlogPostQuery(postId!);
+    const [sendData] = useUpdateLikesOrCommentsCountMutation();
+    const { getUserId } = useLocalStorage();
+    const dispatch = useAppDispatch();
+    const ratedPosts = useAppSelector((state) => state.interactive.userData?.ratedBlogPosts);
+    const isAuth = useAppSelector((state) => state.interactive.passAuth);
+    const isRated = ratedPosts?.includes(postId as string);
+    const handleLike = () => {
+        if (isAuth) {
+            const userId = getUserId();
+            sendData({
+                postId,
+                field: "likes",
+                userId,
+            })
+                .unwrap()
+                .then(() => dispatch(updateUserData(userId)));
+        } else {
+            dispatch(callSnackbar({ text: "Войдите или зарегистрируйтесь", type: "info" }));
+        }
+    };
     if (isLoading) {
         return <PageSkeleton />;
     }
     if (!postData) {
-        <Page404 />;
+        return <Page404 />;
     }
     const {
         userId,
@@ -66,7 +89,13 @@ const BlogPostPage: React.FC = () => {
                         <span>{displayThemes}</span>{" "}
                     </div>
                 </div>
-                <Button className="blog-post-page__like-button" variant="contained">
+
+                <Button
+                    disabled={isRated}
+                    onClick={handleLike}
+                    className="blog-post-page__like-button"
+                    variant="contained"
+                >
                     Понравилась!
                 </Button>
 

@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 
+import { useAppDispatch } from "../../../types/store";
 import { useForm } from "react-hook-form";
 import { TextField, Stack, Button } from "@mui/material";
 import { convertToBase64 } from "../../../utils/convertToBase64";
 import { useSetBlogerDataMutation } from "../../../services/apiSlice";
+import { callSnackbar } from "../../../reducers/interactive";
 import "./startBlogForm.sass";
 
 interface IStartBlogForm {
@@ -15,6 +17,7 @@ const StartBlogForm: React.FC<IStartBlogForm> = ({ userId }) => {
     const [imageName, setImageName] = useState<string | null>(null);
     const [displayBlogForm, setDisplayBlogForm] = useState<boolean>(false);
     const [sendData] = useSetBlogerDataMutation();
+    const dispatch = useAppDispatch();
     let margin;
     const {
         register,
@@ -32,7 +35,7 @@ const StartBlogForm: React.FC<IStartBlogForm> = ({ userId }) => {
         },
     });
     const aboutMe = watch("aboutMe");
-    const lettersLeft = 1000 - aboutMe.length;
+    const lettersLeft = 300 - aboutMe.length;
     if (errors.aboutMe) {
         margin = "extra-margin";
     } else {
@@ -49,8 +52,8 @@ const StartBlogForm: React.FC<IStartBlogForm> = ({ userId }) => {
     const onSubmit = async (data: { blogerName: string; blogCity: string; aboutMe: string }) => {
         sendData({ ...data, blogAvatar, userId })
             .unwrap()
-            .then((response) => {
-                console.log(response);
+            .then(({ message, type }) => {
+                dispatch(callSnackbar({ text: message, type }));
                 reset();
                 setImageName(null);
             })
@@ -97,7 +100,7 @@ const StartBlogForm: React.FC<IStartBlogForm> = ({ userId }) => {
                         error={!!errors.blogCity}
                         helperText={errors.blogCity?.message}
                     />
-                    <div className="about-me_field">
+                    <div className="limited-length_field">
                         <TextField
                             label="Несколько строк о себе"
                             multiline
@@ -106,13 +109,13 @@ const StartBlogForm: React.FC<IStartBlogForm> = ({ userId }) => {
                             {...register("aboutMe", {
                                 required: "Напишите кратко что-нибудь о себе",
                                 minLength: { value: 10, message: "Минимум 10 символов" },
-                                maxLength: { value: 1000, message: "Максимум 1000 символов" },
+                                maxLength: { value: 300, message: "Максимум 300 символов" },
                             })}
                             error={!!errors.aboutMe}
                             helperText={errors.aboutMe?.message}
                         />
-                        <div className={`about-me_field letters-count ${margin}`}>
-                            {lettersLeft}/1000
+                        <div className={`limited-length_field letters-count ${margin}`}>
+                            {lettersLeft}/300
                         </div>
                     </div>
 
