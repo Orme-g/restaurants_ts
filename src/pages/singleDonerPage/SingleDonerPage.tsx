@@ -7,6 +7,7 @@ import { Rating } from "@mui/material";
 import Slider from "../../Components/sliderImages/Slider";
 import { PageSkeleton } from "../../Components/skeletons/Skeletons";
 import tranfsormDate from "../../utils/transformDate";
+import { contentMaker } from "../../utils/contentMaker";
 
 import pic from "../../assets/event.JPG";
 import "./singleDonerPage.sass";
@@ -23,21 +24,7 @@ const SingleDonerPage = () => {
     if (singleDonerData) {
         const { title, rating, title_image, author, subtitle, createdAt, _id, content } =
             singleDonerData;
-        const displayContent = content.map((item) => {
-            if ("text" in item) {
-                return <p>{item.text}</p>;
-            } else if ("bloquote" in item) {
-                return <blockquote>{item.bloquote}</blockquote>;
-            } else if ("slider" in item) {
-                return (
-                    <div className="doner-topic__slider">
-                        <Slider images={item.slider as string[]} />
-                    </div>
-                );
-            } else {
-                return null;
-            }
-        });
+        const displayContent = contentMaker(content);
 
         const date = tranfsormDate(createdAt);
         return (

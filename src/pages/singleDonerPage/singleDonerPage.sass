@@ -2,8 +2,7 @@
 @import '../../style/variables'
 
 
-blockquote
-    @include blockquote
+
 
 
 .page-wrapper 
@@ -47,11 +46,13 @@ blockquote
         p
             text-indent: 30px
             margin: 20px
+        blockquote
+            @include blockquote
 
-    &__slider
-        height: 550px
-        width: 100%
-        margin-bottom: 100px
+        .content__slider
+            height: 550px
+            width: 100%
+            margin-bottom: 100px
 
     &__rating
         font-size: 1.3rem

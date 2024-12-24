@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const eventSchema = new Schema({
-    eventName: String,
+    title: String,
     restaurantName: String,
     restaurantId: String,
     image: String,

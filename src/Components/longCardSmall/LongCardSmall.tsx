@@ -12,7 +12,7 @@ interface ICardData {
 }
 
 const LongCardSmall: React.FC<ICardData> = ({ data }) => {
-    const { _id, short_description, dateStart, dateFinish, eventName } = data;
+    const { _id, short_description, dateStart, dateFinish, title } = data;
     const [start, finish] = transformDate([dateStart, dateFinish]);
     return (
         <Link to={`/event/${_id}`}>
@@ -21,7 +21,7 @@ const LongCardSmall: React.FC<ICardData> = ({ data }) => {
                     <img src={pic} alt="event" />
                 </div>
                 <div className="long-card-small__info">
-                    <div className="long-card-small__info_name">{eventName}</div>
+                    <div className="long-card-small__info_name">{title}</div>
                     <div className="long-card-small__info_description">{short_description}</div>
                     <div className="long-card-small__info_valid-dates">
                         C {start} по {finish}

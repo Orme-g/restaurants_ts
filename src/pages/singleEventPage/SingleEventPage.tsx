@@ -4,8 +4,9 @@ import { useParams } from "react-router-dom";
 import { useGetEventQuery } from "../../services/eventsApi";
 import CommentsBlock from "../../Components/commentsBlock/CommentsBlock";
 import transformDate from "../../utils/transformDate";
+import { contentMaker } from "../../utils/contentMaker";
 
-import image from "../../../src/assets/event.JPG";
+// import image from "../../../src/assets/event.JPG";
 
 import "./singleEventPage.sass";
 
@@ -16,13 +17,15 @@ const SingleEventPage: React.FC = () => {
     if (isLoading) {
         return;
     }
-    const { eventName, restaurantName, dateStart, dateFinish, description, createdAt } = eventData!;
+    const { title, title_image, restaurantName, dateStart, dateFinish, createdAt, content } =
+        eventData!;
     const [start, finish, added] = transformDate([dateStart, dateFinish, createdAt]);
+    const displayContent = contentMaker(content);
     return (
         <>
             <div className="page-wrapper">
                 <div className="event-info__container">
-                    <div className="event-info__name">{eventName}</div>
+                    <div className="event-info__name">{title}</div>
                     <div className="event-info__wrapper">
                         <div className="event-info__title">Где проходит: </div>
                         <div className="event-info__text">Ресторан {restaurantName}</div>
@@ -34,10 +37,10 @@ const SingleEventPage: React.FC = () => {
                     </div>
 
                     <div className="event-info__image">
-                        <img src={image} alt="event" />
+                        <img src={title_image} alt="event" />
                     </div>
-                    <div className="event-info__descr-added-wrapper">
-                        <div className="event-info__description">{description}</div>
+                    <div className="event-info__content">
+                        {displayContent}
                         <div className="event-info__added">
                             Добавлено: <span>{added}</span>
                         </div>
