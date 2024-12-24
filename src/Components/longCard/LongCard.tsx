@@ -11,8 +11,7 @@ interface ILongCardProps {
 }
 
 const LongCard: React.FC<ILongCardProps> = ({ data, type }) => {
-    const { name, short_description, rating, cousine, bill, createdAt, _id } = data;
-    console.log(_id);
+    const { title, short_description, rating, cousine, bill, createdAt, _id } = data;
     const link = type === "doner" ? `/best-doner/${_id}` : `/restaurant/${_id}`;
 
     const donerOrRestRating =
@@ -49,7 +48,7 @@ const LongCard: React.FC<ILongCardProps> = ({ data, type }) => {
                 </div>
                 <div className="long-card__info">
                     <div className="long-card__header">
-                        <div className="long-card__title">{name}</div>
+                        <div className="long-card__title">{title}</div>
                         <div className="long-card__added">{date}</div>
                     </div>
                     <div className="long-card__textfield">{textField(type)}</div>

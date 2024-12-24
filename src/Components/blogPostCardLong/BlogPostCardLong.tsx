@@ -13,14 +13,14 @@ interface IBlogPostCardLong {
 }
 
 const BlogPostCardLong: React.FC<IBlogPostCardLong> = ({ data }) => {
-    const { _id, title, short_description, likes, themes } = data;
+    const { _id, title, subtitle, likes, themes } = data;
     const displayThemes = themes.join(", ");
     return (
         <Link to={`/blog/blog-post/${_id}`}>
             <div className="blog-card-long__container">
                 <div className="blog-card-long__info">
                     <div className="blog-card-long__info_title">{title}</div>
-                    <div className="blog-card-long__info_description">{short_description}</div>
+                    <div className="blog-card-long__info_description">{subtitle}</div>
                     <div className="blog-card-long__footer">
                         <div className="blog-card-long__footer_likes-count">
                             <FavoriteIcon />

@@ -20,7 +20,7 @@ const initialState: IInitialState = {
     serverReply: null,
 };
 
-export const fetchLastAddedRestaurants = createAsyncThunk(
+export const fetchLastAddedRestaurants = createAsyncThunk<IRestaurant[], undefined>(
     "restaurants/fetchLastAddedRestaurants",
     () => {
         const { request } = useHttp();
@@ -28,25 +28,25 @@ export const fetchLastAddedRestaurants = createAsyncThunk(
     }
 );
 
-export const fetchRestaurantData = createAsyncThunk(
+export const fetchRestaurantData = createAsyncThunk<IRestaurant, string>(
     "restaurants/fetchRestaurantData",
-    (restId: string) => {
+    (restId) => {
         const { request } = useHttp();
         return request(`http://localhost:4000/restaurants/${restId}`);
     }
 );
 
-export const fetchRestaurantReviews = createAsyncThunk(
+export const fetchRestaurantReviews = createAsyncThunk<IReview[], string>(
     "restaurants/fetchRestaurantReviews",
-    (restId: string) => {
+    (restId) => {
         const { request } = useHttp();
         return request(`http://localhost:4000/reviews/${restId}`);
     }
 );
 
-export const addNewRestaurant = createAsyncThunk(
+export const addNewRestaurant = createAsyncThunk<"Sending" | "Failed" | "Success", string>(
     "restaurants/addNewRestaurant",
-    (restData: string) => {
+    (restData) => {
         const { request } = useHttp();
         return request("http://localhost:4000/restaurants/add", "POST", restData);
     }
@@ -65,6 +65,7 @@ const restaurantsSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder) => {
+        // Extra reducers dont require action: PayloadAction<> typization. Types coming from CreateAsyncThunk
         builder
             //Last added restaurants
             .addCase(fetchLastAddedRestaurants.pending, (state) => {

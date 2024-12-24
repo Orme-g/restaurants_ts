@@ -6,6 +6,11 @@ interface ISnackBarData {
     text: string;
     type: "error" | "info" | "success" | "warning";
 }
+// interface IPostData {
+//     type: "text" | "bloquote";
+//     id: string;
+//     value: string;
+// }
 interface IinitialSTate {
     sideMenu: boolean;
     modalWindowLogin: boolean;
@@ -14,12 +19,16 @@ interface IinitialSTate {
     userData: IUserData | null;
     showSnackbar: boolean;
     snackBarData: ISnackBarData;
+    // postFields: IPostData[] | [];
 }
 
-export const updateUserData = createAsyncThunk("interactive/updateUserData", (userId: string) => {
-    const { request } = useHttp();
-    return request(`http://localhost:4000/user/getdata/${userId}`);
-});
+export const updateUserData = createAsyncThunk<IUserData, string>(
+    "interactive/updateUserData",
+    (userId) => {
+        const { request } = useHttp();
+        return request(`http://localhost:4000/user/getdata/${userId}`);
+    }
+);
 
 const initialState: IinitialSTate = {
     sideMenu: false,
@@ -29,6 +38,7 @@ const initialState: IinitialSTate = {
     userData: null,
     showSnackbar: false,
     snackBarData: { text: "", type: "success" },
+    // postFields: [],
 };
 
 const interactiveSlice = createSlice({
@@ -57,6 +67,19 @@ const interactiveSlice = createSlice({
         setUserData: (state, action: PayloadAction<IUserData | null>) => {
             state.userData = action.payload;
         },
+        // createPostField: (state, action: PayloadAction<IPostData>) => {
+        //     state.postFields = [...state.postFields, action.payload];
+        // },
+        // updatePostData: (state, action: PayloadAction<{ id: string; value: string }>) => {
+        //     state.postFields.forEach((item) => {
+        //         if (item.id === action.payload.id) {
+        //             item.value = action.payload.value;
+        //         }
+        //     });
+        // },
+        // deletePostField: (state, action: PayloadAction<string>) => {
+        //     state.postFields = [...state.postFields.filter((item) => item.id !== action.payload)];
+        // },
     },
     extraReducers: (builder) => {
         builder.addCase(updateUserData.fulfilled, (state, action: PayloadAction<IUserData>) => {
@@ -75,4 +98,7 @@ export const {
     setPassAuth,
     callSnackbar,
     setUserData,
+    // createPostField,
+    // updatePostData,
+    // deletePostField,
 } = actions;

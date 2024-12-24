@@ -38,6 +38,8 @@ const BlogPageThemeSelection = lazy(
 const AdminPage = lazy(() => import("../../pages/adminPage/AdminPage"));
 const Page404 = lazy(() => import("../../pages/Page404"));
 
+const Workshop = lazy(() => import("../../pages/workshop/Workshop"));
+
 export const App: React.FC = () => {
     const dispatch = useAppDispatch();
     const { getUserData } = useLocalStorage();
@@ -76,6 +78,7 @@ export const App: React.FC = () => {
                         <Route path="/info/:infoType" element={<InfoPage />} />
                         <Route path="/profile/:userId" element={<ProfilePage />} />
                         <Route path="/admin" element={<AdminPage />} />
+                        <Route path="/workshop" element={<Workshop />} />
                         <Route path="*" element={<Page404 />} />
                     </Routes>
                 </Suspense>

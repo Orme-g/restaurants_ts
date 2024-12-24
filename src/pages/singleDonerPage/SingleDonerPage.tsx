@@ -16,24 +16,28 @@ const SingleDonerPage = () => {
     const { data: singleDonerData, isLoading } = useGetSingleDonerRestaurantQuery(
         donerId as string
     );
-
     if (isLoading) {
         return <PageSkeleton />;
     }
 
     if (singleDonerData) {
-        const {
-            name,
-            rating,
-            title_image,
-            description,
-            bloquote,
-            author,
-            images,
-            subtitle,
-            createdAt,
-            _id,
-        } = singleDonerData;
+        const { title, rating, title_image, author, subtitle, createdAt, _id, content } =
+            singleDonerData;
+        const displayContent = content.map((item) => {
+            if ("text" in item) {
+                return <p>{item.text}</p>;
+            } else if ("bloquote" in item) {
+                return <blockquote>{item.bloquote}</blockquote>;
+            } else if ("slider" in item) {
+                return (
+                    <div className="doner-topic__slider">
+                        <Slider images={item.slider as string[]} />
+                    </div>
+                );
+            } else {
+                return null;
+            }
+        });
 
         const date = tranfsormDate(createdAt);
         return (
@@ -42,20 +46,14 @@ const SingleDonerPage = () => {
                     <section className="doner-topic__container">
                         <div className="doner-topic__title">
                             {" "}
-                            {name}
+                            {title}
                             <div className="doner-topic__subtitle"> {subtitle} </div>
                         </div>
                         <div className="doner-topic__image">
                             {/* <img src={title_image} alt="doner" /> */}
                             <img src={pic} alt="doner" />
                         </div>
-                        <div className="doner-topic__content">
-                            <blockquote>{bloquote}</blockquote>
-                            <p>{description}</p>
-                        </div>
-                        <div className="doner-topic__slider">
-                            <Slider images={images} />
-                        </div>
+                        <div className="doner-topic__content">{displayContent}</div>
                         <div className="doner-topic__rating">
                             Наша оценка:{" "}
                             <Rating

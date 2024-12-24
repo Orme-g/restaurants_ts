@@ -14,7 +14,7 @@ interface IBlogPostCard {
 }
 
 const BlogPostCard: React.FC<IBlogPostCard> = ({ data }) => {
-    const { title_image, title, short_description, likes, themes, userId, _id } = data;
+    const { title_image, title, subtitle, likes, themes, userId, _id } = data;
     const displayThemes = themes.join(", ");
     return (
         <div className="blog-item-card__container">
@@ -26,7 +26,7 @@ const BlogPostCard: React.FC<IBlogPostCard> = ({ data }) => {
             </div>
 
             <div className="blog-item-card__title">{title}</div>
-            <div className="blog-item-card__description">{short_description}</div>
+            <div className="blog-item-card__description">{subtitle}</div>
             <div className="blog-item-card__data">
                 <div className="blog-item-card__data_likes">
                     <FavoriteIcon />

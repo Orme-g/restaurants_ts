@@ -60,11 +60,13 @@ const ProfilePage: React.FC = () => {
         year: "numeric",
     });
 
-    const handleFileUpload = async (e: any) => {
-        const uploadedFile = e.target.files[0];
-        setImageName(`"${uploadedFile.name}"`);
-        const base64Image = await convertToBase64(uploadedFile);
-        setAvatarData(base64Image as string);
+    const handleFileUpload: React.ChangeEventHandler<HTMLInputElement> = async (e) => {
+        if (e.target.files) {
+            const uploadedFile = e.target.files[0];
+            setImageName(`"${uploadedFile.name}"`);
+            const base64Image = await convertToBase64(uploadedFile);
+            setAvatarData(base64Image as string);
+        }
     };
     const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = (e) => {
         e.preventDefault();
@@ -118,13 +120,14 @@ const ProfilePage: React.FC = () => {
                                 <Button
                                     variant="outlined"
                                     component="label"
-                                    onChange={(e) => handleFileUpload(e)}
+                                    // onChange={(e) => handleFileUpload(e)}
                                 >
                                     Загрузить фото
                                     <input
                                         type="file"
                                         accept=".png, .jpg, .jpeg, .svg, .ico"
                                         hidden
+                                        onChange={(e) => handleFileUpload(e)}
                                     />
                                 </Button>
                                 <div className="upload-image_name">{imageName}</div>

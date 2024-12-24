@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import { Stack, TextField, Button, Rating } from "@mui/material";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 import { addAdditionalReview, fetchRestaurantReviews } from "../../../reducers/restaurants";
 import { useAppDispatch } from "../../../types/store";
@@ -13,6 +13,10 @@ interface IAdditionalReviewProps {
     restId: string;
     displayStatus: boolean;
     toggleDisplayStatus: () => void;
+}
+interface SubmitCredentials {
+    like: string;
+    dislike: string;
 }
 
 const AdditionalReviewForm: React.FC<IAdditionalReviewProps> = ({
@@ -34,8 +38,7 @@ const AdditionalReviewForm: React.FC<IAdditionalReviewProps> = ({
             dislike: "",
         },
     });
-    const onSubmit = (data: { like: string; dislike: string }, event: any) => {
-        event.preventDefault();
+    const onSubmit: SubmitHandler<SubmitCredentials> = (data) => {
         const { like, dislike } = data;
         const additionalReview = {
             reviewId,

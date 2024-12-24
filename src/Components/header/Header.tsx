@@ -16,7 +16,7 @@ const Header: React.FC = () => {
         skip: value === "",
     });
     let results = null;
-    const handleChange = (e: any) => {
+    const handleChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = (e) => {
         setValue(e.target.value);
     };
     const handleFocus = () => {

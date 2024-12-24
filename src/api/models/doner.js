@@ -3,36 +3,27 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const donerSchema = new Schema({
-    name: {
+    title: {
         type: String,
         required: true,
     },
+    subtitle: String,
+    title_image: String,
     short_description: {
         type: String,
         required: true,
     },
-
-    rating: {
-        type: Number,
-        required: true,
-    },
-
+    content: Object,
     createdAt: {
         type: Date,
         default: () => Date.now(),
         immutable: true,
     },
-
-    images: [String],
-
-    title_image: {
-        type: String,
-        // required: true,
-    },
-    subtitle: String,
-    description: String,
-    bloquote: String,
     author: String,
+    rating: {
+        type: Number,
+        required: true,
+    },
 });
 
 const Doner = mongoose.model("Doner", donerSchema);

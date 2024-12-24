@@ -16,10 +16,9 @@ interface IRestaurantsTabsProps {
 const RestaurantsTabs: React.FC<IRestaurantsTabsProps> = memo(({ description, restId }) => {
     const [activeTab, setActiveTab] = useState("3");
     const checkAuth = useAppSelector((state) => state.interactive.passAuth);
-    const handleChange = (event: any, newActiveTab: string) => {
+    const handleChange = (event: React.SyntheticEvent, newActiveTab: string) => {
         setActiveTab(newActiveTab);
     };
-    console.log("render tabs");
 
     const unAuth = <div className="unAuthorised">Войдите, чтобы оставить отзыв</div>;
 

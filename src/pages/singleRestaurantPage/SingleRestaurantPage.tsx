@@ -16,9 +16,9 @@ import {
 } from "../../services/apiSlice";
 import { callSnackbar } from "../../reducers/interactive";
 import useLocalStorage from "../../hooks/useLocalStorage";
+import type { IUserData } from "../../types/userData";
 
 const SingleRestaurantPage: React.FC = () => {
-    console.log("render main page");
     useEffect(() => {
         if (restId) {
             dispatch(fetchRestaurantData(restId));
@@ -31,12 +31,12 @@ const SingleRestaurantPage: React.FC = () => {
     const dispatch = useAppDispatch();
     const { restId } = useParams<string>();
     const { getUserData } = useLocalStorage();
-    const userData = getUserData();
-    let userId: any;
+    const userData: IUserData = getUserData();
+    let userId: string | null = null;
     if (userData) {
         userId = userData._id;
     }
-    const { data } = useGetUserDataQuery(userId, {
+    const { data } = useGetUserDataQuery(userId as string, {
         skip: !!!userId,
     });
     const [handleFavourite] = useHandleFavouriteRestaurantsMutation();

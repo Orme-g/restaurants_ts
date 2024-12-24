@@ -31,11 +31,11 @@ const AddDonerArticleForm: React.FC<IAddDonerArticleFormProps> = ({
         reset,
     } = useForm({
         defaultValues: {
-            name: "",
+            title: "",
             subtitle: "",
             short_description: "",
-            description: "",
-            bloquote: "",
+            // description: "",
+            // bloquote: "",
             rating: 1,
             author: "",
         },
@@ -75,99 +75,100 @@ const AddDonerArticleForm: React.FC<IAddDonerArticleFormProps> = ({
     );
 
     return (
-        <form className={`add-doner-article-form ${displayForm}`} onSubmit={handleSubmit(onSubmit)}>
-            <h3 className="add-doner-article-form__title">Форма добавления статьи:</h3>
-            <Stack spacing={3} width={"100%"}>
-                <TextField
-                    label="Название заведения"
-                    {...register("name", {
-                        required: "Обязательное поле",
-                        minLength: { value: 2, message: "Слишком короткое название" },
-                    })}
-                    error={!!errors.name}
-                    helperText={errors.name?.message}
-                />
-                <TextField
-                    label="Подзаголовок"
-                    multiline
-                    minRows={2}
-                    {...register("subtitle", {
-                        required: "Обязательное поле",
-                        minLength: { value: 5, message: "Минимум 50 символов" },
-                    })}
-                    error={!!errors.subtitle}
-                    helperText={errors.subtitle?.message}
-                />
-                <TextField
-                    label="Короткое описания"
-                    multiline
-                    minRows={2}
-                    {...register("short_description", {
-                        required: "Обязательное поле",
-                        minLength: { value: 5, message: "Минимум 50 символов" },
-                    })}
-                    error={!!errors.short_description}
-                    helperText={errors.short_description?.message}
-                />
-                <TextField
-                    label="Полное описание"
-                    multiline
-                    minRows={4}
-                    {...register("description", {
-                        required: "Обязательное поле",
-                        minLength: { value: 2, message: "Минимум 200 символов" },
-                    })}
-                    error={!!errors.description}
-                    helperText={errors.description?.message}
-                />
-                <TextField
-                    label="Цитата"
-                    multiline
-                    minRows={2}
-                    {...register("bloquote", {
-                        minLength: { value: 3, message: "Минимум 30 символов" },
-                    })}
-                    error={!!errors.bloquote}
-                    helperText={errors.bloquote?.message}
-                />
-                <TextField
-                    label="Оценка"
-                    size="small"
-                    {...register("rating", {
-                        required: "Обязательное поле",
-                        min: { value: 1, message: "В пределах от 1 до 5" },
-                        max: { value: 5, message: "В пределах от 1 до 5" },
-                        pattern: {
-                            value: /\d/,
-                            message: "Должно быть число",
-                        },
-                    })}
-                    error={!!errors.rating}
-                    helperText={errors.rating?.message}
-                />
-                <TextField
-                    label="Автор"
-                    size="small"
-                    {...register("author", {
-                        required: "Обязательное поле",
-                    })}
-                    error={!!errors.author}
-                    helperText={errors.author?.message}
-                />
-            </Stack>
-            <div className="add-doner-article-form__wrapper">
-                <Button
-                    type="submit"
-                    disabled={btnStatus}
-                    className="add-doner-article-form__btn-submit"
-                >
-                    Отправить <PublishIcon className="add-doner-article-form__icon" />
-                </Button>
-                {isLoading ? loading : null}
-                {isSuccess ? postAlert("success", "Статья добавлена") : null}
-                {isError ? postAlert("error", "Ошибка добавления") : null}
-            </div>
-        </form>
+        <div></div>
+        // <form className={`add-doner-article-form ${displayForm}`} onSubmit={handleSubmit(onSubmit)}>
+        //     <h3 className="add-doner-article-form__title">Форма добавления статьи:</h3>
+        //     <Stack spacing={3} width={"100%"}>
+        //         <TextField
+        //             label="Название заведения"
+        //             {...register("title", {
+        //                 required: "Обязательное поле",
+        //                 minLength: { value: 2, message: "Слишком короткое название" },
+        //             })}
+        //             error={!!errors.title}
+        //             helperText={errors.title?.message}
+        //         />
+        //         <TextField
+        //             label="Подзаголовок"
+        //             multiline
+        //             minRows={2}
+        //             {...register("subtitle", {
+        //                 required: "Обязательное поле",
+        //                 minLength: { value: 5, message: "Минимум 50 символов" },
+        //             })}
+        //             error={!!errors.subtitle}
+        //             helperText={errors.subtitle?.message}
+        //         />
+        //         <TextField
+        //             label="Короткое описания"
+        //             multiline
+        //             minRows={2}
+        //             {...register("short_description", {
+        //                 required: "Обязательное поле",
+        //                 minLength: { value: 5, message: "Минимум 50 символов" },
+        //             })}
+        //             error={!!errors.short_description}
+        //             helperText={errors.short_description?.message}
+        //         />
+        //         <TextField
+        //             label="Полное описание"
+        //             multiline
+        //             minRows={4}
+        //             {...register("description", {
+        //                 required: "Обязательное поле",
+        //                 minLength: { value: 2, message: "Минимум 200 символов" },
+        //             })}
+        //             error={!!errors.description}
+        //             helperText={errors.description?.message}
+        //         />
+        //         <TextField
+        //             label="Цитата"
+        //             multiline
+        //             minRows={2}
+        //             {...register("bloquote", {
+        //                 minLength: { value: 3, message: "Минимум 30 символов" },
+        //             })}
+        //             error={!!errors.bloquote}
+        //             helperText={errors.bloquote?.message}
+        //         />
+        //         <TextField
+        //             label="Оценка"
+        //             size="small"
+        //             {...register("rating", {
+        //                 required: "Обязательное поле",
+        //                 min: { value: 1, message: "В пределах от 1 до 5" },
+        //                 max: { value: 5, message: "В пределах от 1 до 5" },
+        //                 pattern: {
+        //                     value: /\d/,
+        //                     message: "Должно быть число",
+        //                 },
+        //             })}
+        //             error={!!errors.rating}
+        //             helperText={errors.rating?.message}
+        //         />
+        //         <TextField
+        //             label="Автор"
+        //             size="small"
+        //             {...register("author", {
+        //                 required: "Обязательное поле",
+        //             })}
+        //             error={!!errors.author}
+        //             helperText={errors.author?.message}
+        //         />
+        //     </Stack>
+        //     <div className="add-doner-article-form__wrapper">
+        //         <Button
+        //             type="submit"
+        //             disabled={btnStatus}
+        //             className="add-doner-article-form__btn-submit"
+        //         >
+        //             Отправить <PublishIcon className="add-doner-article-form__icon" />
+        //         </Button>
+        //         {isLoading ? loading : null}
+        //         {isSuccess ? postAlert("success", "Статья добавлена") : null}
+        //         {isError ? postAlert("error", "Ошибка добавления") : null}
+        //     </div>
+        // </form>
     );
 };
 
