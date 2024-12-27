@@ -6,8 +6,6 @@ import CommentsBlock from "../../Components/commentsBlock/CommentsBlock";
 import transformDate from "../../utils/transformDate";
 import { contentMaker } from "../../utils/contentMaker";
 
-// import image from "../../../src/assets/event.JPG";
-
 import "./singleEventPage.sass";
 
 const SingleEventPage: React.FC = () => {
@@ -41,6 +39,7 @@ const SingleEventPage: React.FC = () => {
                     </div>
                     <div className="event-info__content">
                         {displayContent}
+
                         <div className="event-info__added">
                             Добавлено: <span>{added}</span>
                         </div>

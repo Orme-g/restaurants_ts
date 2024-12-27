@@ -40,17 +40,36 @@
             border-radius: 15px
             width: 100%
     &__content
-        margin-top: 30px
-        padding: 30px
+        margin-top: 50px
         background-color: $container-color
         border-radius: 15px
+        padding: 30px
+        display: flex
+        flex-direction: column
+        gap: 40px
+
         p
             font-weight: 300
             line-height: 1.7
+            text-indent: 30px
 
+        blockquote
+            @include blockquote
+
+        .content__image
+            height: 400px
+            overflow: hidden
+            border-radius: 5px
+            img
+                height: 100%
+                width: 100%
+        .content__slider
+            height: 500px
+            &>.swiper
+                border-radius: 5px
+            
 
     &__added 
-        margin-top: 50px
         font-size: 1.3rem
         font-weight: 300
         color: $primary-text

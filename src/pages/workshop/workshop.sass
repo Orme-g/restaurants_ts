@@ -16,6 +16,7 @@
         justify-content: flex-start
         margin-bottom: 50px
 
+
     &__button
         cursor: pointer
         margin-left: 10px
@@ -37,6 +38,8 @@
     &__titles
         margin-bottom: 30px
         display: flex
+        position: relative
+        // align-items: center
         color: #044a8f
         label 
             font-size: 1.5rem
@@ -47,6 +50,7 @@
             font-size: 1.5rem
             font-weight: 300
             min-width: 400px
+            
             &:focus
                 outline: none
                 border-bottom: 1px solid #5a9bdc
@@ -62,10 +66,12 @@
         height: fit-content
         margin-bottom: 20px
     &__textfield
+        resize: none
         width: 100%
         height: 100%
-        min-height: 300px
+        min-height: 200px
         padding: 10px
+        padding-top: 30px
         outline: none
         border: 1px solid #5a9bdc
         border-radius: 10px
@@ -73,6 +79,10 @@
         letter-spacing: 1.1px
         &.bloquote
             min-height: 100px
+        &.short_description
+            min-height: 70px
+            padding-bottom: 20px
+            // border: none
         
     &__mark
         position: absolute
@@ -135,7 +145,17 @@
             width: 100%
             object-fit: cover
     
+.characters_left
+    font-size: 0.9rem
+    font-weight: 300
+    margin-left: 20px
+    &.show_error
+        color: red
 
+    &.in_field 
+        position: absolute
+        bottom: 5px
+        right: 10px
 
 
 input[type=file]

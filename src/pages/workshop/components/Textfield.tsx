@@ -44,6 +44,15 @@ const Textfield: React.FC<ITextfield> = ({ type, handleDeleteField, id, modifyRe
     function sendUpdate() {
         modifyRef(id, value);
     }
+    function adjustTextarea(textarea: HTMLTextAreaElement) {
+        textarea.style.height = "auto";
+        textarea.style.height = `${textarea.scrollHeight}px`;
+    }
+
+    function handleInput(e: React.ChangeEvent<HTMLTextAreaElement>) {
+        adjustTextarea(e.target);
+        setValue(e.target.value);
+    }
 
     return (
         <div className="editor__wrapper">
@@ -60,7 +69,7 @@ const Textfield: React.FC<ITextfield> = ({ type, handleDeleteField, id, modifyRe
                 data-textarea={type}
                 aria-multiline
                 value={value}
-                onChange={(e) => setValue(e.target.value)}
+                onChange={handleInput}
                 onBlur={sendUpdate}
             />
         </div>

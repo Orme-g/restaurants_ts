@@ -65,7 +65,7 @@ const ProfilePage: React.FC = () => {
             const uploadedFile = e.target.files[0];
             setImageName(`"${uploadedFile.name}"`);
             const base64Image = await convertToBase64(uploadedFile);
-            setAvatarData(base64Image as string);
+            setAvatarData(base64Image);
         }
     };
     const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = (e) => {

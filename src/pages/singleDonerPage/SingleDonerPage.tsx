@@ -4,7 +4,6 @@ import { useGetSingleDonerRestaurantQuery } from "../../services/donersApi";
 
 import CommentsBlock from "../../Components/commentsBlock/CommentsBlock";
 import { Rating } from "@mui/material";
-import Slider from "../../Components/sliderImages/Slider";
 import { PageSkeleton } from "../../Components/skeletons/Skeletons";
 import tranfsormDate from "../../utils/transformDate";
 import { contentMaker } from "../../utils/contentMaker";
@@ -22,8 +21,7 @@ const SingleDonerPage = () => {
     }
 
     if (singleDonerData) {
-        const { title, rating, title_image, author, subtitle, createdAt, _id, content } =
-            singleDonerData;
+        const { title, rating, author, subtitle, createdAt, _id, content } = singleDonerData;
         const displayContent = contentMaker(content);
 
         const date = tranfsormDate(createdAt);

@@ -17,16 +17,16 @@ const Filefield: React.FC<IFilefield> = ({ type, id, handleDeleteField, modifyRe
             if (type === "photo") {
                 const image = e.target.files[0];
                 const base64Image = await convertToBase64(image);
-                setImage([base64Image as string]);
-                modifyRef(id, base64Image as string);
+                setImage([base64Image]);
+                modifyRef(id, base64Image);
             } else if (type === "slider") {
                 const filesArray = Array.from(e.target.files);
                 const promises = filesArray.map((item) => {
                     return convertToBase64(item);
                 });
                 Promise.all(promises).then((results) => {
-                    setImage([...(results as string[])]);
-                    modifyRef(id, results as string[]);
+                    setImage([...results]);
+                    modifyRef(id, results);
                 });
             }
         }

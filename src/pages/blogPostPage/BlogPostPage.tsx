@@ -65,9 +65,12 @@ const BlogPostPage: React.FC = () => {
                 </div>
                 <div className="blog-post-page__title">{title}</div>
                 <div className="blog-post-page__subtitle">{subtitle}</div>
-                <div className="blog-post-page__title-image">
-                    <img src={title_image} alt="main" />
-                </div>
+                {title_image ? (
+                    <div className="blog-post-page__title-image">
+                        <img src={title_image} alt="main" />
+                    </div>
+                ) : null}
+
                 <div className="blog-post-page__content">{displayContent}</div>
 
                 <div className="blog-post-page__date">{date}</div>
