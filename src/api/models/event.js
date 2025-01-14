@@ -4,10 +4,12 @@ const Schema = mongoose.Schema;
 
 const eventSchema = new Schema({
     title: String,
+    title_image: String,
+    subtitle: String,
     restaurantName: String,
     restaurantId: String,
     image: String,
-    description: String,
+    content: Object,
     short_description: String,
     dateStart: Date,
     dateFinish: Date,

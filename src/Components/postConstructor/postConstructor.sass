@@ -1,0 +1,226 @@
+@import '../../style/mixins'
+@import '../../style/variables'
+
+    
+.post-constructor
+
+    &__container
+        width: 60%
+        height: fit-content
+        margin: 100px auto
+        background-color: #fff
+        padding: 30px 20px
+        border-radius: 10px
+        color: #044a8f
+
+
+.editor
+    &__instruments
+        height: 40px
+        display: flex
+        justify-content: flex-start
+        margin-bottom: 50px
+
+
+    &__button
+        cursor: pointer
+        margin-left: 10px
+        min-width: 60px
+        background-color: rgba(212, 233, 255, 0)
+        border: 2px solid #5a9bdc
+        border-radius: 10px
+        padding: 10px 20px
+        color: #044a8f
+
+        font-size: 0.9rem
+        font-weight: 400
+        transition: background-color 0.5s
+        &:hover
+            background-color: rgba(212, 233, 255, 1)
+
+        &.confirmation
+            min-width: fit-content
+            padding: 5px 10px
+
+    &__post-type
+        margin-top: 20px
+        margin-bottom: 20px
+
+        font-weight: 300
+        font-size: 2rem
+        text-align: center
+    &__restaurant
+        margin-top: 20px
+        margin-bottom: 20px
+        font-weight: 300
+        font-size: 1.8rem
+        text-align: center
+    &__event-dates
+        margin-bottom: 40px
+        text-align: center
+        &_input
+            margin-right: 5px
+            margin-left: 5px
+            color: #044a8f
+            border: none
+            border-bottom: 1px solid #044a8f
+            padding: 3px
+            font-size: 1rem
+            vertical-align: bottom
+            // outline: 1px solid red
+
+
+    &__titles
+        margin-bottom: 30px
+        &_wrapper
+            display: flex
+            align-items: center
+            position: relative
+            &.align_class
+                align-items: flex-start
+
+
+        label 
+            font-size: 1.5rem
+            font-weight: 300
+        &_field
+            border: none
+            margin-left: 10px
+            font-size: 1.5rem
+            font-weight: 300
+            min-width: 400px
+            
+            &:focus
+                outline: none
+                border-bottom: 1px solid #5a9bdc
+        &.title_image
+            display: flex
+            align-items: center
+            input
+                margin-left: 30px
+    &__helper_text
+        margin-top: 10px
+        color: #d12b2b
+        font-size: 0.9rem
+    &__wrapper
+        position: relative
+        width: 100%
+        height: fit-content
+        margin-bottom: 20px
+    &__textfield
+        resize: none
+        width: 100%
+        height: 100%
+        min-height: 200px
+        padding: 10px
+        padding-top: 30px
+        outline: none
+        border: 1px solid #5a9bdc
+        border-radius: 10px
+        font-size: 1.1rem
+        letter-spacing: 1.1px
+        &.bloquote
+            min-height: 100px
+        &.short_description
+            min-height: 70px
+            padding-bottom: 15px
+            padding-top: 10px
+            // border: none
+    &__mark
+        position: absolute
+        top: -10px
+        left: 20px
+        width: fit-content
+        background-color: #fff
+        text-align: center
+        fill: #044a8f
+        height: 20px
+        font-weight: 300
+        letter-spacing: 1.2px
+        padding-left: 10px
+        padding-right: 10px
+
+    &__delete
+        &_mark
+            position: absolute
+            top: 10px
+            right: 20px
+            cursor: pointer
+            font-weight: 300
+    
+        &_confirmation
+            font-size: 1.1rem
+            line-height: 30px
+            position: absolute
+            top: 35px
+            right: -100px
+            background-color: #fff
+            padding: 10px 20px
+            border: 1px solid #5a9bdc
+            border-radius: 10px
+    &__filefield
+        margin-top: 40px
+        margin-bottom: 40px
+        &_input-wrapper
+            position: relative
+            width: 60%
+        &_delete
+            position: absolute
+            top: 10px
+            right: 30px
+            cursor: pointer
+            font-weight: 300
+    
+
+    &__image-gallery
+        display: grid
+        grid-template-columns: repeat(auto-fit, 200px)
+        grid-auto-rows: 200px
+        gap: 10px
+        margin-top: 20px
+    &__image_wrapper
+        width: 100%
+        img
+            height: 100%
+            width: 100%
+            object-fit: cover
+    
+.characters_left
+    font-size: 0.9rem
+    font-weight: 300
+    margin-left: 20px
+    &.show_error
+        color: red
+
+    &.in_field 
+        position: absolute
+        bottom: 5px
+        right: 10px
+
+
+input[type=file]
+    font-size: 0.9rem
+    cursor: pointer
+
+    &::file-selector-button
+        color: #044a8f
+        cursor: pointer
+        background-color: #fff
+        border: 2px solid #5a9bdc
+        border-radius: 5px
+        padding: 10px 20px  
+        height: 40px
+        text-transform: uppercase
+        font-weight: 300
+        transition: background-color 0.5s
+        &:hover
+            background-color: rgba(212, 233, 255, 1)
+            
+.datefield_error
+    border: none
+    outline: 1px solid red
+.textfielf_error
+    border: 1px solid red
+    border-radius: 3px
+    &:focus
+        border-bottom: 1px solid red

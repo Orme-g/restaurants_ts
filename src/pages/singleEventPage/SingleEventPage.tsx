@@ -15,20 +15,28 @@ const SingleEventPage: React.FC = () => {
     if (isLoading) {
         return;
     }
-    const { title, title_image, restaurantName, dateStart, dateFinish, createdAt, content } =
-        eventData!;
+    const {
+        title,
+        subtitle,
+        title_image,
+        restaurantName,
+        dateStart,
+        dateFinish,
+        createdAt,
+        content,
+    } = eventData!;
     const [start, finish, added] = transformDate([dateStart, dateFinish, createdAt]);
     const displayContent = contentMaker(content);
     return (
         <>
             <div className="page-wrapper">
                 <div className="event-info__container">
-                    <div className="event-info__name">{title}</div>
+                    <div className="event-info__title">{title}</div>
+                    <div className="event-info__subtitle">{subtitle}</div>
                     <div className="event-info__wrapper">
-                        <div className="event-info__title">Где проходит: </div>
+                        <div className="event-info__label">Где проходит: </div>
                         <div className="event-info__text">Ресторан {restaurantName}</div>
-
-                        <div className="event-info__title">Когда проходит:</div>
+                        <div className="event-info__label">Когда проходит:</div>
                         <div className="event-info__text">
                             C <span>{start}</span> до <span>{finish}</span>
                         </div>

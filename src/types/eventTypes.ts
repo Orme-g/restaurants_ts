@@ -1,6 +1,7 @@
 export interface IEvent {
     _id: string;
     title: string;
+    subtitle: string;
     title_image: string;
     short_description: string;
     content: { [key: string]: string }[];

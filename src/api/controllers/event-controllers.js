@@ -19,7 +19,17 @@ const getRestaurantEvents = (req, res) => {
         .catch((error) => handleError(res, error));
 };
 
+const addNewEvent = (req, res) => {
+    try {
+        const newEvent = req.body;
+        console.log(newEvent);
+    } catch (e) {
+        handleError(res, e);
+    }
+};
+
 module.exports = {
     getEvent,
     getRestaurantEvents,
+    addNewEvent,
 };

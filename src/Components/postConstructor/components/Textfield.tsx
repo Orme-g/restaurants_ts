@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./fieldstyle.sass";
 import { Quotes } from "../../../Components/svg/Quotes";
 
 interface ITextfield {
@@ -65,6 +64,7 @@ const Textfield: React.FC<ITextfield> = ({ type, handleDeleteField, id, modifyRe
             </div>
 
             <textarea
+                id={id}
                 className={`editor__textfield ${type === "bloquote" ? "bloquote" : null}`}
                 data-textarea={type}
                 aria-multiline

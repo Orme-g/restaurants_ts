@@ -14,6 +14,7 @@
         height: fit-content
         border-radius: 10px
         background-color: $container-color
+        position: relative
 
     &__title
         font-size: 2.7rem
@@ -28,6 +29,12 @@
         font-size: 1.2rem
         text-indent: 25px
         margin-bottom: 70px
+
+    &__add-topic_btn
+        @include addPostButton
+        position: absolute
+        top: 30px
+        right: 60px
 
     &__cards
         display: flex

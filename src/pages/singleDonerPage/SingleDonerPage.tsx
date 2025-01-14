@@ -23,7 +23,6 @@ const SingleDonerPage = () => {
     if (singleDonerData) {
         const { title, rating, author, subtitle, createdAt, _id, content } = singleDonerData;
         const displayContent = contentMaker(content);
-
         const date = tranfsormDate(createdAt);
         return (
             <>

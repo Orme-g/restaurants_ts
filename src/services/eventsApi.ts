@@ -12,7 +12,14 @@ export const eventsApi = createApi({
         getRestaurantEvents: builder.query<IEvent[] | [], string>({
             query: (restId: string) => `event/restaurant/${restId}`,
         }),
+        addEvent: builder.mutation({
+            query: (data: any) => ({
+                url: "event/addEvent",
+                method: "POST",
+                body: data,
+            }),
+        }),
     }),
 });
 
-export const { useGetEventQuery, useGetRestaurantEventsQuery } = eventsApi;
+export const { useGetEventQuery, useGetRestaurantEventsQuery, useAddEventMutation } = eventsApi;

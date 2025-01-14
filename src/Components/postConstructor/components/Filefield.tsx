@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { nanoid } from "@reduxjs/toolkit";
 import { convertToBase64 } from "../../../utils/convertToBase64";
-import "./fieldstyle.sass";
 
 interface IFilefield {
     type: "photo" | "slider";

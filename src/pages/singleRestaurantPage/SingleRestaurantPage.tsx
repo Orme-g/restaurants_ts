@@ -74,7 +74,7 @@ const SingleRestaurantPage: React.FC = () => {
                     isRegistered={passAuth}
                 />
             </div>
-            <RestaurantsTabs description={description} restId={restId} />
+            <RestaurantsTabs description={description} restId={restId} restaurantName={name} />
         </>
     );
 };
