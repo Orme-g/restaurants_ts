@@ -6,9 +6,10 @@ interface ITextfield {
     handleDeleteField: (id: string) => void;
     id: string;
     modifyRef: (id: string, value: string) => void;
+    error?: string | undefined;
 }
 
-const Textfield: React.FC<ITextfield> = ({ type, handleDeleteField, id, modifyRef }) => {
+const Textfield: React.FC<ITextfield> = ({ type, handleDeleteField, id, modifyRef, error }) => {
     const [value, setValue] = useState("");
     const [displayConfirmation, setDisplayConfirmation] = useState(false);
     const mark = () => {
@@ -72,6 +73,8 @@ const Textfield: React.FC<ITextfield> = ({ type, handleDeleteField, id, modifyRe
                 onChange={handleInput}
                 onBlur={sendUpdate}
             />
+            {/* <div className="editor__textfield_error">Error occured</div> */}
+            {error ? <div className="editor__textfield_error">{error}</div> : null}
         </div>
     );
 };

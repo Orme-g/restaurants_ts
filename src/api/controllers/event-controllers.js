@@ -21,8 +21,11 @@ const getRestaurantEvents = (req, res) => {
 
 const addNewEvent = (req, res) => {
     try {
-        const newEvent = req.body;
-        console.log(newEvent);
+        const newEvent = new Event(req.body);
+        newEvent
+            .save()
+            .then(() => res.status(201).json("Success"))
+            .catch((error) => res.status(500).json(error));
     } catch (e) {
         handleError(res, e);
     }

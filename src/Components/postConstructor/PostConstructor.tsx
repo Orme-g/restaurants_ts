@@ -14,6 +14,7 @@ interface IFieldData {
     type: InputType;
     id: string;
     value: string | string[] | null;
+    error?: string;
 }
 interface IPostConstructor {
     modalController: (open: boolean) => void;
@@ -32,7 +33,7 @@ const PostConstructor: React.FC<IPostConstructor> = ({ modalController, type, re
     const [error, setError] = useState<any>({});
     let refData = useRef<IFieldData[]>([]);
 
-    const [sendData, { isError, isSuccess }] = useAddEventMutation();
+    const [sendData, { isError: errorEvent, isSuccess }] = useAddEventMutation();
 
     const maxTitleLength = 50;
     const maxSubtitleLength = 100;
@@ -65,7 +66,7 @@ const PostConstructor: React.FC<IPostConstructor> = ({ modalController, type, re
         refData.current = [...refData.current.filter((item) => item.id !== id)];
     }
 
-    function modifyRef(id: string, value: string | string[]) {
+    function modifyRef(id: string, value: string | string[] | null) {
         refData.current.forEach((item) => {
             if (item.id === id) {
                 item.value = value;
@@ -80,7 +81,7 @@ const PostConstructor: React.FC<IPostConstructor> = ({ modalController, type, re
     };
     const displayFields = fields.map((item) => {
         if (item) {
-            const { type, id } = item;
+            const { type, id, error } = item;
             if (type === "bloquote" || type === "text") {
                 return (
                     <Textfield
@@ -89,6 +90,7 @@ const PostConstructor: React.FC<IPostConstructor> = ({ modalController, type, re
                         id={id}
                         handleDeleteField={handleDeleteField}
                         modifyRef={modifyRef}
+                        error={error}
                     />
                 );
             } else if (type === "photo" || type === "slider") {
@@ -153,10 +155,6 @@ const PostConstructor: React.FC<IPostConstructor> = ({ modalController, type, re
             }));
             document.querySelector(`[name=${fieldName}]`)?.classList.add("textfielf_error");
         } else if (error[fieldName]) {
-            // let { [fieldName]: value, ...errors } = error;
-            // setError(errors);
-            // setError((error: any) => ({ ...error, [fieldName]: "" }));
-
             const copy = { ...error };
             delete copy[fieldName];
             setError(copy);
@@ -167,34 +165,85 @@ const PostConstructor: React.FC<IPostConstructor> = ({ modalController, type, re
         const field = document.querySelector(`[name=${fieldName}]`) as HTMLInputElement;
         if (!fieldValue) {
             field.classList.add("datefield_error");
-        } else if (fieldValue && field.classList.contains("datefield_error")) {
+            setError((error: any) => ({
+                ...error,
+                date: "Заполните даты, когда проходит событие",
+            }));
+        } else if (dateFrom > dateTo) {
+            field.classList.add("datefield_error");
+            setError((error: any) => ({ ...error, date: "Неправильный диапазон дат" }));
+        } else if (fieldValue && dateFrom < dateTo && field.classList.contains("datefield_error")) {
             field.classList.remove("datefield_error");
+            setError((error: any) => ({ ...error, date: null }));
         }
     };
 
     const handleSumbit = () => {
-        validateField("title", title, 2, 50);
-        validateField("subtitle", subtitle, 5, 100);
-        validateField("shortDescription", shortDescription, 10, 200);
-        validateDate(dateFrom, "dateFrom");
-        validateDate(dateTo, "dateTo");
+        // validateField("title", title, 2, 50);
+        // validateField("subtitle", subtitle, 5, 100);
+        // validateField("shortDescription", shortDescription, 10, 200);
+        // if (type === "event") {
+        //     validateDate(dateFrom, "dateFrom");
+        //     validateDate(dateTo, "dateTo");
+        // }
+
         let dynamicFieldsError = 0;
         refData.current.forEach((item) => {
             const element = document.getElementById(item.id);
             if (!item.value) {
-                element?.classList.add("textfielf_error");
-                dynamicFieldsError++;
+                if (item.type === "bloquote" || item.type === "text") {
+                    element?.classList.add("textfielf_error");
+                    dynamicFieldsError++;
+                    const copy = [...fields];
+                    copy.forEach((field) => {
+                        if (field.id === item.id) {
+                            field.error =
+                                "Поле не должно быть пустым. Заполните либо удалите поле.";
+                        }
+                    });
+                    setFields(copy);
+                } else if (item.type === "photo" || item.type === "slider") {
+                    element?.classList.add("filefield_error");
+                }
             } else if (item.value && element?.classList.contains("textfielf_error")) {
                 element?.classList.remove("textfielf_error");
+                const copy = [...fields];
+                copy.forEach((field) => {
+                    if (field.id === item.id) {
+                        field.error = "";
+                    }
+                });
+                setFields(copy);
             }
         });
         console.log(dynamicFieldsError > 0 ? "There is error" : "Good, no errors");
 
-        const content = refData.current.map((item) => {
-            const { type, value } = item;
-
-            return { [type]: value };
-        });
+        if (dynamicFieldsError === 0) {
+            const content = refData.current.map((item) => {
+                const { type, value } = item;
+                return { [type]: value };
+            });
+            if (type === "event") {
+                let dataToSend: any = {
+                    dateStart: new Date(dateFrom),
+                    dateFinish: new Date(dateTo),
+                    title: title.trim(),
+                    title_image: titleImage,
+                    subtitle: subtitle.trim(),
+                    short_description: shortDescription.trim(),
+                    content,
+                    restaurantName: restaurantData?.restaurantName,
+                    restaurantId: restaurantData?.restId,
+                };
+                // sendData(dataToSend)
+                //     .unwrap()
+                //     .then((res) => {
+                //         if (res === "Success") {
+                //         }
+                //     });
+                console.log(dataToSend);
+            }
+        }
 
         // if (type === "event") {
         //     let dataToSend: any = {
@@ -244,6 +293,9 @@ const PostConstructor: React.FC<IPostConstructor> = ({ modalController, type, re
                                 type="date"
                                 onChange={(e) => setDateTo(e.target.value)}
                             />
+                            {error.date ? (
+                                <p className="editor__helper_text">{error.date}</p>
+                            ) : null}
                         </div>
                     </>
                 ) : null}

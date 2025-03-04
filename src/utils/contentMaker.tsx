@@ -1,5 +1,6 @@
 import React from "react";
 import Slider from "../Components/sliderImages/Slider";
+import { nanoid } from "@reduxjs/toolkit";
 
 interface IContent {
     [key: string]: string | string[];
@@ -8,18 +9,22 @@ interface IContent {
 export const contentMaker = (content: IContent[]) => {
     const readyToDisplay = content.map((item) => {
         if ("text" in item) {
-            return <p>{item.text}</p>;
+            const id = nanoid();
+            return <p key={id}>{item.text}</p>;
         } else if ("bloquote" in item) {
-            return <blockquote>{item.bloquote}</blockquote>;
+            const id = nanoid();
+            return <blockquote key={id}>{item.bloquote}</blockquote>;
         } else if ("photo" in item) {
+            const id = nanoid();
             return (
-                <div className="content__image">
+                <div key={id} className="content__image">
                     <img src={item.photo as string} alt="post_image" />
                 </div>
             );
         } else if ("slider" in item) {
+            const id = nanoid();
             return (
-                <div className="content__slider">
+                <div key={id} className="content__slider">
                     <Slider images={item.slider as string[]} />
                 </div>
             );
