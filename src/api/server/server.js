@@ -14,6 +14,7 @@ const blogRoutes = require("../routes/blog-routes");
 
 const PORT = 4000;
 const URL = "mongodb://localhost:27017/restaurants_db";
+// const URL = "mongodb://192.168.31.198:27017/restaurants_db";
 
 const app = express();
 app.use(
