@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import {
     FormControl,
     ListSubheader,
@@ -81,126 +82,131 @@ const RestaurantSelectionPage: React.FC = () => {
         searchResults = <RenderListWithPagination displayItems={3} list={renderList} />;
     }
     return (
-        <section className="find-restaurant__container">
-            <h1 className="find-restaurant__title">Подобрать ресторан</h1>
-            <h3 className="find-restaurant__subtitle">
-                Подобрать ресторан рядом с вами или для будущей поездки.
-            </h3>
-            <div className="find-restaurant__search">
-                <div className="find-restaurant__search_wrapper">
-                    <div>Я около метро</div>
-                    <FormControl
-                        className="find-restaurant__search_subway"
-                        variant="standard"
-                        sx={{ minWidth: 100 }}
-                    >
-                        <Select
-                            style={{ fontSize: "20px", fontWeight: 300 }}
-                            id="select-subway"
-                            value={subway}
-                            onChange={handleSelectSubway}
-                            renderValue={(selected) => selected}
+        <>
+            <Helmet>
+                <title>Подобрать ресторан.</title>
+            </Helmet>
+            <section className="find-restaurant__container">
+                <h1 className="find-restaurant__title">Подобрать ресторан</h1>
+                <h3 className="find-restaurant__subtitle">
+                    Подобрать ресторан рядом с вами или для будущей поездки.
+                </h3>
+                <div className="find-restaurant__search">
+                    <div className="find-restaurant__search_wrapper">
+                        <div>Я около метро</div>
+                        <FormControl
+                            className="find-restaurant__search_subway"
+                            variant="standard"
+                            sx={{ minWidth: 100 }}
                         >
-                            <ListSubheader>Линия 1</ListSubheader>
-                            {line1.map((station) => (
-                                <MenuItem value={station} key={station}>
-                                    <ListItemIcon>
-                                        <SubwayIcon color={TSubwayColors.Red} />
-                                    </ListItemIcon>
-                                    <ListItemText>{station}</ListItemText>
-                                </MenuItem>
-                            ))}
-                            <ListSubheader>Линия 2</ListSubheader>
-                            {line2.map((station) => (
-                                <MenuItem value={station} key={station}>
-                                    <ListItemIcon>
-                                        <SubwayIcon color={TSubwayColors.Blue} />
-                                    </ListItemIcon>
-                                    <ListItemText>{station}</ListItemText>
-                                </MenuItem>
-                            ))}
-                            <ListSubheader>Линия 3</ListSubheader>
-                            {line3.map((station) => (
-                                <MenuItem value={station} key={station}>
-                                    <ListItemIcon>
-                                        <SubwayIcon color={TSubwayColors.Green} />
-                                    </ListItemIcon>
-                                    <ListItemText>{station}</ListItemText>
-                                </MenuItem>
-                            ))}{" "}
-                            <ListSubheader>Линия 4</ListSubheader>
-                            {line4.map((station) => (
-                                <MenuItem value={station} key={station}>
-                                    <ListItemIcon>
-                                        <SubwayIcon color={TSubwayColors.Orange} />
-                                    </ListItemIcon>
-                                    <ListItemText>{station}</ListItemText>
-                                </MenuItem>
-                            ))}
-                            <ListSubheader>Линия 5</ListSubheader>
-                            {line5.map((station) => (
-                                <MenuItem value={station} key={station}>
-                                    <ListItemIcon>
-                                        <SubwayIcon color={TSubwayColors.Purple} />
-                                    </ListItemIcon>
-                                    <ListItemText>{station}</ListItemText>
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
-                </div>
-                <div className="find-restaurant__search_wrapper">
-                    <div>предпочтительная кухня</div>
-                    <FormControl
-                        className="find-restaurant__search_cousine"
-                        variant="standard"
-                        sx={{ minWidth: 100, maxWidth: 300 }}
-                    >
-                        <Select
-                            style={{ fontSize: "20px", fontWeight: 300 }}
-                            value={cousine}
-                            multiple
-                            onChange={handleSelectCousine}
+                            <Select
+                                style={{ fontSize: "20px", fontWeight: 300 }}
+                                id="select-subway"
+                                value={subway}
+                                onChange={handleSelectSubway}
+                                renderValue={(selected) => selected}
+                            >
+                                <ListSubheader>Линия 1</ListSubheader>
+                                {line1.map((station) => (
+                                    <MenuItem value={station} key={station}>
+                                        <ListItemIcon>
+                                            <SubwayIcon color={TSubwayColors.Red} />
+                                        </ListItemIcon>
+                                        <ListItemText>{station}</ListItemText>
+                                    </MenuItem>
+                                ))}
+                                <ListSubheader>Линия 2</ListSubheader>
+                                {line2.map((station) => (
+                                    <MenuItem value={station} key={station}>
+                                        <ListItemIcon>
+                                            <SubwayIcon color={TSubwayColors.Blue} />
+                                        </ListItemIcon>
+                                        <ListItemText>{station}</ListItemText>
+                                    </MenuItem>
+                                ))}
+                                <ListSubheader>Линия 3</ListSubheader>
+                                {line3.map((station) => (
+                                    <MenuItem value={station} key={station}>
+                                        <ListItemIcon>
+                                            <SubwayIcon color={TSubwayColors.Green} />
+                                        </ListItemIcon>
+                                        <ListItemText>{station}</ListItemText>
+                                    </MenuItem>
+                                ))}{" "}
+                                <ListSubheader>Линия 4</ListSubheader>
+                                {line4.map((station) => (
+                                    <MenuItem value={station} key={station}>
+                                        <ListItemIcon>
+                                            <SubwayIcon color={TSubwayColors.Orange} />
+                                        </ListItemIcon>
+                                        <ListItemText>{station}</ListItemText>
+                                    </MenuItem>
+                                ))}
+                                <ListSubheader>Линия 5</ListSubheader>
+                                {line5.map((station) => (
+                                    <MenuItem value={station} key={station}>
+                                        <ListItemIcon>
+                                            <SubwayIcon color={TSubwayColors.Purple} />
+                                        </ListItemIcon>
+                                        <ListItemText>{station}</ListItemText>
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                    </div>
+                    <div className="find-restaurant__search_wrapper">
+                        <div>предпочтительная кухня</div>
+                        <FormControl
+                            className="find-restaurant__search_cousine"
+                            variant="standard"
+                            sx={{ minWidth: 100, maxWidth: 300 }}
                         >
-                            {cousines.map((cousine) => (
-                                <MenuItem key={cousine} value={cousine}>
-                                    {cousine}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
-                </div>
-                <div className="find-restaurant__search_wrapper">
-                    <div>сначала показать рестораны</div>
+                            <Select
+                                style={{ fontSize: "20px", fontWeight: 300 }}
+                                value={cousine}
+                                multiple
+                                onChange={handleSelectCousine}
+                            >
+                                {cousines.map((cousine) => (
+                                    <MenuItem key={cousine} value={cousine}>
+                                        {cousine}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                    </div>
+                    <div className="find-restaurant__search_wrapper">
+                        <div>сначала показать рестораны</div>
 
-                    <FormControl
-                        className="find-restaurant__search_sort-type"
-                        variant="standard"
-                        sx={{ minWidth: 100 }}
-                    >
-                        <Select
-                            style={{ fontSize: "20px", fontWeight: 300 }}
-                            value={sortBy}
-                            onChange={handleSelectSortBy}
+                        <FormControl
+                            className="find-restaurant__search_sort-type"
+                            variant="standard"
+                            sx={{ minWidth: 100 }}
                         >
-                            <MenuItem value={"cheaper"}>Дешевле</MenuItem>
-                            <MenuItem value={"expensive"}>Дороже</MenuItem>
-                        </Select>
-                    </FormControl>
+                            <Select
+                                style={{ fontSize: "20px", fontWeight: 300 }}
+                                value={sortBy}
+                                onChange={handleSelectSortBy}
+                            >
+                                <MenuItem value={"cheaper"}>Дешевле</MenuItem>
+                                <MenuItem value={"expensive"}>Дороже</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </div>
                 </div>
-            </div>
-            <Button
-                className="find-restaurant__search_button"
-                color="success"
-                size="large"
-                variant="contained"
-                onClick={findRest}
-            >
-                Поиск
-            </Button>
-            <div className="find-restaurant__results_title">Результаты поиска:</div>
-            <div className="find-restaurant__results_output">{searchResults}</div>
-        </section>
+                <Button
+                    className="find-restaurant__search_button"
+                    color="success"
+                    size="large"
+                    variant="contained"
+                    onClick={findRest}
+                >
+                    Поиск
+                </Button>
+                <div className="find-restaurant__results_title">Результаты поиска:</div>
+                <div className="find-restaurant__results_output">{searchResults}</div>
+            </section>
+        </>
     );
 };
 

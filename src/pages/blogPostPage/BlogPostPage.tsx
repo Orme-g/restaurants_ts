@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet-async";
 
 import { useParams } from "react-router-dom";
 import ChatIcon from "@mui/icons-material/Chat";
@@ -59,6 +60,9 @@ const BlogPostPage: React.FC = () => {
 
     return (
         <>
+            <Helmet>
+                <title>{title}</title>
+            </Helmet>
             <div className="blog-post-page__container">
                 <div className="blog-post-page__author">
                     <BlogAuthorBadge userId={userId} />

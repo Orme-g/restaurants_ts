@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet-async";
 import { useParams } from "react-router-dom";
 import { useGetSingleDonerRestaurantQuery } from "../../services/donersApi";
 
@@ -11,7 +12,7 @@ import { contentMaker } from "../../utils/contentMaker";
 import pic from "../../assets/event.JPG";
 import "./singleDonerPage.sass";
 
-const SingleDonerPage = () => {
+const SingleDonerPage: React.FC = () => {
     const { donerId } = useParams<string>();
     const { data: singleDonerData, isLoading } = useGetSingleDonerRestaurantQuery(
         donerId as string
@@ -26,6 +27,9 @@ const SingleDonerPage = () => {
         const date = tranfsormDate(createdAt);
         return (
             <>
+                <Helmet>
+                    <title>{title}</title>
+                </Helmet>
                 <div className="page-wrapper">
                     <section className="doner-topic__container">
                         <div className="doner-topic__title">

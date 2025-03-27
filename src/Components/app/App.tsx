@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import { lazy, Suspense } from "react";
 // import { useDispatch } from "react-redux";
 import { useAppDispatch } from "../../types/store";
@@ -53,40 +54,45 @@ export const App: React.FC = () => {
     }
 
     return (
-        <Router>
-            <ScrollToTop />
-            <div className="App">
-                <Navigation />
-                <Suspense fallback={<Spinner />}>
-                    <Routes>
-                        <Route path="/" element={<MainPage />} />
-                        <Route path="/restaurant/:restId" element={<SingleRestaurantPage />} />
-                        <Route path="/find-restaurant" element={<RestaurantSelectionPage />} />
-                        <Route path="/best-doner" element={<BestDonersListPage />} />
-                        <Route path="/best-doner/:donerId" element={<SingleDonerPage />} />
-                        <Route path="/blog" element={<BlogPage />} />
-                        <Route path="/blog/blog-post/:postId" element={<BlogPostPage />} />
-                        <Route
-                            path="/blog/bloger-profile/:userId"
-                            element={<BlogerProfilePage />}
-                        />
-                        <Route
-                            path="/blog/blog-theme/:theme"
-                            element={<BlogPageThemeSelection />}
-                        />
-                        <Route path="/event/:eventId" element={<EventPage />} />
-                        <Route path="/info/:infoType" element={<InfoPage />} />
-                        <Route path="/profile/:userId" element={<ProfilePage />} />
-                        <Route path="/admin" element={<AdminPage />} />
-                        <Route path="/workshop" element={<Workshop />} />
-                        <Route path="*" element={<Page404 />} />
-                    </Routes>
-                </Suspense>
-                <Footer />
-                <ModalLogin />
-                <ModalRegister />
-                <Snack />
-            </div>
-        </Router>
+        <HelmetProvider>
+            <Helmet>
+                <title>WEATS. Подбор ресторана, события, блог.</title>
+            </Helmet>
+            <Router>
+                <ScrollToTop />
+                <div className="App">
+                    <Navigation />
+                    <Suspense fallback={<Spinner />}>
+                        <Routes>
+                            <Route path="/" element={<MainPage />} />
+                            <Route path="/restaurant/:restId" element={<SingleRestaurantPage />} />
+                            <Route path="/find-restaurant" element={<RestaurantSelectionPage />} />
+                            <Route path="/best-doner" element={<BestDonersListPage />} />
+                            <Route path="/best-doner/:donerId" element={<SingleDonerPage />} />
+                            <Route path="/blog" element={<BlogPage />} />
+                            <Route path="/blog/blog-post/:postId" element={<BlogPostPage />} />
+                            <Route
+                                path="/blog/bloger-profile/:userId"
+                                element={<BlogerProfilePage />}
+                            />
+                            <Route
+                                path="/blog/blog-theme/:theme"
+                                element={<BlogPageThemeSelection />}
+                            />
+                            <Route path="/event/:eventId" element={<EventPage />} />
+                            <Route path="/info/:infoType" element={<InfoPage />} />
+                            <Route path="/profile/:userId" element={<ProfilePage />} />
+                            <Route path="/admin" element={<AdminPage />} />
+                            <Route path="/workshop" element={<Workshop />} />
+                            <Route path="*" element={<Page404 />} />
+                        </Routes>
+                    </Suspense>
+                    <Footer />
+                    <ModalLogin />
+                    <ModalRegister />
+                    <Snack />
+                </div>
+            </Router>
+        </HelmetProvider>
     );
 };

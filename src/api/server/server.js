@@ -19,7 +19,7 @@ const URL = "mongodb://localhost:27017/restaurants_db";
 const app = express();
 app.use(
     cors({
-        origin: "http://localhost:3000", // Разрешаем запросы с http://localhost:3000
+        origin: "http://localhost:5173", // Разрешаем запросы с http://localhost:3000
         // methods: ["GET", "POST"]       // Какие запросы разрешены
     })
 );

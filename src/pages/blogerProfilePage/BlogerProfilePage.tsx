@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet-async";
 
 import { useParams } from "react-router-dom";
 
@@ -52,33 +53,40 @@ const BlogerProfilePage: React.FC = () => {
     }
 
     return (
-        <div className="bloger-profile__container">
-            <div className="bloger-profile__info">
-                <div className="bloger-profile__info_image">
-                    <img src={blogAvatar} alt="bloger" />
-                </div>
-                <div className="bloger-profile__info_container">
-                    <div className="bloger-profile__info_name">
-                        {blogerName}, <span>{blogCity}</span>
+        <>
+            <Helmet>
+                <title>Профиль {blogerName}</title>
+            </Helmet>
+            <div className="bloger-profile__container">
+                <div className="bloger-profile__info">
+                    <div className="bloger-profile__info_image">
+                        <img src={blogAvatar} alt="bloger" />
                     </div>
-                    <div className="bloger-profile__info_status">
-                        <div className="status-title">{status}</div>
+                    <div className="bloger-profile__info_container">
+                        <div className="bloger-profile__info_name">
+                            {blogerName}, <span>{blogCity}</span>
+                        </div>
+                        <div className="bloger-profile__info_status">
+                            <div className="status-title">{status}</div>
+                        </div>
+                        <div className="bloger-profile__info_posts-count">
+                            Cтатей: {blogPostsCount}
+                        </div>
+                        <div className="bloger-profile__info_about-me">{aboutMe}</div>
                     </div>
-                    <div className="bloger-profile__info_posts-count">Cтатей: {blogPostsCount}</div>
-                    <div className="bloger-profile__info_about-me">{aboutMe}</div>
+                </div>
+                <div className="bloger-profile__top-posts">
+                    <div className="bloger-profile__top-posts_title">Самые популярные посты:</div>
+                    <div className="bloger-profile__top-posts_list">{displTop4Posts}</div>
+                </div>
+                <div className="bloger-profile__all-posts">
+                    <div className="bloger-profile__all-posts_title">Все посты:</div>
+                    <div className="bloger-profile__all-posts_list">
+                        <RenderListWithPagination list={allPostsList!} displayItems={5} />
+                    </div>
                 </div>
             </div>
-            <div className="bloger-profile__top-posts">
-                <div className="bloger-profile__top-posts_title">Самые популярные посты:</div>
-                <div className="bloger-profile__top-posts_list">{displTop4Posts}</div>
-            </div>
-            <div className="bloger-profile__all-posts">
-                <div className="bloger-profile__all-posts_title">Все посты:</div>
-                <div className="bloger-profile__all-posts_list">
-                    <RenderListWithPagination list={allPostsList!} displayItems={5} />
-                </div>
-            </div>
-        </div>
+        </>
     );
 };
 

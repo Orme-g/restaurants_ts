@@ -26,22 +26,19 @@
         "mongoose": "^7.5.3",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
-        "react-helmet": "^6.1.0",
+        "react-helmet-async": "^2.0.5",
         "react-hook-form": "^7.47.0",
         "react-redux": "^8.1.2",
         "react-router-dom": "^6.15.0",
-        "react-scripts": "5.0.1",
         "swiper": "^10.3.1",
         "web-vitals": "^2.1.4",
         "yup": "^1.2.0"
     },
     "scripts": {
+        "start": "vite",
         "server": "nodemon ./src/api/server/server.js",
-        "start": "react-scripts start",
-        "start__": "concurrently \"react-scripts start\" \"npx json-server restaurants.json --port 3001\"",
-        "build": "react-scripts build --exclude=src/api",
-        "test": "react-scripts test",
-        "eject": "react-scripts eject"
+        "build": "tsc && vite build",
+        "serve": "vite preview"
     },
     "eslintConfig": {
         "extends": [
@@ -67,12 +64,16 @@
         "@types/node": "^20.12.8",
         "@types/react": "^18.3.1",
         "@types/react-dom": "^18.3.0",
+        "@vitejs/plugin-react-swc": "^3.8.1",
         "concurrently": "^8.2.1",
         "nodemon": "^3.0.1",
         "sass": "^1.66.1",
         "source-map-loader": "^5.0.0",
         "ts-loader": "^9.5.1",
-        "typescript": "^5.4.5"
+        "typescript": "^5.4.5",
+        "vite": "^6.2.3",
+        "vite-plugin-svgr": "^4.3.0",
+        "vite-tsconfig-paths": "^5.1.4"
     },
     "description": "Pet project.",
     "main": "Hook-Form.js",

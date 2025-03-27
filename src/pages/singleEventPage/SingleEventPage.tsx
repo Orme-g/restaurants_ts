@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet-async";
 
 import { useParams } from "react-router-dom";
 import { useGetEventQuery } from "../../services/eventsApi";
@@ -29,6 +30,11 @@ const SingleEventPage: React.FC = () => {
     const displayContent = contentMaker(content);
     return (
         <>
+            <Helmet>
+                <title>
+                    {restaurantName}: {title}
+                </title>
+            </Helmet>
             <div className="page-wrapper">
                 <div className="event-info__container">
                     <div className="event-info__title">{title}</div>

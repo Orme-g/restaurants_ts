@@ -1,4 +1,5 @@
 import React, { useCallback } from "react";
+import { Helmet } from "react-helmet-async";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../types/store";
 
@@ -62,6 +63,9 @@ const SingleRestaurantPage: React.FC = () => {
 
     return (
         <>
+            <Helmet>
+                <title>Ресторан {name}</title>
+            </Helmet>
             <div className="restaurant-info__container">
                 <div className="restaurant-info__name">{name}</div>
                 <div className="restaurant-info__slider">
