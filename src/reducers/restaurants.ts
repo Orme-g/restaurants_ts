@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { useHttp } from "../hooks/http.hook";
+import { serverHost, serverPort } from "../../URLs";
 
 import type { IRestaurant } from "../types/restaurantsTypes";
 import type { IReview } from "../types/reviewsTypes";
@@ -24,7 +25,7 @@ export const fetchLastAddedRestaurants = createAsyncThunk<IRestaurant[], undefin
     "restaurants/fetchLastAddedRestaurants",
     () => {
         const { request } = useHttp();
-        return request("http://localhost:4000/restaurants");
+        return request(`http://${serverHost}:${serverPort}/restaurants`);
     }
 );
 
@@ -32,7 +33,7 @@ export const fetchRestaurantData = createAsyncThunk<IRestaurant, string>(
     "restaurants/fetchRestaurantData",
     (restId) => {
         const { request } = useHttp();
-        return request(`http://localhost:4000/restaurants/${restId}`);
+        return request(`http://${serverHost}:${serverPort}/restaurants/${restId}`);
     }
 );
 
@@ -40,7 +41,7 @@ export const fetchRestaurantReviews = createAsyncThunk<IReview[], string>(
     "restaurants/fetchRestaurantReviews",
     (restId) => {
         const { request } = useHttp();
-        return request(`http://localhost:4000/reviews/${restId}`);
+        return request(`http://${serverHost}:${serverPort}/reviews/${restId}`);
     }
 );
 
@@ -48,7 +49,7 @@ export const addNewRestaurant = createAsyncThunk<"Sending" | "Failed" | "Success
     "restaurants/addNewRestaurant",
     (restData) => {
         const { request } = useHttp();
-        return request("http://localhost:4000/restaurants/add", "POST", restData);
+        return request(`http://${serverHost}:${serverPort}/restaurants/add`, "POST", restData);
     }
 );
 
@@ -56,7 +57,11 @@ export const addAdditionalReview = createAsyncThunk(
     "restaurants/addAdditionalReview",
     (reviewData: string) => {
         const { request } = useHttp();
-        return request("http://localhost:4000/reviews/addAdditional", "PATCH", reviewData);
+        return request(
+            `http://${serverHost}:${serverPort}/reviews/addAdditional`,
+            "PATCH",
+            reviewData
+        );
     }
 );
 

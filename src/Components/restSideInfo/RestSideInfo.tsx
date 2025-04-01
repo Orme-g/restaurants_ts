@@ -17,8 +17,9 @@ interface ISideInfoProps {
 const RestSideInfo: React.FC<ISideInfoProps> = memo(
     ({ data, isFavourite, favouriteHandler, isRegistered }) => {
         const { cousine, rating, adress, subway, bill, phone } = data;
-        const { marks, overallRating } = rating;
-        const calculatedRating = marks === 0 ? 0 : overallRating / marks;
+        // const { marks, overallRating } = rating;
+        const calculatedRating =
+            rating.length === 0 ? 0 : rating.reduce((acc, num) => acc + num, 0) / rating.length;
         const cousineList: string = cousine.join(", ");
 
         return (
@@ -48,7 +49,7 @@ const RestSideInfo: React.FC<ISideInfoProps> = memo(
                             />
                         </div>
 
-                        <div className="rest-side-info__rating_marks-amount">({marks})</div>
+                        <div className="rest-side-info__rating_marks-amount">({rating.length})</div>
                     </div>
                 </div>
 

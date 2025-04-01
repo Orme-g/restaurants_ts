@@ -5,7 +5,8 @@ export interface IRestaurant {
     description: string;
     images: string[];
     cousine: string[];
-    rating: { marks: number; overallRating: number };
+    rating: number[];
+    // rating: { marks: number; overallRating: number };
     adress: string;
     bill: number;
     phone: string;

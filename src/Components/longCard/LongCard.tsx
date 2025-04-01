@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Rating } from "@mui/material";
 import transformDate from "../../utils/transformDate";
-import pic from "../../assets/rest.jpeg";
+// import pic from "../../assets/rest.jpeg";
 import "./longCard.sass";
 
 interface ILongCardProps {
@@ -11,7 +11,7 @@ interface ILongCardProps {
 }
 
 const LongCard: React.FC<ILongCardProps> = ({ data, type }) => {
-    const { title, short_description, rating, cousine, bill, createdAt, _id } = data;
+    const { title, title_image, short_description, rating, cousine, bill, createdAt, _id } = data;
     const link = type === "doner" ? `/best-doner/${_id}` : `/restaurant/${_id}`;
 
     const donerOrRestRating =
@@ -43,8 +43,8 @@ const LongCard: React.FC<ILongCardProps> = ({ data, type }) => {
         <Link to={link}>
             <div className="long-card__container">
                 <div className="long-card__picture">
-                    {/* <img src={title_image} alt="doner" /> */}
-                    <img src={pic} alt="doner" />
+                    <img src={title_image} alt="doner" />
+                    {/* <img src={pic} alt="doner" /> */}
                 </div>
                 <div className="long-card__info">
                     <div className="long-card__header">

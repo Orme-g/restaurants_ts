@@ -39,8 +39,15 @@ const CommentForm: React.FC<ICommentProps> = ({ replyData, topicId, setReplyData
             if (replyData) {
                 newComment = { ...newComment, reply: replyData };
             }
-            postComment(newComment).unwrap();
-            setCommentText("");
+            postComment(newComment)
+                .unwrap()
+                .then((res) => console.log(res))
+                .then(() => {
+                    setCommentText("");
+                    setReplyData({ name: null, text: null });
+                })
+                .catch((e) => console.log(e));
+
             setReplyData({ name: null, text: null });
         }
     }

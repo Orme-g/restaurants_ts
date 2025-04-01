@@ -49,9 +49,11 @@ const AdditionalReviewForm: React.FC<IAdditionalReviewProps> = ({
         };
         dispatch(addAdditionalReview(JSON.stringify(additionalReview)))
             .then(({ payload }) => {
-                dispatch(callSnackbar({ text: payload.message, type: "success" }));
-                dispatch(fetchRestaurantReviews(restId));
-                reset({ like: "", dislike: "" });
+                dispatch(callSnackbar({ text: payload.message, type: payload.type }));
+                if (payload.type === "success") {
+                    dispatch(fetchRestaurantReviews(restId));
+                    reset({ like: "", dislike: "" });
+                }
             })
             .catch((error) => console.log(error));
     };

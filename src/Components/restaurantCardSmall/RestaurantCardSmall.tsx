@@ -2,27 +2,19 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Rating } from "@mui/material";
 
-import pic from "../../assets/rest.jpeg";
+// import pic from "../../assets/rest.jpeg";
 
 import type { IRestaurant } from "../../types/restaurantsTypes";
 
 import "./restaurantCardSmall.sass";
-// interface IRestaurantData {
-//     _id?: string;
-//     title_image: string;
-//     name: string;
-//     rating: number;
-//     cousine: string[];
-//     bill: number;
-// }
 interface IRestaurantDataProps {
     restData: IRestaurant;
 }
 const RestaurantCardSmall: React.FC<IRestaurantDataProps> = ({ restData }) => {
-    const { _id, name, rating, bill, cousine } = restData;
+    const { _id, name, rating, bill, cousine, title_image } = restData;
     const cousinesList = cousine.join(", ");
-    const { marks, overallRating } = rating;
-    const calculatedRating = marks === 0 ? 0 : overallRating / marks;
+    const calculatedRating =
+        rating.length === 0 ? 0 : rating.reduce((acc, num) => acc + num, 0) / rating.length;
     let displCousines: string;
     if (cousinesList.length < 40) {
         displCousines = cousinesList;
@@ -33,8 +25,8 @@ const RestaurantCardSmall: React.FC<IRestaurantDataProps> = ({ restData }) => {
         <div className="selection-card">
             <div
                 className="selection-card__image"
-                // style={{ backgroundImage: `url(${title_image})` }}
-                style={{ backgroundImage: `url(${pic})` }}
+                style={{ backgroundImage: `url(${title_image})` }}
+                // style={{ backgroundImage: `url(${pic})` }}
             ></div>
             <div className="selection-card__title">{name}</div>
             <div className="selection-card__cousines">{displCousines}</div>

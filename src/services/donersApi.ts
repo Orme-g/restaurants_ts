@@ -1,10 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { serverHost, serverPort } from "../../URLs";
 
 import type { IDonerRestaurant, INewDonerArticle } from "../types/donersTypes";
 
 export const donersApi = createApi({
     reducerPath: "donersApi",
-    baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:4000/best-doner" }),
+    baseQuery: fetchBaseQuery({ baseUrl: `http://${serverHost}:${serverPort}/best-doner` }),
     tagTypes: [],
     endpoints: (builder) => ({
         getDonersList: builder.query<IDonerRestaurant[], null>({

@@ -1,10 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { serverHost, serverPort } from "../../URLs";
 
 import type { IEvent } from "../types/eventTypes";
 
 export const eventsApi = createApi({
     reducerPath: "eventsApi",
-    baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:4000/" }),
+    baseQuery: fetchBaseQuery({ baseUrl: `http://${serverHost}:${serverPort}/` }),
     endpoints: (builder) => ({
         getEvent: builder.query<IEvent, string>({
             query: (id: string) => `event/${id}`,

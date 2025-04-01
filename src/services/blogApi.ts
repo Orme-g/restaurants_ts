@@ -1,11 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { serverHost, serverPort } from "../../URLs";
 
 import type { IBlogPost } from "../types/blogPost";
 import type { IBlogData } from "../types/userData";
 
 export const blogApi = createApi({
     reducerPath: "blogApi",
-    baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:4000/blog" }),
+    baseQuery: fetchBaseQuery({ baseUrl: `http://${serverHost}:${serverPort}/blog` }),
     tagTypes: ["PostData"],
     endpoints: (builder) => ({
         getBlogPost: builder.query<IBlogPost, string>({
