@@ -1,13 +1,12 @@
-Pet project.
+Project for Restaurants search. Articles. Events. Blog. 
 
-Single page application built on React & Redux 
+Single page application built on TypeScript, React & Redux 
 
 Different approaches and tecnologies used as for practice.
 
 Fetching data by createAsyncThunk & RTK Query
 
-MongoDB used as database running locally. 
+MongoDB used as database. 
 
-Server side Express.js, Mongoose
+Server side ExpressJS, Mongoose
 
-Informational application for restaurants selection.
