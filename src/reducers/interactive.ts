@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { useHttp } from "../hooks/http.hook";
-import { serverHost, serverPort } from "../../URLs";
+import { currentUrl } from "../../URLs";
 import type { IUserData } from "../types/userData";
 
 interface ISnackBarData {
@@ -27,7 +27,7 @@ export const updateUserData = createAsyncThunk<IUserData, string>(
     "interactive/updateUserData",
     (userId) => {
         const { request } = useHttp();
-        return request(`http://${serverHost}:${serverPort}/user/getdata/${userId}`);
+        return request(`${currentUrl}/user/getdata/${userId}`);
     }
 );
 

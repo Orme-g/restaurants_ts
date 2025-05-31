@@ -1,12 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { serverHost, serverPort } from "../../URLs";
+import { currentUrl } from "../../URLs";
 
 import type { IComment } from "../types/commentsTypes";
 
 export const commentsApi = createApi({
     reducerPath: "commentsApi",
     baseQuery: fetchBaseQuery({
-        baseUrl: `http://${serverHost}:${serverPort}/best-doner/comments`,
+        baseUrl: `${currentUrl}/best-doner/comments`,
     }),
     tagTypes: ["Comments"],
     endpoints: (builder) => ({

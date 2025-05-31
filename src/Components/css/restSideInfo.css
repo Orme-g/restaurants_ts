@@ -1,0 +1,65 @@
+.rest-side-info__container {
+  position: relative;
+  width: 25%;
+  min-height: 555px;
+  background-color: #f4f4f4;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: 50px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  color: #494949;
+  border-radius: 15px;
+}
+.rest-side-info__favorite-icon {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: rgb(137, 191, 82);
+}
+.rest-side-info__rating {
+  font-size: 1.7rem;
+  margin-left: 30px;
+}
+.rest-side-info__rating span {
+  color: rgb(138, 191, 82);
+  font-size: 2.2rem;
+}
+.rest-side-info__rating_stars-and-marks {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.rest-side-info__rating_marks-amount {
+  font-weight: 300;
+  font-size: 1.4rem;
+  margin-left: 5px;
+  -webkit-transform: translateY(-3px);
+          transform: translateY(-3px);
+}
+.rest-side-info__item {
+  font-size: 1.2rem;
+  margin-left: 30px;
+  margin-right: 20px;
+}
+.rest-side-info__item span {
+  font-size: 1rem;
+  font-weight: 300;
+}
+.rest-side-info__item .subway {
+  display: block;
+}/*# sourceMappingURL=restSideInfo.css.map */

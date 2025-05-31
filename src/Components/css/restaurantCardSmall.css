@@ -1,0 +1,65 @@
+.cards-gallery {
+  height: 100%;
+}
+
+.swiper-slide {
+  background: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-size: cover;
+  background-position: center;
+}
+
+.selection-card {
+  overflow: hidden;
+  height: 350px;
+  width: 250px;
+  border-radius: 10px;
+  -webkit-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+          box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  position: relative;
+  margin: 0 auto;
+}
+.selection-card__image {
+  height: 55%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.selection-card__title {
+  margin-top: 10px;
+  margin-left: 15px;
+  font-size: 1.2rem;
+  font-weight: 300;
+}
+.selection-card__cousines {
+  margin-top: 5px;
+  font-size: 1rem;
+  margin-left: 15px;
+  font-weight: 300;
+}
+.selection-card__bill {
+  margin-top: 5px;
+  font-size: 1rem;
+  margin-left: 15px;
+  font-weight: 300;
+}
+.selection-card__rating {
+  margin-top: 5px;
+  margin-left: 12px;
+}
+.selection-card__rating .MuiRating-root {
+  color: rgb(137, 191, 82);
+}
+.selection-card__link {
+  font-size: 1rem;
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  text-decoration: none;
+  color: #366cc9;
+}/*# sourceMappingURL=restaurantCardSmall.css.map */

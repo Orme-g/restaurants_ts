@@ -1,0 +1,49 @@
+.admin-panel {
+  min-height: 800px;
+  width: 80%;
+  margin: 0 auto;
+}
+.admin-panel__main-title {
+  width: 50%;
+  margin: 120px 0 70px 0;
+  font-weight: 300;
+  font-size: 2.5rem;
+  line-height: 60px;
+  border-bottom: 2px solid rgb(137, 191, 82);
+}
+.admin-panel__actions-list_item {
+  line-height: 40px;
+  padding: 10px 20px;
+  width: 250px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  border: 1.5px solid grey;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  font-weight: 400;
+  -webkit-transition: -webkit-transform 0.3s, -webkit-box-shadow 0.3s;
+  transition: -webkit-transform 0.3s, -webkit-box-shadow 0.3s;
+  transition: transform 0.3s, box-shadow 0.3s;
+  transition: transform 0.3s, box-shadow 0.3s, -webkit-transform 0.3s, -webkit-box-shadow 0.3s;
+  color: #494949;
+}
+.admin-panel__actions-list_item:hover {
+  cursor: pointer;
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+  -webkit-box-shadow: 5px 7px 10px 0px rgba(34, 60, 80, 0.24);
+          box-shadow: 5px 7px 10px 0px rgba(34, 60, 80, 0.24);
+}
+.admin-panel__actions-list_icon {
+  -webkit-transform: translateY(30%);
+          transform: translateY(30%);
+  color: rgb(137, 191, 82);
+}
+
+.add-rest {
+  padding: 15px 30px 15px 30px;
+}/*# sourceMappingURL=adminPage.css.map */

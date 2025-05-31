@@ -1,0 +1,47 @@
+.long-card-small__container {
+  height: 120px;
+  -webkit-box-shadow: 5px 3px 5px 0px rgba(34, 60, 80, 0.24);
+          box-shadow: 5px 3px 5px 0px rgba(34, 60, 80, 0.24);
+  width: 100%;
+  border-radius: 5px;
+  background-color: #f8f8f8;
+  color: #494949;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: hidden;
+}
+.long-card-small__container.event-passed {
+  opacity: 0.5;
+}
+.long-card-small__image {
+  width: 22%;
+}
+.long-card-small__image img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.long-card-small__info {
+  width: 78%;
+  padding: 10px 10px 10px 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+.long-card-small__info_description {
+  font-weight: 300;
+  font-size: 1rem;
+}
+.long-card-small__info_valid-dates {
+  font-weight: 300;
+  font-style: italic;
+}/*# sourceMappingURL=longCardSmall.css.map */

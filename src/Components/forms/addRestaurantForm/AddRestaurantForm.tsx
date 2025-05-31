@@ -106,7 +106,6 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, to
 
     const onSubmit = (data: IAddRestaurant) => {
         dispatch(addNewRestaurant(JSON.stringify(data))).then(({ payload }) => {
-            console.log(payload);
             if (payload === "Success") {
                 reset();
                 setCousine([]);

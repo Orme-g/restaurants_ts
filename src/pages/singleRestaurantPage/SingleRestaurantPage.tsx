@@ -18,6 +18,7 @@ import {
 import { callSnackbar } from "../../reducers/interactive";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import type { IUserData } from "../../types/userData";
+import { Console } from "console";
 
 const SingleRestaurantPage: React.FC = () => {
     useEffect(() => {

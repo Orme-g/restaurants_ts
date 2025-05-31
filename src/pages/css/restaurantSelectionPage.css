@@ -1,0 +1,74 @@
+.find-restaurant__container {
+  margin: 100px auto 0 auto;
+  margin-top: 100px;
+  width: 80%;
+  min-height: 500px;
+  color: #494949;
+  margin-bottom: 100px;
+}
+.find-restaurant__title {
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid rgb(137, 191, 82);
+}
+.find-restaurant__subtitle {
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+.find-restaurant__search {
+  font-size: 1.3rem;
+  font-weight: 300;
+  margin-top: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+.find-restaurant__search_wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.find-restaurant__search_subway {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+.find-restaurant__search_cousine {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+.find-restaurant__search_sort-type {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+.find-restaurant__search_button {
+  margin-top: 50px;
+}
+.find-restaurant__results_title {
+  margin-top: 70px;
+  font-size: 2rem;
+  font-weight: 300;
+}
+.find-restaurant__results_output {
+  margin-top: 70px;
+  width: 80%;
+  min-height: 300px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 50px;
+}
+.find-restaurant__results_output span {
+  font-size: 1.2rem;
+  font-weight: 300;
+}/*# sourceMappingURL=restaurantSelectionPage.css.map */

@@ -1,0 +1,48 @@
+.form-line {
+  width: 600px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 30px;
+  color: #494949;
+}
+
+.form-label {
+  width: 200px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.form-input {
+  width: 300px;
+  line-height: 30px;
+  text-align: center;
+}
+.form-input::-webkit-input-placeholder {
+  padding-left: 10px;
+}
+.form-input::-moz-placeholder {
+  padding-left: 10px;
+}
+.form-input:-ms-input-placeholder {
+  padding-left: 10px;
+}
+.form-input::-ms-input-placeholder {
+  padding-left: 10px;
+}
+.form-input::placeholder {
+  padding-left: 10px;
+}
+
+.helper-text {
+  margin-top: 5px;
+  font-size: 0.9rem;
+  color: red;
+}/*# sourceMappingURL=modalRegister.css.map */

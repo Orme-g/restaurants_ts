@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { serverHost, serverPort } from "../../../../URLs";
+import { currentUrl } from "../../../../URLs";
 import { useAppDispatch } from "../../../types/store";
 import classNames from "classnames";
 import { useForm } from "react-hook-form";
@@ -64,7 +64,7 @@ const ReviewForm: React.FC<IReviewForm> = ({ restId }) => {
             restaurant: restId,
             userId: _id,
         };
-        request(`http://${serverHost}:${serverPort}/reviews`, "POST", JSON.stringify(review))
+        request(`${currentUrl}/reviews`, "POST", JSON.stringify(review))
             .then(({ message }) => dispatch(callSnackbar({ text: message, type: "success" })))
             .then(() => dispatch(fetchRestaurantReviews(restId)))
             .then(() => addReviewedRestToUser({ userId: _id, restId: restId }))

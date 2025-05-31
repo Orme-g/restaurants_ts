@@ -1,0 +1,17 @@
+.restaurant-gallery {
+  margin: 0 auto;
+  width: 85%;
+  padding-top: 150px;
+}
+.restaurant-gallery__title {
+  font-size: 2.8rem;
+  margin-bottom: 60px;
+  font-weight: 300;
+  padding-bottom: 15px;
+  border-bottom: 2px solid rgb(137, 191, 82);
+}
+.restaurant-gallery__cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 70px;
+}/*# sourceMappingURL=restaurantsGallery.css.map */

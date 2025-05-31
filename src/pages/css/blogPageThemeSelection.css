@@ -1,0 +1,19 @@
+.blog-page-selection {
+  min-height: 800px;
+  width: 80%;
+  margin: 100px auto;
+  background-color: #ededed;
+  padding: 30px 20px;
+}
+.blog-page-selection__title {
+  font-size: 2.5rem;
+  font-weight: 300;
+  margin-bottom: 30px;
+}
+.blog-page-selection__list {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-auto-rows: 500px;
+  gap: 25px;
+}/*# sourceMappingURL=blogPageThemeSelection.css.map */

@@ -1,0 +1,56 @@
+.add-restaurant-form {
+  margin: 50px 0 50px 0;
+  padding: 40px 30px 30px 30px;
+  width: 65%;
+  border: 1px solid grey;
+  border-radius: 10px;
+  -webkit-transition: 1s all;
+  transition: 1s all;
+}
+.add-restaurant-form__title {
+  font-size: 1.3rem;
+  font-weight: 300;
+  margin-bottom: 30px;
+  color: #494949;
+}
+.add-restaurant-form__btn-submit {
+  margin: 30px 0;
+  height: 50px;
+  width: 160px;
+  color: #494949;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  border: 1px solid grey;
+  border-radius: 5px;
+}
+.add-restaurant-form__icon {
+  color: rgb(137, 191, 82);
+}
+.add-restaurant-form__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.add-restaurant-form__alert {
+  height: 50px;
+  margin-top: 30px;
+  margin-left: 20px;
+}
+.add-restaurant-form__spinner {
+  height: 50px;
+  width: 50px;
+  -webkit-transform: translateY(60%);
+          transform: translateY(60%);
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}/*# sourceMappingURL=addRestaurantForm.css.map */

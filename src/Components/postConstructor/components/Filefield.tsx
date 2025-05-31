@@ -17,7 +17,6 @@ const Filefield: React.FC<IFilefield> = ({ type, id, handleDeleteField, modifyRe
         if (e.target.files && e.target.files.length > 0) {
             if (type === "photo") {
                 const image = e.target.files[0];
-                console.log(image);
                 const base64Image = await convertToBase64(image);
                 setImage([base64Image]);
                 modifyRef(id, base64Image);

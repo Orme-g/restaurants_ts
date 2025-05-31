@@ -1,0 +1,58 @@
+.restaurants-tabs__container {
+  width: 90%;
+  margin: 0 auto;
+  color: #494949;
+  min-height: 400px;
+  padding-bottom: 100px;
+}
+.restaurants-tabs__description {
+  margin-top: 20px;
+  font-weight: 300;
+  margin-right: 200px;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  background-color: #f4f4f4;
+  border-radius: 15px;
+  padding: 30px;
+  margin-left: -24px;
+}
+.restaurants-tabs__menu a {
+  text-decoration: none;
+  color: inherit;
+}
+.restaurants-tabs__feedback {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 50px;
+}
+.restaurants-tabs__feedback .post-feedback {
+  width: 200px;
+  color: #494949;
+  font-size: 1.1rem;
+}
+.restaurants-tabs__add-event_btn {
+  padding: 15px 20px;
+  cursor: pointer;
+  background-color: #dfdfdf;
+  border: 2px solid rgb(137, 191, 82);
+  border-radius: 5px;
+  text-transform: uppercase;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  transition: transform 0.3s, -webkit-transform 0.3s;
+  margin-bottom: 20px;
+}
+.restaurants-tabs__add-event_btn:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
+.restaurants-tabs__add-event_btn:active {
+  -webkit-transform: scale(0.95);
+          transform: scale(0.95);
+}/*# sourceMappingURL=restaurantsTabs.css.map */

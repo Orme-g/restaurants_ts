@@ -1,0 +1,23 @@
+.restaurants-selections {
+  width: 85%;
+  margin: 100px auto 50px auto;
+}
+.restaurants-selections__title {
+  font-size: 2.8rem;
+  margin-bottom: 70px;
+  font-weight: 300;
+  padding-bottom: 15px;
+  border-bottom: 2px solid rgb(137, 191, 82);
+}
+
+.selection {
+  height: 400px;
+  margin-bottom: 80px;
+}
+.selection__title {
+  font-size: 2rem;
+  font-weight: 300;
+  padding-bottom: 15px;
+  border-bottom: 1.2px solid #d3d3d3;
+  font-family: "Roboto Light", sans-serif;
+}/*# sourceMappingURL=restaurantsSelections.css.map */

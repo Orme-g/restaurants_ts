@@ -1,0 +1,25 @@
+.restaurant-info__container {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 120px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+.restaurant-info__name {
+  width: 50%;
+  font-size: 40px;
+  margin-bottom: 50px;
+  font-weight: 350;
+  padding-bottom: 15px;
+  border-bottom: 2px solid rgb(137, 191, 82);
+}
+.restaurant-info__slider {
+  height: 550px;
+  width: 60%;
+}
+.restaurant-info__slider > .swiper {
+  border-radius: 10px;
+}/*# sourceMappingURL=singleRestaurantPage.css.map */

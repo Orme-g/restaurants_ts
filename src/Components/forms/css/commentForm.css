@@ -1,0 +1,21 @@
+.comments__add-form {
+  margin-bottom: 40px;
+}
+.comments__reply {
+  position: relative;
+  font-style: italic;
+  background-color: #d5d5d5;
+  min-width: 150px;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  padding: 5px 10px;
+  margin-bottom: 20px;
+  font-weight: 300;
+  color: grey;
+}
+.comments__reply_cancel {
+  position: absolute;
+  top: 0;
+  right: 0;
+}/*# sourceMappingURL=commentForm.css.map */
