@@ -60,7 +60,7 @@ const SingleRestaurantPage: React.FC = () => {
         const { favouriteRestaurants } = data;
         isFavourite = favouriteRestaurants.includes(restId) ? true : false;
     }
-    const { name, images, description } = restaurantData;
+    const { name, images, description, coordinates } = restaurantData;
 
     return (
         <>
@@ -79,7 +79,12 @@ const SingleRestaurantPage: React.FC = () => {
                     isRegistered={passAuth}
                 />
             </div>
-            <RestaurantsTabs description={description} restId={restId} restaurantName={name} />
+            <RestaurantsTabs
+                description={description}
+                restId={restId}
+                restaurantName={name}
+                coordinates={coordinates}
+            />
         </>
     );
 };

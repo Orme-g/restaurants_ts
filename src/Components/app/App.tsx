@@ -22,9 +22,7 @@ const MainPage = lazy(() => import("../../pages/mainPage/MainPage"));
 const SingleRestaurantPage = lazy(
     () => import("../../pages/singleRestaurantPage/SingleRestaurantPage")
 );
-const RestaurantSelectionPage = lazy(
-    () => import("../../pages/restaurantSelectionPage/RestaurantSelectionPage")
-);
+import RestaurantSelectionPage from "../../pages/restaurantSelectionPage/RestaurantSelectionPage";
 const BestDonersListPage = lazy(() => import("../../pages/bestDonersListPage/BestDonersListPage"));
 const BlogPage = lazy(() => import("../../pages/blogPage/BlogPage"));
 const BlogPostPage = lazy(() => import("../../pages/blogPostPage/BlogPostPage"));

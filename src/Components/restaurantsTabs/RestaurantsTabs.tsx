@@ -2,6 +2,7 @@ import React, { useState, memo } from "react";
 import { useAppSelector } from "../../types/store";
 import { Box, Tab } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
+import { YMaps, Map, Placemark, GeolocationControl } from "@pbe/react-yandex-maps";
 
 import ReviewsList from "../reviewsList/ReviewsList";
 import ReviewForm from "../forms/reviewForm/ReviewForm";
@@ -15,20 +16,21 @@ interface IRestaurantsTabsProps {
     description: string;
     restId: string;
     restaurantName: string;
+    coordinates: string;
 }
 
 const RestaurantsTabs: React.FC<IRestaurantsTabsProps> = memo(
-    ({ description, restId, restaurantName }) => {
+    ({ description, restId, restaurantName, coordinates }) => {
         const [activeTab, setActiveTab] = useState("3");
         const [displayModal, setDisplayModal] = useState(false);
         const checkAuth = useAppSelector((state) => state.interactive.passAuth);
         const handleChange = (event: React.SyntheticEvent, newActiveTab: string) => {
             setActiveTab(newActiveTab);
         };
+        const coordinatesToUse = coordinates.split(",").map((item) => +item.trim());
         function modalController(open: boolean) {
             setDisplayModal(open);
         }
-
         const unAuth = <div className="unAuthorised">Войдите, чтобы оставить отзыв</div>;
 
         return (
@@ -71,7 +73,28 @@ const RestaurantsTabs: React.FC<IRestaurantsTabsProps> = memo(
                                 <EventsList />
                             </div>
                         </TabPanel>
-                        <TabPanel value="5"></TabPanel>
+                        <TabPanel value="5">
+                            <div id="map" className="restaurants-tabs__map">
+                                <YMaps>
+                                    <Map
+                                        width={"100%"}
+                                        height={"100%"}
+                                        defaultState={{
+                                            center: coordinatesToUse,
+
+                                            zoom: 15,
+                                            controls: ["zoomControl", "fullscreenControl"],
+                                        }}
+                                        modules={[
+                                            "control.ZoomControl",
+                                            "control.FullscreenControl",
+                                        ]}
+                                    >
+                                        <Placemark geometry={coordinatesToUse} />
+                                    </Map>
+                                </YMaps>
+                            </div>
+                        </TabPanel>
                     </TabContext>
                 </Box>
                 {displayModal ? (

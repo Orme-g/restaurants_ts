@@ -70,6 +70,7 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, to
             phone: "",
             cousine: [""],
             city: "",
+            coordinates: "",
             subway: [""],
         },
     });
@@ -105,6 +106,13 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, to
     };
 
     const onSubmit = (data: IAddRestaurant) => {
+        // const modifiedData = {
+        //     ...data,
+        //     coordinates: data.coordinates
+        //         .trim()
+        //         .split(", ")
+        //         .map((item) => +item),
+        // };
         dispatch(addNewRestaurant(JSON.stringify(data))).then(({ payload }) => {
             if (payload === "Success") {
                 reset();
@@ -279,7 +287,14 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, to
                         </Select>
                     </FormControl>
                 </div>
-
+                <TextField
+                    label="Координаты для Яндекс Карт (59.939868, 30.314547)"
+                    {...register("coordinates", {
+                        required: "Обязательное поле",
+                    })}
+                    error={!!errors.coordinates}
+                    helperText={errors.coordinates?.message}
+                />
                 <TextField
                     label="Средний чек"
                     {...register("bill", {

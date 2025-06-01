@@ -13,6 +13,7 @@ export interface IRestaurant {
     createdAt: Date;
     title_image: string;
     city: string;
+    coordinates: string;
     subway: string[];
     events: string[];
 }
@@ -26,6 +27,7 @@ export interface IAddRestaurant {
     bill: number;
     phone: string;
     city: string;
+    coordinates: string;
     subway: string[];
 }
 
