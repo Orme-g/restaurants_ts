@@ -6,7 +6,7 @@ import { Button, TextField, Stack } from "@mui/material";
 
 import { callSnackbar } from "../../../reducers/interactive";
 
-import "./changePasswordForm.sass";
+import "./changePasswordForm.scss";
 
 interface IPasswordFormProps {
     userId: string;

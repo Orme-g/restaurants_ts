@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
-import "./blogProfileData.sass";
+import "./blogProfileData.scss";
 
 import { calculateStatus } from "../../utils/calculateExperience";
 import EditSingleField from "../forms/editSingleField/EditSingleField";

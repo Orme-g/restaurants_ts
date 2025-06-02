@@ -1,0 +1,30 @@
+// Common styles
+@use "../../style/imports.sass";
+@font-face {
+    font-family: "Roboto Regular";
+    font-style: normal;
+    font-weight: normal;
+    src: url("../../fonts/Roboto/Roboto-Regular.ttf") format("ttf");
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Roboto, "Roboto Regular", sans-serif;
+}
+html {
+    // min-height: 2000px
+    position: relative;
+}
+body {
+    height: 100%;
+    font-size: calc(12px + 0.390625vw);
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+ul {
+    list-style: none;
+}

@@ -10,7 +10,7 @@ import QuizOutlinedIcon from "@mui/icons-material/QuizOutlined";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTwitter, faVk, faInstagram, faGithub } from "@fortawesome/free-brands-svg-icons";
 
-import "./footer.sass";
+import "./footer.scss";
 
 const Footer: React.FC = () => {
     return (

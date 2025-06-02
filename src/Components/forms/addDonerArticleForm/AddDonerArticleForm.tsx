@@ -7,7 +7,7 @@ import SmallSpinner from "../../svg/SmallSpinner";
 
 import { useAddDonerArticleMutation } from "../../../services/donersApi";
 
-import "./addDonerArticleForm.sass";
+import "./addDonerArticleForm.scss";
 
 import type { INewDonerArticle } from "../../../types/donersTypes";
 

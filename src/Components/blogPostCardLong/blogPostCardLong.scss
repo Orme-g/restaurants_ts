@@ -1,0 +1,73 @@
+@use "../../style/mixins";
+@use "../../style/variables";
+
+.blog-card-long {
+    &__container {
+        height: fit-content;
+        box-shadow: 5px 3px 5px 0px rgba(34, 60, 80, 0.24);
+        width: 100%;
+        border-radius: 5px;
+        background-image: linear-gradient(
+            to right,
+            rgba(202, 202, 202, 1),
+            rgba(219, 219, 219, 0.5)
+        );
+        color: variables.$primary-text;
+        display: flex;
+        overflow: hidden;
+    }
+    &__info {
+        width: 100%;
+        padding: 15px 15px 15px 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        &_title {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 10px;
+            margin-left: 20px;
+        }
+
+        &_description {
+            font-weight: 300;
+            padding: 0 30px 7px 0;
+            border-bottom: 1px solid #7a7a7a;
+            text-indent: 20px;
+            margin-bottom: 15px;
+        }
+    }
+
+    &__footer {
+        display: flex;
+        flex-direction: row;
+        font-weight: 300;
+        color: #606060;
+        &_likes-count {
+            display: flex;
+            margin-left: 15px;
+            flex-direction: row;
+            align-items: center;
+            span {
+                margin-left: 5px;
+            }
+        }
+
+        &_comments-count {
+            display: flex;
+            margin-left: 15px;
+            flex-direction: row;
+            align-items: center;
+            span {
+                margin-left: 5px;
+            }
+        }
+        &_themes {
+            margin-left: auto;
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+        }
+    }
+}

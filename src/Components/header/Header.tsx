@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { TextField } from "@mui/material/";
 import { useSearchRestaurantQuery } from "../../services/apiSlice";
 
-import "./header.sass";
+import "./header.scss";
 interface IData {
     _id: string;
     name: string;

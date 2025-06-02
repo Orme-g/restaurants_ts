@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Rating } from "@mui/material";
 import transformDate from "../../utils/transformDate";
 // import pic from "../../assets/rest.jpeg";
-import "./longCard.sass";
+import "./longCard.scss";
 
 interface ILongCardProps {
     data: any;

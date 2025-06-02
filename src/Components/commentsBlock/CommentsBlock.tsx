@@ -6,7 +6,7 @@ import CommentsList from "../commentsList/CommentsList";
 import CommentForm from "../forms/commentForm/CommentForm";
 import type { IReplyData, TCommentReplyFunction } from "../../types/commentsTypes";
 
-import "./commentsBlock.sass";
+import "./commentsBlock.scss";
 
 export interface CommentBlockProps {
     currentTopicId: string;

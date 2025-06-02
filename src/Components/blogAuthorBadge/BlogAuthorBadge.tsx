@@ -6,7 +6,7 @@ import { useGetDataForBadgeQuery } from "../../services/blogApi";
 import { AuthorBadgeSkeleton } from "../skeletons/Skeletons";
 import { calculateStatus } from "../../utils/calculateExperience";
 // import avatar from "../../assets/blogers/bloger3.JPG";
-import "./blogAuthorBadge.sass";
+import "./blogAuthorBadge.scss";
 interface IAuthorBadge {
     userId: string;
 }

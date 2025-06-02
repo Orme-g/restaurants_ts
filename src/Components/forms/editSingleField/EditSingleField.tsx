@@ -5,7 +5,6 @@ import { TextField, Button } from "@mui/material";
 import { useUpdateBlogerDataSingleFieldMutation } from "../../../services/apiSlice";
 
 import { useParams } from "react-router-dom";
-import "./editSingleField.sass";
 
 interface IEditSingleField {
     value: string;

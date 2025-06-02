@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { useGetRestaurantEventsQuery } from "../../services/eventsApi";
 import LongCardSmall from "../longCardSmall/LongCardSmall";
 import RenderListWithPagination from "../renderListWithPagination/RenderListWithPagination";
-import "./eventsList.sass";
+import "./eventsList.scss";
 
 import type { IEvent } from "../../types/eventTypes";
 

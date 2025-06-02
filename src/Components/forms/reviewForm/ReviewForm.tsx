@@ -17,7 +17,7 @@ import { ShortLineSkeleton } from "../../skeletons/Skeletons";
 
 import type { IReview } from "../../../types/reviewsTypes";
 
-import "./reviewForm.sass";
+import "./reviewForm.scss";
 
 interface IReviewForm {
     restId: string;

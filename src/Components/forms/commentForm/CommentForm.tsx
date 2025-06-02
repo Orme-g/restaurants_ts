@@ -7,7 +7,7 @@ import useLocalStorage from "../../../hooks/useLocalStorage";
 import { usePostCommentMutation } from "../../../services/commentsApi";
 
 import type { IReplyData, TCommentReplyFunction } from "../../../types/commentsTypes";
-import "./commentForm.sass";
+import "./commentForm.scss";
 
 interface ICommentProps {
     replyData: IReplyData;

@@ -3,7 +3,7 @@ import { Rating } from "@mui/material";
 
 import tranfsormDate from "../../utils/transformDate";
 
-import "./additionalReviewItem.sass";
+import "./additionalReviewItem.scss";
 
 interface IAdditionalReviewProps {
     additionalReviewData: {

@@ -6,7 +6,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { addAdditionalReview, fetchRestaurantReviews } from "../../../reducers/restaurants";
 import { useAppDispatch } from "../../../types/store";
 import { callSnackbar } from "../../../reducers/interactive";
-import "./additionalReviewForm.sass";
+import "./additionalReviewForm.scss";
 
 interface IAdditionalReviewProps {
     reviewId: string;

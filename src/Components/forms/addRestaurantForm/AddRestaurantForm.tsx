@@ -27,7 +27,7 @@ import { subwaySpb } from "../../../data/subwaysLists";
 import { cousines } from "../../../data/cousines";
 // import SubwaySelectList from "../../../utils/subwayLists/subwaySelectList";
 
-import "./addRestaurantForm.sass";
+import "./addRestaurantForm.scss";
 
 import type { IAddRestaurant } from "../../../types/restaurantsTypes";
 

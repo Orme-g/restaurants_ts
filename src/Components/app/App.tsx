@@ -16,7 +16,7 @@ import useLocalStorage from "../../hooks/useLocalStorage";
 import { setPassAuth, updateUserData } from "../../reducers/interactive";
 import { ScrollToTop } from "../../services/ScrollToTop";
 
-import "./App.sass";
+import "./App.scss";
 
 const MainPage = lazy(() => import("../../pages/mainPage/MainPage"));
 const SingleRestaurantPage = lazy(

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import transformDate from "../../utils/transformDate";
 // import pic from "../../assets/event.JPG";
-import "./longCardSmall.sass";
+import "./longCardSmall.scss";
 
 import type { IEvent } from "../../types/eventTypes";
 interface ICardData {

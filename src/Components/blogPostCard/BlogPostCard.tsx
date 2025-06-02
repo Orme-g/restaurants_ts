@@ -6,7 +6,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 
 import BlogAuthorBadge from "../blogAuthorBadge/BlogAuthorBadge";
 
-import "./blogPostCard.sass";
+import "./blogPostCard.scss";
 
 import type { IBlogPost } from "../../types/blogPost";
 interface IBlogPostCard {

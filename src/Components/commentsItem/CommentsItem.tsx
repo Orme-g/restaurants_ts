@@ -7,7 +7,7 @@ import CloseIcon from "@mui/icons-material/Close";
 
 import transformDate from "../../utils/transformDate";
 
-import "./commentsItem.sass";
+import "./commentsItem.scss";
 import { IComment, TCommentReplyFunction } from "../../types/commentsTypes";
 
 interface ICommentItem {

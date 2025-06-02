@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import ChatIcon from "@mui/icons-material/Chat";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
-import "./blogPostCardLong.sass";
+import "./blogPostCardLong.scss";
 
 import type { IBlogPost } from "../../types/blogPost";
 

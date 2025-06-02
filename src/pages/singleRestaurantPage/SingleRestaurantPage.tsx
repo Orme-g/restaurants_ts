@@ -43,7 +43,6 @@ const SingleRestaurantPage: React.FC = () => {
     });
     const [handleFavourite] = useHandleFavouriteRestaurantsMutation();
     let isFavourite: "idle" | boolean = "idle";
-
     const handleFavouriteButton = useCallback(() => {
         const type = isFavourite ? "remove" : "add";
         handleFavourite({ restId, userId, type })
@@ -65,7 +64,6 @@ const SingleRestaurantPage: React.FC = () => {
         isFavourite = favouriteRestaurants.includes(restId) ? true : false;
     }
     const { name, images, description, coordinates } = restaurantData;
-    console.log("WTF???");
     return (
         <>
             <Helmet>

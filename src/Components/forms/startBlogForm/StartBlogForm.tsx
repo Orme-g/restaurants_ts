@@ -6,7 +6,6 @@ import { TextField, Stack, Button } from "@mui/material";
 import { convertToBase64 } from "../../../utils/convertToBase64";
 import { useSetBlogerDataMutation } from "../../../services/apiSlice";
 import { callSnackbar } from "../../../reducers/interactive";
-import "./startBlogForm.sass";
 
 interface IStartBlogForm {
     userId: string;
