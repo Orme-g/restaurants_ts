@@ -11,6 +11,7 @@ import Slider from "../../Components/sliderImages/Slider";
 import RestSideInfo from "../../Components/restSideInfo/RestSideInfo";
 import RestaurantsTabs from "../../Components/restaurantsTabs/RestaurantsTabs";
 import { PageSkeleton } from "../../Components/skeletons/Skeletons";
+import Page404 from "../Page404";
 import {
     useGetUserDataQuery,
     useHandleFavouriteRestaurantsMutation,
@@ -18,7 +19,6 @@ import {
 import { callSnackbar } from "../../reducers/interactive";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import type { IUserData } from "../../types/userData";
-import { Console } from "console";
 
 const SingleRestaurantPage: React.FC = () => {
     useEffect(() => {
@@ -53,15 +53,19 @@ const SingleRestaurantPage: React.FC = () => {
         // eslint-disable-next-line
     }, [data]);
 
-    if (pageLoading === "loading" || !restaurantData || !restId) {
+    if (pageLoading === "loading" || !restId) {
         return <PageSkeleton />;
     }
+    if (!restaurantData) {
+        return <Page404 />;
+    }
+    // console.log(restaurantData);
     if (data) {
         const { favouriteRestaurants } = data;
         isFavourite = favouriteRestaurants.includes(restId) ? true : false;
     }
     const { name, images, description, coordinates } = restaurantData;
-
+    console.log("WTF???");
     return (
         <>
             <Helmet>

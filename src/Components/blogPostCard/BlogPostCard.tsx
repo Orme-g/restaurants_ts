@@ -40,8 +40,8 @@ const BlogPostCard: React.FC<IBlogPostCard> = ({ data }) => {
                     <span>{displayThemes}</span>{" "}
                 </div>
             </div>
-            <Link to={`/blog/blog-post/${_id}`}>
-                <div className="blog-item-card__link">Читать...</div>
+            <Link to={`/blog/blog-post/${_id}`} className="blog-item-card__link">
+                Читать...
             </Link>
         </div>
     );
