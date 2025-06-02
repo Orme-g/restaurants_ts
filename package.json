@@ -60,7 +60,7 @@
         "@vitejs/plugin-react-swc": "^3.8.1",
         "autoprefixer": "^10.4.21",
         "concurrently": "^8.2.1",
-        "sass": "^1.66.1",
+        "sass": "^1.89.1",
         "source-map-loader": "^5.0.0",
         "ts-loader": "^9.5.1",
         "typescript": "^5.4.5",

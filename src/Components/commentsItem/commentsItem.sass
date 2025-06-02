@@ -1,5 +1,5 @@
-@import '../../style/mixins'
-@import '../../style/variables'
+@use '../../style/mixins'
+@use '../../style/variables'
 
 .comment-card
     &__container
@@ -41,7 +41,7 @@
 
 
     &__name
-        color: $primary-text
+        color: variables.$primary-text
         font-size: 1.3rem
         font-weight: 400
         letter-spacing: 1.8px
@@ -85,12 +85,12 @@
         // margin-left: 50px
 
     &__btn-reply
-        color: $primary-text
+        color: variables.$primary-text
         font-style: italic
 
 
     &__date
-        color: $primary-text
+        color: variables.$primary-text
         font-weight: 300
         font-style: italic
 
