@@ -12,7 +12,7 @@ import transformDate from "../../utils/transformDate";
 import { contentMaker } from "../../utils/contentMaker";
 import Page404 from "../Page404";
 
-import "./blogPostPage.sass";
+import "./blogPostPage.scss";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import { useUpdateLikesOrCommentsCountMutation } from "../../services/blogApi";
 import CommentsBlock from "../../Components/commentsBlock/CommentsBlock";

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import BlogCardsSelection from "../../Components/blogListTop/BlogCardsSelection";
 import BlogTopAuthorsList from "../../Components/blogTopAuthorsList/BlogTopAuthorsList";
 
-import "./blogPage.sass";
+import "./blogPage.scss";
 
 import diet from "../../assets/collage/diet.JPG";
 import food from "../../assets/collage/food.jpg";

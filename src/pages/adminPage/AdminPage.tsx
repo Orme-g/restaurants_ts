@@ -3,7 +3,7 @@ import CreateIcon from "@mui/icons-material/Create";
 import AddRestaurantForm from "../../Components/forms/addRestaurantForm/AddRestaurantForm";
 import AddDonerArticleForm from "../../Components/forms/addDonerArticleForm/AddDonerArticleForm";
 
-import "./adminPage.sass";
+import "./adminPage.scss";
 
 const AdminPage = () => {
     const [displayAddReastaurant, setDisplayAddRestaurant] = useState(false);

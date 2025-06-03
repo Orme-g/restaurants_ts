@@ -18,7 +18,7 @@ import ServerError from "../ServerError";
 import StartBlogForm from "../../Components/forms/startBlogForm/StartBlogForm";
 import BlogProfileData from "../../Components/blogProfileData/BlogProfileData";
 
-import "./profilePage.sass";
+import "./profilePage.scss";
 
 const ProfilePage: React.FC = () => {
     const [avatarData, setAvatarData] = useState<string | null>(null);

@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./workshop.sass";
+import "./workshop.scss";
 
 const Workshop: React.FC = () => {
     return <div></div>;

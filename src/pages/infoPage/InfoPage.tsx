@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 
-import "./infoPage.sass";
+import "./infoPage.scss";
 
 const InfoPage = () => {
     const { infoType } = useParams();

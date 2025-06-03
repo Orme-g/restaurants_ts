@@ -5,7 +5,7 @@ import BestDonerCards from "../../Components/bestDonerCards/BestDonerCards";
 import ModalWindow from "../../Components/modals/modalWindow/ModalWindow";
 import PostConstructor from "../../Components/postConstructor/PostConstructor";
 
-import "./bestDonersListPage.sass";
+import "./bestDonersListPage.scss";
 
 const BestDonersListPage: React.FC = () => {
     const [displayModal, setDisplayModal] = useState(false);

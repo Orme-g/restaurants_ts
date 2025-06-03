@@ -16,7 +16,7 @@ import Page404 from "../Page404";
 
 import { calculateStatus } from "../../utils/calculateExperience";
 
-import "./blogerProfilePage.sass";
+import "./blogerProfilePage.scss";
 
 const BlogerProfilePage: React.FC = () => {
     const { userId } = useParams();

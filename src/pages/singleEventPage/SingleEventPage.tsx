@@ -7,7 +7,7 @@ import CommentsBlock from "../../Components/commentsBlock/CommentsBlock";
 import transformDate from "../../utils/transformDate";
 import { contentMaker } from "../../utils/contentMaker";
 
-import "./singleEventPage.sass";
+import "./singleEventPage.scss";
 
 const SingleEventPage: React.FC = () => {
     const { eventId } = useParams();

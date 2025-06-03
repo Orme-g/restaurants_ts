@@ -5,7 +5,7 @@ import { useGetPostsByThemeQuery } from "../../services/blogApi";
 import BlogPostCard from "../../Components/blogPostCard/BlogPostCard";
 import { CardsSkeleton } from "../../Components/skeletons/Skeletons";
 
-import "./blogPageThemeSelection.sass";
+import "./blogPageThemeSelection.scss";
 
 const BlogPageThemeSelection: React.FC = () => {
     const { theme } = useParams<string>();

@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "../../types/store";
 import { fetchRestaurantData, fetchRestaurantReviews } from "../../reducers/restaurants";
 import { useParams } from "react-router-dom";
 
-import "./singleRestaurantPage.sass";
+import "./singleRestaurantPage.scss";
 import Slider from "../../Components/sliderImages/Slider";
 import RestSideInfo from "../../Components/restSideInfo/RestSideInfo";
 import RestaurantsTabs from "../../Components/restaurantsTabs/RestaurantsTabs";

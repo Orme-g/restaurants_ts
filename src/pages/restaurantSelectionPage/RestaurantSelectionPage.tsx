@@ -17,7 +17,7 @@ import { subwaySpb } from "../../data/subwaysLists";
 import LongCard from "../../Components/longCard/LongCard";
 import RenderListWithPagination from "../../Components/renderListWithPagination/RenderListWithPagination";
 import SubwayIcon from "../../Components/svg/subwayIcon";
-import "./restaurantSelectionPage.sass";
+import "./restaurantSelectionPage.scss";
 
 import type { IFindRestaurantCriterias, IRestaurant } from "../../types/restaurantsTypes";
 

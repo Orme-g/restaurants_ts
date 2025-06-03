@@ -10,7 +10,7 @@ import tranfsormDate from "../../utils/transformDate";
 import { contentMaker } from "../../utils/contentMaker";
 
 import pic from "../../assets/event.JPG";
-import "./singleDonerPage.sass";
+import "./singleDonerPage.scss";
 
 const SingleDonerPage: React.FC = () => {
     const { donerId } = useParams<string>();
