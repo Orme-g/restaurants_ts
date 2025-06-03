@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-import "./modalWindow.sass";
+import "./modalWindow.scss";
 
 interface IModalWindow {
     modalController: (open: boolean) => void;
@@ -8,8 +8,6 @@ interface IModalWindow {
 }
 
 const ModalWindow: React.FC<IModalWindow> = ({ modalController, children }) => {
-    console.log("Renda");
-
     useEffect(() => {
         document.body.style.overflow = "hidden";
         console.log("Mounted?!");
@@ -20,7 +18,6 @@ const ModalWindow: React.FC<IModalWindow> = ({ modalController, children }) => {
         };
         document.addEventListener("keydown", keyHandler);
         return () => {
-            console.log("Unmounted?!");
             document.body.style.overflow = "unset";
             document.removeEventListener("keydown", keyHandler);
         };

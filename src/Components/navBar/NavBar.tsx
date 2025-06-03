@@ -24,7 +24,7 @@ import { useAppDispatch, useAppSelector } from "../../types/store";
 import { Link } from "react-router-dom";
 import useLocalStorage from "../../hooks/useLocalStorage";
 
-import "./navBar.sass";
+import "./navBar.scss";
 
 const NavBar: React.FC = () => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);

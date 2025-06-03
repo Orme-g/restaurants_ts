@@ -18,7 +18,7 @@ import {
 import { useLoginMutation } from "../../../services/apiSlice";
 import useLocalStorage from "../../../hooks/useLocalStorage";
 
-import "./modalLogin.sass";
+import "./modalLogin.scss";
 
 interface IFormData {
     login: string;

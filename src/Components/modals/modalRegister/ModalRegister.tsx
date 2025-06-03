@@ -14,7 +14,7 @@ import {
 } from "../../../reducers/interactive";
 import { useRegistrationMutation } from "../../../services/apiSlice";
 
-import "./modalRegister.sass";
+import "./modalRegister.scss";
 
 interface IRegisterData {
     username: string;

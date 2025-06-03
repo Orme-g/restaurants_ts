@@ -6,7 +6,7 @@ import { convertToBase64 } from "../../utils/convertToBase64";
 
 import { useAddEventMutation } from "../../services/eventsApi";
 
-import "./postConstructor.sass";
+import "./postConstructor.scss";
 
 type PostType = "doner" | "event" | "blog";
 type InputType = "text" | "bloquote" | "photo" | "slider";
