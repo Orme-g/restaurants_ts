@@ -1,0 +1,52 @@
+@use "../../style/variables";
+@use "../../style/mixins";
+
+.restaurants-tabs {
+    &__container {
+        width: 90%;
+        margin: 0 auto;
+        color: variables.$primary-text;
+        min-height: 400px;
+        padding-bottom: 100px;
+    }
+
+    &__description {
+        margin-top: 20px;
+        font-weight: 300;
+        margin-right: 200px;
+        line-height: 1.5;
+        white-space: pre-wrap;
+        background-color: #f4f4f4;
+        border-radius: 15px;
+        padding: 30px;
+        margin-left: -24px;
+    }
+    &__menu {
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+    }
+    &__feedback {
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+
+        .post-feedback {
+            width: 200px;
+            color: variables.$primary-text;
+            font-size: 1.1rem;
+        }
+    }
+    &__add-event_btn {
+        @include mixins.addPostButton;
+        margin-bottom: 20px;
+    }
+    &__map {
+        height: 500px;
+        width: 70%;
+        border-radius: 10px;
+        box-shadow: 2px 1px 20px -3px rgba(21, 35, 47, 0.3);
+        overflow: hidden;
+    }
+}

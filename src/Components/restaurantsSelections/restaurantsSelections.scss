@@ -1,0 +1,27 @@
+@use "../../style/mixins";
+@use "../../style/variables";
+
+.restaurants-selections {
+    width: 85%;
+    margin: 100px auto 50px auto;
+
+    &__title {
+        font-size: 2.8rem;
+        margin-bottom: 70px;
+        font-weight: 300;
+        padding-bottom: 15px;
+        border-bottom: variables.$green-divider;
+    }
+}
+.selection {
+    height: 400px;
+    margin-bottom: 80px;
+
+    &__title {
+        font-size: 2rem;
+        font-weight: 300;
+        padding-bottom: 15px;
+        border-bottom: variables.$divider-style;
+        font-family: "Roboto Light", sans-serif;
+    }
+}

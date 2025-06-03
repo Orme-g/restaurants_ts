@@ -1,7 +1,7 @@
 import React from "react";
 import RestaurantCardBig from "../restaurantCardBig/RestaurantCardBig";
 
-import "./restaurantsGallery.sass";
+import "./restaurantsGallery.scss";
 
 const RestaurantsGallery: React.FC = () => {
     return (

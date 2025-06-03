@@ -11,7 +11,7 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import pic from "../../assets/rest.jpeg";
 // import * as data from "../../services/importModule"
-import "./slider.sass";
+import "./slider.scss";
 
 interface ISliderProps {
     images: string[];

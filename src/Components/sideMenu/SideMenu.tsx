@@ -19,7 +19,7 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 
 // Styles import
-import "./sideMenu.sass";
+import "./sideMenu.scss";
 
 const SideMenu = () => {
     const [contactUs, setContactUs] = useState(false);

@@ -1,7 +1,7 @@
 import React from "react";
 import SliderCards from "../sliderCards/SliderCards";
 
-import "./restaurantsSelections.sass";
+import "./restaurantsSelections.scss";
 
 const RestaurantsSelections = () => {
     return (

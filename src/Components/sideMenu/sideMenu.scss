@@ -1,0 +1,8 @@
+@use "../../style/variables";
+
+.side-list {
+    a {
+        text-decoration: none;
+        color: variables.$primary-text;
+    }
+}

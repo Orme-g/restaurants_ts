@@ -1,0 +1,55 @@
+@use "../../style/variables";
+
+.rest-side-info {
+    &__container {
+        position: relative;
+        width: 25%;
+        min-height: 555px;
+        background-color: #f4f4f4;
+        display: flex;
+        margin-left: 50px;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: flex-start;
+        align-content: center;
+        color: variables.$primary-text;
+        border-radius: 15px;
+    }
+    &__favorite-icon {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        color: variables.$green-color;
+    }
+    &__rating {
+        font-size: 1.7rem;
+        margin-left: 30px;
+        span {
+            color: rgb(138, 191, 82);
+            font-size: 2.2rem;
+        }
+        &_stars-and-marks {
+            display: flex;
+            align-items: center;
+        }
+
+        &_marks-amount {
+            font-weight: 300;
+            font-size: 1.4rem;
+            margin-left: 5px;
+            transform: translateY(-3px);
+        }
+    }
+    &__item {
+        font-size: 1.2rem;
+        margin-left: 30px;
+        margin-right: 20px;
+        span {
+            font-size: 1rem;
+            font-weight: 300;
+        }
+        .subway {
+            display: block;
+        }
+    }
+}

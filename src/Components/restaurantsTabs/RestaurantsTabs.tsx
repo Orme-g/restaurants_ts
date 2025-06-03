@@ -10,7 +10,7 @@ import EventsList from "../eventsList/EventsList";
 import ModalWindow from "../modals/modalWindow/ModalWindow";
 import PostConstructor from "../postConstructor/PostConstructor";
 
-import "./restaurantsTabs.sass";
+import "./restaurantsTabs.scss";
 
 interface IRestaurantsTabsProps {
     description: string;

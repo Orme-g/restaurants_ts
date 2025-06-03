@@ -5,7 +5,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 import type { IRestaurant } from "../../types/restaurantsTypes";
-import "./restSideInfo.sass";
+import "./restSideInfo.scss";
 
 interface ISideInfoProps {
     data: IRestaurant;

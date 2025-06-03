@@ -11,7 +11,7 @@ import AdditionalReviewForm from "../forms/additionalReviewForm/AdditionalReview
 import { useAppSelector } from "../../types/store";
 import type { IReview } from "../../types/reviewsTypes";
 
-import "./reviewItem.sass";
+import "./reviewItem.scss";
 
 interface ReviewItemProps {
     data: IReview;

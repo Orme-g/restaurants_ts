@@ -8,7 +8,7 @@ import { CardsSkeleton } from "../skeletons/Skeletons";
 
 // import pic from "../../assets/rest.jpeg";
 
-import "./restaurantCardBig.sass";
+import "./restaurantCardBig.scss";
 import { IRestaurant } from "../../types/restaurantsTypes";
 
 const RestaurantCardBig: React.FC = () => {

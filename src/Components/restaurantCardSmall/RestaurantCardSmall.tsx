@@ -6,7 +6,7 @@ import { Rating } from "@mui/material";
 
 import type { IRestaurant } from "../../types/restaurantsTypes";
 
-import "./restaurantCardSmall.sass";
+import "./restaurantCardSmall.scss";
 interface IRestaurantDataProps {
     restData: IRestaurant;
 }
