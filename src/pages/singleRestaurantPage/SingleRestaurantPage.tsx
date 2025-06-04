@@ -12,6 +12,7 @@ import RestSideInfo from "../../Components/restSideInfo/RestSideInfo";
 import RestaurantsTabs from "../../Components/restaurantsTabs/RestaurantsTabs";
 import { PageSkeleton } from "../../Components/skeletons/Skeletons";
 import Page404 from "../Page404";
+import ResourceNotFound from "../ResourceNotFound";
 import {
     useGetUserDataQuery,
     useHandleFavouriteRestaurantsMutation,
@@ -56,7 +57,7 @@ const SingleRestaurantPage: React.FC = () => {
         return <PageSkeleton />;
     }
     if (!restaurantData) {
-        return <Page404 />;
+        return <ResourceNotFound />;
     }
     // console.log(restaurantData);
     if (data) {
