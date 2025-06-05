@@ -69,42 +69,42 @@ const UserDataSection: React.FC<IUserDataSection> = ({ userData }) => {
     };
 
     return (
-        <section>
-            <div className="profile-page__header">
-                <div className="profile-page__header_avatar">
+        <section className="user-data">
+            <div className="user-data__header">
+                <div className="user-data__header_avatar">
                     <img src={avatar} alt="avatar" />
                 </div>
-                <div className="profile-page__header_greet">Привет, {name}</div>
+                <div className="user-data__header_greet">Привет, {name}</div>
             </div>
-            <div className="profile-page__userdata">
-                <div className="profile-page__userdata_item">
-                    <div className="profile-page__data-field">Логин:</div>
-                    <div className="profile-page__data-value">{username}</div>
+            <div className="user-data__userdata">
+                <div className="user-data__userdata_item">
+                    <div className="user-data__data-field">Логин:</div>
+                    <div className="user-data__data-value">{username}</div>
                 </div>
 
-                <div className="profile-page__userdata_item">
-                    <div className="profile-page__data-field">Электронная почта:</div>
-                    <div className="profile-page__data-value email">{email}</div>
+                <div className="user-data__userdata_item">
+                    <div className="user-data__data-field">Электронная почта:</div>
+                    <div className="user-data__data-value email">{email}</div>
                 </div>
-                <div className="profile-page__userdata_item">
-                    <div className="profile-page__data-field">Статус:</div>
-                    <div className="profile-page__data-value">{status}</div>
+                <div className="user-data__userdata_item">
+                    <div className="user-data__data-field">Статус:</div>
+                    <div className="user-data__data-value">{status}</div>
                 </div>
-                <div className="profile-page__userdata_item">
-                    <div className="profile-page__data-field">Оставлено отзывов:</div>
-                    <div className="profile-page__data-value">{reviews}</div>
+                <div className="user-data__userdata_item">
+                    <div className="user-data__data-field">Оставлено отзывов:</div>
+                    <div className="user-data__data-value">{reviews}</div>
                 </div>
-                <div className="profile-page__userdata_item">
-                    <div className="profile-page__data-field">Написано комментариев:</div>
-                    <div className="profile-page__data-value">{comments}</div>
+                <div className="user-data__userdata_item">
+                    <div className="user-data__data-field">Написано комментариев:</div>
+                    <div className="user-data__data-value">{comments}</div>
                 </div>
-                <div className="profile-page__userdata_item">
-                    <div className="profile-page__data-field">Аккаунт зарегистрирован:</div>
-                    <div className="profile-page__data-value">{date}</div>
+                <div className="user-data__userdata_item">
+                    <div className="user-data__data-field">Аккаунт зарегистрирован:</div>
+                    <div className="user-data__data-value">{date}</div>
                 </div>
-                <div className="profile-page__userdata_item">
-                    <div className="profile-page__data-field">Изменить фото профиля:</div>
-                    <div className="profile-page__data-value">
+                <div className="user-data__userdata_item">
+                    <div className="user-data__data-field">Изменить фото профиля:</div>
+                    <div className="user-data__data-value">
                         <form>
                             <div className="change-avatar-wrapper">
                                 <Button variant="outlined" component="label">
@@ -131,13 +131,13 @@ const UserDataSection: React.FC<IUserDataSection> = ({ userData }) => {
                     </div>
                 </div>
 
-                <div className="profile-page__userdata_item change-password">
-                    <div className="profile-page__data-field">
+                <div className="user-data__userdata_item change-password">
+                    <div className="user-data__data-field">
                         <Button className="show-change-fields" onClick={() => changePassButton()}>
                             Изменить пароль
                         </Button>
                     </div>
-                    <div className="profile-page__data-value">
+                    <div className="user-data__data-value">
                         <div className="password-fields hide">
                             <ChangePasswordForm userId={userId!} />
                         </div>

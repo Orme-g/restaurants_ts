@@ -7,6 +7,8 @@ import { convertToBase64 } from "../../../utils/convertToBase64";
 import { useSetBlogerDataMutation } from "../../../services/apiSlice";
 import { callSnackbar } from "../../../reducers/interactive";
 
+import "./startBlogForm.scss";
+
 interface IStartBlogForm {
     userId: string;
 }
@@ -66,17 +68,14 @@ const StartBlogForm: React.FC<IStartBlogForm> = ({ userId }) => {
     const display = displayBlogForm ? "show-with-animation" : "hide-with-animation";
     return (
         <>
-            <div className="profile-page__blog-start">
-                <div className="profile-page__blog-start_label">Вести блог:</div>
-                <div className="profile-page__blog-start_checkbox">
+            <div className="blog-start">
+                <div className="blog-start_label">Вести блог:</div>
+                <div className="blog-start_checkbox">
                     <input type="checkbox" onChange={(e) => handleCheckbox(e)} />
                 </div>
             </div>
 
-            <form
-                className={`profile-page__blog_form ${display}`}
-                onSubmit={handleSubmit(onSubmit)}
-            >
+            <form className={`blog__form ${display}`} onSubmit={handleSubmit(onSubmit)}>
                 <Stack spacing={3}>
                     <TextField
                         label="Псевдоним для блога"
@@ -120,7 +119,7 @@ const StartBlogForm: React.FC<IStartBlogForm> = ({ userId }) => {
                         </div>
                     </div>
 
-                    <div className="profile-page__blog_form upload-image">
+                    <div className="blog__blog_form upload-image">
                         <div className="upload-image_label">Фото для блога:</div>
                         <Button
                             className="upload-image_button"

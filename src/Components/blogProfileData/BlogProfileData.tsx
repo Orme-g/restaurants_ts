@@ -37,17 +37,17 @@ const BlogProfileData: React.FC<IBlogProfileData> = ({ blogData }) => {
     };
     return (
         <>
-            <div className="profile-page__blog-subtitle">Вы ведёте блог</div>
-            <div className="profile-page__userdata_item">
+            <div className="blog-data__blog-subtitle">Вы ведёте блог</div>
+            <div className="blog-data__userdata_item">
                 <img src={blogAvatar} alt="blogAvatar" />
             </div>
-            <div className="profile-page__userdata_item">
-                <div className="profile-page__data-field">В блоге вас знают как:</div>
-                <div className="profile-page__data-value">{blogerName}</div>
+            <div className="blog-data__userdata_item">
+                <div className="blog-data__data-field">В блоге вас знают как:</div>
+                <div className="blog-data__data-value">{blogerName}</div>
             </div>
-            <div className="profile-page__userdata_item">
-                <div className="profile-page__data-field">Что вы написали о себе:</div>
-                <div className="profile-page__data-value editable-field">
+            <div className="blog-data__userdata_item">
+                <div className="blog-data__data-field">Что вы написали о себе:</div>
+                <div className="blog-data__data-value">
                     {editAboutField ? (
                         <EditSingleField
                             field={"aboutMe"}
@@ -69,9 +69,9 @@ const BlogProfileData: React.FC<IBlogProfileData> = ({ blogData }) => {
                     </Button>
                 </div>
             </div>
-            <div className="profile-page__userdata_item">
-                <div className="profile-page__data-field">Город:</div>
-                <div className="profile-page__data-value editable-field">
+            <div className="blog-data__userdata_item">
+                <div className="blog-data__data-field">Город:</div>
+                <div className="blog-data__data-value">
                     {editCityField ? (
                         <EditSingleField
                             field={"blogCity"}
@@ -95,19 +95,19 @@ const BlogProfileData: React.FC<IBlogProfileData> = ({ blogData }) => {
                     {/* {blogCity} */}
                 </div>
             </div>
-            <div className="profile-page__userdata_item">
-                <div className="profile-page__data-field">Всего постов:</div>
-                <div className="profile-page__data-value">{blogPostsCount}</div>
+            <div className="blog-data__userdata_item">
+                <div className="blog-data__data-field">Всего постов:</div>
+                <div className="blog-data__data-value">{blogPostsCount}</div>
             </div>
-            <div className="profile-page__userdata_item">
-                <div className="profile-page__data-field">Ваш рейтинг:</div>
-                <div className="profile-page__data-value">{blogerRating}</div>
+            <div className="blog-data__userdata_item">
+                <div className="blog-data__data-field">Ваш рейтинг:</div>
+                <div className="blog-data__data-value">{blogerRating}</div>
             </div>
-            <div className="profile-page__userdata_item">
-                <div className="profile-page__data-field">Ваш статус:</div>
-                <div className="profile-page__data-value">{status}</div>
+            <div className="blog-data__userdata_item">
+                <div className="blog-data__data-field">Ваш статус:</div>
+                <div className="blog-data__data-value">{status}</div>
             </div>
-            <button className="profile-page__add-blog-post" onClick={() => handleModal(true)}>
+            <button className="blog-data__add-blog-post" onClick={() => handleModal(true)}>
                 Создать пост
             </button>
             {displayModal ? (

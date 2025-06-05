@@ -14,15 +14,13 @@ interface IBlogDataSection {
 const BlogDataSection: React.FC<IBlogDataSection> = ({ userData }) => {
     const { _id, bloger, blogData } = userData;
     return (
-        <section>
-            <div className="profile-page__blogdata">
-                <div className="profile-page__blog-title">Блог</div>
-                {bloger && blogData ? (
-                    <BlogProfileData blogData={blogData} />
-                ) : (
-                    <StartBlogForm userId={_id} />
-                )}
-            </div>
+        <section className="blog-data">
+            <div className="blog-data__title">Блог</div>
+            {bloger && blogData ? (
+                <BlogProfileData blogData={blogData} />
+            ) : (
+                <StartBlogForm userId={_id} />
+            )}
         </section>
     );
 };

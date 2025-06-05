@@ -1,1 +1,83 @@
-// Styles in ProfilePage
+.blog-start {
+    display: flex;
+    flex-direction: row;
+    line-height: 30px;
+    margin-bottom: 30px;
+    &_label {
+        margin-left: 100px;
+        font-weight: 300;
+    }
+    &_checkbox {
+        display: flex;
+        align-items: center;
+        margin-left: 15px;
+        input {
+            height: 16px;
+            width: 16px;
+        }
+    }
+}
+.blog {
+    &__form {
+        margin-left: 100px;
+        &.hide-with-animation {
+            visibility: hidden;
+            max-height: 0;
+            opacity: 0;
+            transform: translateY(-50px);
+            transition: opacity 0.5s, max-height 0.2s, transform 1s;
+            margin-top: -50px;
+        }
+        &.show-with-animation {
+            visibility: visible;
+            max-height: 100vh;
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.5s 0.2s, max-height 1s, transform 1s;
+        }
+    }
+}
+
+.upload-image {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    &_label {
+        font-weight: 300;
+        font-style: italic;
+    }
+    &_button {
+        margin-left: 20px;
+    }
+    &_name {
+        margin-left: 10px;
+        font-style: italic;
+        color: #525252;
+        text-decoration: underline;
+        font-weight: 300;
+    }
+}
+
+.limited-length_field {
+    position: relative;
+    height: fit-content;
+    width: fit-content;
+
+    .letters-count {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        font-size: 0.9rem;
+        color: #7b7b7b;
+    }
+    .single-field {
+        margin-bottom: 5px;
+    }
+
+    &_helper-text {
+        margin-top: -5px;
+        margin-bottom: 10px;
+        color: red;
+        font-size: 0.9rem;
+    }
+}

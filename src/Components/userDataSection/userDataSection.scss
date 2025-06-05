@@ -1,2 +1,64 @@
 @use "../../style/mixins.scss";
 @use "../../style/variables.scss";
+
+.user-data {
+    &__header {
+        margin-top: 50px;
+        display: flex;
+        &_avatar {
+            height: 90px;
+            width: 90px;
+            img {
+                border-radius: 100%;
+                height: 100%;
+                width: 100%;
+                object-fit: contain;
+            }
+        }
+        &_greet {
+            margin-left: 40px;
+            margin-top: auto;
+            font-size: 1.5rem;
+            font-style: italic;
+            font-weight: 300;
+        }
+    }
+    &__userdata {
+        margin-top: 50px;
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+        &_item {
+            display: flex;
+            min-height: 30px;
+            margin: 5px 0;
+            img {
+                height: 200px;
+                width: 200px;
+                margin-left: 70px;
+                object-fit: cover;
+                margin-bottom: 30px;
+                border-radius: 7px;
+            }
+        }
+        .change-password {
+            margin-top: 30px;
+        }
+    }
+    &__data-field {
+        width: 25%;
+        text-align: right;
+    }
+    &__data-value {
+        width: 75%;
+        font-style: italic;
+        font-weight: 300;
+        padding-left: 40px;
+        position: relative;
+    }
+}
+.change-avatar-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
