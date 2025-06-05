@@ -11,7 +11,6 @@ import Slider from "../../Components/sliderImages/Slider";
 import RestSideInfo from "../../Components/restSideInfo/RestSideInfo";
 import RestaurantsTabs from "../../Components/restaurantsTabs/RestaurantsTabs";
 import { PageSkeleton } from "../../Components/skeletons/Skeletons";
-import Page404 from "../Page404";
 import ResourceNotFound from "../ResourceNotFound";
 import {
     useGetUserDataQuery,
@@ -46,7 +45,7 @@ const SingleRestaurantPage: React.FC = () => {
     let isFavourite: "idle" | boolean = "idle";
     const handleFavouriteButton = useCallback(() => {
         const type = isFavourite ? "remove" : "add";
-        handleFavourite({ restId, userId, type })
+        handleFavourite({ restId, userId, type, name })
             .unwrap()
             .then(({ message, type }) => dispatch(callSnackbar({ text: message, type: type })));
 
@@ -62,7 +61,8 @@ const SingleRestaurantPage: React.FC = () => {
     // console.log(restaurantData);
     if (data) {
         const { favouriteRestaurants } = data;
-        isFavourite = favouriteRestaurants.includes(restId) ? true : false;
+        let favouriteRestaurantsIds = favouriteRestaurants.map((item) => item[1]);
+        isFavourite = favouriteRestaurantsIds.includes(restId) ? true : false;
     }
     const { name, images, description, coordinates } = restaurantData;
     return (

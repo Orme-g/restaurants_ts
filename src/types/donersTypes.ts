@@ -1,6 +1,6 @@
 export interface IDonerRestaurant {
     _id: string;
-    title: string;
+    name: string;
     subtitle: string;
     title_image: string;
     short_description: string;

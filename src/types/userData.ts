@@ -21,7 +21,7 @@ export interface IUserData {
     _id: string;
     birthday: Date;
     reviewedRestaurants: string[];
-    favouriteRestaurants: string[];
+    favouriteRestaurants: string[][];
     ratedComments: string[];
     rating: number;
     bloger: boolean;

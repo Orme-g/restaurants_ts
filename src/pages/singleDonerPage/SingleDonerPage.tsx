@@ -22,19 +22,19 @@ const SingleDonerPage: React.FC = () => {
     }
 
     if (singleDonerData) {
-        const { title, rating, author, subtitle, createdAt, _id, content } = singleDonerData;
+        const { name, rating, author, subtitle, createdAt, _id, content } = singleDonerData;
         const displayContent = contentMaker(content);
         const date = tranfsormDate(createdAt);
         return (
             <>
                 <Helmet>
-                    <title>{title}</title>
+                    <title>{name}</title>
                 </Helmet>
                 <div className="page-wrapper">
                     <section className="doner-topic__container">
                         <div className="doner-topic__title">
                             {" "}
-                            {title}
+                            {name}
                             <div className="doner-topic__subtitle"> {subtitle} </div>
                         </div>
                         <div className="doner-topic__image">

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useChangePasswordMutation } from "../../../services/apiSlice";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
+import { useAppDispatch } from "../../../types/store";
 
 import { Button, TextField, Stack } from "@mui/material";
 
@@ -23,7 +24,7 @@ const PasswordForm: React.FC<IPasswordFormProps> = ({ userId }) => {
     });
     const [sendData] = useChangePasswordMutation();
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const clearForm = () => {
         setOldPass("");

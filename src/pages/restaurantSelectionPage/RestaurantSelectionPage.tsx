@@ -46,12 +46,9 @@ const RestaurantSelectionPage: React.FC = () => {
         criterias.subway = subway;
         criterias.cousine = cousine;
         criterias.sortBy = sortBy;
-        console.log(criterias);
         findRestaurant({ subway, cousine, sortBy })
             .unwrap()
-            .then((response) => {
-                console.log(response);
-            });
+            .then((response) => {});
     };
     const handleSelectSubway = (event: SelectChangeEvent) => {
         setSubway(event.target.value as string);
@@ -65,6 +62,7 @@ const RestaurantSelectionPage: React.FC = () => {
     const handleSelectSortBy = (event: SelectChangeEvent) => {
         setSortBy(event.target.value as "cheaper" | "expensive");
     };
+    console.log(data);
     let searchResults;
     if (isUninitialized)
         searchResults = <span>Нажмите на "Поиск" для отображения результатов</span>;
