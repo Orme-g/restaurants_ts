@@ -23,38 +23,89 @@
             font-weight: 300;
         }
     }
-    &__userdata {
+    &__wrapper {
+        width: 95%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: row;
+    }
+    &__info {
         margin-top: 50px;
         display: flex;
         flex-direction: column;
-        width: 90%;
-        &_item {
-            display: flex;
-            min-height: 30px;
-            margin: 5px 0;
-            img {
-                height: 200px;
-                width: 200px;
-                margin-left: 70px;
-                object-fit: cover;
-                margin-bottom: 30px;
-                border-radius: 7px;
-            }
-        }
+        width: 50%;
         .change-password {
             margin-top: 30px;
         }
     }
-    &__data-field {
-        width: 25%;
+    &__info-item {
+        display: flex;
+        min-height: 30px;
+        margin: 5px 0;
+        img {
+            height: 200px;
+            width: 200px;
+            margin-left: 70px;
+            object-fit: cover;
+            margin-bottom: 30px;
+            border-radius: 7px;
+        }
+    }
+    &__info-field {
+        width: 50%;
         text-align: right;
     }
-    &__data-value {
-        width: 75%;
+    &__info-value {
+        width: 50%;
         font-style: italic;
         font-weight: 300;
         padding-left: 40px;
         position: relative;
+    }
+    &__favorites {
+        width: 100%;
+        padding-left: 100px;
+        color: variables.$primary-text;
+        &_header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        &_title {
+            // width: 100%;
+            text-align: center;
+            font-size: 40px;
+            font-weight: 300;
+        }
+        &_icon {
+            color: rgb(99, 99, 99);
+            margin-left: 15px;
+        }
+        &_subtitle {
+            font-size: 35px;
+            font-weight: 300;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+    }
+    &__favorite-restaurants {
+        max-height: 400px;
+        overflow: scroll;
+        &_item {
+            width: fit-content;
+            font-weight: 300;
+            display: flex;
+            align-items: center;
+            margin-left: 20px;
+            margin-top: 15px;
+        }
+        &_icon {
+            transform: translateY(2px);
+        }
+        &_name {
+            margin-left: 5px;
+            font-size: 20px;
+        }
     }
 }
 .change-avatar-wrapper {

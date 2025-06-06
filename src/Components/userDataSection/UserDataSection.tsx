@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 import { Button } from "@mui/material";
+import Bookmarks from "@mui/icons-material/BookmarksRounded";
+import Bookmark from "@mui/icons-material/BookmarkRounded";
 import { useParams } from "react-router-dom";
 import ChangePasswordForm from "../../Components/forms/changePasswordForm/ChangePasswordForm";
 import {
@@ -39,7 +42,8 @@ const UserDataSection: React.FC<IUserDataSection> = ({ userData }) => {
     const [sendAvatar] = useChangeAvatarMutation();
     const { userId } = useParams<string>();
     const dispatch = useAppDispatch();
-    const { avatar, name, registeredAt, username, email, comments, reviews } = userData;
+    const { avatar, name, registeredAt, username, email, comments, reviews, favouriteRestaurants } =
+        userData;
     const status = calculateExperience(reviews);
     const date = new Date(registeredAt).toLocaleString("ru", {
         day: "numeric",
@@ -67,6 +71,16 @@ const UserDataSection: React.FC<IUserDataSection> = ({ userData }) => {
                 .catch((error) => dispatch(callSnackbar({ text: error, type: "error" })));
         }
     };
+    const favoriteRestaursntsList = favouriteRestaurants.map(([name, id]) => {
+        return (
+            <Link to={`/restaurant/${id}`} className="user-data__favorite-restaurants_item">
+                <div className="user-data__favorite-restaurants_icon">
+                    <Bookmark />
+                </div>
+                <div className="user-data__favorite-restaurants_name">{name}</div>
+            </Link>
+        );
+    });
 
     return (
         <section className="user-data">
@@ -76,71 +90,113 @@ const UserDataSection: React.FC<IUserDataSection> = ({ userData }) => {
                 </div>
                 <div className="user-data__header_greet">Привет, {name}</div>
             </div>
-            <div className="user-data__userdata">
-                <div className="user-data__userdata_item">
-                    <div className="user-data__data-field">Логин:</div>
-                    <div className="user-data__data-value">{username}</div>
-                </div>
+            <div className="user-data__wrapper">
+                <div className="user-data__info">
+                    <div className="user-data__info-item">
+                        <div className="user-data__info-field">Логин:</div>
+                        <div className="user-data__info-value">{username}</div>
+                    </div>
 
-                <div className="user-data__userdata_item">
-                    <div className="user-data__data-field">Электронная почта:</div>
-                    <div className="user-data__data-value email">{email}</div>
-                </div>
-                <div className="user-data__userdata_item">
-                    <div className="user-data__data-field">Статус:</div>
-                    <div className="user-data__data-value">{status}</div>
-                </div>
-                <div className="user-data__userdata_item">
-                    <div className="user-data__data-field">Оставлено отзывов:</div>
-                    <div className="user-data__data-value">{reviews}</div>
-                </div>
-                <div className="user-data__userdata_item">
-                    <div className="user-data__data-field">Написано комментариев:</div>
-                    <div className="user-data__data-value">{comments}</div>
-                </div>
-                <div className="user-data__userdata_item">
-                    <div className="user-data__data-field">Аккаунт зарегистрирован:</div>
-                    <div className="user-data__data-value">{date}</div>
-                </div>
-                <div className="user-data__userdata_item">
-                    <div className="user-data__data-field">Изменить фото профиля:</div>
-                    <div className="user-data__data-value">
-                        <form>
-                            <div className="change-avatar-wrapper">
-                                <Button variant="outlined" component="label">
-                                    Загрузить фото
-                                    <input
-                                        type="file"
-                                        accept=".png, .jpg, .jpeg, .svg, .ico"
-                                        hidden
-                                        onChange={(e) => handleFileUpload(e)}
-                                    />
+                    <div className="user-data__info-item">
+                        <div className="user-data__info-field">Электронная почта:</div>
+                        <div className="user-data__info-value email">{email}</div>
+                    </div>
+                    <div className="user-data__info-item">
+                        <div className="user-data__info-field">Статус:</div>
+                        <div className="user-data__info-value">{status}</div>
+                    </div>
+                    <div className="user-data__info-item">
+                        <div className="user-data__info-field">Оставлено отзывов:</div>
+                        <div className="user-data__info-value">{reviews}</div>
+                    </div>
+                    <div className="user-data__info-item">
+                        <div className="user-data__info-field">Комментариев:</div>
+                        <div className="user-data__info-value">{comments}</div>
+                    </div>
+                    <div className="user-data__info-item">
+                        <div className="user-data__info-field">Зарегистрирован:</div>
+                        <div className="user-data__info-value">{date}</div>
+                    </div>
+                    <div className="user-data__info-item">
+                        <div className="user-data__info-field">Изменить фото профиля:</div>
+                        <div className="user-data__info-value">
+                            <form>
+                                <div className="change-avatar-wrapper">
+                                    <Button variant="outlined" component="label">
+                                        Загрузить фото
+                                        <input
+                                            type="file"
+                                            accept=".png, .jpg, .jpeg, .svg, .ico"
+                                            hidden
+                                            onChange={(e) => handleFileUpload(e)}
+                                        />
+                                    </Button>
+                                    <div className="upload-image_name">{imageName}</div>
+                                </div>
+
+                                <Button
+                                    type="submit"
+                                    style={{ marginTop: 10 }}
+                                    variant="contained"
+                                    onClick={(e) => handleSubmit(e)}
+                                >
+                                    Отправить
                                 </Button>
-                                <div className="upload-image_name">{imageName}</div>
-                            </div>
+                            </form>
+                        </div>
+                    </div>
 
+                    <div className="user-data__info-item change-password">
+                        <div className="user-data__info-field">
                             <Button
-                                type="submit"
-                                style={{ marginTop: 10 }}
-                                variant="contained"
-                                onClick={(e) => handleSubmit(e)}
+                                className="show-change-fields"
+                                onClick={() => changePassButton()}
                             >
-                                Отправить
+                                Изменить пароль
                             </Button>
-                        </form>
+                        </div>
+                        <div className="user-data__info-value">
+                            <div className="password-fields hide">
+                                <ChangePasswordForm userId={userId!} />
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <div className="user-data__userdata_item change-password">
-                    <div className="user-data__data-field">
-                        <Button className="show-change-fields" onClick={() => changePassButton()}>
-                            Изменить пароль
-                        </Button>
+                <div className="user-data__favorites">
+                    <div className="user-data__favorites_header">
+                        <div className="user-data__favorites_title">Избранное</div>
+                        <Bookmarks fontSize="large" className="user-data__favorites_icon" />
                     </div>
-                    <div className="user-data__data-value">
-                        <div className="password-fields hide">
-                            <ChangePasswordForm userId={userId!} />
+                    <div className="user-data__favorites_subtitle">Рестораны:</div>
+                    <div className="user-data__favorite-restaurants">
+                        {favoriteRestaursntsList}
+                        {favoriteRestaursntsList}
+                        {favoriteRestaursntsList}
+                        {favoriteRestaursntsList}
+                        {favoriteRestaursntsList}
+                        {favoriteRestaursntsList}
+                        {/* <Link
+                            to="/restaurant/652fe18502b0256dc1e6ba3e"
+                            className="user-data__favorite-restaurants_item"
+                        >
+                            <div className="user-data__favorite-restaurants_icon">
+                                <Bookmark />
+                            </div>
+                            <div className="user-data__favorite-restaurants_name">БАНЩИКИ</div>
+                        </Link>
+
+                        <div className="user-data__favorite-restaurants_item">
+                            <div className="user-data__favorite-restaurants_icon">
+                                <Bookmark />
+                            </div>
+                            <div className="user-data__favorite-restaurants_name">БАНЩИКИ</div>
                         </div>
+                        <div className="user-data__favorite-restaurants_item">
+                            <div className="user-data__favorite-restaurants_icon">
+                                <Bookmark />
+                            </div>
+                            <div className="user-data__favorite-restaurants_name">БАНЩИКИ</div>
+                        </div> */}
                     </div>
                 </div>
             </div>
