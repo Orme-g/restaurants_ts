@@ -42,7 +42,7 @@ const SingleRestaurantPage: React.FC = () => {
         skip: !!!userId,
     });
     const [handleFavourite] = useHandleFavouriteRestaurantsMutation();
-    let isFavourite: "idle" | boolean = "idle";
+    let isFavourite: boolean = false;
 
     const handleFavouriteButton = useCallback(
         (name: string) => {
@@ -59,6 +59,7 @@ const SingleRestaurantPage: React.FC = () => {
     if (pageLoading === "loading" || !restId) {
         return <PageSkeleton />;
     }
+
     if (!restaurantData) {
         return <ResourceNotFound />;
     }

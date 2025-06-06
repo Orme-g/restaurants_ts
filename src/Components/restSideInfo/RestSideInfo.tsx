@@ -9,7 +9,7 @@ import "./restSideInfo.scss";
 
 interface ISideInfoProps {
     data: IRestaurant;
-    isFavourite: "idle" | boolean;
+    isFavourite: boolean;
     favouriteHandler: (name: string) => void;
     isRegistered: boolean;
 }
@@ -29,7 +29,7 @@ const RestSideInfo: React.FC<ISideInfoProps> = memo(
                         className="rest-side-info__favorite-icon"
                         onClick={() => favouriteHandler(name)}
                     >
-                        {isFavourite === "idle" ? null : isFavourite === true ? (
+                        {isFavourite ? (
                             <FavoriteIcon fontSize="large" />
                         ) : (
                             <FavoriteBorderIcon fontSize="large" />

@@ -71,6 +71,7 @@ const UserDataSection: React.FC<IUserDataSection> = ({ userData }) => {
                 .catch((error) => dispatch(callSnackbar({ text: error, type: "error" })));
         }
     };
+
     const favoriteRestaursntsList = favouriteRestaurants.map(([name, id]) => {
         return (
             <Link
@@ -172,7 +173,20 @@ const UserDataSection: React.FC<IUserDataSection> = ({ userData }) => {
                         <Bookmarks fontSize="large" className="user-data__favorites_icon" />
                     </div>
                     <div className="user-data__favorites_subtitle">Рестораны:</div>
-                    <div className="user-data__favorite-restaurants">{favoriteRestaursntsList}</div>
+                    {favouriteRestaurants.length > 0 ? (
+                        <div className="user-data__favorite-restaurants">
+                            {favoriteRestaursntsList}
+                        </div>
+                    ) : (
+                        <div className="user-data__favorite-restaurants_empty">
+                            Список пуст. Добавить в избранное вы можете на странице ресторана.
+                        </div>
+                    )}
+                    {/* <div className="user-data__favorite-restaurants"> */}
+                    {/* {favouriteRestaurants.length > 0
+                            ? favoriteRestaursntsList
+                            : "Вы пока не добавили ни одного любимого ресторана."} */}
+                    {/* </div> */}
                 </div>
             </div>
         </section>
