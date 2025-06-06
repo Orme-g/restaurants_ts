@@ -15,4 +15,5 @@ export interface IComment {
     createdAt: Date;
     text: string;
     reply?: IReplyData;
+    deletedReason?: string;
 }

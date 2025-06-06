@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { memo } from "react";
 import {
     useGetCommentsQuery,
@@ -8,6 +8,7 @@ import {
 import { updateUserData, callSnackbar } from "../../reducers/interactive";
 import { useAppSelector, useAppDispatch } from "../../types/store";
 import CommentsItem from "../commentsItem/CommentsItem";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 import type { TCommentReplyFunction } from "../../types/commentsTypes";
 
@@ -19,6 +20,7 @@ interface ICommentItemProps {
 }
 
 const CommentsList: React.FC<ICommentItemProps> = memo(({ topicId, commentReply }) => {
+    const [reason, setReason] = useState<string | null>("Because it is baaad!!!");
     const [deleteComment] = useDeleteCommentMutation();
     const [evaluateComment] = useEvaluateCommentMutation();
     const actualUserData = useAppSelector((state) => state.interactive.userData);
@@ -27,8 +29,10 @@ const CommentsList: React.FC<ICommentItemProps> = memo(({ topicId, commentReply 
     const userId = actualUserData?._id;
     const { data: topicComments, isLoading } = useGetCommentsQuery(topicId);
     const onDelete = (id: string) => {
-        deleteComment(id).unwrap();
+        deleteComment({ id, reason }).unwrap();
     };
+    const { getUserData } = useLocalStorage();
+    const isAdmin = getUserData()?.role.includes("admin");
     const dispatch = useAppDispatch();
     const noComments = <div className="no-comments">Комментариев пока нет. Отсавьте первый!</div>;
     function handleLike(id: string) {
@@ -78,6 +82,7 @@ const CommentsList: React.FC<ICommentItemProps> = memo(({ topicId, commentReply 
                     ratedComments={ratedComments}
                     commentReply={commentReply}
                     key={_id}
+                    isAdmin={isAdmin}
                 />
             );
         });

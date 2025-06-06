@@ -23,9 +23,10 @@ export const commentsApi = createApi({
             invalidatesTags: ["Comments"],
         }),
         deleteComment: builder.mutation({
-            query: (id) => ({
-                url: `/${id}`,
-                method: "DELETE",
+            query: (data) => ({
+                url: `/${data.id}`,
+                method: "PATCH",
+                body: data,
             }),
             invalidatesTags: ["Comments"],
         }),

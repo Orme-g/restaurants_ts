@@ -17,6 +17,7 @@ interface ICommentItem {
     handleLike: (_id: string) => void;
     handleDislike: (_id: string) => void;
     commentReply: TCommentReplyFunction;
+    isAdmin: boolean;
 }
 
 const CommentsItem: React.FC<ICommentItem> = ({
@@ -26,17 +27,27 @@ const CommentsItem: React.FC<ICommentItem> = ({
     handleDislike,
     ratedComments,
     commentReply,
+    isAdmin,
 }) => {
-    const { name, likes, dislikes, createdAt, text, _id, reply } = commentData;
+    const { name, likes, dislikes, createdAt, text, _id, reply, deletedReason } = commentData;
     const date = transformDate(createdAt);
     let beingRated = false;
     if (ratedComments) {
         beingRated = ratedComments.includes(_id);
     }
-    const replyBlock = (
-        <div className="comment-card__reply">
-            <div className="comment-card__reply_name">{reply?.name}</div>
-            <div className="comment-card__reply_text">{reply?.text}</div>
+    const commentWithReply = (
+        <>
+            <div className="comment-card__reply">
+                <div className="comment-card__reply_name">{reply?.name}</div>
+                <div className="comment-card__reply_text">{reply?.text}</div>
+            </div>
+            {text}
+        </>
+    );
+    const commentDeleted = (
+        <div className="comment-card__deleted">
+            <div className="comment-card__deleted_title">Комментарий удалён. Причина:</div>
+            <div className="comment-card__deleted_reason">{deletedReason}</div>
         </div>
     );
     return (
@@ -47,15 +58,16 @@ const CommentsItem: React.FC<ICommentItem> = ({
             <div className="comment-card__content">
                 <div className="comment-card__header">
                     <div className="comment-card__name">{name}</div>
-                    <div className="comment-card__delete">
-                        <IconButton onClick={() => onDelete(_id)}>
-                            <CloseIcon />
-                        </IconButton>
-                    </div>
+                    {isAdmin ? (
+                        <div className="comment-card__delete">
+                            <IconButton onClick={() => onDelete(_id)}>
+                                <CloseIcon />
+                            </IconButton>
+                        </div>
+                    ) : null}
                 </div>
                 <div className="comment-card__text">
-                    {reply?.text ? replyBlock : null}
-                    {text}
+                    {deletedReason ? commentDeleted : reply?.text ? commentWithReply : text}
                 </div>
                 <div className="comment-card__footer">
                     <div className="comment-card__like">
