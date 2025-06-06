@@ -73,7 +73,11 @@ const UserDataSection: React.FC<IUserDataSection> = ({ userData }) => {
     };
     const favoriteRestaursntsList = favouriteRestaurants.map(([name, id]) => {
         return (
-            <Link to={`/restaurant/${id}`} className="user-data__favorite-restaurants_item">
+            <Link
+                to={`/restaurant/${id}`}
+                key={id}
+                className="user-data__favorite-restaurants_item"
+            >
                 <div className="user-data__favorite-restaurants_icon">
                     <Bookmark />
                 </div>
@@ -168,36 +172,7 @@ const UserDataSection: React.FC<IUserDataSection> = ({ userData }) => {
                         <Bookmarks fontSize="large" className="user-data__favorites_icon" />
                     </div>
                     <div className="user-data__favorites_subtitle">Рестораны:</div>
-                    <div className="user-data__favorite-restaurants">
-                        {favoriteRestaursntsList}
-                        {favoriteRestaursntsList}
-                        {favoriteRestaursntsList}
-                        {favoriteRestaursntsList}
-                        {favoriteRestaursntsList}
-                        {favoriteRestaursntsList}
-                        {/* <Link
-                            to="/restaurant/652fe18502b0256dc1e6ba3e"
-                            className="user-data__favorite-restaurants_item"
-                        >
-                            <div className="user-data__favorite-restaurants_icon">
-                                <Bookmark />
-                            </div>
-                            <div className="user-data__favorite-restaurants_name">БАНЩИКИ</div>
-                        </Link>
-
-                        <div className="user-data__favorite-restaurants_item">
-                            <div className="user-data__favorite-restaurants_icon">
-                                <Bookmark />
-                            </div>
-                            <div className="user-data__favorite-restaurants_name">БАНЩИКИ</div>
-                        </div>
-                        <div className="user-data__favorite-restaurants_item">
-                            <div className="user-data__favorite-restaurants_icon">
-                                <Bookmark />
-                            </div>
-                            <div className="user-data__favorite-restaurants_name">БАНЩИКИ</div>
-                        </div> */}
-                    </div>
+                    <div className="user-data__favorite-restaurants">{favoriteRestaursntsList}</div>
                 </div>
             </div>
         </section>

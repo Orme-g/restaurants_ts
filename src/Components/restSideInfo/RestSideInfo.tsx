@@ -10,13 +10,13 @@ import "./restSideInfo.scss";
 interface ISideInfoProps {
     data: IRestaurant;
     isFavourite: "idle" | boolean;
-    favouriteHandler: () => void;
+    favouriteHandler: (name: string) => void;
     isRegistered: boolean;
 }
 
 const RestSideInfo: React.FC<ISideInfoProps> = memo(
     ({ data, isFavourite, favouriteHandler, isRegistered }) => {
-        const { cousine, rating, adress, subway, bill, phone } = data;
+        const { cousine, rating, adress, subway, bill, phone, name } = data;
         // const { marks, overallRating } = rating;
         const calculatedRating =
             rating.length === 0 ? 0 : rating.reduce((acc, num) => acc + num, 0) / rating.length;
@@ -27,7 +27,7 @@ const RestSideInfo: React.FC<ISideInfoProps> = memo(
                 {isRegistered ? (
                     <IconButton
                         className="rest-side-info__favorite-icon"
-                        onClick={() => favouriteHandler()}
+                        onClick={() => favouriteHandler(name)}
                     >
                         {isFavourite === "idle" ? null : isFavourite === true ? (
                             <FavoriteIcon fontSize="large" />

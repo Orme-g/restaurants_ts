@@ -43,14 +43,18 @@ const SingleRestaurantPage: React.FC = () => {
     });
     const [handleFavourite] = useHandleFavouriteRestaurantsMutation();
     let isFavourite: "idle" | boolean = "idle";
-    const handleFavouriteButton = useCallback(() => {
-        const type = isFavourite ? "remove" : "add";
-        handleFavourite({ restId, userId, type, name })
-            .unwrap()
-            .then(({ message, type }) => dispatch(callSnackbar({ text: message, type: type })));
 
-        // eslint-disable-next-line
-    }, [data]);
+    const handleFavouriteButton = useCallback(
+        (name: string) => {
+            const type: "remove" | "add" = isFavourite ? "remove" : "add";
+            handleFavourite({ restId, userId, type, name })
+                .unwrap()
+                .then(({ message, type }) => dispatch(callSnackbar({ text: message, type: type })));
+
+            // eslint-disable-next-line
+        },
+        [data]
+    );
 
     if (pageLoading === "loading" || !restId) {
         return <PageSkeleton />;
