@@ -20,7 +20,6 @@ interface ICommentItemProps {
 }
 
 const CommentsList: React.FC<ICommentItemProps> = memo(({ topicId, commentReply }) => {
-    const [reason, setReason] = useState<string | null>("Because it is baaad!!!");
     const [deleteComment] = useDeleteCommentMutation();
     const [evaluateComment] = useEvaluateCommentMutation();
     const actualUserData = useAppSelector((state) => state.interactive.userData);
@@ -28,8 +27,11 @@ const CommentsList: React.FC<ICommentItemProps> = memo(({ topicId, commentReply 
     const ratedComments = actualUserData?.ratedComments;
     const userId = actualUserData?._id;
     const { data: topicComments, isLoading } = useGetCommentsQuery(topicId);
-    const onDelete = (id: string) => {
-        deleteComment({ id, reason }).unwrap();
+    const onDelete = (id: string, reason: string) => {
+        deleteComment({ id, reason })
+            .unwrap()
+            .then(({ message }) => dispatch(callSnackbar({ text: message, type: "success" })))
+            .catch(({ data }) => dispatch(callSnackbar({ text: data, type: "error" })));
     };
     const { getUserData } = useLocalStorage();
     const isAdmin = getUserData()?.role.includes("admin");

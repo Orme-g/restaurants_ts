@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { IconButton, Badge, Button } from "@mui/material";
+import TextField from "@mui/material/TextField";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import CloseIcon from "@mui/icons-material/Close";
@@ -13,7 +14,7 @@ import { IComment, TCommentReplyFunction } from "../../types/commentsTypes";
 interface ICommentItem {
     commentData: IComment;
     ratedComments: string[] | undefined;
-    onDelete: (_id: string) => void;
+    onDelete: (_id: string, reason: string) => void;
     handleLike: (_id: string) => void;
     handleDislike: (_id: string) => void;
     commentReply: TCommentReplyFunction;
@@ -29,6 +30,10 @@ const CommentsItem: React.FC<ICommentItem> = ({
     commentReply,
     isAdmin,
 }) => {
+    const [displayDeleteWindow, setDisplayDeleteWindow] = useState<boolean>(false);
+    const [inputError, setInputError] = useState<boolean>(false);
+    const [helperText, setHelperText] = useState<string | null>(null);
+    const [deleteReason, setDeleteReason] = useState("");
     const { name, likes, dislikes, createdAt, text, _id, replyToComment, deleted } = commentData;
     const date = transformDate(createdAt);
     let beingRated = false;
@@ -38,6 +43,18 @@ const CommentsItem: React.FC<ICommentItem> = ({
     const { data: replyCommentData } = useGetSingleCommentDataQuery(replyToComment as string, {
         skip: !!!replyToComment,
     });
+    function handleDeleteComment() {
+        if (deleteReason.trim().length < 10) {
+            setInputError(true);
+            setHelperText("Укажите причину удаления. Минимум 10 символов.");
+            return;
+        }
+        onDelete(_id, deleteReason.trim());
+        setHelperText(null);
+        setInputError(false);
+        setDeleteReason("");
+        setDisplayDeleteWindow(false);
+    }
     const commentWithReply = (
         <>
             <div className="comment-card__reply">
@@ -53,6 +70,30 @@ const CommentsItem: React.FC<ICommentItem> = ({
             <div className="comment-card__deleted_reason">{text}</div>
         </div>
     );
+    const deleteWindow = (
+        <div className="delete-window">
+            <div className="delete-window__title">Удаление комментария:</div>
+            <div className="delete-window__text-field">
+                <TextField
+                    label="Причина удаления"
+                    size="small"
+                    fullWidth
+                    value={deleteReason}
+                    onChange={(e) => setDeleteReason(e.target.value)}
+                    helperText={helperText}
+                    error={inputError}
+                />
+            </div>
+            <div className="delete-window__buttons">
+                <Button color="error" variant="contained" onClick={handleDeleteComment}>
+                    Удалить
+                </Button>
+                <Button color="success" onClick={() => setDisplayDeleteWindow(false)}>
+                    Отмена
+                </Button>
+            </div>
+        </div>
+    );
     return (
         <div className="comment-card__container" key={_id}>
             <div className="comment-card__avatar">
@@ -63,7 +104,8 @@ const CommentsItem: React.FC<ICommentItem> = ({
                     <div className="comment-card__name">{name}</div>
                     {isAdmin ? (
                         <div className="comment-card__delete">
-                            <IconButton onClick={() => onDelete(_id)}>
+                            {/* <IconButton onClick={() => onDelete(_id)}> */}
+                            <IconButton onClick={() => setDisplayDeleteWindow(true)}>
                                 <CloseIcon />
                             </IconButton>
                         </div>
@@ -74,14 +116,20 @@ const CommentsItem: React.FC<ICommentItem> = ({
                 </div>
                 <div className="comment-card__footer">
                     <div className="comment-card__like">
-                        <IconButton disabled={beingRated} onClick={() => handleLike(_id)}>
+                        <IconButton
+                            disabled={beingRated || deleted}
+                            onClick={() => handleLike(_id)}
+                        >
                             <Badge badgeContent={likes} color="success">
                                 <ThumbUpIcon />
                             </Badge>
                         </IconButton>
                     </div>
                     <div className="comment-card__dislike">
-                        <IconButton disabled={beingRated} onClick={() => handleDislike(_id)}>
+                        <IconButton
+                            disabled={beingRated || deleted}
+                            onClick={() => handleDislike(_id)}
+                        >
                             <Badge badgeContent={-dislikes} color="error">
                                 <ThumbDownIcon />
                             </Badge>
@@ -90,12 +138,14 @@ const CommentsItem: React.FC<ICommentItem> = ({
                     <Button
                         className="comment-card__btn-reply"
                         onClick={() => commentReply({ name, text, commentId: _id })}
+                        disabled={deleted}
                     >
                         Ответить
                     </Button>
                     <div className="comment-card__date">{date}</div>
                 </div>
             </div>
+            {displayDeleteWindow ? deleteWindow : null}
         </div>
     );
 };

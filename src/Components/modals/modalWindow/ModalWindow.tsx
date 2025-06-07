@@ -10,7 +10,6 @@ interface IModalWindow {
 const ModalWindow: React.FC<IModalWindow> = ({ modalController, children }) => {
     useEffect(() => {
         document.body.style.overflow = "hidden";
-        console.log("Mounted?!");
         const keyHandler = (e: any) => {
             if (e.code === "Escape") {
                 modalController(false);
