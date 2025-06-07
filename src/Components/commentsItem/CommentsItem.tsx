@@ -6,7 +6,7 @@ import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import CloseIcon from "@mui/icons-material/Close";
 
 import transformDate from "../../utils/transformDate";
-
+import { useGetSingleCommentDataQuery } from "../../services/commentsApi";
 import "./commentsItem.scss";
 import { IComment, TCommentReplyFunction } from "../../types/commentsTypes";
 
@@ -29,17 +29,20 @@ const CommentsItem: React.FC<ICommentItem> = ({
     commentReply,
     isAdmin,
 }) => {
-    const { name, likes, dislikes, createdAt, text, _id, reply, deletedReason } = commentData;
+    const { name, likes, dislikes, createdAt, text, _id, replyToComment, deleted } = commentData;
     const date = transformDate(createdAt);
     let beingRated = false;
     if (ratedComments) {
         beingRated = ratedComments.includes(_id);
     }
+    const { data: replyCommentData } = useGetSingleCommentDataQuery(replyToComment as string, {
+        skip: !!!replyToComment,
+    });
     const commentWithReply = (
         <>
             <div className="comment-card__reply">
-                <div className="comment-card__reply_name">{reply?.name}</div>
-                <div className="comment-card__reply_text">{reply?.text}</div>
+                <div className="comment-card__reply_name">{replyCommentData?.name}</div>
+                <div className="comment-card__reply_text">{replyCommentData?.text}</div>
             </div>
             {text}
         </>
@@ -47,7 +50,7 @@ const CommentsItem: React.FC<ICommentItem> = ({
     const commentDeleted = (
         <div className="comment-card__deleted">
             <div className="comment-card__deleted_title">Комментарий удалён. Причина:</div>
-            <div className="comment-card__deleted_reason">{deletedReason}</div>
+            <div className="comment-card__deleted_reason">{text}</div>
         </div>
     );
     return (
@@ -67,7 +70,7 @@ const CommentsItem: React.FC<ICommentItem> = ({
                     ) : null}
                 </div>
                 <div className="comment-card__text">
-                    {deletedReason ? commentDeleted : reply?.text ? commentWithReply : text}
+                    {deleted ? commentDeleted : replyToComment ? commentWithReply : text}
                 </div>
                 <div className="comment-card__footer">
                     <div className="comment-card__like">
@@ -86,7 +89,7 @@ const CommentsItem: React.FC<ICommentItem> = ({
                     </div>
                     <Button
                         className="comment-card__btn-reply"
-                        onClick={() => commentReply({ name, text })}
+                        onClick={() => commentReply({ name, text, commentId: _id })}
                     >
                         Ответить
                     </Button>

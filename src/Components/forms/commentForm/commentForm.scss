@@ -13,11 +13,10 @@
         margin-bottom: 20px;
         font-weight: 300;
         color: grey;
-    }
-
-    &_cancel {
-        position: absolute;
-        top: 0;
-        right: 0;
+        &_cancel {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
     }
 }

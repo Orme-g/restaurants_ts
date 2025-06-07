@@ -6,13 +6,16 @@ import type { IComment } from "../types/commentsTypes";
 export const commentsApi = createApi({
     reducerPath: "commentsApi",
     baseQuery: fetchBaseQuery({
-        baseUrl: `${currentUrl}/best-doner/comments`,
+        baseUrl: `${currentUrl}/comments`,
     }),
     tagTypes: ["Comments"],
     endpoints: (builder) => ({
         getComments: builder.query<IComment[], string>({
             query: (id: string) => `/${id}`,
             providesTags: ["Comments"],
+        }),
+        getSingleCommentData: builder.query<IComment, string>({
+            query: (commentId: string) => `/single-comment/${commentId}`,
         }),
         postComment: builder.mutation({
             query: (comment) => ({
@@ -46,4 +49,5 @@ export const {
     usePostCommentMutation,
     useDeleteCommentMutation,
     useEvaluateCommentMutation,
+    useGetSingleCommentDataQuery,
 } = commentsApi;

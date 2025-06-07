@@ -13,15 +13,19 @@ export interface CommentBlockProps {
 }
 
 const CommentsBlock: React.FC<CommentBlockProps> = ({ currentTopicId }) => {
-    const [replyData, setReplyData] = useState<IReplyData>({ name: null, text: null });
+    const [replyData, setReplyData] = useState<IReplyData>({
+        name: null,
+        text: null,
+        commentId: null,
+    });
     const checkAuth = useAppSelector((state) => state.interactive.passAuth);
     const unAuth = (
         <div className="comments__unauth">
             Войдите или зарегистрируйтесь, чтобы оставлять комментарии.
         </div>
     );
-    const commentReply: TCommentReplyFunction = ({ name, text }) => {
-        setReplyData({ name, text });
+    const commentReply: TCommentReplyFunction = ({ name, text, commentId }) => {
+        setReplyData({ name, text, commentId });
     };
     return (
         <>

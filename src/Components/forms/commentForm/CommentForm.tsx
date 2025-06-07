@@ -6,7 +6,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import useLocalStorage from "../../../hooks/useLocalStorage";
 import { usePostCommentMutation } from "../../../services/commentsApi";
 
-import type { IReplyData, TCommentReplyFunction } from "../../../types/commentsTypes";
+import type { IReplyData, TCommentReplyFunction, INewComment } from "../../../types/commentsTypes";
 import "./commentForm.scss";
 
 interface ICommentProps {
@@ -27,27 +27,26 @@ const CommentForm: React.FC<ICommentProps> = ({ replyData, topicId, setReplyData
             setValid(true);
         } else {
             setValid(false);
-            let newComment = {
+            let newComment: INewComment = {
                 name: username,
                 userId: _id,
                 topic: topicId,
                 likes: 0,
                 dislikes: 0,
                 text: commentText,
-                reply: {},
             };
-            if (replyData) {
-                newComment = { ...newComment, reply: replyData };
+            if (replyData?.commentId) {
+                newComment = { ...newComment, replyToComment: replyData.commentId };
             }
             postComment(newComment)
                 .unwrap()
                 .then(() => {
                     setCommentText("");
-                    setReplyData({ name: null, text: null });
+                    setReplyData({ name: null, text: null, commentId: null });
                 })
                 .catch((e) => console.log(e));
 
-            setReplyData({ name: null, text: null });
+            setReplyData({ name: null, text: null, commentId: null });
         }
     }
     const replyBlock = (
@@ -57,7 +56,7 @@ const CommentForm: React.FC<ICommentProps> = ({ replyData, topicId, setReplyData
             <div className="comments__reply_text">{replyData?.text}</div>
             <IconButton
                 className="comments__reply_cancel"
-                onClick={() => setReplyData({ name: null, text: null })}
+                onClick={() => setReplyData({ name: null, text: null, commentId: null })}
             >
                 <CloseIcon />
             </IconButton>
