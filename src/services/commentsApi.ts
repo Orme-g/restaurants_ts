@@ -11,7 +11,7 @@ export const commentsApi = createApi({
     tagTypes: ["Comments"],
     endpoints: (builder) => ({
         getComments: builder.query<IComment[], string>({
-            query: (id: string) => `/${id}`,
+            query: (id) => `/${id}`,
             providesTags: ["Comments"],
         }),
         getSingleCommentData: builder.query<IComment, string>({
@@ -25,17 +25,17 @@ export const commentsApi = createApi({
             }),
             invalidatesTags: ["Comments"],
         }),
-        deleteComment: builder.mutation({
+        evaluateComment: builder.mutation({
             query: (data) => ({
-                url: `/${data.id}`,
+                url: "/evaluate-comment",
                 method: "PATCH",
                 body: data,
             }),
             invalidatesTags: ["Comments"],
         }),
-        evaluateComment: builder.mutation({
+        deleteComment: builder.mutation<{ message: string }, { id: string; reason: string }>({
             query: (data) => ({
-                url: "/evaluate",
+                url: `/delete-comment`,
                 method: "PATCH",
                 body: data,
             }),
@@ -46,8 +46,8 @@ export const commentsApi = createApi({
 
 export const {
     useGetCommentsQuery,
-    usePostCommentMutation,
-    useDeleteCommentMutation,
-    useEvaluateCommentMutation,
     useGetSingleCommentDataQuery,
+    usePostCommentMutation,
+    useEvaluateCommentMutation,
+    useDeleteCommentMutation,
 } = commentsApi;

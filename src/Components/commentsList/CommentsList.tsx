@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { memo } from "react";
 import {
     useGetCommentsQuery,
-    useDeleteCommentMutation,
     useEvaluateCommentMutation,
+    useDeleteCommentMutation,
 } from "../../services/commentsApi";
 import { updateUserData, callSnackbar } from "../../reducers/interactive";
 import { useAppSelector, useAppDispatch } from "../../types/store";
@@ -37,9 +37,9 @@ const CommentsList: React.FC<ICommentItemProps> = memo(({ topicId, commentReply 
     const isAdmin = getUserData()?.role.includes("admin");
     const dispatch = useAppDispatch();
     const noComments = <div className="no-comments">Комментариев пока нет. Отсавьте первый!</div>;
-    function handleLike(id: string) {
+    function handleEvaluateComment(id: string, type: "like" | "dislike") {
         if (isAuth && userId) {
-            let body = { userId, id, type: "like" };
+            let body = { userId, id, type };
             evaluateComment(body).then(() => {
                 dispatch(updateUserData(userId));
             });
@@ -52,22 +52,6 @@ const CommentsList: React.FC<ICommentItemProps> = memo(({ topicId, commentReply 
             );
         }
     }
-    function handleDislike(id: string) {
-        if (isAuth && userId) {
-            let body = { userId, id, type: "dislike" };
-            evaluateComment(body).then(() => {
-                dispatch(updateUserData(userId));
-            });
-        } else {
-            dispatch(
-                callSnackbar({
-                    text: "Войдите или зарегистрируйтесь чтобы поставить реакцию",
-                    type: "info",
-                })
-            );
-        }
-    }
-
     if (isLoading) {
         return <Spinner />;
     }
@@ -79,8 +63,7 @@ const CommentsList: React.FC<ICommentItemProps> = memo(({ topicId, commentReply 
                 <CommentsItem
                     commentData={data}
                     onDelete={onDelete}
-                    handleDislike={handleDislike}
-                    handleLike={handleLike}
+                    handleEvaluateComment={handleEvaluateComment}
                     ratedComments={ratedComments}
                     commentReply={commentReply}
                     key={_id}

@@ -15,8 +15,7 @@ interface ICommentItem {
     commentData: IComment;
     ratedComments: string[] | undefined;
     onDelete: (_id: string, reason: string) => void;
-    handleLike: (_id: string) => void;
-    handleDislike: (_id: string) => void;
+    handleEvaluateComment: (_id: string, type: "like" | "dislike") => void;
     commentReply: TCommentReplyFunction;
     isAdmin: boolean;
 }
@@ -24,8 +23,7 @@ interface ICommentItem {
 const CommentsItem: React.FC<ICommentItem> = ({
     commentData,
     onDelete,
-    handleLike,
-    handleDislike,
+    handleEvaluateComment,
     ratedComments,
     commentReply,
     isAdmin,
@@ -104,7 +102,6 @@ const CommentsItem: React.FC<ICommentItem> = ({
                     <div className="comment-card__name">{name}</div>
                     {isAdmin ? (
                         <div className="comment-card__delete">
-                            {/* <IconButton onClick={() => onDelete(_id)}> */}
                             <IconButton onClick={() => setDisplayDeleteWindow(true)}>
                                 <CloseIcon />
                             </IconButton>
@@ -118,7 +115,7 @@ const CommentsItem: React.FC<ICommentItem> = ({
                     <div className="comment-card__like">
                         <IconButton
                             disabled={beingRated || deleted}
-                            onClick={() => handleLike(_id)}
+                            onClick={() => handleEvaluateComment(_id, "like")}
                         >
                             <Badge badgeContent={likes} color="success">
                                 <ThumbUpIcon />
@@ -128,7 +125,7 @@ const CommentsItem: React.FC<ICommentItem> = ({
                     <div className="comment-card__dislike">
                         <IconButton
                             disabled={beingRated || deleted}
-                            onClick={() => handleDislike(_id)}
+                            onClick={() => handleEvaluateComment(_id, "dislike")}
                         >
                             <Badge badgeContent={-dislikes} color="error">
                                 <ThumbDownIcon />
