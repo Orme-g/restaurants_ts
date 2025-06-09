@@ -35,7 +35,7 @@ const BlogPostPage: React.FC = () => {
             const userId = getUserId();
             sendData({
                 postId,
-                field: "likes",
+                field: "like",
                 userId,
             })
                 .unwrap()

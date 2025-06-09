@@ -6,10 +6,14 @@ import { BlogPostCardSkeleton } from "../skeletons/Skeletons";
 
 interface IBlogList {
     type: "top" | "last";
+    number: number;
 }
-const BlogCardsSelection: React.FC<IBlogList> = ({ type }) => {
+const BlogCardsSelection: React.FC<IBlogList> = ({ type, number }) => {
     let renderList;
-    const { data: postsData, isLoading } = useGetSortedPostsQuery(type);
+    const { data: postsData, isLoading } = useGetSortedPostsQuery({
+        type,
+        number,
+    });
     if (isLoading) {
         return (
             <>

@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { currentUrl } from "../../URLs";
 
-import type { IComment } from "../types/commentsTypes";
+import { INewComment, type IComment } from "../types/commentsTypes";
 
 export const commentsApi = createApi({
     reducerPath: "commentsApi",
@@ -15,9 +15,9 @@ export const commentsApi = createApi({
             providesTags: ["Comments"],
         }),
         getSingleCommentData: builder.query<IComment, string>({
-            query: (commentId: string) => `/single-comment/${commentId}`,
+            query: (commentId) => `/single-comment/${commentId}`,
         }),
-        postComment: builder.mutation({
+        postComment: builder.mutation<{ message: string }, INewComment>({
             query: (comment) => ({
                 url: "/",
                 method: "POST",

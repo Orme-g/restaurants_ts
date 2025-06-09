@@ -14,8 +14,14 @@ export const apiSlice = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: `${currentUrl}` }),
     tagTypes: ["Review", "Favourite", "UserData"],
     endpoints: (builder) => ({
-        getSortedRestaurants: builder.query<IRestaurant[], string>({
-            query: (sort: TSortRestaurants) => `/sorted-restaurants/${sort}`,
+        getSortedRestaurants: builder.query<
+            IRestaurant[],
+            { sortType: TSortRestaurants; cardsNumber: number }
+        >({
+            query: ({ sortType, cardsNumber }) => ({
+                url: `/sorted-restaurants/${sortType}`,
+                params: { cardsNumber },
+            }),
         }),
         findRestaurant: builder.mutation({
             query: (criterias: IFindRestaurantCriterias) => ({

@@ -86,14 +86,14 @@ const BlogPage: React.FC = () => {
                             Последние популярные статьи блога:
                         </div>
                         <div className="blog-page__popular-posts_list">
-                            <BlogCardsSelection type="top" />
+                            <BlogCardsSelection type="top" number={4} />
                         </div>
                     </div>
                 </section>
                 <section className="blog-page__last-topics">
                     <div className="blog-page__last-topics_title">Самые недавние статьи:</div>
                     <div className="blog-page__last-topics_list">
-                        <BlogCardsSelection type="last" />
+                        <BlogCardsSelection type="last" number={9} />
                     </div>
                 </section>
                 <section className="blog-page__themes">

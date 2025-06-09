@@ -1,6 +1,8 @@
 import React from "react";
 import { useState } from "react";
 
+import { useAppDispatch } from "../../../types/store";
+import { callSnackbar } from "../../../reducers/interactive";
 import { TextField, Button, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import useLocalStorage from "../../../hooks/useLocalStorage";
@@ -21,6 +23,7 @@ const CommentForm: React.FC<ICommentProps> = ({ replyData, topicId, setReplyData
     const { getUserData } = useLocalStorage();
     const { username, _id } = getUserData();
     const [postComment] = usePostCommentMutation();
+    const dispatch = useAppDispatch();
 
     function handleSubmit() {
         if (commentText.length < 10) {
@@ -40,11 +43,12 @@ const CommentForm: React.FC<ICommentProps> = ({ replyData, topicId, setReplyData
             }
             postComment(newComment)
                 .unwrap()
-                .then(() => {
+                .then(({ message }) => {
+                    dispatch(callSnackbar({ type: "success", text: message }));
                     setCommentText("");
                     setReplyData({ name: null, text: null, commentId: null });
                 })
-                .catch((e) => console.log(e));
+                .catch(({ data }) => dispatch(callSnackbar({ type: "error", text: data })));
 
             setReplyData({ name: null, text: null, commentId: null });
         }

@@ -9,15 +9,15 @@ const RestaurantsSelections = () => {
             <div className="restaurants-selections__title">Наши подборки для вас</div>
             <article className="selection expensive">
                 <div className="selection__title">Самые дорогие рестораны</div>
-                <SliderCards type="expensive" />
+                <SliderCards sortType="expensive" cardsNumber={10} />
             </article>
             <article className="selection cheap">
                 <div className="selection__title">Самые доступные</div>
-                <SliderCards type="cheap" />
+                <SliderCards sortType="cheap" cardsNumber={10} />
             </article>
             <article className="selection best">
                 <div className="selection__title">Самый высокий рейтинг</div>
-                <SliderCards type="best" />
+                <SliderCards sortType="best" cardsNumber={10} />
             </article>
         </section>
     );

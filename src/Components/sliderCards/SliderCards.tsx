@@ -6,15 +6,20 @@ import { useGetSortedRestaurantsQuery } from "../../services/apiSlice";
 import { CardsSliderSkeleton } from "../skeletons/Skeletons";
 import RestaurantCardSmall from "../restaurantCardSmall/RestaurantCardSmall";
 // import ServerError from "../pages/ServerError"
-
+import type { TSortRestaurants } from "../../types/restaurantsTypes";
 // import pic from "../../assets/rest_photos/cristal/cris_1.jpeg"
 
 interface ISliderCardsProps {
-    type: string;
+    sortType: TSortRestaurants;
+    cardsNumber: number;
 }
 
-const SliderCards: React.FC<ISliderCardsProps> = ({ type }) => {
-    const { data: sortedRestaurants, isLoading, isError } = useGetSortedRestaurantsQuery(type);
+const SliderCards: React.FC<ISliderCardsProps> = ({ sortType, cardsNumber }) => {
+    const {
+        data: sortedRestaurants,
+        isLoading,
+        isError,
+    } = useGetSortedRestaurantsQuery({ sortType, cardsNumber });
 
     if (isLoading || isError) {
         return <CardsSliderSkeleton />;

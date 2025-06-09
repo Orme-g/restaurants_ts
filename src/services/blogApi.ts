@@ -3,6 +3,7 @@ import { currentUrl } from "../../URLs";
 
 import type { IBlogPost } from "../types/blogPost";
 import type { IBlogData } from "../types/userData";
+import { url } from "inspector";
 
 export const blogApi = createApi({
     reducerPath: "blogApi",
@@ -13,8 +14,11 @@ export const blogApi = createApi({
             query: (postId: string) => `/blog-post/${postId}`,
             providesTags: ["PostData"],
         }),
-        getSortedPosts: builder.query<IBlogPost[], string>({
-            query: (type: string) => `/posts/${type}`,
+        getSortedPosts: builder.query<IBlogPost[], { type: string; number: number }>({
+            query: ({ type, number }) => ({
+                url: `/posts/${type}`,
+                params: { number },
+            }),
         }),
         getTopAuthorsIds: builder.query<string[], void>({
             query: () => `/top-authors`,
