@@ -28,15 +28,6 @@ export const fetchLastAddedRestaurants = createAsyncThunk<IRestaurant[], undefin
         return request(`${currentUrl}/restaurants`);
     }
 );
-
-export const fetchRestaurantData = createAsyncThunk<IRestaurant, string>(
-    "restaurants/fetchRestaurantData",
-    (restId) => {
-        const { request } = useHttp();
-        return request(`${currentUrl}/restaurants/${restId}`);
-    }
-);
-
 export const fetchRestaurantReviews = createAsyncThunk<IReview[], string>(
     "restaurants/fetchRestaurantReviews",
     (restId) => {
@@ -77,17 +68,6 @@ const restaurantsSlice = createSlice({
                 state.lastAddedRestaurants = action.payload;
             })
             .addCase(fetchLastAddedRestaurants.rejected, (state) => {
-                state.pageLoading = "error";
-            })
-            // Restaurant Data
-            .addCase(fetchRestaurantData.pending, (state) => {
-                state.pageLoading = "loading";
-            })
-            .addCase(fetchRestaurantData.fulfilled, (state, action) => {
-                state.pageLoading = "idle";
-                state.restaurantData = action.payload;
-            })
-            .addCase(fetchRestaurantData.rejected, (state) => {
                 state.pageLoading = "error";
             })
             // Get Restaurant Reviews

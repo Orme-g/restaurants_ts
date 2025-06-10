@@ -3,7 +3,8 @@ import { Helmet } from "react-helmet-async";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../types/store";
 
-import { fetchRestaurantData, fetchRestaurantReviews } from "../../reducers/restaurants";
+import { fetchRestaurantReviews } from "../../reducers/restaurants";
+import { useGetRestaurantByIdQuery } from "../../services/apiSlice";
 import { useParams } from "react-router-dom";
 
 import "./singleRestaurantPage.scss";
@@ -23,23 +24,29 @@ import type { IUserData } from "../../types/userData";
 const SingleRestaurantPage: React.FC = () => {
     useEffect(() => {
         if (restId) {
-            dispatch(fetchRestaurantData(restId));
+            // dispatch(fetchRestaurantData(restId));
             dispatch(fetchRestaurantReviews(restId));
         }
         // eslint-disable-next-line
     }, []);
-    const { restaurantData, pageLoading } = useAppSelector((state) => state.restaurants);
     const { passAuth } = useAppSelector((state) => state.interactive);
     const dispatch = useAppDispatch();
     const { restId } = useParams<string>();
     const { getUserData } = useLocalStorage();
     const userData: IUserData = getUserData();
+    const {
+        data: restaurantData,
+        isLoading,
+        isError,
+    } = useGetRestaurantByIdQuery(restId!, {
+        skip: !restId,
+    });
     let userId: string | null = null;
     if (userData) {
         userId = userData._id;
     }
-    const { data } = useGetUserDataQuery(userId as string, {
-        skip: !!!userId,
+    const { data } = useGetUserDataQuery(userId!, {
+        skip: !userId,
     });
     const [handleFavourite] = useHandleFavouriteRestaurantsMutation();
     let isFavourite: boolean = false;
@@ -55,10 +62,11 @@ const SingleRestaurantPage: React.FC = () => {
         },
         [data]
     );
-    if (pageLoading === "loading" || !restId) {
+
+    if (isLoading || !restId || !restaurantData) {
         return <PageSkeleton />;
     }
-    if (!restaurantData) {
+    if (isError) {
         return <ResourceNotFound />;
     }
     if (data) {

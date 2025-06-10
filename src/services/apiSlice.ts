@@ -30,6 +30,9 @@ export const apiSlice = createApi({
                 body: criterias,
             }),
         }),
+        getRestaurantById: builder.query<IRestaurant, string>({
+            query: (restId) => `/restaurants/${restId}`,
+        }),
         searchRestaurant: builder.query({
             query: (input: string) => `/search-restaurant/${input}`,
         }),
@@ -100,11 +103,6 @@ export const apiSlice = createApi({
             }),
             invalidatesTags: ["Favourite"],
         }),
-        // getFavouriteRestNames: builder.query({
-        //     query: (userId) => ({
-        //         url: `/get-favourite-restaurants-names/${userId}`,
-        //     }),
-        // }),
     }),
 });
 
@@ -114,6 +112,7 @@ export const {
     useGetUserDataQuery,
     useGetSortedRestaurantsQuery,
     useFindRestaurantMutation,
+    useGetRestaurantByIdQuery,
     useSearchRestaurantQuery,
     useChangePasswordMutation,
     useGetReviewedRestaurantsListQuery,
