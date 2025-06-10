@@ -7,11 +7,7 @@ interface ISnackBarData {
     text: string;
     type: "error" | "info" | "success" | "warning";
 }
-// interface IPostData {
-//     type: "text" | "bloquote";
-//     id: string;
-//     value: string;
-// }
+
 interface IinitialSTate {
     sideMenu: boolean;
     modalWindowLogin: boolean;
@@ -68,19 +64,6 @@ const interactiveSlice = createSlice({
         setUserData: (state, action: PayloadAction<IUserData | null>) => {
             state.userData = action.payload;
         },
-        // createPostField: (state, action: PayloadAction<IPostData>) => {
-        //     state.postFields = [...state.postFields, action.payload];
-        // },
-        // updatePostData: (state, action: PayloadAction<{ id: string; value: string }>) => {
-        //     state.postFields.forEach((item) => {
-        //         if (item.id === action.payload.id) {
-        //             item.value = action.payload.value;
-        //         }
-        //     });
-        // },
-        // deletePostField: (state, action: PayloadAction<string>) => {
-        //     state.postFields = [...state.postFields.filter((item) => item.id !== action.payload)];
-        // },
     },
     extraReducers: (builder) => {
         builder.addCase(updateUserData.fulfilled, (state, action: PayloadAction<IUserData>) => {
@@ -99,7 +82,4 @@ export const {
     setPassAuth,
     callSnackbar,
     setUserData,
-    // createPostField,
-    // updatePostData,
-    // deletePostField,
 } = actions;

@@ -55,15 +55,12 @@ const SingleRestaurantPage: React.FC = () => {
         },
         [data]
     );
-
     if (pageLoading === "loading" || !restId) {
         return <PageSkeleton />;
     }
-
     if (!restaurantData) {
         return <ResourceNotFound />;
     }
-    // console.log(restaurantData);
     if (data) {
         const { favouriteRestaurants } = data;
         let favouriteRestaurantsIds = favouriteRestaurants.map((item) => item[1]);
