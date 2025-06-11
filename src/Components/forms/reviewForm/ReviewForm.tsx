@@ -7,7 +7,6 @@ import { useForm } from "react-hook-form";
 import { Button, Stack, TextField, Rating } from "@mui/material";
 import { fetchRestaurantReviews } from "../../../reducers/restaurants";
 import { useGetReviewedRestaurantsListQuery } from "../../../services/apiSlice";
-import { useAddReviewedRestaurantToUserMutation } from "../../../services/apiSlice";
 
 import { useHttp } from "../../../hooks/http.hook";
 import useLocalStorage from "../../../hooks/useLocalStorage";
@@ -36,7 +35,6 @@ const ReviewForm: React.FC<IReviewForm> = ({ restId }) => {
     const { data: reviewedRestaurants, isLoading } = useGetReviewedRestaurantsListQuery(_id, {
         refetchOnMountOrArgChange: true,
     });
-    const [addReviewedRestToUser] = useAddReviewedRestaurantToUserMutation();
 
     const displayForm = classNames("add-review__container", {
         show: display,
@@ -67,7 +65,6 @@ const ReviewForm: React.FC<IReviewForm> = ({ restId }) => {
         request(`${currentUrl}/reviews`, "POST", JSON.stringify(review))
             .then(({ message }) => dispatch(callSnackbar({ text: message, type: "success" })))
             .then(() => dispatch(fetchRestaurantReviews(restId)))
-            .then(() => addReviewedRestToUser({ userId: _id, restId: restId }))
             .then(() => reset())
             .catch((err) => console.log(err));
     };

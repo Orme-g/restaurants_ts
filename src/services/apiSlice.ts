@@ -87,14 +87,6 @@ export const apiSlice = createApi({
             query: (userId: string) => `/reviewedRestaurants/${userId}`,
             providesTags: ["Review"],
         }),
-        addReviewedRestaurantToUser: builder.mutation({
-            query: (data) => ({
-                url: "/addReviewedRestaurant",
-                method: "PATCH",
-                body: data,
-            }),
-            invalidatesTags: ["Review"],
-        }),
         handleFavouriteRestaurants: builder.mutation({
             query: (data) => ({
                 url: "/handleFavouriteRestaurant",
@@ -116,7 +108,6 @@ export const {
     useSearchRestaurantQuery,
     useChangePasswordMutation,
     useGetReviewedRestaurantsListQuery,
-    useAddReviewedRestaurantToUserMutation,
     useChangeAvatarMutation,
     useSetBlogerDataMutation,
     useUpdateBlogerDataSingleFieldMutation,

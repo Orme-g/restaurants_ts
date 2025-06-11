@@ -63,10 +63,10 @@ const SingleRestaurantPage: React.FC = () => {
         [data]
     );
 
-    if (isLoading || !restId || !restaurantData) {
+    if (isLoading || !restId) {
         return <PageSkeleton />;
     }
-    if (isError) {
+    if (isError || !restaurantData) {
         return <ResourceNotFound />;
     }
     if (data) {

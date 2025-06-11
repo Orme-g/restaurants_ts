@@ -16,6 +16,7 @@ export interface IRestaurant {
     coordinates: string;
     subway: string[];
     events: string[];
+    averageRating: number;
 }
 
 export interface IAddRestaurant {
