@@ -50,6 +50,7 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, to
     const { line1, line2, line3, line4, line5 } = subwaySpb;
 
     const displayForm = displayState ? "show" : "hide";
+    const [files, setFiles] = useState<FileList | null>(null);
     const [cousine, setCousine] = useState([]);
     const [city, setCity] = useState("");
     const [subway, setSubway] = useState([]);
@@ -106,14 +107,24 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, to
     };
 
     const onSubmit = (data: IAddRestaurant) => {
-        // const modifiedData = {
-        //     ...data,
-        //     coordinates: data.coordinates
-        //         .trim()
-        //         .split(", ")
-        //         .map((item) => +item),
-        // };
-        dispatch(addNewRestaurant(JSON.stringify(data))).then(({ payload }) => {
+        const formData = new FormData();
+        Object.entries(data).forEach(([key, value]) => {
+            if (Array.isArray(value)) {
+                value.forEach((item) => {
+                    formData.append(key, item);
+                });
+            } else {
+                formData.append(key, String(value));
+            }
+        });
+        if (files) {
+            Array.from(files).forEach((file) => {
+                formData.append("images", file);
+            });
+        }
+
+        // dispatch(addNewRestaurant(JSON.stringify(formData))).then(({ payload }) => {
+        dispatch(addNewRestaurant(formData)).then(({ payload }) => {
             if (payload === "Success") {
                 reset();
                 setCousine([]);
@@ -123,8 +134,6 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, to
                 console.log("Ошибка отправки");
             }
         });
-
-        // toggleDisplay();
     };
     return (
         <form className={`add-restaurant-form ${displayForm}`} onSubmit={handleSubmit(onSubmit)}>
@@ -166,6 +175,15 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, to
                     error={!!errors.description}
                     helperText={errors.description?.message}
                 />
+                <Button className="add-restaurant-form__button" variant="outlined">
+                    Загрузить фото
+                    <input
+                        type="file"
+                        accept="image/*"
+                        multiple
+                        onChange={(e) => setFiles(e.target.files)}
+                    />
+                </Button>
                 <FormControl sx={{ width: 400 }}>
                     <InputLabel id="cousine-select">Кухня</InputLabel>
                     <Select
@@ -317,7 +335,8 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, to
                 />
             </Stack>
             <div className="add-restaurant-form__wrapper">
-                <Button type="submit" disabled={false} className="add-restaurant-form__btn-submit">
+                {/* <Button type="submit" disabled={false} className="add-restaurant-form__btn-submit"> */}
+                <Button type="submit" disabled={false} className="add-restaurant-form__button">
                     Отправить <PublishIcon className="add-restaurant-form__icon" />
                 </Button>
                 {serverReply === "Sending" ? loading : null}

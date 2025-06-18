@@ -36,11 +36,11 @@ export const fetchRestaurantReviews = createAsyncThunk<IReview[], string>(
     }
 );
 
-export const addNewRestaurant = createAsyncThunk<"Sending" | "Failed" | "Success", string>(
+export const addNewRestaurant = createAsyncThunk<"Sending" | "Failed" | "Success", FormData>(
     "restaurants/addNewRestaurant",
     (restData) => {
         const { request } = useHttp();
-        return request(`${currentUrl}/restaurants/add`, "POST", restData);
+        return request(`${currentUrl}/restaurants/add`, "POST", restData, {});
     }
 );
 

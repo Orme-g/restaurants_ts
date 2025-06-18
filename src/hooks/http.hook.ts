@@ -3,7 +3,7 @@ export const useHttp = () => {
         url: string,
         method = "GET",
         body: any = null,
-        headers = { "Content-Type": "application/json" }
+        headers: any = { "Content-Type": "application/json" }
     ) => {
         try {
             const response = await fetch(url, { method, body, headers });
