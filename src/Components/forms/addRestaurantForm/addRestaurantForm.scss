@@ -25,6 +25,9 @@
         justify-content: space-evenly;
         border: 1px solid grey;
         border-radius: 5px;
+        &.submit-button {
+            margin-top: 20px;
+        }
     }
     &__images-previews {
         margin: 0;

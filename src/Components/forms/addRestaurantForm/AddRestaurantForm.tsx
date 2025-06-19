@@ -54,18 +54,22 @@ interface ISelectedFile {
 const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, toggleDisplay }) => {
     useEffect(() => {
         return () => {
-            selectedFiles?.forEach((file) => URL.revokeObjectURL(file.url));
+            if (selectedFiles) {
+                revokeURLs(selectedFiles);
+            }
+
+            // selectedFiles?.forEach((file) => URL.revokeObjectURL(file.url));
         };
     }, []);
     const { line1, line2, line3, line4, line5 } = subwaySpb;
     const displayForm = displayState ? "show" : "hide";
     const [selectedFiles, setSelectedFiles] = useState<ISelectedFile[]>();
     const [titleImageName, setTitleImageName] = useState<string | null>(null);
+    const [showAddImagesNotice, setShowAddImagesNotice] = useState<boolean>(false);
     const [cousine, setCousine] = useState([]);
     const [city, setCity] = useState("");
     const [subway, setSubway] = useState([]);
     const { serverReply } = useAppSelector((state) => state.restaurants);
-    console.log(serverReply);
     const dispatch = useAppDispatch();
     const {
         register,
@@ -130,6 +134,7 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, to
         if (removedImage) {
             URL.revokeObjectURL(removedImage.url);
         }
+
         setSelectedFiles(filteredFiles);
         if (image.name === titleImageName) {
             setTitleImageName(null);
@@ -138,12 +143,20 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, to
     const handleSelectTitleImage = (name: string) => {
         setTitleImageName(name);
     };
+    const revokeURLs = (files: ISelectedFile[]) => {
+        files?.forEach((file) => URL.revokeObjectURL(file.url));
+    };
 
     const onSubmit = (data: IAddRestaurant) => {
         const formData = new FormData();
+        if (!selectedFiles) {
+            setShowAddImagesNotice(true);
+            return;
+        }
         if (!titleImageName) {
             return;
         }
+        setShowAddImagesNotice(false);
         Object.entries(data).forEach(([key, value]) => {
             if (Array.isArray(value)) {
                 value.forEach((item) => {
@@ -153,28 +166,31 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, to
                 formData.append(key, String(value));
             }
         });
-        if (selectedFiles) {
-            selectedFiles.forEach(({ file }) => {
-                formData.append("images", file);
-            });
-        }
+
+        selectedFiles.forEach(({ file }) => {
+            formData.append("images", file);
+        });
+
         formData.append("titleImageName", titleImageName);
+
         // for (const [key, value] of formData) {
         //     console.log(key, value);
         // }
-        dispatch(addNewRestaurant(formData))
-            .unwrap()
-            .then((payload) => {
-                console.log(payload);
-                if (payload.message === "success") {
-                    reset();
-                    setCousine([]);
-                    setSubway([]);
-                    setCity("");
-                } else if (payload.message === "error") {
-                    console.log("Ошибка отправки");
-                }
-            });
+        // dispatch(addNewRestaurant(formData))
+        //     .unwrap()
+        //     .then((payload) => {
+        //         console.log(payload);
+        //         if (payload.message === "success") {
+        //             reset();
+        //             setCousine([]);
+        //             setSubway([]);
+        //             setCity("");
+        //             revokeURLs(selectedFiles);
+        //             setSelectedFiles(undefined);
+        //         } else if (payload.message === "error") {
+        //             console.log("Ошибка отправки");
+        //         }
+        //     });
     };
     const imagePreviews = selectedFiles?.map(({ file, url }) => {
         const id = nanoid();
@@ -239,24 +255,37 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, to
                     error={!!errors.description}
                     helperText={errors.description?.message}
                 />
-                <label>
-                    <input
-                        type="file"
-                        accept="image/*"
-                        multiple
-                        onChange={(e) => {
-                            if (e.target.files) handleSelectFiles(Array.from(e.target.files));
-                        }}
-                        style={{ display: "none" }}
-                    />
-                    <Button
-                        component="span"
-                        className="add-restaurant-form__button"
-                        variant="outlined"
-                    >
-                        Загрузить фото
-                    </Button>
-                </label>
+                <div style={{ display: "flex" }}>
+                    <label>
+                        <input
+                            type="file"
+                            accept="image/*"
+                            multiple
+                            onChange={(e) => {
+                                if (e.target.files) handleSelectFiles(Array.from(e.target.files));
+                            }}
+                            style={{ display: "none" }}
+                        />
+                        <Button
+                            component="span"
+                            className="add-restaurant-form__button"
+                            variant="outlined"
+                        >
+                            Загрузить фото
+                        </Button>
+                    </label>
+                    {showAddImagesNotice ? (
+                        <div
+                            style={{
+                                marginLeft: "15px",
+                                lineHeight: "50px",
+                                color: "rgb(221, 39, 39)",
+                            }}
+                        >
+                            Добавьте изображения
+                        </div>
+                    ) : null}
+                </div>
 
                 <div
                     className="add-restaurant-form__images-previews"
@@ -424,7 +453,11 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, to
             </Stack>
             <div className="add-restaurant-form__wrapper">
                 {/* <Button type="submit" disabled={false} className="add-restaurant-form__btn-submit"> */}
-                <Button type="submit" disabled={false} className="add-restaurant-form__button">
+                <Button
+                    type="submit"
+                    disabled={false}
+                    className="add-restaurant-form__button submit-button"
+                >
                     Отправить <PublishIcon className="add-restaurant-form__icon" />
                 </Button>
                 {serverReply === "Sending" ? loading : null}

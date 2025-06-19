@@ -15,11 +15,13 @@
         color: variables.$primary-text;
         border-radius: 15px;
     }
-    &__favorite-icon {
-        position: absolute;
-        top: 10px;
-        right: 15px;
-        color: variables.$green-color;
+    &__icon {
+        &.favourite-icon {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            color: variables.$green-color;
+        }
     }
     &__rating {
         font-size: 1.7rem;

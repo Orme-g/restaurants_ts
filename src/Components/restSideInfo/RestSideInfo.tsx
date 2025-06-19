@@ -26,7 +26,7 @@ const RestSideInfo: React.FC<ISideInfoProps> = memo(
             <div className="rest-side-info__container">
                 {isRegistered ? (
                     <IconButton
-                        className="rest-side-info__favorite-icon"
+                        className="rest-side-info__icon favourite-icon"
                         onClick={() => favouriteHandler(name)}
                     >
                         {isFavourite ? (
