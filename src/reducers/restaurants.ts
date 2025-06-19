@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { useHttp } from "../hooks/http.hook";
 import { currentUrl } from "../../URLs";
 
@@ -10,7 +10,7 @@ interface IInitialState {
     restaurantData: IRestaurant | null;
     restaurantReviews: IReview[] | null;
     pageLoading: "loading" | "error" | "idle";
-    serverReply: "Sending" | "Failed" | "Success" | null;
+    serverReply: "success" | "error" | "Failed" | "Sending" | null;
 }
 
 const initialState: IInitialState = {
@@ -36,7 +36,7 @@ export const fetchRestaurantReviews = createAsyncThunk<IReview[], string>(
     }
 );
 
-export const addNewRestaurant = createAsyncThunk<"Sending" | "Failed" | "Success", FormData>(
+export const addNewRestaurant = createAsyncThunk<{ message: "success" | "error" }, FormData>(
     "restaurants/addNewRestaurant",
     (restData) => {
         const { request } = useHttp();
@@ -85,9 +85,12 @@ const restaurantsSlice = createSlice({
             .addCase(addNewRestaurant.pending, (state) => {
                 state.serverReply = "Sending";
             })
-            .addCase(addNewRestaurant.fulfilled, (state, action) => {
-                state.serverReply = action.payload;
-            })
+            .addCase(
+                addNewRestaurant.fulfilled,
+                (state, action: PayloadAction<{ message: "success" | "error" }>) => {
+                    state.serverReply = action.payload.message;
+                }
+            )
             .addCase(addNewRestaurant.rejected, (state) => {
                 state.serverReply = "Failed";
             });

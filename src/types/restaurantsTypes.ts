@@ -25,7 +25,7 @@ export interface IAddRestaurant {
     description: string;
     cousine: string[];
     adress: string;
-    bill: number;
+    bill: number | null;
     phone: string;
     city: string;
     coordinates: string;

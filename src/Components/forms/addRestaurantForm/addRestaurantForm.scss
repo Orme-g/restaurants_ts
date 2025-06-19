@@ -18,16 +18,42 @@
 
     // &__btn-submit {
     &__button {
-        margin: 30px 0;
         height: 50px;
-        width: 160px;
+        width: fit-content;
         color: variables.$primary-text;
         display: flex;
         justify-content: space-evenly;
         border: 1px solid grey;
         border-radius: 5px;
     }
-
+    &__images-previews {
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        .preview-wrapper {
+            position: relative;
+            height: 120px;
+            width: 120px;
+            overflow: hidden;
+            border-radius: 5px;
+        }
+        .selected-preview {
+            outline: 3px solid variables.$green-color;
+        }
+        img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+    &__helper-text {
+        font-size: 1.1rem;
+        color: rgb(221, 39, 39);
+        &.selected {
+            color: rgb(0, 125, 0);
+        }
+    }
     &__icon {
         color: variables.$green-color;
     }

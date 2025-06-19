@@ -36,16 +36,6 @@ export const apiSlice = createApi({
         searchRestaurant: builder.query({
             query: (input: string) => `/search-restaurant/${input}`,
         }),
-        uploadRestaurantImages: builder.mutation<
-            { restaurant: string; uploaded: string[] },
-            FormData
-        >({
-            query: (formData) => ({
-                url: "/upload",
-                method: "POST",
-                body: formData,
-            }),
-        }),
         login: builder.mutation({
             query: (loginData) => ({
                 url: "/login",
@@ -116,7 +106,6 @@ export const {
     useFindRestaurantMutation,
     useGetRestaurantByIdQuery,
     useSearchRestaurantQuery,
-    useUploadRestaurantImagesMutation,
     useChangePasswordMutation,
     useGetReviewedRestaurantsListQuery,
     useChangeAvatarMutation,
