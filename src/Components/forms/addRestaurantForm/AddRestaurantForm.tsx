@@ -1,5 +1,5 @@
 // fix any
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { nanoid } from "@reduxjs/toolkit";
 import { useAppSelector, useAppDispatch } from "../../../types/store";
 import { useForm } from "react-hook-form";
@@ -52,18 +52,9 @@ interface ISelectedFile {
 }
 
 const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, toggleDisplay }) => {
-    useEffect(() => {
-        return () => {
-            if (selectedFiles) {
-                revokeURLs(selectedFiles);
-            }
-
-            // selectedFiles?.forEach((file) => URL.revokeObjectURL(file.url));
-        };
-    }, []);
     const { line1, line2, line3, line4, line5 } = subwaySpb;
     const displayForm = displayState ? "show" : "hide";
-    const [selectedFiles, setSelectedFiles] = useState<ISelectedFile[]>();
+    const [selectedFiles, setSelectedFiles] = useState<ISelectedFile[] | null>(null);
     const [titleImageName, setTitleImageName] = useState<string | null>(null);
     const [showAddImagesNotice, setShowAddImagesNotice] = useState<boolean>(false);
     const [cousine, setCousine] = useState([]);
@@ -90,7 +81,18 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, to
             subway: [""],
         },
     });
-
+    useEffect(() => {
+        return () => {
+            if (selectedFiles) {
+                revokeURLs(selectedFiles);
+            }
+        };
+    }, []);
+    useEffect(() => {
+        if (selectedFiles?.length === 0) {
+            setSelectedFiles(null);
+        }
+    }, [selectedFiles]);
     const postAlert = (type: TAlerts, text: string) => {
         return (
             <Alert severity={type} className="add-restaurant-form__alert">
@@ -98,7 +100,7 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, to
             </Alert>
         );
     };
-
+    const inputRef = useRef<HTMLInputElement>(null);
     const loading = (
         <div className="add-restaurant-form__spinner">
             <SmallSpinner />
@@ -122,11 +124,15 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, to
         setSubway(typeof value === "string" ? value.split(",") : value);
     };
     const handleSelectFiles = (files: File[]) => {
+        console.log("Handle!");
         setSelectedFiles(
             files?.map((file) => {
                 return { file, url: URL.createObjectURL(file) };
             })
         );
+        if (inputRef.current) {
+            inputRef.current.value = "";
+        }
     };
     const handleDeletePreviewImage = (image: File) => {
         const removedImage = selectedFiles?.find(({ file }) => file === image);
@@ -134,8 +140,9 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, to
         if (removedImage) {
             URL.revokeObjectURL(removedImage.url);
         }
-
-        setSelectedFiles(filteredFiles);
+        if (filteredFiles) {
+            setSelectedFiles(filteredFiles);
+        }
         if (image.name === titleImageName) {
             setTitleImageName(null);
         }
@@ -166,10 +173,11 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, to
                 formData.append(key, String(value));
             }
         });
-
-        selectedFiles.forEach(({ file }) => {
-            formData.append("images", file);
-        });
+        if (selectedFiles) {
+            selectedFiles.forEach(({ file }) => {
+                formData.append("images", file);
+            });
+        }
 
         formData.append("titleImageName", titleImageName);
 
@@ -186,7 +194,7 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, to
         //             setSubway([]);
         //             setCity("");
         //             revokeURLs(selectedFiles);
-        //             setSelectedFiles(undefined);
+        //             setSelectedFiles([]);
         //         } else if (payload.message === "error") {
         //             console.log("Ошибка отправки");
         //         }
@@ -258,6 +266,7 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, to
                 <div style={{ display: "flex" }}>
                     <label>
                         <input
+                            ref={inputRef}
                             type="file"
                             accept="image/*"
                             multiple
