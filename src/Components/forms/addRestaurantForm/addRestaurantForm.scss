@@ -25,9 +25,9 @@
         justify-content: space-evenly;
         border: 1px solid grey;
         border-radius: 5px;
-        &.submit-button {
-            margin-top: 20px;
-        }
+        // &.submit-button {
+        //     // margin-top: 20px;
+        // }
     }
     &__images-previews {
         margin: 0;
@@ -62,19 +62,18 @@
     }
 
     &__wrapper {
+        margin-top: 20px;
         display: flex;
     }
 
     &__alert {
         height: 50px;
-        margin-top: 30px;
         margin-left: 20px;
     }
 
     &__spinner {
         height: 50px;
         width: 50px;
-        transform: translateY(60%);
     }
     &__upload-images {
         height: 50px;

@@ -184,21 +184,21 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, to
         // for (const [key, value] of formData) {
         //     console.log(key, value);
         // }
-        // dispatch(addNewRestaurant(formData))
-        //     .unwrap()
-        //     .then((payload) => {
-        //         console.log(payload);
-        //         if (payload.message === "success") {
-        //             reset();
-        //             setCousine([]);
-        //             setSubway([]);
-        //             setCity("");
-        //             revokeURLs(selectedFiles);
-        //             setSelectedFiles([]);
-        //         } else if (payload.message === "error") {
-        //             console.log("Ошибка отправки");
-        //         }
-        //     });
+        dispatch(addNewRestaurant(formData))
+            .unwrap()
+            .then((payload) => {
+                console.log(payload);
+                if (payload.message === "success") {
+                    reset();
+                    setCousine([]);
+                    setSubway([]);
+                    setCity("");
+                    revokeURLs(selectedFiles);
+                    setSelectedFiles([]);
+                } else if (payload.message === "error") {
+                    console.log("Ошибка отправки");
+                }
+            });
     };
     const imagePreviews = selectedFiles?.map(({ file, url }) => {
         const id = nanoid();
