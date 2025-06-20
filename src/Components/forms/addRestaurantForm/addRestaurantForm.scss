@@ -16,19 +16,6 @@
         color: variables.$primary-text;
     }
 
-    // &__btn-submit {
-    &__button {
-        height: 50px;
-        width: fit-content;
-        color: variables.$primary-text;
-        display: flex;
-        justify-content: space-evenly;
-        border: 1px solid grey;
-        border-radius: 5px;
-        // &.submit-button {
-        //     // margin-top: 20px;
-        // }
-    }
     &__images-previews {
         margin: 0;
         display: flex;

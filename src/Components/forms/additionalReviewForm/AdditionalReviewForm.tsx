@@ -64,7 +64,7 @@ const AdditionalReviewForm: React.FC<IAdditionalReviewProps> = ({
             className={`additional-review-form ${currentFormStatus}`}
             onSubmit={handleSubmit(onSubmit)}
         >
-            <Stack spacing={3} className="additional-review-form__content">
+            <Stack spacing={3} sx={{ margin: "30px 30px" }}>
                 <div>Дополните ваш отзыв:</div>
                 <TextField
                     label="Что понравилось"

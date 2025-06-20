@@ -95,8 +95,8 @@ const BlogPostPage: React.FC = () => {
                 <Button
                     disabled={isRated}
                     onClick={handleLike}
-                    className="blog-post-page__like-button"
                     variant="contained"
+                    sx={{ display: "block", margin: "0 auto" }}
                 >
                     Понравилась!
                 </Button>

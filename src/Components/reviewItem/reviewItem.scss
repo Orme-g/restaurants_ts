@@ -78,16 +78,5 @@
             margin-bottom: 30px;
             line-height: 1.25;
         }
-        &_add-additional-review {
-            position: absolute !important;
-            bottom: 15px;
-            right: 30px;
-            color: variables.$primary-text !important;
-            &_icon {
-                font-size: 1.3rem;
-                margin-left: 5px;
-                transform: translateY(-3px);
-            }
-        }
     }
 }

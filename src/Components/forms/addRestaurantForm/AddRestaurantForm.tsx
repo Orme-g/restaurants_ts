@@ -277,8 +277,12 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, to
                         />
                         <Button
                             component="span"
-                            className="add-restaurant-form__button"
+                            // className="add-restaurant-form__button"
                             variant="outlined"
+                            color="primary"
+                            sx={{
+                                height: "50px",
+                            }}
                         >
                             Загрузить фото
                         </Button>
@@ -464,8 +468,11 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, to
                 {/* <Button type="submit" disabled={false} className="add-restaurant-form__btn-submit"> */}
                 <Button
                     type="submit"
-                    disabled={false}
-                    className="add-restaurant-form__button submit-button"
+                    disabled={serverReply === "Sending"}
+                    variant="outlined"
+                    sx={{
+                        height: "50px",
+                    }}
                 >
                     Отправить <PublishIcon className="add-restaurant-form__icon" />
                 </Button>

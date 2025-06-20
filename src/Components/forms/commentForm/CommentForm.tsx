@@ -59,7 +59,11 @@ const CommentForm: React.FC<ICommentProps> = ({ replyData, topicId, setReplyData
             <div className="comments__reply_name">{replyData?.name}</div>
             <div className="comments__reply_text">{replyData?.text}</div>
             <IconButton
-                className="comments__reply_cancel"
+                sx={{
+                    position: "absolute",
+                    top: 0,
+                    right: 0,
+                }}
                 onClick={() => setReplyData({ name: null, text: null, commentId: null })}
             >
                 <CloseIcon />

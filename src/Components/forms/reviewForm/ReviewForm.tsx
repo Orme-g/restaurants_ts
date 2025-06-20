@@ -82,7 +82,14 @@ const ReviewForm: React.FC<IReviewForm> = ({ restId }) => {
                 <div>Вы уже оставили отзыв</div>
             ) : (
                 <>
-                    <Button className="post-feedback show" onClick={() => toggleDisplay()}>
+                    <Button
+                        sx={{
+                            width: "200px",
+                            color: "#494949",
+                            fontSize: "1.1rem",
+                        }}
+                        onClick={() => toggleDisplay()}
+                    >
                         Написать отзыв
                     </Button>
 

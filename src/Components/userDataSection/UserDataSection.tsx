@@ -1,3 +1,4 @@
+// Rewrite DOM manipulations
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -18,6 +19,7 @@ import "./userDataSection.scss";
 
 import type { IUserData } from "../../types/userData";
 import { callSnackbar } from "../../reducers/interactive";
+import classNames from "classnames";
 
 interface IUserDataSection {
     userData: IUserData;
@@ -131,7 +133,7 @@ const UserDataSection: React.FC<IUserDataSection> = ({ userData }) => {
                                         Загрузить фото
                                         <input
                                             type="file"
-                                            accept=".png, .jpg, .jpeg, .svg, .ico"
+                                            accept="image/*"
                                             hidden
                                             onChange={(e) => handleFileUpload(e)}
                                         />
@@ -154,8 +156,8 @@ const UserDataSection: React.FC<IUserDataSection> = ({ userData }) => {
                     <div className="user-data__info-item change-password">
                         <div className="user-data__info-field">
                             <Button
-                                className="show-change-fields"
                                 onClick={() => changePassButton()}
+                                className="show-change-fields"
                             >
                                 Изменить пароль
                             </Button>

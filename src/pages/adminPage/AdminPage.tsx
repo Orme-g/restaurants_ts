@@ -23,7 +23,8 @@ const AdminPage = () => {
                     className="admin-panel__actions-list_item"
                     onClick={() => setDisplayAddRestaurant((state) => !state)}
                 >
-                    Добавить ресторан <CreateIcon className="admin-panel__actions-list_icon" />
+                    Добавить ресторан{" "}
+                    <CreateIcon sx={{ transform: "translateY(30%)", color: "#89bf52" }} />
                 </li>
                 <AddRestaurantForm
                     displayState={displayAddReastaurant}
@@ -33,7 +34,8 @@ const AdminPage = () => {
                     className="admin-panel__actions-list_item"
                     onClick={() => setDisplayAddArticle((state) => !state)}
                 >
-                    Добавить статью <CreateIcon className="admin-panel__actions-list_icon" />
+                    Добавить статью{" "}
+                    <CreateIcon sx={{ transform: "translateY(30%)", color: "#89bf52" }} />
                 </li>
                 <AddDonerArticleForm
                     displayState={displayAddArticle}

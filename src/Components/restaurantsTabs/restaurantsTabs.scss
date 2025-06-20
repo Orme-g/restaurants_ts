@@ -32,11 +32,11 @@
         flex-direction: column;
         gap: 50px;
 
-        .post-feedback {
-            width: 200px;
-            color: variables.$primary-text;
-            font-size: 1.1rem;
-        }
+        // .post-feedback {
+        //     width: 200px;
+        //     color: variables.$primary-text;
+        //     font-size: 1.1rem;
+        // }
     }
     &__add-event_btn {
         @include mixins.addPostButton;

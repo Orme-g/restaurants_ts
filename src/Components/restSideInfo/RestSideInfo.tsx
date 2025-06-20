@@ -17,7 +17,6 @@ interface ISideInfoProps {
 const RestSideInfo: React.FC<ISideInfoProps> = memo(
     ({ data, isFavourite, favouriteHandler, isRegistered }) => {
         const { cousine, rating, adress, subway, bill, phone, name } = data;
-        // const { marks, overallRating } = rating;
         const calculatedRating =
             rating.length === 0 ? 0 : rating.reduce((acc, num) => acc + num, 0) / rating.length;
         const cousineList: string = cousine.join(", ");
@@ -26,7 +25,12 @@ const RestSideInfo: React.FC<ISideInfoProps> = memo(
             <div className="rest-side-info__container">
                 {isRegistered ? (
                     <IconButton
-                        className="rest-side-info__icon favourite-icon"
+                        sx={{
+                            position: "absolute",
+                            top: "10px",
+                            right: "15px",
+                            color: "#89bf52",
+                        }}
                         onClick={() => favouriteHandler(name)}
                     >
                         {isFavourite ? (

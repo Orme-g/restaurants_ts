@@ -62,7 +62,6 @@ const RestaurantSelectionPage: React.FC = () => {
     const handleSelectSortBy = (event: SelectChangeEvent) => {
         setSortBy(event.target.value as "cheaper" | "expensive");
     };
-    console.log(data);
     let searchResults;
     if (isUninitialized)
         searchResults = <span>Нажмите на "Поиск" для отображения результатов</span>;
@@ -93,9 +92,8 @@ const RestaurantSelectionPage: React.FC = () => {
                     <div className="find-restaurant__search_wrapper">
                         <div>Я около метро</div>
                         <FormControl
-                            className="find-restaurant__search_subway"
                             variant="standard"
-                            sx={{ minWidth: 100 }}
+                            sx={{ minWidth: "100px", marginLeft: "15px", marginRight: "15px" }}
                         >
                             <Select
                                 style={{ fontSize: "20px", fontWeight: 300 }}
@@ -155,9 +153,13 @@ const RestaurantSelectionPage: React.FC = () => {
                     <div className="find-restaurant__search_wrapper">
                         <div>предпочтительная кухня</div>
                         <FormControl
-                            className="find-restaurant__search_cousine"
                             variant="standard"
-                            sx={{ minWidth: 100, maxWidth: 300 }}
+                            sx={{
+                                minWidth: 100,
+                                maxWidth: 300,
+                                marginLeft: "15px",
+                                marginRight: "15px",
+                            }}
                         >
                             <Select
                                 style={{ fontSize: "20px", fontWeight: 300 }}
@@ -177,9 +179,8 @@ const RestaurantSelectionPage: React.FC = () => {
                         <div>сначала показать рестораны</div>
 
                         <FormControl
-                            className="find-restaurant__search_sort-type"
                             variant="standard"
-                            sx={{ minWidth: 100 }}
+                            sx={{ minWidth: "100px", marginLeft: "15px", marginRight: "15px" }}
                         >
                             <Select
                                 style={{ fontSize: "20px", fontWeight: 300 }}
@@ -193,11 +194,11 @@ const RestaurantSelectionPage: React.FC = () => {
                     </div>
                 </div>
                 <Button
-                    className="find-restaurant__search_button"
                     color="success"
                     size="large"
                     variant="contained"
                     onClick={findRest}
+                    sx={{ marginTop: "50px" }}
                 >
                     Поиск
                 </Button>

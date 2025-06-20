@@ -133,7 +133,10 @@ const CommentsItem: React.FC<ICommentItem> = ({
                         </IconButton>
                     </div>
                     <Button
-                        className="comment-card__btn-reply"
+                        sx={{
+                            color: "#494949",
+                            fontStyle: "italic",
+                        }}
                         onClick={() => commentReply({ name, text, commentId: _id })}
                         disabled={deleted}
                     >

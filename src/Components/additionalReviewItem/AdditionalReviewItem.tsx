@@ -36,7 +36,11 @@ const AdditionalReviewItem: React.FC<IAdditionalReviewProps> = ({ additionalRevi
             <div className={`feedback-card__additional_container ${displayExtraReview}`}>
                 <div className="feedback-card__additional_body">
                     <Rating
-                        className="feedback-card__additional_body_rating"
+                        sx={{
+                            position: "absolute",
+                            top: "30px",
+                            right: "30px",
+                        }}
                         name="rating"
                         value={rating}
                         precision={0.5}

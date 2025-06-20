@@ -72,11 +72,22 @@ const ReviewItem: React.FC<ReviewItemProps> = ({ data }) => {
                     {isMyReview && !additionalReview ? (
                         <Button
                             size="small"
-                            className="feedback-card__body_add-additional-review"
                             onClick={() => toggleFormDispay()}
+                            sx={{
+                                position: "absolute",
+                                bottom: "15px",
+                                right: "30px",
+                                color: "#494949",
+                            }}
                         >
                             Дополнить отзыв{" "}
-                            <EditIcon className="feedback-card__body_add-additional-review_icon" />
+                            <EditIcon
+                                sx={{
+                                    fontSize: "1.3rem",
+                                    marginLeft: "5px",
+                                    transform: "translateY(-3px)",
+                                }}
+                            />
                         </Button>
                     ) : null}
                 </div>

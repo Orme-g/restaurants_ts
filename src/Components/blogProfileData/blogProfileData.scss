@@ -48,15 +48,3 @@
         display: block;
     }
 }
-
-.edit-button {
-    color: variables.$primary-text;
-    font-size: 0.8rem;
-    padding-top: 0;
-    padding-bottom: 0;
-
-    &_icon {
-        margin-left: 5px;
-        font-size: 1.3rem;
-    }
-}

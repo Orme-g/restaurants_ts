@@ -122,13 +122,15 @@ const StartBlogForm: React.FC<IStartBlogForm> = ({ userId }) => {
                     <div className="blog__blog_form upload-image">
                         <div className="upload-image_label">Фото для блога:</div>
                         <Button
-                            className="upload-image_button"
+                            sx={{
+                                marginLeft: "20px",
+                            }}
                             variant="outlined"
                             component="label"
                             onChange={(e) => handleFileUpload(e)}
                         >
                             Выбрать фото
-                            <input type="file" accept=".png, .jpg, .jpeg, .svg, .ico" hidden />
+                            <input type="file" accept="image/*" hidden />
                         </Button>
                         <div className="upload-image_name">{imageName}</div>
                     </div>

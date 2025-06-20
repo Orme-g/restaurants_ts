@@ -61,11 +61,15 @@ const BlogProfileData: React.FC<IBlogProfileData> = ({ blogData }) => {
                         size="medium"
                         variant="text"
                         onClick={() => handleEditField("aboutMe")}
-                        className="edit-button"
-                        style={{ marginLeft: "10px" }}
+                        sx={{
+                            marginLeft: "10px",
+                            color: "#494949",
+                            paddingTop: 0,
+                            paddingBottom: 0,
+                        }}
                     >
                         {editAboutField ? "Отмена" : null}
-                        <EditIcon className="edit-button_icon" />
+                        <EditIcon fontSize="small" />
                     </Button>
                 </div>
             </div>
@@ -87,10 +91,15 @@ const BlogProfileData: React.FC<IBlogProfileData> = ({ blogData }) => {
                         variant="text"
                         onClick={() => handleEditField("blogCity")}
                         className="edit-button"
-                        style={{ marginLeft: "10px" }}
+                        sx={{
+                            marginLeft: "10px",
+                            color: "#494949",
+                            paddingTop: 0,
+                            paddingBottom: 0,
+                        }}
                     >
                         {editCityField ? "Отмена" : null}
-                        <EditIcon className="edit-button_icon" />
+                        <EditIcon fontSize="small" />
                     </Button>
                     {/* {blogCity} */}
                 </div>
