@@ -6,6 +6,7 @@ import { donersApi } from "../services/donersApi";
 import { commentsApi } from "../services/commentsApi";
 import { eventsApi } from "../services/eventsApi";
 import { blogApi } from "../services/blogApi";
+import { authApi } from "../services/authApi";
 
 const store = configureStore({
     reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
         [commentsApi.reducerPath]: commentsApi.reducer,
         [eventsApi.reducerPath]: eventsApi.reducer,
         [blogApi.reducerPath]: blogApi.reducer,
+        [authApi.reducerPath]: authApi.reducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(
@@ -23,7 +25,8 @@ const store = configureStore({
             donersApi.middleware,
             commentsApi.middleware,
             eventsApi.middleware,
-            blogApi.middleware
+            blogApi.middleware,
+            authApi.middleware
         ),
     devTools: process.env.NODE_ENV !== "production",
 });

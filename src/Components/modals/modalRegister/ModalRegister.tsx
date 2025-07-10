@@ -12,23 +12,16 @@ import {
     toggleModalWindowLogin,
     callSnackbar,
 } from "../../../reducers/interactive";
-import { useRegistrationMutation } from "../../../services/apiSlice";
+// import { useRegistrationMutation } from "../../../services/apiSlice";
+import { useRegistrationMutation } from "../../../services/authApi";
 
 import "./modalRegister.scss";
 
-interface IRegisterData {
-    username: string;
-    name: string;
-    surname: string;
-    birthday: null | Date;
-    email: string;
-    password: string;
-    password1: string;
-    password2: string;
-}
+import type { IRegisterData } from "../../../types/userData";
 
 const ModalRegister: React.FC = () => {
     const [passError, setPassError] = useState<null | string>(null);
+    const [passwordCheck, setPasswordCheck] = useState<string>("");
     const [userExistError, setUserExistError] = useState<null | string>(null);
     const dispatch = useAppDispatch();
     const modalWindowRegister = useAppSelector((state) => state.interactive.modalWindowRegister);
@@ -49,31 +42,32 @@ const ModalRegister: React.FC = () => {
             birthday: null,
             email: "",
             password: "",
-            password1: "",
-            password2: "",
+            // password1: "",
+            // password2: "",
         },
     });
 
     function onSubmit(data: IRegisterData) {
-        if (data.password1 !== data.password2) {
+        if (data.password !== passwordCheck) {
             return setPassError("Пароли не совпадают");
         }
-        const { username, name, surname, birthday, email, password1 } = data;
+        const { username, name, surname, birthday, email, password } = data;
         const newUser = {
             username,
             name,
             surname,
             birthday,
             email,
-            password: password1,
+            password,
         };
         registerUser(newUser)
             .unwrap()
-            .then(({ message }) => {
+            .then((response) => {
                 reset();
                 setPassError(null);
+                setPasswordCheck("");
                 setUserExistError(null);
-                dispatch(callSnackbar({ text: message, type: "success" }));
+                dispatch(callSnackbar({ text: response.message, type: "success" }));
                 dispatch(toggleRegisterWindowModal());
                 dispatch(toggleModalWindowLogin());
             })
@@ -82,6 +76,8 @@ const ModalRegister: React.FC = () => {
 
     function handleClose() {
         dispatch(toggleRegisterWindowModal());
+        setPassError(null);
+        setPasswordCheck("");
         setUserExistError(null);
         reset();
     }
@@ -163,20 +159,20 @@ const ModalRegister: React.FC = () => {
                     <p className="helper-text">{errors.email?.message}</p>
 
                     <div className="form-line">
-                        <label className="form-label" htmlFor="password1">
+                        <label className="form-label" htmlFor="password">
                             Придумайте пароль:<sup>*</sup>
                         </label>
                         <input
                             type="password"
                             className="form-input"
                             placeholder="Пароль"
-                            {...register("password1", {
+                            {...register("password", {
                                 minLength: 8,
                             })}
                         />
                     </div>
                     <p className="helper-text">
-                        {errors.password1?.type === "minLength" ? "Минимум 8 символов" : ""}
+                        {/* {errors.password?.type === "minLength" ? "Минимум 8 символов" : ""} */}
                     </p>
                     <div className="form-line">
                         <label className="form-label" htmlFor="password2">
@@ -186,13 +182,16 @@ const ModalRegister: React.FC = () => {
                             type="password"
                             className="form-input"
                             placeholder="Повторите пароль"
-                            {...register("password2", {
-                                minLength: 8,
-                            })}
+                            value={passwordCheck}
+                            onChange={(e) => setPasswordCheck(e.target.value)}
+                            // {...register("password2", {
+                            //     minLength: 8,
+                            // })}
                         />
                     </div>
                     <p className="helper-text">
-                        {errors.password2?.type === "minLength" ? "Минимум 8 символов" : ""}
+                        {errors.password?.type === "minLength" ? "Минимум 8 символов" : ""}
+                        {/* {errors.password2?.type === "minLength" ? "Минимум 8 символов" : ""} */}
                         {passError}
                     </p>
                     <p className="helper-text">{userExistError}</p>

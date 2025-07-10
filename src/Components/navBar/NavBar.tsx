@@ -20,7 +20,9 @@ import {
     setPassAuth,
     setUserData,
 } from "../../reducers/interactive";
+import { useLogoutMutation } from "../../services/authApi";
 import { useAppDispatch, useAppSelector } from "../../types/store";
+import { callSnackbar } from "../../reducers/interactive";
 import { Link } from "react-router-dom";
 import useLocalStorage from "../../hooks/useLocalStorage";
 
@@ -29,6 +31,7 @@ import "./navBar.scss";
 const NavBar: React.FC = () => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const dispatch = useAppDispatch();
+    const [logout] = useLogoutMutation();
     const { clearData, getUserData } = useLocalStorage();
     const passAuth = useAppSelector((state) => state.interactive.passAuth);
     const handleProfile = (event: React.MouseEvent<HTMLElement>) => {
@@ -39,6 +42,14 @@ const NavBar: React.FC = () => {
     };
     const handleLogout = () => {
         clearData("userData");
+        logout()
+            .unwrap()
+            .then((result) => {
+                dispatch(callSnackbar({ type: "info", text: result }));
+            })
+            .catch((error) =>
+                dispatch(callSnackbar({ type: "error", text: "Что-то пошло не так" }))
+            );
         dispatch(setPassAuth(false));
         dispatch(setUserData(null));
         handleClose();

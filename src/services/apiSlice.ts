@@ -36,20 +36,20 @@ export const apiSlice = createApi({
         searchRestaurant: builder.query({
             query: (input: string) => `/search-restaurant/${input}`,
         }),
-        login: builder.mutation({
-            query: (loginData) => ({
-                url: "/login",
-                method: "POST",
-                body: loginData,
-            }),
-        }),
-        registration: builder.mutation({
-            query: (userData) => ({
-                url: "/register",
-                method: "POST",
-                body: userData,
-            }),
-        }),
+        // login: builder.mutation({
+        //     query: (loginData) => ({
+        //         url: "/login",
+        //         method: "POST",
+        //         body: loginData,
+        //     }),
+        // }),
+        // registration: builder.mutation({
+        //     query: (userData) => ({
+        //         url: "/register",
+        //         method: "POST",
+        //         body: userData,
+        //     }),
+        // }),
         getUserData: builder.query<IUserData, string>({
             query: (userId: string) => `/user/getdata/${userId}`,
             providesTags: ["Favourite", "UserData"],
@@ -99,8 +99,8 @@ export const apiSlice = createApi({
 });
 
 export const {
-    useLoginMutation,
-    useRegistrationMutation,
+    // useLoginMutation,
+    // useRegistrationMutation,
     useGetUserDataQuery,
     useGetSortedRestaurantsQuery,
     useFindRestaurantMutation,

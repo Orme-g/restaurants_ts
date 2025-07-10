@@ -1,3 +1,14 @@
+export interface IRegisterData {
+    username: string;
+    name: string;
+    surname: string;
+    birthday: null | Date;
+    email: string;
+    password: string;
+    // password1: string;
+    // password2: string;
+}
+
 export interface IBlogData {
     blogerName: string;
     blogPosts: string[];

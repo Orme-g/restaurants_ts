@@ -3,7 +3,6 @@ import { currentUrl } from "../../URLs";
 
 import type { IBlogPost } from "../types/blogPost";
 import type { IBlogData } from "../types/userData";
-import { url } from "inspector";
 
 export const blogApi = createApi({
     reducerPath: "blogApi",

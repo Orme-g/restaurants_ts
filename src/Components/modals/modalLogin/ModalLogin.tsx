@@ -15,7 +15,8 @@ import {
     setPassAuth,
     updateUserData,
 } from "../../../reducers/interactive";
-import { useLoginMutation } from "../../../services/apiSlice";
+// import { useLoginMutation } from "../../../services/apiSlice";
+import { useLoginMutation } from "../../../services/authApi";
 import useLocalStorage from "../../../hooks/useLocalStorage";
 
 import "./modalLogin.scss";
