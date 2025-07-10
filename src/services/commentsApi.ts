@@ -1,13 +1,12 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
 import { currentUrl } from "../../URLs";
+import { createBaseQueryWithReauth } from "./baseQueryWithReauth";
 
 import { INewComment, type IComment } from "../types/commentsTypes";
 
 export const commentsApi = createApi({
     reducerPath: "commentsApi",
-    baseQuery: fetchBaseQuery({
-        baseUrl: `${currentUrl}/comments`,
-    }),
+    baseQuery: createBaseQueryWithReauth(`${currentUrl}/comments`),
     tagTypes: ["Comments"],
     endpoints: (builder) => ({
         getComments: builder.query<IComment[], string>({

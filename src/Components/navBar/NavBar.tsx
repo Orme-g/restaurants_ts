@@ -45,7 +45,7 @@ const NavBar: React.FC = () => {
         logout()
             .unwrap()
             .then((result) => {
-                dispatch(callSnackbar({ type: "info", text: result }));
+                dispatch(callSnackbar({ type: "info", text: result.message }));
             })
             .catch((error) =>
                 dispatch(callSnackbar({ type: "error", text: "Что-то пошло не так" }))

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../types/store";
-// import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 
@@ -12,7 +11,6 @@ import {
     toggleModalWindowLogin,
     callSnackbar,
 } from "../../../reducers/interactive";
-// import { useRegistrationMutation } from "../../../services/apiSlice";
 import { useRegistrationMutation } from "../../../services/authApi";
 
 import "./modalRegister.scss";
@@ -42,8 +40,6 @@ const ModalRegister: React.FC = () => {
             birthday: null,
             email: "",
             password: "",
-            // password1: "",
-            // password2: "",
         },
     });
 
