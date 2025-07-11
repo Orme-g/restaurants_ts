@@ -10,7 +10,7 @@ interface ISnackBarData {
 
 interface IinitialSTate {
     sideMenu: boolean;
-    modalWindowLogin: boolean;
+    // modalWindowLogin: boolean;
     modalWindowRegister: boolean;
     passAuth: boolean;
     userData: IUserData | null;
@@ -29,7 +29,7 @@ export const updateUserData = createAsyncThunk<IUserData, string>(
 
 const initialState: IinitialSTate = {
     sideMenu: false,
-    modalWindowLogin: false,
+    // modalWindowLogin: false,
     modalWindowRegister: false,
     passAuth: false,
     userData: null,
@@ -45,9 +45,9 @@ const interactiveSlice = createSlice({
         toggleSideMenu: (state) => {
             state.sideMenu = !state.sideMenu;
         },
-        toggleModalWindowLogin: (state) => {
-            state.modalWindowLogin = !state.modalWindowLogin;
-        },
+        // toggleModalWindowLogin: (state) => {
+        //     state.modalWindowLogin = !state.modalWindowLogin;
+        // },
         toggleRegisterWindowModal: (state) => {
             state.modalWindowRegister = !state.modalWindowRegister;
         },
@@ -76,7 +76,7 @@ const { actions, reducer } = interactiveSlice;
 export default reducer;
 export const {
     toggleSideMenu,
-    toggleModalWindowLogin,
+    // toggleModalWindowLogin,
     toggleRegisterWindowModal,
     toggleSnackbar,
     setPassAuth,

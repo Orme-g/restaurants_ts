@@ -8,7 +8,7 @@ import { Button } from "@mui/material";
 
 import {
     toggleRegisterWindowModal,
-    toggleModalWindowLogin,
+    // toggleModalWindowLogin,
     callSnackbar,
 } from "../../../reducers/interactive";
 import { useRegistrationMutation } from "../../../services/authApi";
@@ -65,7 +65,7 @@ const ModalRegister: React.FC = () => {
                 setUserExistError(null);
                 dispatch(callSnackbar({ text: response.message, type: "success" }));
                 dispatch(toggleRegisterWindowModal());
-                dispatch(toggleModalWindowLogin());
+                // dispatch(toggleModalWindowLogin());
             })
             .catch(({ data }) => setUserExistError(data));
     }

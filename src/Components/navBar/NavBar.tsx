@@ -16,7 +16,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import {
     toggleSideMenu,
-    toggleModalWindowLogin,
+    // toggleModalWindowLogin,
     setPassAuth,
     setUserData,
 } from "../../reducers/interactive";
@@ -60,9 +60,12 @@ const NavBar: React.FC = () => {
     const isAdmin = getUserData()?.role.includes("admin");
 
     const unAuth = (
-        <Button color="inherit" onClick={() => dispatch(toggleModalWindowLogin())}>
-            Войти
+        // <Button color="inherit" onClick={() => dispatch(toggleModalWindowLogin())}>
+        <Button color="inherit">
+            <Link to={`/login`}>Войти</Link>
         </Button>
+
+        // </Button>
     );
     const admin = (
         <Link to={`/admin`} onClick={handleClose}>
@@ -108,7 +111,7 @@ const NavBar: React.FC = () => {
     );
 
     return (
-        <AppBar color="inherit">
+        <AppBar color="inherit" sx={{ backgroundColor: "rgb(244, 244, 244)", color: "#494949" }}>
             <Toolbar>
                 <IconButton onClick={() => dispatch(toggleSideMenu())} color="inherit">
                     <MenuIcon />

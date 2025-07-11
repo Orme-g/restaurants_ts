@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Navigation from "../navigation/Navigation";
 import Footer from "../footer/Footer";
-import ModalLogin from "../modals/modalLogin/ModalLogin";
+// import ModalLogin from "../modals/modalLogin/ModalLogin";
 import ModalRegister from "../modals/modalRegister/ModalRegister";
 import Snack from "../snackbar/Snackbar";
 import Spinner from "../svg/Spinner";
@@ -36,6 +36,7 @@ const BlogPageThemeSelection = lazy(
 );
 const AdminPage = lazy(() => import("../../pages/adminPage/AdminPage"));
 const Page404 = lazy(() => import("../../pages/Page404"));
+const LoginPage = lazy(() => import("../../pages/loginPage/LoginPage"));
 
 const Workshop = lazy(() => import("../../pages/workshop/Workshop"));
 
@@ -63,6 +64,7 @@ export const App: React.FC = () => {
                     <Suspense fallback={<Spinner />}>
                         <Routes>
                             <Route path="/" element={<MainPage />} />
+                            <Route path="/login" element={<LoginPage />} />
                             <Route path="/restaurant/:restId" element={<SingleRestaurantPage />} />
                             <Route path="/find-restaurant" element={<RestaurantSelectionPage />} />
                             <Route path="/best-doner" element={<BestDonersListPage />} />
@@ -86,7 +88,7 @@ export const App: React.FC = () => {
                         </Routes>
                     </Suspense>
                     <Footer />
-                    <ModalLogin />
+                    {/* <ModalLogin /> */}
                     <ModalRegister />
                     <Snack />
                 </div>

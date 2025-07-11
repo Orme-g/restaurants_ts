@@ -1,0 +1,38 @@
+@use "../../style/mixins";
+@use "../../style/variables";
+
+.login-page {
+    padding-top: 150px;
+    min-height: 800px;
+    background-color: #ececec;
+    &__content {
+        margin: 0 auto;
+        width: fit-content;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    &__title {
+        text-align: center;
+        font-size: 1.5rem;
+        color: variables.$primary-text;
+    }
+    &__form {
+        height: fit-content;
+        width: 500px;
+        background-color: #fcfcfc;
+        border-radius: 10px;
+        padding-bottom: 30px;
+    }
+    &__link {
+        text-transform: uppercase;
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: #1976d2;
+        margin-left: 20px;
+    }
+    &__actions {
+        width: fit-content;
+        margin: 0 auto;
+    }
+}

@@ -9,7 +9,7 @@ import { Dialog, DialogContent, DialogContentText, DialogTitle } from "@mui/mate
 import { Stack, TextField, Button } from "@mui/material";
 
 import {
-    toggleModalWindowLogin,
+    // toggleModalWindowLogin,
     toggleRegisterWindowModal,
     callSnackbar,
     setPassAuth,
@@ -29,7 +29,7 @@ interface IFormData {
 const ModalLogin = () => {
     const [errorMessage, setErrorMessage] = useState(null);
     const dispatch = useAppDispatch();
-    const { modalWindowLogin } = useAppSelector((state) => state.interactive);
+    // const { modalWindowLogin } = useAppSelector((state) => state.interactive);
     const [sendLogin] = useLoginMutation();
     const { setData } = useLocalStorage();
 
@@ -66,65 +66,65 @@ const ModalLogin = () => {
     };
 
     const handleClose = () => {
-        dispatch(toggleModalWindowLogin());
+        // dispatch(toggleModalWindowLogin());
         setErrorMessage(null);
         reset();
     };
 
     const passToRegistration = () => {
-        dispatch(toggleModalWindowLogin());
+        // dispatch(toggleModalWindowLogin());
         dispatch(toggleRegisterWindowModal());
     };
 
-    return (
-        <Dialog open={modalWindowLogin} onClose={() => handleClose()}>
-            <DialogTitle>Вход в аккаунт</DialogTitle>
-            <DialogContent>
-                <DialogContentText mb={2}>
-                    Войдите в систему, чтобы открыть все возможности Whereats
-                </DialogContentText>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <Stack spacing={2} width={300} mb={2}>
-                        <TextField
-                            label="Логин"
-                            size="small"
-                            {...register("login", {
-                                required: "Введите логин",
-                            })}
-                            error={!!errors.login}
-                            helperText={errors.login?.message}
-                        />
-                        <TextField
-                            label="Пароль"
-                            type="password"
-                            size="small"
-                            {...register("password", {
-                                required: "Введите пароль",
-                            })}
-                            error={!!errors.password}
-                            helperText={errors.password?.message}
-                        />
-                        <div className="error-message">{errorMessage}</div>
-                        <div>
-                            <Button size="small" sx={{ fontSize: "12px" }}>
-                                Восстановить пароль
-                            </Button>
-                            <Button
-                                size="small"
-                                sx={{ fontSize: "12px" }}
-                                onClick={() => passToRegistration()}
-                            >
-                                Регистрация
-                            </Button>
-                        </div>
-                    </Stack>
-                    <Button type="submit">Войти</Button>
-                    <Button onClick={() => handleClose()}>Отмена</Button>
-                </form>
-                <DevTool control={control} />
-            </DialogContent>
-        </Dialog>
-    );
+    // return (
+    // <Dialog open={modalWindowLogin} onClose={() => handleClose()}>
+    //     <DialogTitle>Вход в аккаунт</DialogTitle>
+    //     <DialogContent>
+    //         <DialogContentText mb={2}>
+    //             Войдите в систему, чтобы открыть все возможности Weats
+    //         </DialogContentText>
+    //         <form onSubmit={handleSubmit(onSubmit)}>
+    //             <Stack spacing={2} width={300} mb={2}>
+    //                 <TextField
+    //                     label="Логин"
+    //                     size="small"
+    //                     {...register("login", {
+    //                         required: "Введите логин",
+    //                     })}
+    //                     error={!!errors.login}
+    //                     helperText={errors.login?.message}
+    //                 />
+    //                 <TextField
+    //                     label="Пароль"
+    //                     type="password"
+    //                     size="small"
+    //                     {...register("password", {
+    //                         required: "Введите пароль",
+    //                     })}
+    //                     error={!!errors.password}
+    //                     helperText={errors.password?.message}
+    //                 />
+    //                 <div className="error-message">{errorMessage}</div>
+    //                 <div>
+    //                     <Button size="small" sx={{ fontSize: "12px" }}>
+    //                         Восстановить пароль
+    //                     </Button>
+    //                     <Button
+    //                         size="small"
+    //                         sx={{ fontSize: "12px" }}
+    //                         onClick={() => passToRegistration()}
+    //                     >
+    //                         Регистрация
+    //                     </Button>
+    //                 </div>
+    //             </Stack>
+    //             <Button type="submit">Войти</Button>
+    //             <Button onClick={() => handleClose()}>Отмена</Button>
+    //         </form>
+    //         <DevTool control={control} />
+    //     </DialogContent>
+    // </Dialog>
+    // );
 };
 
 export default ModalLogin;
