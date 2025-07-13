@@ -1,3 +1,4 @@
+// When all tested - working - delete Login modal component
 import React, { useState } from "react";
 import { useAppDispatch } from "../../types/store";
 import { useForm } from "react-hook-form";
@@ -87,7 +88,7 @@ const LoginPage: React.FC = () => {
                     </Stack>
                     <div className="login-page__actions">
                         <Button type="submit">Войти</Button>
-                        <Link to={"/registration"} className="login-page__link">
+                        <Link to={"/register"} className="login-page__link">
                             Регистрация
                         </Link>
                     </div>

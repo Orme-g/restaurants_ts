@@ -56,18 +56,19 @@ const ModalRegister: React.FC = () => {
             email,
             password,
         };
-        registerUser(newUser)
-            .unwrap()
-            .then((response) => {
-                reset();
-                setPassError(null);
-                setPasswordCheck("");
-                setUserExistError(null);
-                dispatch(callSnackbar({ text: response.message, type: "success" }));
-                dispatch(toggleRegisterWindowModal());
-                // dispatch(toggleModalWindowLogin());
-            })
-            .catch(({ data }) => setUserExistError(data));
+        console.log(newUser);
+        // registerUser(newUser)
+        //     .unwrap()
+        //     .then((response) => {
+        //         reset();
+        //         setPassError(null);
+        //         setPasswordCheck("");
+        //         setUserExistError(null);
+        //         dispatch(callSnackbar({ text: response.message, type: "success" }));
+        //         dispatch(toggleRegisterWindowModal());
+        //         // dispatch(toggleModalWindowLogin());
+        //     })
+        //     .catch(({ data }) => setUserExistError(data));
     }
 
     function handleClose() {

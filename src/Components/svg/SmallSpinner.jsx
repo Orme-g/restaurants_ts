@@ -3,7 +3,7 @@ const SmallSpinner = () => {
         <svg
             xmlns="http://www.w3.org/2000/svg"
             style={{
-                background: "rgb(255, 255, 255)",
+                background: "inherit",
                 display: "block",
                 shapeRendering: "auto",
                 width: "100%",

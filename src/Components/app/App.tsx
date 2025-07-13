@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { lazy, Suspense } from "react";
 // import { useDispatch } from "react-redux";
@@ -37,10 +37,12 @@ const BlogPageThemeSelection = lazy(
 const AdminPage = lazy(() => import("../../pages/adminPage/AdminPage"));
 const Page404 = lazy(() => import("../../pages/Page404"));
 const LoginPage = lazy(() => import("../../pages/loginPage/LoginPage"));
+const RegisterPage = lazy(() => import("../../pages/registerPage/RegisterPage"));
 
 const Workshop = lazy(() => import("../../pages/workshop/Workshop"));
 
 export const App: React.FC = () => {
+    useEffect(() => {}, []);
     const dispatch = useAppDispatch();
     const { getUserData } = useLocalStorage();
     if (getUserData()) {
@@ -65,6 +67,7 @@ export const App: React.FC = () => {
                         <Routes>
                             <Route path="/" element={<MainPage />} />
                             <Route path="/login" element={<LoginPage />} />
+                            <Route path="/register" element={<RegisterPage />} />
                             <Route path="/restaurant/:restId" element={<SingleRestaurantPage />} />
                             <Route path="/find-restaurant" element={<RestaurantSelectionPage />} />
                             <Route path="/best-doner" element={<BestDonersListPage />} />

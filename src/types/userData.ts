@@ -2,7 +2,7 @@ export interface IRegisterData {
     username: string;
     name: string;
     surname: string;
-    birthday: null | Date;
+    birthday: null | string;
     email: string;
     password: string;
     // password1: string;
