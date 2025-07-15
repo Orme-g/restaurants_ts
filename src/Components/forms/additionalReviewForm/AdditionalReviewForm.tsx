@@ -49,13 +49,13 @@ const AdditionalReviewForm: React.FC<IAdditionalReviewProps> = ({
         };
         dispatch(addAdditionalReview(JSON.stringify(additionalReview)))
             .then(({ payload }) => {
-                dispatch(callSnackbar({ text: payload.message, type: payload.type }));
+                dispatch(callSnackbar({ text: payload.message, type: "success" }));
                 if (payload.type === "success") {
                     dispatch(fetchRestaurantReviews(restId));
                     reset({ like: "", dislike: "" });
                 }
             })
-            .catch((error) => console.log(error));
+            .catch((error) => dispatch(callSnackbar({ text: error.message, type: "error" })));
     };
     const currentFormStatus = displayStatus ? "show-with-animation" : "hide-with-animation";
 

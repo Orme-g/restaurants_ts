@@ -1,11 +1,11 @@
 import React from "react";
 import { useState } from "react";
 
-import { useAppDispatch } from "../../../types/store";
+import { useAppDispatch, useAppSelector } from "../../../types/store";
 import { callSnackbar } from "../../../reducers/interactive";
 import { TextField, Button, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import useLocalStorage from "../../../hooks/useLocalStorage";
+// import useLocalStorage from "../../../hooks/useLocalStorage";
 import { usePostCommentMutation } from "../../../services/commentsApi";
 
 import type { IReplyData, TCommentReplyFunction, INewComment } from "../../../types/commentsTypes";
@@ -20,38 +20,41 @@ interface ICommentProps {
 const CommentForm: React.FC<ICommentProps> = ({ replyData, topicId, setReplyData }) => {
     const [commentText, setCommentText] = useState("");
     const [valid, setValid] = useState(false);
-    const { getUserData } = useLocalStorage();
-    const { username, _id } = getUserData();
+    // const { getUserData } = useLocalStorage();
+    // const { username, _id } = getUserData();
     const [postComment] = usePostCommentMutation();
     const dispatch = useAppDispatch();
-
+    const userData = useAppSelector((state) => state.interactive.userData);
     function handleSubmit() {
         if (commentText.length < 10) {
             setValid(true);
-        } else {
-            setValid(false);
-            let newComment: INewComment = {
-                name: username,
-                userId: _id,
-                topic: topicId,
-                likes: 0,
-                dislikes: 0,
-                text: commentText,
-            };
-            if (replyData?.commentId) {
-                newComment = { ...newComment, replyToComment: replyData.commentId };
-            }
-            postComment(newComment)
-                .unwrap()
-                .then(({ message }) => {
-                    dispatch(callSnackbar({ type: "success", text: message }));
-                    setCommentText("");
-                    setReplyData({ name: null, text: null, commentId: null });
-                })
-                .catch(({ data }) => dispatch(callSnackbar({ type: "error", text: data })));
-
-            setReplyData({ name: null, text: null, commentId: null });
+            return;
         }
+        if (!userData) {
+            return;
+        }
+        setValid(false);
+        let newComment: INewComment = {
+            name: userData.username,
+            userId: userData._id,
+            topic: topicId,
+            likes: 0,
+            dislikes: 0,
+            text: commentText,
+        };
+        if (replyData?.commentId) {
+            newComment = { ...newComment, replyToComment: replyData.commentId };
+        }
+        postComment(newComment)
+            .unwrap()
+            .then(({ message }) => {
+                dispatch(callSnackbar({ type: "success", text: message }));
+                setCommentText("");
+                setReplyData({ name: null, text: null, commentId: null });
+            })
+            .catch(({ data }) => dispatch(callSnackbar({ type: "error", text: data })));
+
+        setReplyData({ name: null, text: null, commentId: null });
     }
     const replyBlock = (
         <div className="comments__reply">

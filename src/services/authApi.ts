@@ -1,11 +1,14 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { currentUrl } from "../../URLs";
-import type { IRegisterData } from "../types/userData";
+import type { IRegisterData, IUserStoreData } from "../types/userData";
 import { createBaseQueryWithReauth } from "./baseQueryWithReauth";
 export const authApi = createApi({
     reducerPath: "authApi",
     baseQuery: createBaseQueryWithReauth(`${currentUrl}/auth`),
     endpoints: (builder) => ({
+        me: builder.query<IUserStoreData, void>({
+            query: () => `/me`,
+        }),
         registration: builder.mutation<{ message: string }, IRegisterData>({
             query: (userData) => ({
                 url: "/register",
@@ -65,6 +68,7 @@ export const authApi = createApi({
 
 export const {
     //Working
+    useLazyMeQuery,
     useRegistrationMutation,
     useLoginMutation,
     useLogoutMutation,

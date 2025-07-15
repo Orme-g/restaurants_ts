@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../types/store";
 
 import { fetchRestaurantReviews } from "../../reducers/restaurants";
-import { useGetRestaurantByIdQuery } from "../../services/apiSlice";
+import { useGetRestaurantByIdQuery } from "../../services/restaurantsApi";
 import { useParams } from "react-router-dom";
 
 import "./singleRestaurantPage.scss";
@@ -13,27 +13,27 @@ import RestSideInfo from "../../Components/restSideInfo/RestSideInfo";
 import RestaurantsTabs from "../../Components/restaurantsTabs/RestaurantsTabs";
 import { PageSkeleton } from "../../Components/skeletons/Skeletons";
 import ResourceNotFound from "../ResourceNotFound";
-import {
-    useGetUserDataQuery,
-    useHandleFavouriteRestaurantsMutation,
-} from "../../services/apiSlice";
+import { useGetUserDataQuery, useHandleFavouriteRestaurantsMutation } from "../../services/userApi";
+import { useLazyMeQuery } from "../../services/authApi";
 import { callSnackbar } from "../../reducers/interactive";
-import useLocalStorage from "../../hooks/useLocalStorage";
+// import useLocalStorage from "../../hooks/useLocalStorage";
 import type { IUserData } from "../../types/userData";
 
 const SingleRestaurantPage: React.FC = () => {
+    console.log("renderRest");
     useEffect(() => {
         if (restId) {
-            // dispatch(fetchRestaurantData(restId));
             dispatch(fetchRestaurantReviews(restId));
         }
         // eslint-disable-next-line
     }, []);
-    const { passAuth } = useAppSelector((state) => state.interactive);
     const dispatch = useAppDispatch();
     const { restId } = useParams<string>();
-    const { getUserData } = useLocalStorage();
-    const userData: IUserData = getUserData();
+    const [getUserData] = useLazyMeQuery();
+    // const { getUserData } = useLocalStorage();
+    // const userData: IUserData = getUserData();
+    const _id = useAppSelector((state) => state.interactive.userData?._id);
+    const isAuth = !!_id;
     const {
         data: restaurantData,
         isLoading,
@@ -42,8 +42,8 @@ const SingleRestaurantPage: React.FC = () => {
         skip: !restId,
     });
     let userId: string | null = null;
-    if (userData) {
-        userId = userData._id;
+    if (_id) {
+        userId = _id;
     }
     const { data } = useGetUserDataQuery(userId!, {
         skip: !userId,
@@ -56,7 +56,12 @@ const SingleRestaurantPage: React.FC = () => {
             const type: "remove" | "add" = isFavourite ? "remove" : "add";
             handleFavourite({ restId, userId, type, name })
                 .unwrap()
-                .then(({ message, type }) => dispatch(callSnackbar({ text: message, type: type })));
+                .then(({ message, type }) => {
+                    dispatch(callSnackbar({ text: message, type: type }));
+                    // getUserData()
+                    //     .unwrap()
+                    //     .then((userData) => dispatch(setUserData(userData)));
+                });
 
             // eslint-disable-next-line
         },
@@ -89,7 +94,7 @@ const SingleRestaurantPage: React.FC = () => {
                     data={restaurantData}
                     isFavourite={isFavourite}
                     favouriteHandler={handleFavouriteButton}
-                    isRegistered={passAuth}
+                    isRegistered={isAuth}
                 />
             </div>
             <RestaurantsTabs

@@ -18,7 +18,7 @@ const CommentsBlock: React.FC<CommentBlockProps> = ({ currentTopicId }) => {
         text: null,
         commentId: null,
     });
-    const checkAuth = useAppSelector((state) => state.interactive.passAuth);
+    const checkAuth = useAppSelector((state) => state.interactive.isAuth);
     const unAuth = (
         <div className="comments__unauth">
             Войдите или зарегистрируйтесь, чтобы оставлять комментарии.

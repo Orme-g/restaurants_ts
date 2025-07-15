@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { useHttp } from "../hooks/http.hook";
 import { currentUrl } from "../../URLs";
-import type { IUserData } from "../types/userData";
+import type { IUserStoreData } from "../types/userData";
+import { RootState } from "../store";
 
 interface ISnackBarData {
     text: string;
@@ -10,28 +11,30 @@ interface ISnackBarData {
 
 interface IinitialSTate {
     sideMenu: boolean;
-    // modalWindowLogin: boolean;
-    modalWindowRegister: boolean;
-    passAuth: boolean;
-    userData: IUserData | null;
+    isAuth: boolean | null;
+    userData: IUserStoreData | null;
     showSnackbar: boolean;
     snackBarData: ISnackBarData;
-    // postFields: IPostData[] | [];
 }
 
-export const updateUserData = createAsyncThunk<IUserData, string>(
-    "interactive/updateUserData",
-    (userId) => {
-        const { request } = useHttp();
-        return request(`${currentUrl}/user/getdata/${userId}`);
-    }
-);
+// export const updateUserData = createAsyncThunk<IUserData, string>(
+//     "interactive/updateUserData",
+//     (userId) => {
+//         const { request } = useHttp();
+//         return request(`${currentUrl}/user/getdata/${userId}`);
+//     }
+// );
+// export const updateUserData = createAsyncThunk<IUserData, void>(
+//     "interactive/updateUserData",
+//     () => {
+//         const { request } = useHttp();
+//         return request(`${currentUrl}/auth/me`);
+//     }
+// );
 
 const initialState: IinitialSTate = {
     sideMenu: false,
-    // modalWindowLogin: false,
-    modalWindowRegister: false,
-    passAuth: false,
+    isAuth: null,
     userData: null,
     showSnackbar: false,
     snackBarData: { text: "", type: "success" },
@@ -45,12 +48,6 @@ const interactiveSlice = createSlice({
         toggleSideMenu: (state) => {
             state.sideMenu = !state.sideMenu;
         },
-        // toggleModalWindowLogin: (state) => {
-        //     state.modalWindowLogin = !state.modalWindowLogin;
-        // },
-        toggleRegisterWindowModal: (state) => {
-            state.modalWindowRegister = !state.modalWindowRegister;
-        },
         toggleSnackbar: (state) => {
             state.showSnackbar = !state.showSnackbar;
         },
@@ -58,18 +55,29 @@ const interactiveSlice = createSlice({
             state.snackBarData = action.payload;
             state.showSnackbar = !state.showSnackbar;
         },
-        setPassAuth: (state, action: PayloadAction<boolean>) => {
-            state.passAuth = action.payload;
+        setIsAuth: (state, action: PayloadAction<true>) => {
+            state.isAuth = action.payload;
         },
-        setUserData: (state, action: PayloadAction<IUserData | null>) => {
+        setUserDataAndAuth: (state, action: PayloadAction<IUserStoreData | null>) => {
+            state.isAuth = true;
             state.userData = action.payload;
         },
+        logoutUser: (state) => {
+            state.isAuth = false;
+            state.userData = null;
+        },
     },
-    extraReducers: (builder) => {
-        builder.addCase(updateUserData.fulfilled, (state, action: PayloadAction<IUserData>) => {
-            state.userData = action.payload;
-        });
-    },
+    // extraReducers: (builder) => {
+    //     builder
+    //         .addCase(updateUserData.fulfilled, (state, action: PayloadAction<IUserData>) => {
+    //             state.userData = action.payload;
+    //             state.isAuth = true;
+    //         })
+    //         .addCase(updateUserData.rejected, (state) => {
+    //             state.userData = null;
+    //             state.isAuth = false;
+    //         });
+    // },
 });
 
 const { actions, reducer } = interactiveSlice;
@@ -77,9 +85,11 @@ export default reducer;
 export const {
     toggleSideMenu,
     // toggleModalWindowLogin,
-    toggleRegisterWindowModal,
+    // toggleRegisterWindowModal,
     toggleSnackbar,
-    setPassAuth,
+    // setPassAuth,
     callSnackbar,
-    setUserData,
+    setUserDataAndAuth,
+    setIsAuth,
+    logoutUser,
 } = actions;

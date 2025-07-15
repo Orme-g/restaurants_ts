@@ -14,59 +14,47 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import PersonIcon from "@mui/icons-material/Person";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
-import {
-    toggleSideMenu,
-    // toggleModalWindowLogin,
-    setPassAuth,
-    setUserData,
-} from "../../reducers/interactive";
+import { toggleSideMenu, callSnackbar, logoutUser } from "../../reducers/interactive";
 import { useLogoutMutation } from "../../services/authApi";
 import { useAppDispatch, useAppSelector } from "../../types/store";
-import { callSnackbar } from "../../reducers/interactive";
+// import { shallowEqual, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import useLocalStorage from "../../hooks/useLocalStorage";
+import SmallSpinner from "../svg/SmallSpinner";
+// import useLocalStorage from "../../hooks/useLocalStorage";
 
 import "./navBar.scss";
+import { RootState } from "../../store";
 
 const NavBar: React.FC = () => {
+    console.log("Render Nav");
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const dispatch = useAppDispatch();
     const [logout] = useLogoutMutation();
-    const { clearData, getUserData } = useLocalStorage();
-    const passAuth = useAppSelector((state) => state.interactive.passAuth);
+    // const isAuth = useAppSelector(selectIsAuth);
     const handleProfile = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
     };
+    const userData = useAppSelector((state) => state.interactive.userData);
+    const isAuth = useAppSelector((state) => state.interactive.isAuth);
+    const name = userData?.name;
+    const _id = userData?._id;
+    const role = userData?.role;
+    const isAdmin = role?.includes("admin");
     const handleClose = () => {
         setAnchorEl(null);
     };
     const handleLogout = () => {
-        clearData("userData");
         logout()
             .unwrap()
             .then((result) => {
                 dispatch(callSnackbar({ type: "info", text: result.message }));
+                dispatch(logoutUser());
             })
             .catch((error) =>
                 dispatch(callSnackbar({ type: "error", text: "Что-то пошло не так" }))
             );
-        dispatch(setPassAuth(false));
-        dispatch(setUserData(null));
         handleClose();
     };
-
-    const name = getUserData()?.name;
-    const _id = getUserData()?._id;
-    const isAdmin = getUserData()?.role.includes("admin");
-
-    const unAuth = (
-        // <Button color="inherit" onClick={() => dispatch(toggleModalWindowLogin())}>
-        <Button color="inherit">
-            <Link to={`/login`}>Войти</Link>
-        </Button>
-
-        // </Button>
-    );
     const admin = (
         <Link to={`/admin`} onClick={handleClose}>
             <MenuItem>
@@ -77,7 +65,17 @@ const NavBar: React.FC = () => {
             </MenuItem>
         </Link>
     );
-    const isAuth = (
+    const isLoading = (
+        <div className="navbar-spinner">
+            <SmallSpinner />
+        </div>
+    );
+    const ifUnAuth = (
+        <Button color="inherit">
+            <Link to={`/login`}>Войти</Link>
+        </Button>
+    );
+    const ifAuth = (
         <>
             <IconButton
                 size="large"
@@ -127,7 +125,9 @@ const NavBar: React.FC = () => {
                     </Typography>
                 </Link>
                 <div className="navbarItems">
-                    {passAuth ? isAuth : unAuth}
+                    {/* {isAuth ? ifAuth : ifUnAuth} */}
+                    {/* {isLoading} */}
+                    {isAuth === null ? isLoading : isAuth === false ? ifUnAuth : ifAuth}
 
                     <Button color="inherit" sx={{ ml: "25px" }}>
                         Помощь

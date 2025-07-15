@@ -1,12 +1,13 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
 import { currentUrl } from "../../URLs";
+import { createBaseQueryWithReauth } from "./baseQueryWithReauth";
 
 import type { IBlogPost } from "../types/blogPost";
 import type { IBlogData } from "../types/userData";
 
 export const blogApi = createApi({
     reducerPath: "blogApi",
-    baseQuery: fetchBaseQuery({ baseUrl: `${currentUrl}/blog` }),
+    baseQuery: createBaseQueryWithReauth(`${currentUrl}/blog`),
     tagTypes: ["PostData"],
     endpoints: (builder) => ({
         getBlogPost: builder.query<IBlogPost, string>({
@@ -32,7 +33,7 @@ export const blogApi = createApi({
         getPostsByTheme: builder.query<IBlogPost[], string>({
             query: (theme: string) => `/blog-posts/${theme}`,
         }),
-        updateLikesOrCommentsCount: builder.mutation({
+        updateLikesOrCommentsCount: builder.mutation<string, {}>({
             query: (data) => ({
                 url: "/update-likes-comments",
                 method: "PATCH",

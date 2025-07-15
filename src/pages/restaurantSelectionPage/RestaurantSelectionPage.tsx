@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { cousines } from "../../data/cousines";
 
-import { useFindRestaurantMutation } from "../../services/apiSlice";
+import { useFindRestaurantMutation } from "../../services/restaurantsApi";
 import { subwaySpb } from "../../data/subwaysLists";
 import LongCard from "../../Components/longCard/LongCard";
 import RenderListWithPagination from "../../Components/renderListWithPagination/RenderListWithPagination";

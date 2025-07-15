@@ -1,7 +1,7 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, FreeMode } from "swiper/modules";
-import { useGetSortedRestaurantsQuery } from "../../services/apiSlice";
+import { useGetSortedRestaurantsQuery } from "../../services/restaurantsApi";
 
 import { CardsSliderSkeleton } from "../skeletons/Skeletons";
 import RestaurantCardSmall from "../restaurantCardSmall/RestaurantCardSmall";

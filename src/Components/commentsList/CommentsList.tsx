@@ -5,10 +5,11 @@ import {
     useEvaluateCommentMutation,
     useDeleteCommentMutation,
 } from "../../services/commentsApi";
-import { updateUserData, callSnackbar } from "../../reducers/interactive";
+// import { updateUserData, callSnackbar } from "../../reducers/interactive";
+import { callSnackbar } from "../../reducers/interactive";
 import { useAppSelector, useAppDispatch } from "../../types/store";
 import CommentsItem from "../commentsItem/CommentsItem";
-import useLocalStorage from "../../hooks/useLocalStorage";
+// import useLocalStorage from "../../hooks/useLocalStorage";
 
 import type { TCommentReplyFunction } from "../../types/commentsTypes";
 
@@ -22,10 +23,11 @@ interface ICommentItemProps {
 const CommentsList: React.FC<ICommentItemProps> = memo(({ topicId, commentReply }) => {
     const [deleteComment] = useDeleteCommentMutation();
     const [evaluateComment] = useEvaluateCommentMutation();
-    const actualUserData = useAppSelector((state) => state.interactive.userData);
-    const isAuth = useAppSelector((state) => state.interactive.passAuth);
-    const ratedComments = actualUserData?.ratedComments;
-    const userId = actualUserData?._id;
+    const userData = useAppSelector((state) => state.interactive.userData);
+    const isAuth = useAppSelector((state) => state.interactive.isAuth);
+    const ratedComments = userData?.ratedComments;
+    const userId = userData?._id;
+    const isAdmin = !!userData?.role.includes("admin");
     const { data: topicComments, isLoading } = useGetCommentsQuery(topicId);
     const onDelete = (id: string, reason: string) => {
         deleteComment({ id, reason })
@@ -33,15 +35,15 @@ const CommentsList: React.FC<ICommentItemProps> = memo(({ topicId, commentReply 
             .then(({ message }) => dispatch(callSnackbar({ text: message, type: "success" })))
             .catch(({ data }) => dispatch(callSnackbar({ text: data, type: "error" })));
     };
-    const { getUserData } = useLocalStorage();
-    const isAdmin = getUserData()?.role.includes("admin");
+    // const { getUserData } = useLocalStorage();
+    // const isAdmin = getUserData()?.role.includes("admin");
     const dispatch = useAppDispatch();
     const noComments = <div className="no-comments">Комментариев пока нет. Отсавьте первый!</div>;
     function handleEvaluateComment(id: string, type: "like" | "dislike") {
         if (isAuth && userId) {
             let body = { userId, id, type };
             evaluateComment(body).then(() => {
-                dispatch(updateUserData(userId));
+                dispatch(updateUserData());
             });
         } else {
             dispatch(

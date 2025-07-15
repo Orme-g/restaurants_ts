@@ -8,7 +8,7 @@ import BlogPostCardLong from "../../Components/blogPostCardLong/BlogPostCardLong
 import BlogPostCard from "../../Components/blogPostCard/BlogPostCard";
 import RenderListWithPagination from "../../Components/renderListWithPagination/RenderListWithPagination";
 
-import { useGetUserDataQuery } from "../../services/apiSlice";
+import { useGetUserDataQuery } from "../../services/userApi";
 import { useGetUserPostsQuery } from "../../services/blogApi";
 
 import { BlogerProfilePageSkeleton } from "../../Components/skeletons/Skeletons";

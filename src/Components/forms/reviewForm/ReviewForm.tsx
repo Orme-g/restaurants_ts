@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { currentUrl } from "../../../../URLs";
-import { useAppDispatch } from "../../../types/store";
+import { useAppDispatch, useAppSelector } from "../../../types/store";
 import classNames from "classnames";
 import { useForm } from "react-hook-form";
 
 import { Button, Stack, TextField, Rating } from "@mui/material";
 import { fetchRestaurantReviews } from "../../../reducers/restaurants";
-import { useGetReviewedRestaurantsListQuery } from "../../../services/apiSlice";
+import { useGetReviewedRestaurantsListQuery } from "../../../services/userApi";
 
 import { useHttp } from "../../../hooks/http.hook";
-import useLocalStorage from "../../../hooks/useLocalStorage";
+// import useLocalStorage from "../../../hooks/useLocalStorage";
 
 import { callSnackbar } from "../../../reducers/interactive";
 import { ShortLineSkeleton } from "../../skeletons/Skeletons";
@@ -30,9 +30,15 @@ const ReviewForm: React.FC<IReviewForm> = ({ restId }) => {
 
     const dispatch = useAppDispatch();
     const { request } = useHttp();
-    const { getUserData } = useLocalStorage();
-    const { name, avatar, _id } = getUserData();
-    const { data: reviewedRestaurants, isLoading } = useGetReviewedRestaurantsListQuery(_id, {
+    // const { getUserData } = useLocalStorage();
+    // const { name, avatar, _id } = getUserData();
+    const userData = useAppSelector((state) => state.interactive.userData);
+    const userId = userData?._id;
+    const name = userData?.name;
+    const avatar = userData?.avatar;
+    const skip = !userId;
+    const { data: reviewedRestaurants, isLoading } = useGetReviewedRestaurantsListQuery(userId!, {
+        skip,
         refetchOnMountOrArgChange: true,
     });
 
@@ -60,13 +66,17 @@ const ReviewForm: React.FC<IReviewForm> = ({ restId }) => {
             dislike,
             rating,
             restaurant: restId,
-            userId: _id,
+            userId: userId!,
         };
         request(`${currentUrl}/reviews`, "POST", JSON.stringify(review))
-            .then(({ message }) => dispatch(callSnackbar({ text: message, type: "success" })))
-            .then(() => dispatch(fetchRestaurantReviews(restId)))
-            .then(() => reset())
-            .catch((err) => console.log(err));
+            .then(({ message }) => {
+                dispatch(callSnackbar({ text: message, type: "success" }));
+                dispatch(fetchRestaurantReviews(restId));
+                reset();
+            })
+            // .then(() => dispatch(fetchRestaurantReviews(restId)))
+            // .then(() => reset())
+            .catch((error) => dispatch(callSnackbar({ type: "error", text: error.message })));
     };
 
     const toggleDisplay = () => {

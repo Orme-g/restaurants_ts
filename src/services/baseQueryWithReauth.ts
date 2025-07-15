@@ -5,6 +5,7 @@ import {
     FetchBaseQueryError,
     BaseQueryFn,
 } from "@reduxjs/toolkit/query/react";
+import { logoutUser } from "../reducers/interactive";
 import { currentUrl } from "../../URLs";
 type ExtraOptionsWithRetry = { retryAttempted?: boolean };
 const createBaseQuery = (baseUrl: string) =>
@@ -28,11 +29,8 @@ export const createBaseQueryWithReauth =
             if ((refreshToken.data as any)?.message === "Token issued") {
                 result = await baseQuery(args, api, extraOptions);
             } else {
-                result = await authQuery(
-                    { url: "/auth/logout", method: "POST" },
-                    api,
-                    extraOptions
-                );
+                api.dispatch(logoutUser());
+                await authQuery({ url: "/auth/logout", method: "POST" }, api, extraOptions);
             }
         }
         return result;

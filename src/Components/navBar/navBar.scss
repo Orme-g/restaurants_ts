@@ -3,6 +3,7 @@
 
 .navbarItems {
     margin-left: 72%;
+    display: flex;
 }
 .navbar-menu {
     &__username {
@@ -11,4 +12,9 @@
         border-bottom: variables.$divider-style;
         color: #605d5d;
     }
+}
+.navbar-spinner {
+    height: 40px;
+    width: 40px;
+    display: inline-block;
 }

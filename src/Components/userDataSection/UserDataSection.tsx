@@ -10,7 +10,7 @@ import ChangePasswordForm from "../../Components/forms/changePasswordForm/Change
 import {
     useChangeAvatarMutation,
     // useGetFavouriteRestNamesQuery,
-} from "../../services/apiSlice";
+} from "../../services/userApi";
 import { useAppDispatch } from "../../types/store";
 import { calculateExperience } from "../../utils/calculateExperience";
 import { convertToBase64 } from "../../utils/convertToBase64";

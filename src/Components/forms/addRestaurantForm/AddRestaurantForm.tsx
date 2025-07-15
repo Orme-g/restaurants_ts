@@ -198,7 +198,8 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, to
                 } else if (payload.message === "error") {
                     console.log("Ошибка отправки");
                 }
-            });
+            })
+            .catch((error) => console.log(error.message));
     };
     const imagePreviews = selectedFiles?.map(({ file, url }) => {
         const id = nanoid();

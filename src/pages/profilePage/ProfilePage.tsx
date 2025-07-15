@@ -2,7 +2,7 @@ import React from "react";
 
 import { useParams } from "react-router-dom";
 
-import { useGetUserDataQuery } from "../../services/apiSlice";
+import { useGetUserDataQuery } from "../../services/userApi";
 import { PageSkeleton } from "../../Components/skeletons/Skeletons";
 import ServerError from "../ServerError";
 

@@ -1,7 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import interactive from "../reducers/interactive";
 import restaurants from "../reducers/restaurants";
-import { apiSlice } from "../services/apiSlice";
+import { restaurantsApi } from "../services/restaurantsApi";
+import { userApi } from "../services/userApi";
 import { donersApi } from "../services/donersApi";
 import { commentsApi } from "../services/commentsApi";
 import { eventsApi } from "../services/eventsApi";
@@ -12,7 +13,8 @@ const store = configureStore({
     reducer: {
         interactive,
         restaurants,
-        [apiSlice.reducerPath]: apiSlice.reducer,
+        [restaurantsApi.reducerPath]: restaurantsApi.reducer,
+        [userApi.reducerPath]: userApi.reducer,
         [donersApi.reducerPath]: donersApi.reducer,
         [commentsApi.reducerPath]: commentsApi.reducer,
         [eventsApi.reducerPath]: eventsApi.reducer,
@@ -21,7 +23,8 @@ const store = configureStore({
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(
-            apiSlice.middleware,
+            restaurantsApi.middleware,
+            userApi.middleware,
             donersApi.middleware,
             commentsApi.middleware,
             eventsApi.middleware,

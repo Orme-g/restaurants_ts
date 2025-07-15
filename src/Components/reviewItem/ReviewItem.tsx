@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Rating, Button } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 
-import { useGetUserDataQuery } from "../../services/apiSlice";
+import { useGetUserDataQuery } from "../../services/userApi";
 import { calculateExperience } from "../../utils/calculateExperience";
 import { ReviewItemSkeleton } from "../skeletons/Skeletons";
 import tranfsormDate from "../../utils/transformDate";

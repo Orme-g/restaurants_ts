@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useChangePasswordMutation } from "../../../services/apiSlice";
+import { useChangePasswordMutation } from "../../../services/userApi";
 // import { useDispatch } from "react-redux";
 import { useAppDispatch } from "../../../types/store";
 

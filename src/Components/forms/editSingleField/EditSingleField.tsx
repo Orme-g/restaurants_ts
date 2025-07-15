@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { TextField, Button } from "@mui/material";
 
-import { useUpdateBlogerDataSingleFieldMutation } from "../../../services/apiSlice";
+import { useUpdateBlogerDataSingleFieldMutation } from "../../../services/userApi";
 
 import { useParams } from "react-router-dom";
 

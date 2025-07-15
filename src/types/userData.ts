@@ -27,7 +27,7 @@ export interface IUserData {
     registeredAt: Date;
     reviews: number;
     role: string[];
-    token: string;
+    // token: string;
     username: string;
     _id: string;
     birthday: Date;
@@ -38,4 +38,11 @@ export interface IUserData {
     bloger: boolean;
     blogData?: IBlogData;
     ratedBlogPosts: string[];
+}
+
+export interface IUserStoreData {
+    name: string;
+    username: string;
+    role: string[];
+    _id: string;
 }

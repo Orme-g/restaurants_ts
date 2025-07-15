@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useAppDispatch } from "../../types/store";
+import { useAppDispatch, useAppSelector } from "../../types/store";
 
 import {
     useLazyTestQuery,
@@ -20,20 +20,21 @@ const Workshop: React.FC = () => {
     const [loginUser] = useLoginTestMutation();
     const [clearAccessToken] = useClearAccessTokenMutation();
     const dispatch = useAppDispatch();
+    const userData = useAppSelector((state) => state.interactive.userData);
     async function handleClick() {
         const result = await getData();
         console.log(result);
         if (result.data) {
             setInfo(result.data.message);
         } else {
-            setInfo((result.error as any)?.data);
+            setInfo((result.error as any)?.data?.message);
         }
     }
     function refresh() {
         refreshToken()
             .unwrap()
             .then((result) => console.log(result.message))
-            .catch((error) => setInfo(error.data));
+            .catch((error) => setInfo(error.message));
     }
     function logout() {
         logoutUser()
@@ -42,13 +43,13 @@ const Workshop: React.FC = () => {
                 setInfo(result.message);
                 dispatch(authApi.util.resetApiState());
             })
-            .catch((error) => setInfo(error.data));
+            .catch((error) => setInfo(error.message));
     }
     function login() {
         loginUser()
             .unwrap()
             .then((result) => setInfo(result))
-            .catch((error) => setInfo(error.data));
+            .catch((error) => setInfo(error.message));
     }
     function clearAccessTokenFn() {
         clearAccessToken()
@@ -57,7 +58,7 @@ const Workshop: React.FC = () => {
                 setInfo(result);
                 dispatch(authApi.util.resetApiState());
             })
-            .catch((error) => setInfo(error.data));
+            .catch((error) => setInfo(error.message));
     }
     return (
         <div className="workshop">

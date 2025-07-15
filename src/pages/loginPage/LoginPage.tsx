@@ -5,9 +5,9 @@ import { useForm } from "react-hook-form";
 import { Stack, TextField, Button } from "@mui/material";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
-import { callSnackbar, setPassAuth, updateUserData } from "../../reducers/interactive";
-import { useLoginMutation } from "../../services/authApi";
-import useLocalStorage from "../../hooks/useLocalStorage";
+import { callSnackbar, setUserDataAndAuth, setIsAuth } from "../../reducers/interactive";
+import { useLoginMutation, useLazyMeQuery } from "../../services/authApi";
+// import useLocalStorage from "../../hooks/useLocalStorage";
 
 interface IFormData {
     login: string;
@@ -20,7 +20,8 @@ const LoginPage: React.FC = () => {
     const [errorMessage, setErrorMessage] = useState(null);
     const dispatch = useAppDispatch();
     const [sendLogin] = useLoginMutation();
-    const { setData } = useLocalStorage();
+    const [getUserData] = useLazyMeQuery();
+    // const { setData } = useLocalStorage();
     const location = useLocation();
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || "/";
@@ -43,13 +44,15 @@ const LoginPage: React.FC = () => {
         };
         sendLogin(loginData)
             .unwrap()
-            .then(({ message, ...data }) => {
-                const { _id } = data;
+            .then(({ message }) => {
+                // const { _id } = data;
                 dispatch(callSnackbar({ text: message, type: "success" }));
                 reset();
-                setData(data);
-                dispatch(setPassAuth(true));
-                dispatch(updateUserData(_id));
+                getUserData()
+                    .unwrap()
+                    .then((userData) => {
+                        dispatch(setUserDataAndAuth(userData));
+                    });
                 navigate(from, { replace: true });
             })
             .catch((error) => setErrorMessage(error.data));

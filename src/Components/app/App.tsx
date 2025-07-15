@@ -1,20 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, memo } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { lazy, Suspense } from "react";
+
 // import { useDispatch } from "react-redux";
 import { useAppDispatch } from "../../types/store";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Navigation from "../navigation/Navigation";
 import Footer from "../footer/Footer";
-// import ModalLogin from "../modals/modalLogin/ModalLogin";
-import ModalRegister from "../modals/modalRegister/ModalRegister";
 import Snack from "../snackbar/Snackbar";
 import Spinner from "../svg/Spinner";
-
-import useLocalStorage from "../../hooks/useLocalStorage";
-import { setPassAuth, updateUserData } from "../../reducers/interactive";
 import { ScrollToTop } from "../../services/ScrollToTop";
+import { useLazyMeQuery } from "../../services/authApi";
 
 import "./App.scss";
 
@@ -23,6 +20,7 @@ const SingleRestaurantPage = lazy(
     () => import("../../pages/singleRestaurantPage/SingleRestaurantPage")
 );
 import RestaurantSelectionPage from "../../pages/restaurantSelectionPage/RestaurantSelectionPage";
+import { setUserDataAndAuth } from "../../reducers/interactive";
 const BestDonersListPage = lazy(() => import("../../pages/bestDonersListPage/BestDonersListPage"));
 const BlogPage = lazy(() => import("../../pages/blogPage/BlogPage"));
 const BlogPostPage = lazy(() => import("../../pages/blogPostPage/BlogPostPage"));
@@ -42,18 +40,16 @@ const RegisterPage = lazy(() => import("../../pages/registerPage/RegisterPage"))
 const Workshop = lazy(() => import("../../pages/workshop/Workshop"));
 
 export const App: React.FC = () => {
-    useEffect(() => {}, []);
+    console.log("renderApp");
+    const [getUserData] = useLazyMeQuery();
     const dispatch = useAppDispatch();
-    const { getUserData } = useLocalStorage();
-    if (getUserData()) {
-        const userData = getUserData();
-        const { _id } = userData;
-        // dispatch(setUserData(userData));
-        dispatch(updateUserData(_id));
-        dispatch(setPassAuth(true));
-        // dispatch(updateUserData(_id));
-    }
-
+    useEffect(() => {
+        getUserData()
+            .unwrap()
+            .then((userData) => {
+                dispatch(setUserDataAndAuth(userData));
+            });
+    }, []);
     return (
         <HelmetProvider>
             <Helmet>
@@ -92,7 +88,7 @@ export const App: React.FC = () => {
                     </Suspense>
                     <Footer />
                     {/* <ModalLogin /> */}
-                    <ModalRegister />
+                    {/* <ModalRegister /> */}
                     <Snack />
                 </div>
             </Router>

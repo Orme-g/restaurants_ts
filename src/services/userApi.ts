@@ -1,43 +1,14 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
 import { currentUrl } from "../../URLs.ts";
-
-import type {
-    IRestaurant,
-    TSortRestaurants,
-    IFindRestaurantCriterias,
-} from "../types/restaurantsTypes";
 import type { IUserData } from "../types/userData";
 
-export const apiSlice = createApi({
-    reducerPath: "api",
-    baseQuery: fetchBaseQuery({ baseUrl: `${currentUrl}` }),
+export const userApi = createApi({
+    reducerPath: "userApi",
+    baseQuery: fetchBaseQuery({ baseUrl: `${currentUrl}/user` }),
     tagTypes: ["Review", "Favourite", "UserData"],
     endpoints: (builder) => ({
-        getSortedRestaurants: builder.query<
-            IRestaurant[],
-            { sortType: TSortRestaurants; cardsNumber: number }
-        >({
-            query: ({ sortType, cardsNumber }) => ({
-                url: `/sorted-restaurants/${sortType}`,
-                params: { cardsNumber },
-            }),
-        }),
-        findRestaurant: builder.mutation({
-            query: (criterias: IFindRestaurantCriterias) => ({
-                url: "/find-restaurant/selection",
-                method: "POST",
-                body: criterias,
-            }),
-        }),
-        getRestaurantById: builder.query<IRestaurant, string>({
-            query: (restId) => `/restaurants/${restId}`,
-        }),
-        searchRestaurant: builder.query({
-            query: (input: string) => `/search-restaurant/${input}`,
-        }),
         getUserData: builder.query<IUserData, string>({
-            query: (userId: string) => `/user/getdata/${userId}`,
+            query: (userId: string) => `/getdata/${userId}`,
             providesTags: ["Favourite", "UserData"],
         }),
         changePassword: builder.mutation({
@@ -56,22 +27,18 @@ export const apiSlice = createApi({
         }),
         setBlogerData: builder.mutation({
             query: (data) => ({
-                url: `/user/setBlogerData`,
+                url: `/setBlogerData`,
                 method: "PATCH",
                 body: data,
             }),
         }),
         updateBlogerDataSingleField: builder.mutation({
             query: (data) => ({
-                url: "/user/update-data-field",
+                url: "/update-data-field",
                 method: "PATCH",
                 body: data,
             }),
             invalidatesTags: ["UserData"],
-        }),
-        getReviewedRestaurantsList: builder.query<string[], string>({
-            query: (userId: string) => `/reviewedRestaurants/${userId}`,
-            providesTags: ["Review"],
         }),
         handleFavouriteRestaurants: builder.mutation({
             query: (data) => ({
@@ -81,19 +48,19 @@ export const apiSlice = createApi({
             }),
             invalidatesTags: ["Favourite"],
         }),
+        getReviewedRestaurantsList: builder.query<string[], string>({
+            query: (userId: string) => `/reviewedRestaurants/${userId}`,
+            providesTags: ["Review"],
+        }),
     }),
 });
 
 export const {
     useGetUserDataQuery,
-    useGetSortedRestaurantsQuery,
-    useFindRestaurantMutation,
-    useGetRestaurantByIdQuery,
-    useSearchRestaurantQuery,
     useChangePasswordMutation,
-    useGetReviewedRestaurantsListQuery,
     useChangeAvatarMutation,
     useSetBlogerDataMutation,
     useUpdateBlogerDataSingleFieldMutation,
     useHandleFavouriteRestaurantsMutation,
-} = apiSlice;
+    useGetReviewedRestaurantsListQuery,
+} = userApi;

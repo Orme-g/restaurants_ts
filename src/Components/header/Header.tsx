@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { TextField } from "@mui/material/";
-import { useSearchRestaurantQuery } from "../../services/apiSlice";
+import { useSearchRestaurantQuery } from "../../services/restaurantsApi";
 
 import "./header.scss";
 interface IData {

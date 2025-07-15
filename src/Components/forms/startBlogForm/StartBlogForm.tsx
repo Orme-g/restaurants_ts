@@ -4,7 +4,7 @@ import { useAppDispatch } from "../../../types/store";
 import { useForm } from "react-hook-form";
 import { TextField, Stack, Button } from "@mui/material";
 import { convertToBase64 } from "../../../utils/convertToBase64";
-import { useSetBlogerDataMutation } from "../../../services/apiSlice";
+import { useSetBlogerDataMutation } from "../../../services/userApi";
 import { callSnackbar } from "../../../reducers/interactive";
 
 import "./startBlogForm.scss";

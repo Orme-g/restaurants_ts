@@ -23,7 +23,7 @@ const RestaurantsTabs: React.FC<IRestaurantsTabsProps> = memo(
     ({ description, restId, restaurantName, coordinates }) => {
         const [activeTab, setActiveTab] = useState("3");
         const [displayModal, setDisplayModal] = useState(false);
-        const checkAuth = useAppSelector((state) => state.interactive.passAuth);
+        const isAuth = useAppSelector((state) => state.interactive.isAuth);
         const handleChange = (event: React.SyntheticEvent, newActiveTab: string) => {
             setActiveTab(newActiveTab);
         };
@@ -58,7 +58,7 @@ const RestaurantsTabs: React.FC<IRestaurantsTabsProps> = memo(
                         </TabPanel>
                         <TabPanel value="3">
                             <div className="restaurants-tabs__feedback">
-                                {checkAuth ? <ReviewForm restId={restId} /> : unAuth}
+                                {isAuth ? <ReviewForm restId={restId} /> : unAuth}
                                 <ReviewsList />
                             </div>
                         </TabPanel>
