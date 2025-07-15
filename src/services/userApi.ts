@@ -47,10 +47,18 @@ export const userApi = createApi({
                 body: data,
             }),
             invalidatesTags: ["Favourite"],
+            // providesTags: ["Favourite"],
         }),
-        getReviewedRestaurantsList: builder.query<string[], string>({
-            query: (userId: string) => `/reviewedRestaurants/${userId}`,
+        getReviewedRestaurantsList: builder.query<string[], void>({
+            query: () => `/reviewedRestaurants`,
             providesTags: ["Review"],
+        }),
+        getFavoriteRestaurantsList: builder.query<string[], void>({
+            query: () => `/favoriteRestaurants`,
+            providesTags: ["Favourite"],
+        }),
+        getRatedCommentsList: builder.query<string[], void>({
+            query: () => `/ratedComments`,
         }),
     }),
 });
@@ -63,4 +71,6 @@ export const {
     useUpdateBlogerDataSingleFieldMutation,
     useHandleFavouriteRestaurantsMutation,
     useGetReviewedRestaurantsListQuery,
+    useGetFavoriteRestaurantsListQuery,
+    useGetRatedCommentsListQuery,
 } = userApi;
