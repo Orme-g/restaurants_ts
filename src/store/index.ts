@@ -8,28 +8,31 @@ import { commentsApi } from "../services/commentsApi";
 import { eventsApi } from "../services/eventsApi";
 import { blogApi } from "../services/blogApi";
 import { authApi } from "../services/authApi";
+import { baseApi } from "../services/baseApi";
 
 const store = configureStore({
     reducer: {
         interactive,
         restaurants,
-        [restaurantsApi.reducerPath]: restaurantsApi.reducer,
-        [userApi.reducerPath]: userApi.reducer,
-        [donersApi.reducerPath]: donersApi.reducer,
-        [commentsApi.reducerPath]: commentsApi.reducer,
-        [eventsApi.reducerPath]: eventsApi.reducer,
-        [blogApi.reducerPath]: blogApi.reducer,
-        [authApi.reducerPath]: authApi.reducer,
+        [baseApi.reducerPath]: baseApi.reducer,
+        // [restaurantsApi.reducerPath]: restaurantsApi.reducer,
+        // [userApi.reducerPath]: userApi.reducer,
+        // [donersApi.reducerPath]: donersApi.reducer,
+        // [commentsApi.reducerPath]: commentsApi.reducer,
+        // [eventsApi.reducerPath]: eventsApi.reducer,
+        // [blogApi.reducerPath]: blogApi.reducer,
+        // [authApi.reducerPath]: authApi.reducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(
-            restaurantsApi.middleware,
-            userApi.middleware,
-            donersApi.middleware,
-            commentsApi.middleware,
-            eventsApi.middleware,
-            blogApi.middleware,
-            authApi.middleware
+            baseApi.middleware
+            // restaurantsApi.middleware,
+            // userApi.middleware,
+            // donersApi.middleware,
+            // commentsApi.middleware,
+            // eventsApi.middleware,
+            // blogApi.middleware,
+            // authApi.middleware
         ),
     devTools: process.env.NODE_ENV !== "production",
 });
