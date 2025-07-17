@@ -1,20 +1,17 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
-
 import { useParams } from "react-router-dom";
 import ChatIcon from "@mui/icons-material/Chat";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Button } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../../types/store";
-import { updateUserData } from "../../reducers/interactive";
-import { useGetBlogPostQuery } from "../../services/blogApi";
+import { useGetRatedBlogPostsListQuery } from "../../services/userApi";
 import transformDate from "../../utils/transformDate";
 import { contentMaker } from "../../utils/contentMaker";
 import Page404 from "../Page404";
 
 import "./blogPostPage.scss";
-// import useLocalStorage from "../../hooks/useLocalStorage";
-import { useUpdateLikesOrCommentsCountMutation } from "../../services/blogApi";
+import { useUpdateLikesOrCommentsCountMutation, useGetBlogPostQuery } from "../../services/blogApi";
 import CommentsBlock from "../../Components/commentsBlock/CommentsBlock";
 import BlogAuthorBadge from "../../Components/blogAuthorBadge/BlogAuthorBadge";
 import { PageSkeleton } from "../../Components/skeletons/Skeletons";
@@ -23,11 +20,9 @@ import { callSnackbar } from "../../reducers/interactive";
 const BlogPostPage: React.FC = () => {
     const { postId } = useParams();
     const { data: postData, isLoading } = useGetBlogPostQuery(postId!, { skip: !postId });
+    const { data: ratedPosts } = useGetRatedBlogPostsListQuery();
     const [sendData] = useUpdateLikesOrCommentsCountMutation();
-    // const { getUserId } = useLocalStorage();
-
     const dispatch = useAppDispatch();
-    const ratedPosts = useAppSelector((state) => state.interactive.userData?.ratedBlogPosts);
     const isAuth = useAppSelector((state) => state.interactive.isAuth);
     const isRated = ratedPosts?.includes(postId as string);
     let displayContent;
@@ -36,10 +31,7 @@ const BlogPostPage: React.FC = () => {
             sendData({
                 postId,
                 field: "like",
-                // userId,
-            })
-                .unwrap()
-                .then(() => dispatch(updateUserData()));
+            });
         } else {
             dispatch(callSnackbar({ text: "Войдите или зарегистрируйтесь", type: "info" }));
         }

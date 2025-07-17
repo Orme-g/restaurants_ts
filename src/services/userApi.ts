@@ -1,11 +1,14 @@
 import { baseApi } from "./baseApi";
-import type { IUserData, IUserPublicData } from "../types/userData";
+import type { IUserData, IUserPublicData, IBlogData } from "../types/userData";
 
 export const userApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         getUserPublicData: builder.query<IUserPublicData, string>({
             query: (userId: string) => `/user/getdata/${userId}`,
             providesTags: ["Favourite", "UserData"],
+        }),
+        getUserBlogPublicData: builder.query<IBlogData, string>({
+            query: (userId) => `/user/blogData/${userId}`,
         }),
         getUserProfileData: builder.query<IUserData, void>({
             query: () => `/user/profile/getData`,
@@ -59,11 +62,16 @@ export const userApi = baseApi.injectEndpoints({
             query: () => `/user/ratedComments`,
             providesTags: ["UserData"],
         }),
+        getRatedBlogPostsList: builder.query<string[], void>({
+            query: () => `/user/ratedBlogPosts`,
+            providesTags: ["PostData"],
+        }),
     }),
 });
 
 export const {
     useGetUserPublicDataQuery,
+    useGetUserBlogPublicDataQuery,
     useGetUserProfileDataQuery,
     useChangePasswordMutation,
     useChangeAvatarMutation,
@@ -73,4 +81,5 @@ export const {
     useGetReviewedRestaurantsListQuery,
     useGetFavoriteRestaurantsListQuery,
     useGetRatedCommentsListQuery,
+    useGetRatedBlogPostsListQuery,
 } = userApi;

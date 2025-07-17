@@ -7,11 +7,8 @@ import { useSetBlogerDataMutation } from "../../../services/userApi";
 import { callSnackbar } from "../../../reducers/interactive";
 
 import "./startBlogForm.scss";
-interface IStartBlogForm {
-    userId: string;
-}
 
-const StartBlogForm: React.FC<IStartBlogForm> = ({ userId }) => {
+const StartBlogForm: React.FC = () => {
     const [blogAvatar, setBlogAvatar] = useState("");
     const [imageName, setImageName] = useState<string | null>(null);
     const [displayBlogForm, setDisplayBlogForm] = useState<boolean>(false);
@@ -50,7 +47,7 @@ const StartBlogForm: React.FC<IStartBlogForm> = ({ userId }) => {
     };
 
     const onSubmit = async (data: { blogerName: string; blogCity: string; aboutMe: string }) => {
-        sendData({ ...data, blogAvatar, userId })
+        sendData({ ...data, blogAvatar })
             .unwrap()
             .then(({ message, type }) => {
                 dispatch(callSnackbar({ text: message, type }));

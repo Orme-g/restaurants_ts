@@ -7,7 +7,7 @@ import BlogPostCardLong from "../../Components/blogPostCardLong/BlogPostCardLong
 import BlogPostCard from "../../Components/blogPostCard/BlogPostCard";
 import RenderListWithPagination from "../../Components/renderListWithPagination/RenderListWithPagination";
 
-import { useGetUserDataQuery } from "../../services/userApi";
+import { useGetUserBlogPublicDataQuery } from "../../services/userApi";
 import { useGetUserPostsQuery } from "../../services/blogApi";
 
 import { BlogerProfilePageSkeleton } from "../../Components/skeletons/Skeletons";
@@ -19,21 +19,20 @@ import "./blogerProfilePage.scss";
 
 const BlogerProfilePage: React.FC = () => {
     const { userId } = useParams();
-    const { data: userData, isLoading } = useGetUserDataQuery(userId!);
+    const { data: blogData, isLoading } = useGetUserBlogPublicDataQuery(userId!);
     const { currentData: posts, isLoading: isPostsLoading } = useGetUserPostsQuery(userId!);
 
     if (isLoading || isPostsLoading) {
         return <BlogerProfilePageSkeleton />;
     }
-    if (!userData || !posts) {
+    if (!blogData || !posts) {
         return <Page404 />;
     }
 
     let allPostsList;
     let displTop4Posts;
 
-    const { blogerName, blogAvatar, blogCity, blogPostsCount, blogerRating, aboutMe } =
-        userData?.blogData!;
+    const { blogerName, blogAvatar, blogCity, blogPostsCount, blogerRating, aboutMe } = blogData;
     const status = calculateStatus(blogerRating);
     if (posts) {
         let postsCopy = [...posts];
