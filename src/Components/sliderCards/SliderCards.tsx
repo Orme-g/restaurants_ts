@@ -5,7 +5,6 @@ import { useGetSortedRestaurantsQuery } from "../../services/restaurantsApi";
 
 import { CardsSliderSkeleton } from "../skeletons/Skeletons";
 import RestaurantCardSmall from "../restaurantCardSmall/RestaurantCardSmall";
-// import ServerError from "../pages/ServerError"
 import type { TSortRestaurants } from "../../types/restaurantsTypes";
 // import pic from "../../assets/rest_photos/cristal/cris_1.jpeg"
 

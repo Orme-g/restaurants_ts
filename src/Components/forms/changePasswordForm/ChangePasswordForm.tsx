@@ -1,14 +1,10 @@
 import React, { useState } from "react";
 import { useChangePasswordMutation } from "../../../services/userApi";
-// import { useDispatch } from "react-redux";
 import { useAppDispatch } from "../../../types/store";
-
 import { Button, TextField, Stack } from "@mui/material";
-
 import { callSnackbar } from "../../../reducers/interactive";
 
 import "./changePasswordForm.scss";
-
 interface IPasswordFormProps {
     userId: string;
 }

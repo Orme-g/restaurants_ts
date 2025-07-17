@@ -3,7 +3,6 @@ import { Helmet } from "react-helmet-async";
 
 import { useParams } from "react-router-dom";
 
-// import BlogPostCard from "../../Components/blogPostCard/BlogPostCard";
 import BlogPostCardLong from "../../Components/blogPostCardLong/BlogPostCardLong";
 import BlogPostCard from "../../Components/blogPostCard/BlogPostCard";
 import RenderListWithPagination from "../../Components/renderListWithPagination/RenderListWithPagination";

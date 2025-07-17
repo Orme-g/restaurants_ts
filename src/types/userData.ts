@@ -5,8 +5,6 @@ export interface IRegisterData {
     birthday: null | string;
     email: string;
     password: string;
-    // password1: string;
-    // password2: string;
 }
 
 export interface IBlogData {
@@ -27,7 +25,6 @@ export interface IUserData {
     registeredAt: Date;
     reviews: number;
     role: string[];
-    // token: string;
     username: string;
     _id: string;
     birthday: Date;
@@ -45,4 +42,12 @@ export interface IUserStoreData {
     username: string;
     role: string[];
     _id: string;
+}
+
+export interface IUserPublicData {
+    name: string;
+    username: string;
+    avatar: string;
+    comments: number;
+    reviews: number;
 }

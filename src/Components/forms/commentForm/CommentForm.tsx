@@ -5,7 +5,6 @@ import { useAppDispatch, useAppSelector } from "../../../types/store";
 import { callSnackbar } from "../../../reducers/interactive";
 import { TextField, Button, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-// import useLocalStorage from "../../../hooks/useLocalStorage";
 import { usePostCommentMutation } from "../../../services/commentsApi";
 
 import type { IReplyData, TCommentReplyFunction, INewComment } from "../../../types/commentsTypes";
@@ -20,8 +19,6 @@ interface ICommentProps {
 const CommentForm: React.FC<ICommentProps> = ({ replyData, topicId, setReplyData }) => {
     const [commentText, setCommentText] = useState("");
     const [valid, setValid] = useState(false);
-    // const { getUserData } = useLocalStorage();
-    // const { username, _id } = getUserData();
     const [postComment] = usePostCommentMutation();
     const dispatch = useAppDispatch();
     const userData = useAppSelector((state) => state.interactive.userData);

@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-
 import { Stack, TextField, Button, Rating } from "@mui/material";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import { addAdditionalReview, fetchRestaurantReviews } from "../../../reducers/restaurants";
+import { useAddAdditionalReviewMutation } from "../../../services/restaurantsApi";
 import { useAppDispatch } from "../../../types/store";
 import { callSnackbar } from "../../../reducers/interactive";
 import "./additionalReviewForm.scss";
 
-interface IAdditionalReviewProps {
+import type { IAddidionalReview } from "../../../types/restaurantsTypes";
+interface IAdditionalReviewFormProps {
     reviewId: string;
     restId: string;
     displayStatus: boolean;
@@ -19,7 +19,7 @@ interface SubmitCredentials {
     dislike: string;
 }
 
-const AdditionalReviewForm: React.FC<IAdditionalReviewProps> = ({
+const AdditionalReviewForm: React.FC<IAdditionalReviewFormProps> = ({
     reviewId,
     restId,
     displayStatus,
@@ -38,24 +38,26 @@ const AdditionalReviewForm: React.FC<IAdditionalReviewProps> = ({
             dislike: "",
         },
     });
-    const onSubmit: SubmitHandler<SubmitCredentials> = (data) => {
+    const [sendAdditionalReview] = useAddAdditionalReviewMutation();
+    const onSubmit: SubmitHandler<SubmitCredentials> = (data: {
+        like: string;
+        dislike: string;
+    }) => {
         const { like, dislike } = data;
-        const additionalReview = {
+        const additionalReview: IAddidionalReview = {
             reviewId,
             like,
             dislike,
             rating,
             restId,
         };
-        dispatch(addAdditionalReview(JSON.stringify(additionalReview)))
-            .then(({ payload }) => {
-                dispatch(callSnackbar({ text: payload.message, type: "success" }));
-                if (payload.type === "success") {
-                    dispatch(fetchRestaurantReviews(restId));
-                    reset({ like: "", dislike: "" });
-                }
+        sendAdditionalReview(additionalReview)
+            .unwrap()
+            .then(({ message }) => {
+                dispatch(callSnackbar({ text: message, type: "success" }));
+                reset();
             })
-            .catch((error) => dispatch(callSnackbar({ text: error.message, type: "error" })));
+            .catch((error) => dispatch(callSnackbar({ text: error.data, type: "error" })));
     };
     const currentFormStatus = displayStatus ? "show-with-animation" : "hide-with-animation";
 

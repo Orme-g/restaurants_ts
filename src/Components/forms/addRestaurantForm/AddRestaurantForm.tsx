@@ -1,7 +1,6 @@
 // fix any
 import React, { useState, useEffect, useRef } from "react";
 import { nanoid } from "@reduxjs/toolkit";
-import { useAppSelector, useAppDispatch } from "../../../types/store";
 import { useForm } from "react-hook-form";
 import {
     TextField,
@@ -21,7 +20,7 @@ import {
 } from "@mui/material";
 import PublishIcon from "@mui/icons-material/Publish";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
-import { addNewRestaurant } from "../../../reducers/restaurants";
+import { useAddNewRestaurantMutation } from "../../../services/restaurantsApi";
 
 import SmallSpinner from "../../svg/SmallSpinner";
 import SubwayIcon from "../../svg/subwayIcon";
@@ -30,7 +29,7 @@ import { cousines } from "../../../data/cousines";
 
 import "./addRestaurantForm.scss";
 
-import type { IAddRestaurant } from "../../../types/restaurantsTypes";
+import type { IAddNewRestaurant } from "../../../types/restaurantsTypes";
 
 interface IAddRestaurantFormProps {
     displayState: boolean;
@@ -51,7 +50,7 @@ interface ISelectedFile {
     url: string;
 }
 
-const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, toggleDisplay }) => {
+const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState }) => {
     const { line1, line2, line3, line4, line5 } = subwaySpb;
     const displayForm = displayState ? "show" : "hide";
     const [selectedFiles, setSelectedFiles] = useState<ISelectedFile[] | null>(null);
@@ -60,8 +59,7 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, to
     const [cousine, setCousine] = useState([]);
     const [city, setCity] = useState("");
     const [subway, setSubway] = useState([]);
-    const { serverReply } = useAppSelector((state) => state.restaurants);
-    const dispatch = useAppDispatch();
+    const [addRestaurant, { isLoading, isError, isSuccess }] = useAddNewRestaurantMutation();
     const {
         register,
         handleSubmit,
@@ -154,7 +152,7 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, to
         files?.forEach((file) => URL.revokeObjectURL(file.url));
     };
 
-    const onSubmit = (data: IAddRestaurant) => {
+    const onSubmit = (data: IAddNewRestaurant) => {
         const formData = new FormData();
         if (!selectedFiles) {
             setShowAddImagesNotice(true);
@@ -178,28 +176,20 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, to
                 formData.append("images", file);
             });
         }
-
         formData.append("titleImageName", titleImageName);
-
         // for (const [key, value] of formData) {
         //     console.log(key, value);
         // }
-        dispatch(addNewRestaurant(formData))
+        addRestaurant(formData)
             .unwrap()
-            .then((payload) => {
-                console.log(payload);
-                if (payload.message === "success") {
-                    reset();
-                    setCousine([]);
-                    setSubway([]);
-                    setCity("");
-                    revokeURLs(selectedFiles);
-                    setSelectedFiles([]);
-                } else if (payload.message === "error") {
-                    console.log("Ошибка отправки");
-                }
-            })
-            .catch((error) => console.log(error.message));
+            .then(() => {
+                reset();
+                setCousine([]);
+                setSubway([]);
+                setCity("");
+                revokeURLs(selectedFiles);
+                setSelectedFiles([]);
+            });
     };
     const imagePreviews = selectedFiles?.map(({ file, url }) => {
         const id = nanoid();
@@ -241,8 +231,7 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, to
                     {...register("short_description", {
                         required: "Обязательное поле",
                         minLength: {
-                            // value: 20,
-                            value: 1,
+                            value: 20,
                             message: "Минимум 20 символов",
                         },
                     })}
@@ -256,8 +245,7 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, to
                     {...register("description", {
                         required: "Обязательное поле",
                         minLength: {
-                            // value: 100,
-                            value: 1,
+                            value: 100,
                             message: "Минимум 100 символов",
                         },
                     })}
@@ -278,7 +266,6 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, to
                         />
                         <Button
                             component="span"
-                            // className="add-restaurant-form__button"
                             variant="outlined"
                             color="primary"
                             sx={{
@@ -466,10 +453,9 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, to
                 />
             </Stack>
             <div className="add-restaurant-form__wrapper">
-                {/* <Button type="submit" disabled={false} className="add-restaurant-form__btn-submit"> */}
                 <Button
                     type="submit"
-                    disabled={serverReply === "Sending"}
+                    disabled={isLoading}
                     variant="outlined"
                     sx={{
                         height: "50px",
@@ -477,11 +463,9 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState, to
                 >
                     Отправить <PublishIcon className="add-restaurant-form__icon" />
                 </Button>
-                {serverReply === "Sending" ? loading : null}
-                {serverReply === "success" ? postAlert("success", "Ресторан добавлен") : null}
-                {serverReply === "Failed" || serverReply === "error"
-                    ? postAlert("error", "Ошибка добавления")
-                    : null}
+                {isLoading ? loading : null}
+                {isSuccess ? postAlert("success", "Ресторан добавлен") : null}
+                {isError ? postAlert("error", "Ошибка добавления") : null}
             </div>
         </form>
     );

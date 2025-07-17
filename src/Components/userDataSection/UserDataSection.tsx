@@ -7,10 +7,7 @@ import Bookmarks from "@mui/icons-material/BookmarksRounded";
 import Bookmark from "@mui/icons-material/BookmarkRounded";
 import { useParams } from "react-router-dom";
 import ChangePasswordForm from "../../Components/forms/changePasswordForm/ChangePasswordForm";
-import {
-    useChangeAvatarMutation,
-    // useGetFavouriteRestNamesQuery,
-} from "../../services/userApi";
+import { useChangeAvatarMutation } from "../../services/userApi";
 import { useAppDispatch } from "../../types/store";
 import { calculateExperience } from "../../utils/calculateExperience";
 import { convertToBase64 } from "../../utils/convertToBase64";
@@ -19,7 +16,6 @@ import "./userDataSection.scss";
 
 import type { IUserData } from "../../types/userData";
 import { callSnackbar } from "../../reducers/interactive";
-import classNames from "classnames";
 
 interface IUserDataSection {
     userData: IUserData;

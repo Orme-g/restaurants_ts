@@ -1,13 +1,11 @@
-// When all tested - working - delete Login modal component
 import React, { useState } from "react";
 import { useAppDispatch } from "../../types/store";
 import { useForm } from "react-hook-form";
 import { Stack, TextField, Button } from "@mui/material";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
-import { callSnackbar, setUserDataAndAuth, setIsAuth } from "../../reducers/interactive";
+import { callSnackbar, setUserDataAndAuth } from "../../reducers/interactive";
 import { useLoginMutation, useLazyMeQuery } from "../../services/authApi";
-// import useLocalStorage from "../../hooks/useLocalStorage";
 
 interface IFormData {
     login: string;
@@ -21,7 +19,6 @@ const LoginPage: React.FC = () => {
     const dispatch = useAppDispatch();
     const [sendLogin] = useLoginMutation();
     const [getUserData] = useLazyMeQuery();
-    // const { setData } = useLocalStorage();
     const location = useLocation();
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || "/";
@@ -45,7 +42,6 @@ const LoginPage: React.FC = () => {
         sendLogin(loginData)
             .unwrap()
             .then(({ message }) => {
-                // const { _id } = data;
                 dispatch(callSnackbar({ text: message, type: "success" }));
                 reset();
                 getUserData()

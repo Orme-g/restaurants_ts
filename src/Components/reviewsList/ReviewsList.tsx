@@ -1,11 +1,16 @@
 import React from "react";
-import { useAppSelector } from "../../types/store";
-
+import { useGetRestaurantReviewsQuery } from "../../services/restaurantsApi";
 import ReviewItem from "../reviewItem/ReviewItem";
 import Spinner from "../svg/Spinner";
 
-const ReviewsList: React.FC = () => {
-    const { restaurantReviews } = useAppSelector((state) => state.restaurants);
+interface IReviewsList {
+    restId: string;
+}
+
+const ReviewsList: React.FC<IReviewsList> = ({ restId }) => {
+    const { data: restaurantReviews, isFetching } = useGetRestaurantReviewsQuery(restId!, {
+        skip: !restId,
+    });
 
     if (!restaurantReviews) {
         return <Spinner />;

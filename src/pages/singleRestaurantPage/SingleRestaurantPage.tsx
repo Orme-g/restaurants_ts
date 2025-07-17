@@ -1,9 +1,6 @@
 import React, { useCallback } from "react";
 import { Helmet } from "react-helmet-async";
-import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../types/store";
-
-import { fetchRestaurantReviews } from "../../reducers/restaurants";
 import { useGetRestaurantByIdQuery } from "../../services/restaurantsApi";
 import { useParams } from "react-router-dom";
 
@@ -13,25 +10,16 @@ import RestSideInfo from "../../Components/restSideInfo/RestSideInfo";
 import RestaurantsTabs from "../../Components/restaurantsTabs/RestaurantsTabs";
 import { PageSkeleton } from "../../Components/skeletons/Skeletons";
 import ResourceNotFound from "../ResourceNotFound";
-import { useGetUserDataQuery, useHandleFavouriteRestaurantsMutation } from "../../services/userApi";
-import { useLazyMeQuery } from "../../services/authApi";
+import {
+    useGetFavoriteRestaurantsListQuery,
+    useHandleFavouriteRestaurantsMutation,
+} from "../../services/userApi";
 import { callSnackbar } from "../../reducers/interactive";
-// import useLocalStorage from "../../hooks/useLocalStorage";
-import type { IUserData } from "../../types/userData";
 
 const SingleRestaurantPage: React.FC = () => {
     console.log("renderRest");
-    useEffect(() => {
-        if (restId) {
-            dispatch(fetchRestaurantReviews(restId));
-        }
-        // eslint-disable-next-line
-    }, []);
     const dispatch = useAppDispatch();
     const { restId } = useParams<string>();
-    const [getUserData] = useLazyMeQuery();
-    // const { getUserData } = useLocalStorage();
-    // const userData: IUserData = getUserData();
     const _id = useAppSelector((state) => state.interactive.userData?._id);
     const isAuth = !!_id;
     const {
@@ -45,7 +33,7 @@ const SingleRestaurantPage: React.FC = () => {
     if (_id) {
         userId = _id;
     }
-    const { data } = useGetUserDataQuery(userId!, {
+    const { data: favoriteRestaurants } = useGetFavoriteRestaurantsListQuery(undefined, {
         skip: !userId,
     });
     const [handleFavourite] = useHandleFavouriteRestaurantsMutation();
@@ -54,18 +42,15 @@ const SingleRestaurantPage: React.FC = () => {
     const handleFavouriteButton = useCallback(
         (name: string) => {
             const type: "remove" | "add" = isFavourite ? "remove" : "add";
-            handleFavourite({ restId, userId, type, name })
+            handleFavourite({ restId, type, name })
                 .unwrap()
                 .then(({ message, type }) => {
                     dispatch(callSnackbar({ text: message, type: type }));
-                    // getUserData()
-                    //     .unwrap()
-                    //     .then((userData) => dispatch(setUserData(userData)));
                 });
 
             // eslint-disable-next-line
         },
-        [data]
+        [favoriteRestaurants]
     );
 
     if (isLoading || !restId) {
@@ -74,9 +59,8 @@ const SingleRestaurantPage: React.FC = () => {
     if (isError || !restaurantData) {
         return <ResourceNotFound />;
     }
-    if (data) {
-        const { favouriteRestaurants } = data;
-        let favouriteRestaurantsIds = favouriteRestaurants.map((item) => item[1]);
+    if (favoriteRestaurants) {
+        let favouriteRestaurantsIds = favoriteRestaurants.map((item) => item[1]);
         isFavourite = favouriteRestaurantsIds.includes(restId) ? true : false;
     }
     const { name, images, description, coordinates } = restaurantData;

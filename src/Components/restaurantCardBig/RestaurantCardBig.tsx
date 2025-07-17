@@ -1,9 +1,7 @@
 import React from "react";
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../types/store";
-// import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom";
-import { fetchLastAddedRestaurants } from "../../reducers/restaurants";
+
+import { useGetLastAddedRestaurantsQuery } from "../../services/restaurantsApi";
 import { CardsSkeleton } from "../skeletons/Skeletons";
 
 // import pic from "../../assets/rest.jpeg";
@@ -12,14 +10,8 @@ import "./restaurantCardBig.scss";
 import { IRestaurant } from "../../types/restaurantsTypes";
 
 const RestaurantCardBig: React.FC = () => {
-    const dispatch = useAppDispatch();
-    const { lastAddedRestaurants, pageLoading } = useAppSelector((state) => state.restaurants);
-    useEffect(() => {
-        dispatch(fetchLastAddedRestaurants());
-        // eslint-disable-next-line
-    }, []);
-
-    if (pageLoading === "loading" || !lastAddedRestaurants) {
+    const { data: lastAddedRestaurants } = useGetLastAddedRestaurantsQuery(6);
+    if (!lastAddedRestaurants) {
         return <CardsSkeleton />;
     }
 

@@ -59,7 +59,7 @@ const RestaurantsTabs: React.FC<IRestaurantsTabsProps> = memo(
                         <TabPanel value="3">
                             <div className="restaurants-tabs__feedback">
                                 {isAuth ? <ReviewForm restId={restId} /> : unAuth}
-                                <ReviewsList />
+                                <ReviewsList restId={restId} />
                             </div>
                         </TabPanel>
                         <TabPanel value="4">

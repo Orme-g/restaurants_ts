@@ -1,8 +1,6 @@
 import React, { useEffect, memo } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { lazy, Suspense } from "react";
-
-// import { useDispatch } from "react-redux";
 import { useAppDispatch } from "../../types/store";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
@@ -20,7 +18,7 @@ const SingleRestaurantPage = lazy(
     () => import("../../pages/singleRestaurantPage/SingleRestaurantPage")
 );
 import RestaurantSelectionPage from "../../pages/restaurantSelectionPage/RestaurantSelectionPage";
-import { setUserDataAndAuth } from "../../reducers/interactive";
+import { setIsAuth, setUserDataAndAuth } from "../../reducers/interactive";
 const BestDonersListPage = lazy(() => import("../../pages/bestDonersListPage/BestDonersListPage"));
 const BlogPage = lazy(() => import("../../pages/blogPage/BlogPage"));
 const BlogPostPage = lazy(() => import("../../pages/blogPostPage/BlogPostPage"));
@@ -48,7 +46,8 @@ export const App: React.FC = () => {
             .unwrap()
             .then((userData) => {
                 dispatch(setUserDataAndAuth(userData));
-            });
+            })
+            .catch(() => dispatch(setIsAuth(false)));
     }, []);
     return (
         <HelmetProvider>
@@ -87,8 +86,6 @@ export const App: React.FC = () => {
                         </Routes>
                     </Suspense>
                     <Footer />
-                    {/* <ModalLogin /> */}
-                    {/* <ModalRegister /> */}
                     <Snack />
                 </div>
             </Router>

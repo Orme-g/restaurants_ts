@@ -17,20 +17,16 @@ import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import { toggleSideMenu, callSnackbar, logoutUser } from "../../reducers/interactive";
 import { useLogoutMutation } from "../../services/authApi";
 import { useAppDispatch, useAppSelector } from "../../types/store";
-// import { shallowEqual, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import SmallSpinner from "../svg/SmallSpinner";
-// import useLocalStorage from "../../hooks/useLocalStorage";
 
 import "./navBar.scss";
-import { RootState } from "../../store";
 
 const NavBar: React.FC = () => {
     console.log("Render Nav");
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const dispatch = useAppDispatch();
     const [logout] = useLogoutMutation();
-    // const isAuth = useAppSelector(selectIsAuth);
     const handleProfile = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
     };
@@ -125,8 +121,6 @@ const NavBar: React.FC = () => {
                     </Typography>
                 </Link>
                 <div className="navbarItems">
-                    {/* {isAuth ? ifAuth : ifUnAuth} */}
-                    {/* {isLoading} */}
                     {isAuth === null ? isLoading : isAuth === false ? ifUnAuth : ifAuth}
 
                     <Button color="inherit" sx={{ ml: "25px" }}>

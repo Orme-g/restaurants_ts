@@ -157,7 +157,6 @@ export const BlogerProfilePageSkeleton = () => {
 
 export const AuthorBadgeSkeleton = () => {
     return (
-        // <div className="bloger-badge-skeleton">
         <Stack direction={"row"} className="bloger-badge-skeleton">
             <Skeleton variant="circular" className="bloger-badge-skeleton__circle" />
             <Stack
@@ -170,7 +169,6 @@ export const AuthorBadgeSkeleton = () => {
                 <Skeleton variant="text" />
             </Stack>
         </Stack>
-        // </div>
     );
 };
 

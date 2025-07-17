@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import { useAppDispatch } from "../../../types/store";
 import { useForm } from "react-hook-form";
 import { TextField, Stack, Button } from "@mui/material";
@@ -8,7 +7,6 @@ import { useSetBlogerDataMutation } from "../../../services/userApi";
 import { callSnackbar } from "../../../reducers/interactive";
 
 import "./startBlogForm.scss";
-
 interface IStartBlogForm {
     userId: string;
 }
@@ -32,7 +30,6 @@ const StartBlogForm: React.FC<IStartBlogForm> = ({ userId }) => {
             blogerName: "",
             blogCity: "",
             aboutMe: "",
-            // blogAvatar: null,
         },
     });
     const aboutMe = watch("aboutMe");

@@ -1,8 +1,8 @@
 import React from "react";
 
 import { useParams } from "react-router-dom";
-
-import { useGetUserDataQuery } from "../../services/userApi";
+import { useAppSelector } from "../../types/store";
+import { useGetUserProfileDataQuery } from "../../services/userApi";
 import { PageSkeleton } from "../../Components/skeletons/Skeletons";
 import ServerError from "../ServerError";
 
@@ -13,13 +13,15 @@ import "./profilePage.scss";
 
 const ProfilePage: React.FC = () => {
     const { userId } = useParams<string>();
+    const isAuth = useAppSelector((state) => state.interactive.isAuth);
     const {
         data: userData,
         isLoading,
         isError,
-    } = useGetUserDataQuery(userId as string, {
-        skip: !!!userId,
+    } = useGetUserProfileDataQuery(undefined, {
+        skip: !isAuth,
     });
+
     if (isError) {
         return <ServerError />;
     }

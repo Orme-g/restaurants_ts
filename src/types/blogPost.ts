@@ -10,6 +10,3 @@ export interface IBlogPost {
     themes: string[];
     likes: number;
 }
-
-// Content Keys
-// "text" | "bloquote" | "photo" | "slider"

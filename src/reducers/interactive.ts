@@ -1,14 +1,9 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { useHttp } from "../hooks/http.hook";
-import { currentUrl } from "../../URLs";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { IUserStoreData } from "../types/userData";
-import { RootState } from "../store";
-
 interface ISnackBarData {
     text: string;
     type: "error" | "info" | "success" | "warning";
 }
-
 interface IinitialSTate {
     sideMenu: boolean;
     isAuth: boolean | null;
@@ -17,28 +12,12 @@ interface IinitialSTate {
     snackBarData: ISnackBarData;
 }
 
-// export const updateUserData = createAsyncThunk<IUserData, string>(
-//     "interactive/updateUserData",
-//     (userId) => {
-//         const { request } = useHttp();
-//         return request(`${currentUrl}/user/getdata/${userId}`);
-//     }
-// );
-// export const updateUserData = createAsyncThunk<IUserData, void>(
-//     "interactive/updateUserData",
-//     () => {
-//         const { request } = useHttp();
-//         return request(`${currentUrl}/auth/me`);
-//     }
-// );
-
 const initialState: IinitialSTate = {
     sideMenu: false,
     isAuth: null,
     userData: null,
     showSnackbar: false,
     snackBarData: { text: "", type: "success" },
-    // postFields: [],
 };
 
 const interactiveSlice = createSlice({
@@ -55,7 +34,7 @@ const interactiveSlice = createSlice({
             state.snackBarData = action.payload;
             state.showSnackbar = !state.showSnackbar;
         },
-        setIsAuth: (state, action: PayloadAction<true>) => {
+        setIsAuth: (state, action: PayloadAction<boolean | null>) => {
             state.isAuth = action.payload;
         },
         setUserDataAndAuth: (state, action: PayloadAction<IUserStoreData | null>) => {
@@ -67,27 +46,13 @@ const interactiveSlice = createSlice({
             state.userData = null;
         },
     },
-    // extraReducers: (builder) => {
-    //     builder
-    //         .addCase(updateUserData.fulfilled, (state, action: PayloadAction<IUserData>) => {
-    //             state.userData = action.payload;
-    //             state.isAuth = true;
-    //         })
-    //         .addCase(updateUserData.rejected, (state) => {
-    //             state.userData = null;
-    //             state.isAuth = false;
-    //         });
-    // },
 });
 
 const { actions, reducer } = interactiveSlice;
 export default reducer;
 export const {
     toggleSideMenu,
-    // toggleModalWindowLogin,
-    // toggleRegisterWindowModal,
     toggleSnackbar,
-    // setPassAuth,
     callSnackbar,
     setUserDataAndAuth,
     setIsAuth,

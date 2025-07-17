@@ -5,14 +5,17 @@ import {
     FetchBaseQueryError,
     BaseQueryFn,
 } from "@reduxjs/toolkit/query/react";
-import { logoutUser } from "../reducers/interactive";
+import { logoutUser, callSnackbar } from "../reducers/interactive";
 import { currentUrl } from "../../URLs";
+import { RootState } from "../store";
 type ExtraOptionsWithRetry = { retryAttempted?: boolean };
+
 const createBaseQuery = (baseUrl: string) =>
     fetchBaseQuery({
         baseUrl,
         credentials: "include",
     });
+
 export const createBaseQueryWithReauth =
     (
         baseUrl: string
@@ -29,7 +32,18 @@ export const createBaseQueryWithReauth =
             if ((refreshToken.data as any)?.message === "Token issued") {
                 result = await baseQuery(args, api, extraOptions);
             } else {
-                api.dispatch(logoutUser());
+                const state = api.getState() as RootState;
+                const isAuth = state.interactive.isAuth;
+                if (isAuth) {
+                    api.dispatch(
+                        callSnackbar({
+                            text: "Текущая сессия окончена. Войдите заново.",
+                            type: "warning",
+                        })
+                    );
+                    api.dispatch(logoutUser());
+                }
+
                 await authQuery({ url: "/auth/logout", method: "POST" }, api, extraOptions);
             }
         }

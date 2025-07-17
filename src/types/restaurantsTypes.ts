@@ -6,7 +6,6 @@ export interface IRestaurant {
     images: string[];
     cousine: string[];
     rating: number[];
-    // rating: { marks: number; overallRating: number };
     adress: string;
     bill: number;
     phone: string;
@@ -19,7 +18,7 @@ export interface IRestaurant {
     averageRating: number;
 }
 
-export interface IAddRestaurant {
+export interface IAddNewRestaurant {
     name: string;
     short_description: string;
     description: string;
@@ -38,4 +37,28 @@ export interface IFindRestaurantCriterias {
     subway: string;
     cousine: string[];
     sortBy: "cheaper" | "expensive";
+}
+export interface IReview {
+    _id: string;
+    like: string;
+    dislike: string;
+    rating: number;
+    restaurant: string;
+    createdAt: Date;
+    userId: string;
+    additionalReview?: {
+        like: string;
+        dislike: string;
+        rating: number;
+        added: Date;
+    };
+}
+export type INewReview = Omit<IReview, "_id" | "createdAt">;
+
+export interface IAddidionalReview {
+    reviewId: string;
+    like: string;
+    dislike: string;
+    rating: number;
+    restId: string;
 }

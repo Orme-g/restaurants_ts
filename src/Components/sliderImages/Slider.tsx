@@ -19,12 +19,6 @@ interface ISliderProps {
 
 const Slider: React.FC<ISliderProps> = memo(({ images }) => {
     const [thumbsSwiper, setThumbsSwiper] = useState<SwiperCore | null>(null);
-    // useEffect(() => {
-    //     if (thumbsSwiper) {
-    //         thumbsSwiper.update();
-    //     }
-    // }, [thumbsSwiper]);
-
     const slideList = images.map((item) => {
         const id = nanoid();
         return (
@@ -34,7 +28,6 @@ const Slider: React.FC<ISliderProps> = memo(({ images }) => {
             </SwiperSlide>
         );
     });
-
     return (
         <>
             <Swiper
@@ -48,9 +41,6 @@ const Slider: React.FC<ISliderProps> = memo(({ images }) => {
                 spaceBetween={10}
                 navigation={true}
                 modules={[FreeMode, Navigation, Thumbs]}
-                // thumbs={{
-                //     swiper: thumbsSwiper ? thumbsSwiper : undefined,
-                // }}
                 thumbs={{
                     swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
                 }}

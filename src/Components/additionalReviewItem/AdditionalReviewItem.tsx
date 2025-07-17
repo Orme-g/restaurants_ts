@@ -34,18 +34,18 @@ const AdditionalReviewItem: React.FC<IAdditionalReviewProps> = ({ additionalRevi
                 <div className="toggle-display-extra-review_text">{interactiveText}</div>
             </div>
             <div className={`feedback-card__additional_container ${displayExtraReview}`}>
+                <Rating
+                    sx={{
+                        position: "absolute",
+                        top: "20px",
+                        right: "30px",
+                    }}
+                    name="rating"
+                    value={rating}
+                    precision={0.5}
+                    readOnly
+                />
                 <div className="feedback-card__additional_body">
-                    <Rating
-                        sx={{
-                            position: "absolute",
-                            top: "30px",
-                            right: "30px",
-                        }}
-                        name="rating"
-                        value={rating}
-                        precision={0.5}
-                        readOnly
-                    />
                     <div className="feedback-card__additional_body_title">Понравилось:</div>
                     <div className="feedback-card__additional_body_content">{like}</div>
                     <div className="feedback-card__additional_body_title">Не понравилось:</div>
