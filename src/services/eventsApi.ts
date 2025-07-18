@@ -9,8 +9,8 @@ export const eventsApi = baseApi.injectEndpoints({
         getRestaurantEvents: builder.query<IEvent[] | [], string>({
             query: (restId: string) => `event/restaurant/${restId}`,
         }),
-        addEvent: builder.mutation({
-            query: (data: any) => ({
+        addEvent: builder.mutation<{ message: string }, any>({
+            query: (data) => ({
                 url: "event/addEvent",
                 method: "POST",
                 body: data,

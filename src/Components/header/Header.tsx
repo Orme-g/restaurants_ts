@@ -4,10 +4,6 @@ import { TextField } from "@mui/material/";
 import { useSearchRestaurantQuery } from "../../services/restaurantsApi";
 
 import "./header.scss";
-interface IData {
-    _id: string;
-    name: string;
-}
 
 const Header: React.FC = () => {
     const [value, setValue] = useState("");
@@ -34,7 +30,7 @@ const Header: React.FC = () => {
 
     if (currentData) {
         if (currentData.length > 0) {
-            results = currentData.map((item: IData) => (
+            results = currentData.map((item) => (
                 <Link
                     className="search-results__list_item"
                     to={`/restaurant/${item._id}`}

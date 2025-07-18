@@ -5,11 +5,8 @@ import { Button, TextField, Stack } from "@mui/material";
 import { callSnackbar } from "../../../reducers/interactive";
 
 import "./changePasswordForm.scss";
-interface IPasswordFormProps {
-    userId: string;
-}
 
-const PasswordForm: React.FC<IPasswordFormProps> = ({ userId }) => {
+const PasswordForm: React.FC = () => {
     const [oldPass, setOldPass] = useState("");
     const [newPass, setNewPass] = useState("");
     const [newPassRepeat, setNewPassRepeat] = useState("");
@@ -44,15 +41,13 @@ const PasswordForm: React.FC<IPasswordFormProps> = ({ userId }) => {
             setError({ ...error, oldPassError: "Обязательное поле" });
         } else {
             const data = {
-                userId,
                 oldPass,
                 newPass,
             };
-
             sendData(data)
                 .unwrap()
-                .then((res) => {
-                    dispatch(callSnackbar({ text: res, type: "success" }));
+                .then(({ message }) => {
+                    dispatch(callSnackbar({ text: message, type: "success" }));
                     clearForm();
                 })
                 .catch((err) => setError({ ...error, oldPassError: err.data }));

@@ -6,7 +6,6 @@ export interface IRegisterData {
     email: string;
     password: string;
 }
-
 export interface IBlogData {
     blogerName: string;
     blogPosts: string[];
@@ -17,6 +16,12 @@ export interface IBlogData {
     blogCity: string;
 }
 
+export interface IStartBlogData {
+    blogerName: string;
+    blogCity: string;
+    aboutMe: string;
+    blogAvatar: string;
+}
 export interface IUserData {
     avatar: string;
     comments: number;

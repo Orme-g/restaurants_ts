@@ -6,6 +6,8 @@ import { convertToBase64 } from "../../../utils/convertToBase64";
 import { useSetBlogerDataMutation } from "../../../services/userApi";
 import { callSnackbar } from "../../../reducers/interactive";
 
+import type { IStartBlogData } from "../../../types/userData";
+
 import "./startBlogForm.scss";
 
 const StartBlogForm: React.FC = () => {
@@ -47,10 +49,11 @@ const StartBlogForm: React.FC = () => {
     };
 
     const onSubmit = async (data: { blogerName: string; blogCity: string; aboutMe: string }) => {
-        sendData({ ...data, blogAvatar })
+        const startBlogData: IStartBlogData = { ...data, blogAvatar };
+        sendData(startBlogData)
             .unwrap()
-            .then(({ message, type }) => {
-                dispatch(callSnackbar({ text: message, type }));
+            .then(({ message }) => {
+                dispatch(callSnackbar({ text: message, type: "success" }));
                 reset();
                 setImageName(null);
             })

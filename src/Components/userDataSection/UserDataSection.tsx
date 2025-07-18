@@ -38,7 +38,6 @@ const UserDataSection: React.FC<IUserDataSection> = ({ userData }) => {
         }
     };
     const [sendAvatar] = useChangeAvatarMutation();
-    const { userId } = useParams<string>();
     const dispatch = useAppDispatch();
     const { avatar, name, registeredAt, username, email, comments, reviews, favouriteRestaurants } =
         userData;
@@ -59,9 +58,9 @@ const UserDataSection: React.FC<IUserDataSection> = ({ userData }) => {
     const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = (e) => {
         e.preventDefault();
         if (avatarData) {
-            sendAvatar({ userId, avatarData })
+            sendAvatar({ avatarData })
                 .unwrap()
-                .then((res) => dispatch(callSnackbar({ text: res, type: "success" })))
+                .then(({ message }) => dispatch(callSnackbar({ text: message, type: "success" })))
                 .then(() => {
                     setAvatarData(null);
                     setImageName(null);
@@ -160,7 +159,7 @@ const UserDataSection: React.FC<IUserDataSection> = ({ userData }) => {
                         </div>
                         <div className="user-data__info-value">
                             <div className="password-fields hide">
-                                <ChangePasswordForm userId={userId!} />
+                                <ChangePasswordForm />
                             </div>
                         </div>
                     </div>

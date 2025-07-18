@@ -18,7 +18,10 @@ export const commentsApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: ["Comments"],
         }),
-        evaluateComment: builder.mutation({
+        evaluateComment: builder.mutation<
+            { message: string },
+            { id: string; type: "like" | "dislike" }
+        >({
             query: (data) => ({
                 url: "/comments/evaluate-comment",
                 method: "PATCH",

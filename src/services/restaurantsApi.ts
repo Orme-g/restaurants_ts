@@ -32,8 +32,8 @@ export const restaurantsApi = baseApi.injectEndpoints({
                 body: data,
             }),
         }),
-        findRestaurant: builder.mutation({
-            query: (criterias: IFindRestaurantCriterias) => ({
+        findRestaurant: builder.mutation<IRestaurant[] | null, IFindRestaurantCriterias>({
+            query: (criterias) => ({
                 url: "/find-restaurant/selection",
                 method: "POST",
                 body: criterias,
@@ -42,8 +42,8 @@ export const restaurantsApi = baseApi.injectEndpoints({
         getRestaurantById: builder.query<IRestaurant, string>({
             query: (restId) => `/restaurants/${restId}`,
         }),
-        searchRestaurant: builder.query({
-            query: (input: string) => `/search-restaurant/${input}`,
+        searchRestaurant: builder.query<{ name: string; _id: string }[] | [], string>({
+            query: (input) => `/search-restaurant/${input}`,
         }),
         getRestaurantReviews: builder.query<IReview[], string>({
             query: (restId) => `/restaurant/reviews/${restId}`,

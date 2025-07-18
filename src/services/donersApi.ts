@@ -9,8 +9,8 @@ export const donersApi = baseApi.injectEndpoints({
         getSingleDonerRestaurant: builder.query<IDonerRestaurant, string>({
             query: (id: string) => `/best-doner/${id}`,
         }),
-        addDonerArticle: builder.mutation({
-            query: (data: INewDonerArticle) => ({
+        addDonerArticle: builder.mutation<{ message: string }, INewDonerArticle>({
+            query: (data) => ({
                 url: "/best-doner/add",
                 method: "POST",
                 body: data,

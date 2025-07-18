@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-
 import { TextField, Button } from "@mui/material";
-
 import { useUpdateBlogerDataSingleFieldMutation } from "../../../services/userApi";
-
-import { useParams } from "react-router-dom";
-
+import { useAppDispatch } from "../../../types/store";
+import { callSnackbar } from "../../../reducers/interactive";
 interface IEditSingleField {
     value: string;
     field: "aboutMe" | "blogCity";
@@ -18,8 +15,7 @@ const EditSingleField: React.FC<IEditSingleField> = ({ field, value, displayHand
     });
     const [helperText, setHelperText] = useState<string | null>(null);
     const [sendData] = useUpdateBlogerDataSingleFieldMutation();
-    const { userId } = useParams();
-
+    const dispatch = useAppDispatch();
     const lettersLeft = 300 - fieldValue.length;
     const handleInput: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = (e) => {
         setFieldValue(e.target.value);
@@ -31,18 +27,17 @@ const EditSingleField: React.FC<IEditSingleField> = ({ field, value, displayHand
         }
         if (lettersLeft >= 0) {
             sendData({
-                userId,
                 field,
                 data: fieldValue,
             })
                 .unwrap()
-                .then((response) => {
-                    console.log(response);
+                .then(({ message }) => {
+                    dispatch(callSnackbar({ text: message, type: "success" }));
                     displayHandler(field);
                     setFieldValue("");
                     setHelperText(null);
                 })
-                .catch((error) => console.log(error));
+                .catch((error) => dispatch(callSnackbar({ text: error.data, type: "error" })));
         }
     };
     return (

@@ -31,24 +31,16 @@ enum TSubwayColors {
 
 const RestaurantSelectionPage: React.FC = () => {
     const { line1, line2, line3, line4, line5 } = subwaySpb;
-    const criterias: IFindRestaurantCriterias = {
-        subway: "",
-        cousine: [""],
-        sortBy: "cheaper",
-    };
     const [subway, setSubway] = useState("");
     const [cousine, setCousine] = useState([]);
     const [sortBy, setSortBy] = useState<"cheaper" | "expensive">("cheaper");
     const [findRestaurant, { data, isLoading, isUninitialized, isSuccess }] =
         useFindRestaurantMutation();
     const findRest = () => {
-        console.log(subway, cousine, sortBy);
-        criterias.subway = subway;
-        criterias.cousine = cousine;
-        criterias.sortBy = sortBy;
-        findRestaurant({ subway, cousine, sortBy })
+        const criterias: IFindRestaurantCriterias = { subway, cousine, sortBy };
+        findRestaurant(criterias)
             .unwrap()
-            .then((response) => {});
+            .then((response) => console.log(response));
     };
     const handleSelectSubway = (event: SelectChangeEvent) => {
         setSubway(event.target.value as string);

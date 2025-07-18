@@ -5,7 +5,7 @@ import BlogProfileData from "../../Components/blogProfileData/BlogProfileData";
 
 import "./blogDataSection.scss";
 
-import type { IBlogData, IUserData } from "../../types/userData";
+import type { IUserData } from "../../types/userData";
 
 interface IBlogDataSection {
     userData: IUserData;

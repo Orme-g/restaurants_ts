@@ -20,8 +20,10 @@ const SingleRestaurantPage: React.FC = () => {
     console.log("renderRest");
     const dispatch = useAppDispatch();
     const { restId } = useParams<string>();
-    const _id = useAppSelector((state) => state.interactive.userData?._id);
-    const isAuth = !!_id;
+    const isAuth = !!useAppSelector((state) => state.interactive.isAuth);
+    if (!restId) {
+        return;
+    }
     const {
         data: restaurantData,
         isLoading,
@@ -29,33 +31,29 @@ const SingleRestaurantPage: React.FC = () => {
     } = useGetRestaurantByIdQuery(restId!, {
         skip: !restId,
     });
-    let userId: string | null = null;
-    if (_id) {
-        userId = _id;
-    }
     const { data: favoriteRestaurants } = useGetFavoriteRestaurantsListQuery(undefined, {
-        skip: !userId,
+        skip: !isAuth,
     });
     const [handleFavourite] = useHandleFavouriteRestaurantsMutation();
     let isFavourite: boolean = false;
-
     const handleFavouriteButton = useCallback(
         (name: string) => {
             const type: "remove" | "add" = isFavourite ? "remove" : "add";
             handleFavourite({ restId, type, name })
                 .unwrap()
-                .then(({ message, type }) => {
-                    dispatch(callSnackbar({ text: message, type: type }));
-                });
+                .then(({ message }) => {
+                    dispatch(callSnackbar({ text: message, type: "success" }));
+                })
+                .catch((error) => dispatch(callSnackbar({ text: error.data, type: "error" })));
 
             // eslint-disable-next-line
         },
         [favoriteRestaurants]
     );
-
     if (isLoading || !restId) {
         return <PageSkeleton />;
     }
+
     if (isError || !restaurantData) {
         return <ResourceNotFound />;
     }

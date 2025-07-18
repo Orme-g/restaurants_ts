@@ -1,5 +1,5 @@
 import { baseApi } from "./baseApi";
-import type { IUserData, IUserPublicData, IBlogData } from "../types/userData";
+import type { IUserData, IUserPublicData, IBlogData, IStartBlogData } from "../types/userData";
 
 export const userApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
@@ -12,37 +12,47 @@ export const userApi = baseApi.injectEndpoints({
         }),
         getUserProfileData: builder.query<IUserData, void>({
             query: () => `/user/profile/getData`,
+            providesTags: ["Profile"],
         }),
-        changePassword: builder.mutation({
-            query: (data) => ({
-                url: `/user/profile/changePassword`,
-                method: "PATCH",
-                body: data,
-            }),
-        }),
-        changeAvatar: builder.mutation({
+        changePassword: builder.mutation<{ message: string }, { oldPass: string; newPass: string }>(
+            {
+                query: (data) => ({
+                    url: `/user/profile/changePassword`,
+                    method: "PATCH",
+                    body: data,
+                }),
+            }
+        ),
+        changeAvatar: builder.mutation<{ message: string }, { avatarData: string }>({
             query: (data) => ({
                 url: `/user/profile/changeAvatar`,
                 method: "PATCH",
                 body: data,
             }),
+            invalidatesTags: ["Profile"],
         }),
-        setBlogerData: builder.mutation({
+        setBlogerData: builder.mutation<{ message: string }, IStartBlogData>({
             query: (data) => ({
                 url: `/user/profile/setBlogerData`,
                 method: "PATCH",
                 body: data,
             }),
         }),
-        updateBlogerDataSingleField: builder.mutation({
+        updateBlogerDataSingleField: builder.mutation<
+            { message: string },
+            { field: "aboutMe" | "blogCity"; data: string }
+        >({
             query: (data) => ({
                 url: "/user/profile/updateDataField",
                 method: "PATCH",
                 body: data,
             }),
-            invalidatesTags: ["UserData"],
+            invalidatesTags: ["Profile"],
         }),
-        handleFavouriteRestaurants: builder.mutation({
+        handleFavouriteRestaurants: builder.mutation<
+            { message: string },
+            { restId: string; type: "remove" | "add"; name: string }
+        >({
             query: (data) => ({
                 url: "/user/handleFavouriteRestaurant",
                 method: "PATCH",
