@@ -21,11 +21,11 @@ const ReviewForm: React.FC<IReviewForm> = ({ restId }) => {
     const [display, setDisplay] = useState(false);
     const dispatch = useAppDispatch();
     const userData = useAppSelector((state) => state.interactive.userData);
-    const userId = userData?._id;
+    const isAuth = useAppSelector((state) => state.interactive.isAuth);
     const name = userData?.name;
     const [postReview] = usePostRestaurantReviewMutation();
     const { data: reviewedRestaurants, isLoading } = useGetReviewedRestaurantsListQuery(undefined, {
-        skip: !userId,
+        skip: !isAuth,
     });
 
     const displayForm = classNames("add-review__container", {
@@ -52,7 +52,6 @@ const ReviewForm: React.FC<IReviewForm> = ({ restId }) => {
             dislike,
             rating,
             restaurant: restId,
-            userId: userId!,
         };
         postReview(review)
             .unwrap()

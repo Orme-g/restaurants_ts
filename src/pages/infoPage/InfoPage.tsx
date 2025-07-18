@@ -1,11 +1,8 @@
 import React from "react";
-import { useParams } from "react-router-dom";
 
 import "./infoPage.scss";
 
-const InfoPage = () => {
-    const { infoType } = useParams();
-    console.log(infoType);
+const InfoPage: React.FC = () => {
     return (
         <section className="info-page">
             <h1 className="info-page__main-header">О нашем сайте</h1>

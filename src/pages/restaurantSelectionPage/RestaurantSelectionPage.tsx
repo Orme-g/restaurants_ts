@@ -38,9 +38,7 @@ const RestaurantSelectionPage: React.FC = () => {
         useFindRestaurantMutation();
     const findRest = () => {
         const criterias: IFindRestaurantCriterias = { subway, cousine, sortBy };
-        findRestaurant(criterias)
-            .unwrap()
-            .then((response) => console.log(response));
+        findRestaurant(criterias);
     };
     const handleSelectSubway = (event: SelectChangeEvent) => {
         setSubway(event.target.value as string);

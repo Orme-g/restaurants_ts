@@ -53,7 +53,7 @@ export interface IReview {
         added: Date;
     };
 }
-export type INewReview = Omit<IReview, "_id" | "createdAt">;
+export type INewReview = Omit<IReview, "_id" | "createdAt" | "userId">;
 
 export interface IAddidionalReview {
     reviewId: string;

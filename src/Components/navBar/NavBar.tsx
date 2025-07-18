@@ -23,7 +23,6 @@ import SmallSpinner from "../svg/SmallSpinner";
 import "./navBar.scss";
 
 const NavBar: React.FC = () => {
-    console.log("Render Nav");
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const dispatch = useAppDispatch();
     const [logout] = useLogoutMutation();

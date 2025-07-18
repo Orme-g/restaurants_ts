@@ -122,7 +122,6 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState }) 
         setSubway(typeof value === "string" ? value.split(",") : value);
     };
     const handleSelectFiles = (files: File[]) => {
-        console.log("Handle!");
         setSelectedFiles(
             files?.map((file) => {
                 return { file, url: URL.createObjectURL(file) };

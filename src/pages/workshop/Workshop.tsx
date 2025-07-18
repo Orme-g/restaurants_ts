@@ -7,6 +7,7 @@ import {
     useLogoutMutation,
     useLoginTestMutation,
     useClearAccessTokenMutation,
+    useClearAllTokensMutation,
     authApi,
 } from "../../services/authApi";
 
@@ -19,6 +20,7 @@ const Workshop: React.FC = () => {
     const [logoutUser] = useLogoutMutation();
     const [loginUser] = useLoginTestMutation();
     const [clearAccessToken] = useClearAccessTokenMutation();
+    const [clearAllTokens] = useClearAllTokensMutation();
     const dispatch = useAppDispatch();
     const userData = useAppSelector((state) => state.interactive.userData);
     async function handleClick() {
@@ -60,6 +62,13 @@ const Workshop: React.FC = () => {
             })
             .catch((error) => setInfo(error.message));
     }
+    function clearAllTokensFn() {
+        clearAllTokens()
+            .unwrap()
+            .then((result) => {
+                setInfo(result);
+            });
+    }
     return (
         <div className="workshop">
             <button onClick={login}>Login</button>
@@ -69,6 +78,7 @@ const Workshop: React.FC = () => {
             <button onClick={refresh}>Refresh</button>
             <button onClick={logout}>Logout</button>
             <button onClick={clearAccessTokenFn}>Clear access token</button>
+            <button onClick={clearAllTokensFn}>Clear all tokens</button>
             <div className="result">{info}</div>
         </div>
     );

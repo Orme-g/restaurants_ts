@@ -17,7 +17,6 @@ import {
 import { callSnackbar } from "../../reducers/interactive";
 
 const SingleRestaurantPage: React.FC = () => {
-    console.log("renderRest");
     const dispatch = useAppDispatch();
     const { restId } = useParams<string>();
     const isAuth = !!useAppSelector((state) => state.interactive.isAuth);

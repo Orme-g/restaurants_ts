@@ -33,7 +33,6 @@ const CommentForm: React.FC<ICommentProps> = ({ replyData, topicId, setReplyData
         setValid(false);
         let newComment: INewComment = {
             name: userData.username,
-            userId: userData._id,
             topic: topicId,
             likes: 0,
             dislikes: 0,
@@ -49,7 +48,7 @@ const CommentForm: React.FC<ICommentProps> = ({ replyData, topicId, setReplyData
                 setCommentText("");
                 setReplyData({ name: null, text: null, commentId: null });
             })
-            .catch(({ data }) => dispatch(callSnackbar({ type: "error", text: data })));
+            .catch((error) => dispatch(callSnackbar({ type: "error", text: error.data })));
 
         setReplyData({ name: null, text: null, commentId: null });
     }

@@ -38,7 +38,6 @@ const RegisterPage = lazy(() => import("../../pages/registerPage/RegisterPage"))
 const Workshop = lazy(() => import("../../pages/workshop/Workshop"));
 
 export const App: React.FC = () => {
-    console.log("renderApp");
     const [getUserData] = useLazyMeQuery();
     const dispatch = useAppDispatch();
     useEffect(() => {

@@ -11,7 +11,6 @@ import "./singleEventPage.scss";
 
 const SingleEventPage: React.FC = () => {
     const { eventId } = useParams();
-    console.log(eventId);
     const { data: eventData, isLoading } = useGetEventQuery(eventId as string);
     if (isLoading) {
         return;

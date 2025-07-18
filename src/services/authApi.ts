@@ -59,6 +59,12 @@ export const authApi = baseApi.injectEndpoints({
                 method: "POST",
             }),
         }),
+        clearAllTokens: builder.mutation<string, void>({
+            query: () => ({
+                url: "/auth/clearAllTokens",
+                method: "POST",
+            }),
+        }),
     }),
 });
 
@@ -76,4 +82,5 @@ export const {
     useRefreshTokenMutation,
     useLogoutUserMutation,
     useClearAccessTokenMutation,
+    useClearAllTokensMutation,
 } = authApi;

@@ -39,7 +39,6 @@ const BlogerProfilePage: React.FC = () => {
         postsCopy.sort((a, b) => b.likes - a.likes);
         let top4Posts = postsCopy.slice(0, 4);
         displTop4Posts = top4Posts.map((item) => {
-            console.log("Calc");
             const { _id } = item;
             return <BlogPostCard key={_id} data={item} />;
         });

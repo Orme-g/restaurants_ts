@@ -21,7 +21,6 @@ export interface IComment {
 
 export interface INewComment {
     name: string;
-    userId: string;
     topic: string;
     likes: number;
     dislikes: number;
