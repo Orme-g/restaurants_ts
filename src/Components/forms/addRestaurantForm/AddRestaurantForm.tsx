@@ -14,17 +14,13 @@ import {
     OutlinedInput,
     Alert,
     SelectChangeEvent,
-    ListItemIcon,
-    ListItemText,
-    ListSubheader,
 } from "@mui/material";
 import PublishIcon from "@mui/icons-material/Publish";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import { useAddNewRestaurantMutation } from "../../../services/restaurantsApi";
 
+import SelectSubway from "../../selectSubway/SelectSubway";
 import SmallSpinner from "../../svg/SmallSpinner";
-import SubwayIcon from "../../svg/subwayIcon";
-import { subwaySpb } from "../../../data/subwaysLists";
 import { cousines } from "../../../data/cousines";
 
 import "./addRestaurantForm.scss";
@@ -35,15 +31,6 @@ interface IAddRestaurantFormProps {
     displayState: boolean;
     toggleDisplay: () => void;
 }
-
-enum TSubwayColors {
-    Red = "#D70138",
-    Blue = "#0079CA",
-    Green = "#019C47",
-    Orange = "#EB7220",
-    Purple = "#6D2781",
-}
-
 type TAlerts = "success" | "info" | "warning" | "error";
 interface ISelectedFile {
     file: File;
@@ -51,14 +38,13 @@ interface ISelectedFile {
 }
 
 const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState }) => {
-    const { line1, line2, line3, line4, line5 } = subwaySpb;
     const displayForm = displayState ? "show" : "hide";
     const [selectedFiles, setSelectedFiles] = useState<ISelectedFile[] | null>(null);
     const [titleImageName, setTitleImageName] = useState<string | null>(null);
     const [showAddImagesNotice, setShowAddImagesNotice] = useState<boolean>(false);
     const [cousine, setCousine] = useState([]);
     const [city, setCity] = useState("");
-    const [subway, setSubway] = useState([]);
+    const [subway, setSubway] = useState<string[] | null>(null);
     const [addRestaurant, { isLoading, isError, isSuccess }] = useAddNewRestaurantMutation();
     const {
         register,
@@ -115,11 +101,8 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState }) 
         setCity(event.target.value as string);
     };
 
-    const handleSelectSubway = (event: any) => {
-        const {
-            target: { value },
-        } = event;
-        setSubway(typeof value === "string" ? value.split(",") : value);
+    const handleSelectSubway = (selected: string[]) => {
+        setSubway(selected);
     };
     const handleSelectFiles = (files: File[]) => {
         setSelectedFiles(
@@ -356,70 +339,7 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState }) 
                         </Select>
                     </FormControl>
                     <FormControl sx={{ width: 300, marginLeft: "20px" }}>
-                        <InputLabel id="subway-select">Метро</InputLabel>
-                        <Select
-                            id="subway-select"
-                            value={subway}
-                            renderValue={(selected) => selected.join(", ")}
-                            multiple
-                            onChange={handleSelectSubway}
-                            input={
-                                <OutlinedInput
-                                    label="Метро"
-                                    {...register("subway", {
-                                        required: "Обязательное поле",
-                                    })}
-                                    error={!!errors.subway}
-                                />
-                            }
-                        >
-                            {/* <SubwaySelectList stationsList={subwaySpb} /> */}
-                            <ListSubheader>Линия 1</ListSubheader>
-                            {line1.map((station) => (
-                                <MenuItem value={station} key={station}>
-                                    <ListItemIcon>
-                                        <SubwayIcon color={TSubwayColors.Red} />
-                                    </ListItemIcon>
-                                    <ListItemText>{station}</ListItemText>
-                                </MenuItem>
-                            ))}
-                            <ListSubheader>Линия 2</ListSubheader>
-                            {line2.map((station) => (
-                                <MenuItem value={station} key={station}>
-                                    <ListItemIcon>
-                                        <SubwayIcon color={TSubwayColors.Blue} />
-                                    </ListItemIcon>
-                                    <ListItemText>{station}</ListItemText>
-                                </MenuItem>
-                            ))}
-                            <ListSubheader>Линия 3</ListSubheader>
-                            {line3.map((station) => (
-                                <MenuItem value={station} key={station}>
-                                    <ListItemIcon>
-                                        <SubwayIcon color={TSubwayColors.Green} />
-                                    </ListItemIcon>
-                                    <ListItemText>{station}</ListItemText>
-                                </MenuItem>
-                            ))}{" "}
-                            <ListSubheader>Линия 4</ListSubheader>
-                            {line4.map((station) => (
-                                <MenuItem value={station} key={station}>
-                                    <ListItemIcon>
-                                        <SubwayIcon color={TSubwayColors.Orange} />
-                                    </ListItemIcon>
-                                    <ListItemText>{station}</ListItemText>
-                                </MenuItem>
-                            ))}
-                            <ListSubheader>Линия 5</ListSubheader>
-                            {line5.map((station) => (
-                                <MenuItem value={station} key={station}>
-                                    <ListItemIcon>
-                                        <SubwayIcon color={TSubwayColors.Purple} />
-                                    </ListItemIcon>
-                                    <ListItemText>{station}</ListItemText>
-                                </MenuItem>
-                            ))}
-                        </Select>
+                        <SelectSubway handleChange={handleSelectSubway} multiple={true} />
                     </FormControl>
                 </div>
                 <TextField

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Select from "react-select";
 import { useAppDispatch, useAppSelector } from "../../types/store";
 
 import {
@@ -23,6 +24,17 @@ const Workshop: React.FC = () => {
     const [clearAllTokens] = useClearAllTokensMutation();
     const dispatch = useAppDispatch();
     const userData = useAppSelector((state) => state.interactive.userData);
+    //
+    const [selectedOption, setSelectedOption] = useState(null);
+    const options = [
+        { label: "Apple", value: "apple" },
+        { label: "Banana", value: "banana" },
+        { label: "Pear", value: "pear" },
+    ];
+    function handleSelectOption(value: any) {
+        setSelectedOption(value);
+    }
+    //
     async function handleClick() {
         const result = await getData();
         console.log(result);
@@ -71,6 +83,14 @@ const Workshop: React.FC = () => {
     }
     return (
         <div className="workshop">
+            <Select
+                isMulti
+                value={selectedOption}
+                onChange={handleSelectOption}
+                options={options}
+                isSearchable
+                placeholder={"Станция..."}
+            />
             <button onClick={login}>Login</button>
             <button className="test_btn" onClick={handleClick}>
                 Test btn

@@ -39,7 +39,7 @@ const StartBlogForm: React.FC = () => {
         margin = null;
     }
 
-    const handleFileUpload = async (e: any) => {
+    const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
             const uploadedFile = e.target.files[0];
             setImageName(`"${uploadedFile.name}"`);
@@ -124,10 +124,14 @@ const StartBlogForm: React.FC = () => {
                             }}
                             variant="outlined"
                             component="label"
-                            onChange={(e) => handleFileUpload(e)}
                         >
                             Выбрать фото
-                            <input type="file" accept="image/*" hidden />
+                            <input
+                                type="file"
+                                accept="image/*"
+                                hidden
+                                onChange={(e) => handleFileUpload(e)}
+                            />
                         </Button>
                         <div className="upload-image_name">{imageName}</div>
                     </div>

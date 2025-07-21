@@ -13,4 +13,6 @@ export const cousines = [
     "Мексиканская",
     "Грузинская",
     "Фастфуд",
-];
+] as const;
+
+export type Cousine = (typeof cousines)[number];
