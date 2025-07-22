@@ -338,9 +338,9 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState }) 
                             <MenuItem value={"Екатеринбург"}>Екатеринбург</MenuItem>
                         </Select>
                     </FormControl>
-                    <FormControl sx={{ width: 300, marginLeft: "20px" }}>
+                    <div className="add-restaurant-form__select-subway">
                         <SelectSubway handleChange={handleSelectSubway} multiple={true} />
-                    </FormControl>
+                    </div>
                 </div>
                 <TextField
                     label="Координаты для Яндекс Карт (59.939868, 30.314547)"

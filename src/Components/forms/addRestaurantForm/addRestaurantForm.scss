@@ -47,7 +47,14 @@
     &__icon {
         color: variables.$green-color;
     }
-
+    &__select-subway {
+        margin-top: 30px;
+        border: 1px solid #c4c4c4;
+        padding: 7px 0;
+        border-radius: 4px;
+        font-size: 16px;
+        color: #666666;
+    }
     &__wrapper {
         margin-top: 20px;
         display: flex;

@@ -47,32 +47,56 @@ const SelectSubway = <T extends boolean>({ handleChange, multiple }: ISelectSubw
             placeholder="Выберите станцию"
             isSearchable
             styles={{
-                option: (styles, { data, isFocused }) => ({
+                control: (styles) => ({
                     ...styles,
-                    display: "flex",
-                    alignItems: "center",
-                    backgroundColor: isFocused ? "#f0f0f0" : "white",
-                    color: "black",
-                    paddingLeft: "8px",
-                }),
-                singleValue: (styles, { data }) => ({
-                    ...styles,
-                    display: "flex",
-                    alignItems: "center",
-                }),
-                control: (base, state) => ({
-                    ...base,
                     border: "none",
                     boxShadow: "none",
-                    backgroundColor: "#fff",
+                    backgroundColor: "inherit",
                     borderRadius: "12px",
                     padding: "4px 8px",
                     minHeight: "40px",
                 }),
+                option: (styles, { isFocused }) => ({
+                    ...styles,
+                    backgroundColor: isFocused ? "#f0f0f0" : "white",
+                    color: "black",
+                }),
+                singleValue: (styles) => ({
+                    ...styles,
+                    display: "flex",
+                    alignItems: "center",
+                }),
+                multiValue: (styles) => ({
+                    ...styles,
+                    backgroundColor: "#f5f5f5",
+                }),
+                menu: (base) => ({
+                    ...base,
+                    minWidth: "300px",
+                    zIndex: "99",
+                }),
+                dropdownIndicator: (styles) => ({
+                    ...styles,
+                    color: "#616161",
+                    ":hover": {
+                        color: "#2f2f2f",
+                    },
+                }),
+                clearIndicator: (styles) => ({
+                    ...styles,
+                    color: "#616161",
+                    ":hover": {
+                        color: "#2f2f2f",
+                    },
+                }),
+                placeholder: (styles) => ({
+                    ...styles,
+                    fontSize: "inherit",
+                }),
             }}
             formatOptionLabel={(option) => (
                 <div style={{ display: "flex", alignItems: "center" }}>
-                    <SubwayIcon color={option.color} />
+                    <SubwayIcon color={option.color} size="15px" />
                     <span style={{ marginLeft: 8 }}>{option.label}</span>
                 </div>
             )}
