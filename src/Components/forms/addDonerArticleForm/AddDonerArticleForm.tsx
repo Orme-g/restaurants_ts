@@ -43,22 +43,22 @@ const AddDonerArticleForm: React.FC<IAddDonerArticleFormProps> = ({
 
     const [addDonerArticle, { isLoading, isSuccess, isError }] = useAddDonerArticleMutation();
 
-    const onSubmit = (formData: INewDonerArticle) => {
-        setBtnStatus(true);
-        addDonerArticle(formData)
-            .unwrap()
-            .then((response) => {
-                if (response === "Success") {
-                    reset();
-                    setBtnStatus(false);
-                    // toggleDisplay();
-                }
-            })
-            .catch((error) => {
-                console.log(error);
-                setBtnStatus(false);
-            });
-    };
+    // const onSubmit = (formData: INewDonerArticle) => {
+    //     setBtnStatus(true);
+    //     addDonerArticle(formData)
+    //         .unwrap()
+    //         .then((response) => {
+    //             if (response === "Success") {
+    //                 reset();
+    //                 setBtnStatus(false);
+    //                 // toggleDisplay();
+    //             }
+    //         })
+    //         .catch((error) => {
+    //             console.log(error);
+    //             setBtnStatus(false);
+    //         });
+    // };
 
     const postAlert = (type: TAlerts, text: string) => {
         return (

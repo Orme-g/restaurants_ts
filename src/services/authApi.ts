@@ -4,7 +4,9 @@ export const authApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         me: builder.query<IUserStoreData, void>({
             query: () => `/auth/me`,
+            keepUnusedDataFor: 0,
         }),
+
         registration: builder.mutation<{ message: string }, IRegisterData>({
             query: (userData) => ({
                 url: "/auth/register",

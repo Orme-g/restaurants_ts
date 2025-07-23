@@ -2,13 +2,11 @@ import React, { useState, memo } from "react";
 import { useAppSelector } from "../../types/store";
 import { Box, Tab } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
-import { YMaps, Map, Placemark, GeolocationControl } from "@pbe/react-yandex-maps";
+import { YMaps, Map, Placemark } from "@pbe/react-yandex-maps";
 
 import ReviewsList from "../reviewsList/ReviewsList";
 import ReviewForm from "../forms/reviewForm/ReviewForm";
 import EventsList from "../eventsList/EventsList";
-import ModalWindow from "../modals/modalWindow/ModalWindow";
-import PostConstructor from "../postConstructor/PostConstructor";
 
 import "./restaurantsTabs.scss";
 
@@ -20,17 +18,13 @@ interface IRestaurantsTabsProps {
 }
 
 const RestaurantsTabs: React.FC<IRestaurantsTabsProps> = memo(
-    ({ description, restId, restaurantName, coordinates }) => {
+    ({ description, restId, coordinates }) => {
         const [activeTab, setActiveTab] = useState("3");
-        const [displayModal, setDisplayModal] = useState(false);
         const isAuth = useAppSelector((state) => state.interactive.isAuth);
         const handleChange = (event: React.SyntheticEvent, newActiveTab: string) => {
             setActiveTab(newActiveTab);
         };
         const coordinatesToUse = coordinates.split(",").map((item) => +item.trim());
-        function modalController(open: boolean) {
-            setDisplayModal(open);
-        }
         const unAuth = <div className="unAuthorised">Войдите, чтобы оставить отзыв</div>;
 
         return (
@@ -64,12 +58,6 @@ const RestaurantsTabs: React.FC<IRestaurantsTabsProps> = memo(
                         </TabPanel>
                         <TabPanel value="4">
                             <div className="restaurants-tabs__events">
-                                <button
-                                    className="restaurants-tabs__add-event_btn"
-                                    onClick={() => modalController(true)}
-                                >
-                                    Добавить событие
-                                </button>
                                 <EventsList />
                             </div>
                         </TabPanel>
@@ -97,15 +85,6 @@ const RestaurantsTabs: React.FC<IRestaurantsTabsProps> = memo(
                         </TabPanel>
                     </TabContext>
                 </Box>
-                {displayModal ? (
-                    <ModalWindow modalController={modalController}>
-                        <PostConstructor
-                            modalController={modalController}
-                            type="event"
-                            restaurantData={{ restaurantName, restId }}
-                        />
-                    </ModalWindow>
-                ) : null}
             </div>
         );
     }

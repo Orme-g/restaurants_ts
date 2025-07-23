@@ -2,16 +2,9 @@ import React, { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import BestDonerCards from "../../Components/bestDonerCards/BestDonerCards";
 
-import ModalWindow from "../../Components/modals/modalWindow/ModalWindow";
-import PostConstructor from "../../Components/postConstructor/PostConstructor";
-
 import "./bestDonersListPage.scss";
 
 const BestDonersListPage: React.FC = () => {
-    const [displayModal, setDisplayModal] = useState(false);
-    function modalOpen(open: boolean) {
-        setDisplayModal(open);
-    }
     return (
         <>
             <Helmet>
@@ -27,19 +20,10 @@ const BestDonersListPage: React.FC = () => {
                         понравившееся нам - так же понравится и Вам. <br />
                         Но свои поиски мы продолжим, а их результаты читайте ниже.
                     </div>
-                    <button className="best-doner__add-topic_btn" onClick={() => modalOpen(true)}>
-                        Добавить статью
-                    </button>
                     <div className="best-doner__cards">
                         <BestDonerCards />
                     </div>
                 </section>
-
-                {displayModal ? (
-                    <ModalWindow modalController={modalOpen}>
-                        <PostConstructor type="doner" modalController={modalOpen} />
-                    </ModalWindow>
-                ) : null}
             </div>
         </>
     );

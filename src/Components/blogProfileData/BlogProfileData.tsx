@@ -6,11 +6,7 @@ import "./blogProfileData.scss";
 import { calculateStatus } from "../../utils/calculateExperience";
 import EditSingleField from "../forms/editSingleField/EditSingleField";
 
-import ModalWindow from "../modals/modalWindow/ModalWindow";
-import PostConstructor from "../postConstructor/PostConstructor";
-
 import type { IBlogData } from "../../types/userData";
-
 interface IBlogProfileData {
     blogData: IBlogData;
 }
@@ -18,7 +14,6 @@ interface IBlogProfileData {
 const BlogProfileData: React.FC<IBlogProfileData> = ({ blogData }) => {
     const [editAboutField, setEditAboutField] = useState(false);
     const [editCityField, setEditCityField] = useState(false);
-    const [displayModal, setDisplayModal] = useState(false);
     const { blogerName, aboutMe, blogCity, blogPostsCount, blogerRating, blogAvatar } = blogData;
     const status = calculateStatus(blogerRating);
 
@@ -31,9 +26,6 @@ const BlogProfileData: React.FC<IBlogProfileData> = ({ blogData }) => {
                 setEditCityField((editCityField) => !editCityField);
                 break;
         }
-    };
-    const handleModal = (state: boolean) => {
-        setDisplayModal(state);
     };
     return (
         <>
@@ -116,14 +108,6 @@ const BlogProfileData: React.FC<IBlogProfileData> = ({ blogData }) => {
                 <div className="blog-data__data-field">Ваш статус:</div>
                 <div className="blog-data__data-value">{status}</div>
             </div>
-            <button className="blog-data__add-blog-post" onClick={() => handleModal(true)}>
-                Создать пост
-            </button>
-            {displayModal ? (
-                <ModalWindow modalController={handleModal}>
-                    <PostConstructor modalController={handleModal} type="blog" />
-                </ModalWindow>
-            ) : null}
         </>
     );
 };

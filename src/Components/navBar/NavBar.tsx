@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 import {
     AppBar,
     IconButton,
@@ -16,6 +17,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import { toggleSideMenu, callSnackbar, logoutUser } from "../../reducers/interactive";
 import { useLogoutMutation } from "../../services/authApi";
+import { baseApi } from "../../services/baseApi";
 import { useAppDispatch, useAppSelector } from "../../types/store";
 import { Link } from "react-router-dom";
 import SmallSpinner from "../svg/SmallSpinner";
@@ -26,13 +28,13 @@ const NavBar: React.FC = () => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const dispatch = useAppDispatch();
     const [logout] = useLogoutMutation();
+    const location = useLocation();
     const handleProfile = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
     };
     const userData = useAppSelector((state) => state.interactive.userData);
     const isAuth = useAppSelector((state) => state.interactive.isAuth);
     const name = userData?.name;
-    const _id = userData?._id;
     const role = userData?.role;
     const isAdmin = role?.includes("admin");
     const handleClose = () => {
@@ -44,6 +46,7 @@ const NavBar: React.FC = () => {
             .then((result) => {
                 dispatch(callSnackbar({ type: "info", text: result.message }));
                 dispatch(logoutUser());
+                dispatch(baseApi.util.resetApiState());
             })
             .catch((error) =>
                 dispatch(callSnackbar({ type: "error", text: "Что-то пошло не так" }))
@@ -67,7 +70,9 @@ const NavBar: React.FC = () => {
     );
     const ifUnAuth = (
         <Button color="inherit">
-            <Link to={`/login`}>Войти</Link>
+            <Link to={`/login`} state={{ from: location }}>
+                Войти
+            </Link>
         </Button>
     );
     const ifAuth = (
@@ -82,7 +87,7 @@ const NavBar: React.FC = () => {
             </IconButton>
             <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
                 <div className="navbar-menu__username">{name}</div>
-                <Link to={`/profile/${_id}`} onClick={handleClose}>
+                <Link to={`/profile`} onClick={handleClose}>
                     <MenuItem>
                         <ListItemIcon>
                             <PersonIcon />
@@ -91,14 +96,12 @@ const NavBar: React.FC = () => {
                     </MenuItem>
                 </Link>
                 {isAdmin ? admin : null}
-                <Link to={"/"}>
-                    <MenuItem onClick={handleLogout}>
-                        <ListItemIcon>
-                            <LogoutIcon />
-                        </ListItemIcon>
-                        Выйти
-                    </MenuItem>
-                </Link>
+                <MenuItem onClick={handleLogout}>
+                    <ListItemIcon>
+                        <LogoutIcon />
+                    </ListItemIcon>
+                    Выйти
+                </MenuItem>
             </Menu>
         </>
     );

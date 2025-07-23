@@ -13,12 +13,14 @@ import { useLazyMeQuery } from "../../services/authApi";
 
 import "./App.scss";
 
+import ProtectedRoute from "../protectedRoute/ProtectedRoute";
+import RedirectRoute from "../redirectRoute/RedirectRoute";
 const MainPage = lazy(() => import("../../pages/mainPage/MainPage"));
 const SingleRestaurantPage = lazy(
     () => import("../../pages/singleRestaurantPage/SingleRestaurantPage")
 );
 import RestaurantSelectionPage from "../../pages/restaurantSelectionPage/RestaurantSelectionPage";
-import { setIsAuth, setUserDataAndAuth } from "../../reducers/interactive";
+import { setIsAuth, setUserDataAndAuth, logoutUser } from "../../reducers/interactive";
 const BestDonersListPage = lazy(() => import("../../pages/bestDonersListPage/BestDonersListPage"));
 const BlogPage = lazy(() => import("../../pages/blogPage/BlogPage"));
 const BlogPostPage = lazy(() => import("../../pages/blogPostPage/BlogPostPage"));
@@ -46,7 +48,9 @@ export const App: React.FC = () => {
             .then((userData) => {
                 dispatch(setUserDataAndAuth(userData));
             })
-            .catch(() => dispatch(setIsAuth(false)));
+            .catch(() => {
+                dispatch(setIsAuth(false));
+            });
     }, []);
     return (
         <HelmetProvider>
@@ -60,8 +64,22 @@ export const App: React.FC = () => {
                     <Suspense fallback={<Spinner />}>
                         <Routes>
                             <Route path="/" element={<MainPage />} />
-                            <Route path="/login" element={<LoginPage />} />
-                            <Route path="/register" element={<RegisterPage />} />
+                            <Route
+                                path="/login"
+                                element={
+                                    <RedirectRoute>
+                                        <LoginPage />
+                                    </RedirectRoute>
+                                }
+                            />
+                            <Route
+                                path="/register"
+                                element={
+                                    <RedirectRoute>
+                                        <RegisterPage />
+                                    </RedirectRoute>
+                                }
+                            />
                             <Route path="/restaurant/:restId" element={<SingleRestaurantPage />} />
                             <Route path="/find-restaurant" element={<RestaurantSelectionPage />} />
                             <Route path="/best-doner" element={<BestDonersListPage />} />
@@ -78,7 +96,14 @@ export const App: React.FC = () => {
                             />
                             <Route path="/event/:eventId" element={<EventPage />} />
                             <Route path="/info/:infoType" element={<InfoPage />} />
-                            <Route path="/profile/:userId" element={<ProfilePage />} />
+                            <Route
+                                path="/profile"
+                                element={
+                                    <ProtectedRoute>
+                                        <ProfilePage />
+                                    </ProtectedRoute>
+                                }
+                            />
                             <Route path="/admin" element={<AdminPage />} />
                             <Route path="/workshop" element={<Workshop />} />
                             <Route path="*" element={<Page404 />} />

@@ -5,6 +5,7 @@ import {
     FetchBaseQueryError,
     BaseQueryFn,
 } from "@reduxjs/toolkit/query/react";
+import { baseApi } from "./baseApi";
 import { logoutUser, callSnackbar } from "../reducers/interactive";
 import { currentUrl } from "../../URLs";
 import { RootState } from "../store";
@@ -42,6 +43,7 @@ export const createBaseQueryWithReauth =
                         })
                     );
                     api.dispatch(logoutUser());
+                    api.dispatch(baseApi.util.resetApiState());
                 }
 
                 await authQuery({ url: "/auth/logout", method: "POST" }, api, extraOptions);

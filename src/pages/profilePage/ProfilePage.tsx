@@ -1,6 +1,5 @@
 import React from "react";
 
-import { useParams } from "react-router-dom";
 import { useAppSelector } from "../../types/store";
 import { useGetUserProfileDataQuery } from "../../services/userApi";
 import { PageSkeleton } from "../../Components/skeletons/Skeletons";
@@ -12,7 +11,6 @@ import BlogDataSection from "../../Components/blogDataSection/BlogDataSection";
 import "./profilePage.scss";
 
 const ProfilePage: React.FC = () => {
-    const { userId } = useParams<string>();
     const isAuth = useAppSelector((state) => state.interactive.isAuth);
     const {
         data: userData,

@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { IUserStoreData } from "../types/userData";
+
 interface ISnackBarData {
     text: string;
     type: "error" | "info" | "success" | "warning";

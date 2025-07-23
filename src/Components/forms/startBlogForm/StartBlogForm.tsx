@@ -11,7 +11,8 @@ import type { IStartBlogData } from "../../../types/userData";
 import "./startBlogForm.scss";
 
 const StartBlogForm: React.FC = () => {
-    const [blogAvatar, setBlogAvatar] = useState("");
+    const [blogAvatar, setBlogAvatar] = useState<string | null>(null);
+    const [avatarSizeError, setAvatarSizeError] = useState<string | null>(null);
     const [imageName, setImageName] = useState<string | null>(null);
     const [displayBlogForm, setDisplayBlogForm] = useState<boolean>(false);
     const [sendData] = useSetBlogerDataMutation();
@@ -40,15 +41,31 @@ const StartBlogForm: React.FC = () => {
     }
 
     const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        setBlogAvatar(null);
+        setImageName(null);
         if (e.target.files) {
             const uploadedFile = e.target.files[0];
+            if (uploadedFile.size / (1024 * 1024) > 1) {
+                setAvatarSizeError("Максимальный размер аватарки 5мб.");
+                return;
+            }
             setImageName(`"${uploadedFile.name}"`);
-            const file = (await convertToBase64(uploadedFile)) as string;
-            setBlogAvatar(file);
+            const base64Image = await convertToBase64(uploadedFile);
+            setBlogAvatar(base64Image);
+            setAvatarSizeError(null);
         }
+        // if (e.target.files) {
+        //     const uploadedFile = e.target.files[0];
+        //     setImageName(`"${uploadedFile.name}"`);
+        //     const file = (await convertToBase64(uploadedFile)) as string;
+        //     setBlogAvatar(file);
+        // }
     };
 
     const onSubmit = async (data: { blogerName: string; blogCity: string; aboutMe: string }) => {
+        if (!blogAvatar) {
+            return;
+        }
         const startBlogData: IStartBlogData = { ...data, blogAvatar };
         sendData(startBlogData)
             .unwrap()
@@ -135,6 +152,7 @@ const StartBlogForm: React.FC = () => {
                         </Button>
                         <div className="upload-image_name">{imageName}</div>
                     </div>
+                    <div className="upload-image_helper-text">{avatarSizeError}</div>
                 </Stack>
                 <Button type="submit" style={{ marginTop: 30, marginLeft: 40 }} variant="contained">
                     Отправить

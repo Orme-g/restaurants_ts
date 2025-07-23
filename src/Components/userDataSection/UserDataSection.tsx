@@ -23,6 +23,7 @@ interface IUserDataSection {
 
 const UserDataSection: React.FC<IUserDataSection> = ({ userData }) => {
     const [avatarData, setAvatarData] = useState<string | null>(null);
+    const [avatarSizeError, setAvatarSizeError] = useState<string | null>(null);
     const [imageName, setImageName] = useState<string | null>(null);
     const changePassButton = () => {
         const passwordFields = document.querySelector(".password-fields") as HTMLElement;
@@ -48,11 +49,18 @@ const UserDataSection: React.FC<IUserDataSection> = ({ userData }) => {
         year: "numeric",
     });
     const handleFileUpload: React.ChangeEventHandler<HTMLInputElement> = async (e) => {
+        setAvatarData(null);
+        setImageName(null);
         if (e.target.files) {
             const uploadedFile = e.target.files[0];
+            if (uploadedFile.size / (1024 * 1024) > 1) {
+                setAvatarSizeError("Максимальный размер аватарки 1мб.");
+                return;
+            }
             setImageName(`"${uploadedFile.name}"`);
             const base64Image = await convertToBase64(uploadedFile);
             setAvatarData(base64Image);
+            setAvatarSizeError(null);
         }
     };
     const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = (e) => {
@@ -144,6 +152,7 @@ const UserDataSection: React.FC<IUserDataSection> = ({ userData }) => {
                                 >
                                     Отправить
                                 </Button>
+                                <div className="upload-image_helper-text">{avatarSizeError}</div>
                             </form>
                         </div>
                     </div>

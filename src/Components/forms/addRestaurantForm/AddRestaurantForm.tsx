@@ -40,6 +40,7 @@ interface ISelectedFile {
 const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState }) => {
     const displayForm = displayState ? "show" : "hide";
     const [selectedFiles, setSelectedFiles] = useState<ISelectedFile[] | null>(null);
+    const [selectedFilesError, setSelectedFilesError] = useState<string | null>(null);
     const [titleImageName, setTitleImageName] = useState<string | null>(null);
     const [showAddImagesNotice, setShowAddImagesNotice] = useState<boolean>(false);
     const [cousine, setCousine] = useState([]);
@@ -105,6 +106,19 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState }) 
         setSubway(selected);
     };
     const handleSelectFiles = (files: File[]) => {
+        setSelectedFilesError(null);
+        setTitleImageName(null);
+        if (files.length > 12) {
+            setSelectedFilesError("Максимальное количество фото - 12.");
+            return;
+        }
+        for (const file of files) {
+            if (file.size / (1024 * 1024) > 5) {
+                setSelectedFilesError("Размер каждого загружаемого фото должен быть менее 5мб.");
+                return;
+            }
+        }
+
         setSelectedFiles(
             files?.map((file) => {
                 return { file, url: URL.createObjectURL(file) };
@@ -136,6 +150,9 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState }) 
 
     const onSubmit = (data: IAddNewRestaurant) => {
         const formData = new FormData();
+        if (selectedFilesError) {
+            return;
+        }
         if (!selectedFiles) {
             setShowAddImagesNotice(true);
             return;
@@ -284,6 +301,7 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState }) 
                 >
                     {selectedFiles ? "Выберите титульное фото ресторана." : null}
                 </div>
+                <div className="add-restaurant-form__helper-text">{selectedFilesError}</div>
                 <FormControl sx={{ width: 400 }}>
                     <InputLabel id="cousine-select">Кухня</InputLabel>
                     <Select
