@@ -1,5 +1,5 @@
 import React from "react";
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useAppSelector } from "../../types/store";
 
 interface IRedirectRoute {
@@ -7,6 +7,9 @@ interface IRedirectRoute {
 }
 const RedirectRoute: React.FC<IRedirectRoute> = ({ children }) => {
     const isAuth = useAppSelector((state) => state.interactive.isAuth);
+    if (isAuth === null) {
+        return null;
+    }
     if (isAuth) {
         return <Navigate to="/profile" replace />;
     }
