@@ -11,9 +11,38 @@
         border-bottom: 2px solid rgb(137, 191, 82);
     }
 
-    &__cards {
+    &__cards-list {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-template-columns: repeat(3, minmax(200px, 1fr));
         gap: 70px;
+    }
+}
+
+@media (min-width: 1981px) {
+    .restaurant-gallery {
+        width: 70%;
+    }
+}
+
+@media (max-width: 980px) {
+    .restaurant-gallery {
+        width: 95%;
+    }
+}
+@media (max-width: 780px) {
+    .restaurant-gallery {
+        &__cards-list {
+            grid-template-columns: repeat(2, minmax(200px, 1fr));
+            gap: 50px;
+        }
+    }
+}
+@media (max-width: 480px) {
+    .restaurant-gallery {
+        width: 90%;
+        &__cards-list {
+            grid-template-columns: 300px;
+            justify-content: center;
+        }
     }
 }

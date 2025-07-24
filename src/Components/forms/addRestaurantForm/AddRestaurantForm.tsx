@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { nanoid } from "@reduxjs/toolkit";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import {
     TextField,
     Stack,
@@ -44,12 +44,13 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState }) 
     const [showAddImagesNotice, setShowAddImagesNotice] = useState<boolean>(false);
     const [cousine, setCousine] = useState<string[]>([]);
     const [city, setCity] = useState("");
-    const [subway, setSubway] = useState<string[] | null>(null);
+    // const [subway, setSubway] = useState<string[] | null>(null);
     const [addRestaurant, { isLoading, isError, isSuccess }] = useAddNewRestaurantMutation();
     const {
         register,
         handleSubmit,
         formState: { errors },
+        control,
         reset,
     } = useForm({
         defaultValues: {
@@ -62,7 +63,7 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState }) 
             cousine: [""],
             city: "",
             coordinates: "",
-            subway: [""],
+            subway: [],
         },
     });
     useEffect(() => {
@@ -101,9 +102,9 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState }) 
         setCity(event.target.value as string);
     };
 
-    const handleSelectSubway = (selected: string[]) => {
-        setSubway(selected);
-    };
+    // const handleSelectSubway = (selected: string[]) => {
+    //     setSubway(selected);
+    // };
     const handleSelectFiles = (files: File[]) => {
         setSelectedFilesError(null);
         setTitleImageName(null);
@@ -176,18 +177,18 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState }) 
         }
         formData.append("titleImageName", titleImageName);
         // for (const [key, value] of formData) {
-        //     console.log(key, value);
+        //     console.log(key, ": ", value);
         // }
-        addRestaurant(formData)
-            .unwrap()
-            .then(() => {
-                reset();
-                setCousine([]);
-                setSubway([]);
-                setCity("");
-                revokeURLs(selectedFiles);
-                setSelectedFiles([]);
-            });
+        // addRestaurant(formData)
+        //     .unwrap()
+        //     .then(() => {
+        //         reset();
+        //         setCousine([]);
+        //         setSubway([]);
+        //         setCity("");
+        //         revokeURLs(selectedFiles);
+        //         setSelectedFiles([]);
+        //     });
     };
     const imagePreviews = selectedFiles?.map(({ file, url }) => {
         const id = nanoid();
@@ -356,8 +357,23 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState }) 
                         </Select>
                     </FormControl>
                     <div className="add-restaurant-form__select-subway">
-                        <SelectSubway handleChange={handleSelectSubway} multiple={true} />
+                        {/* <SelectSubway handleChange={handleSelectSubway} multiple={true} /> */}
+                        <Controller
+                            name="subway"
+                            control={control}
+                            rules={{ required: "Выберите хотя бы одну станцию метро" }}
+                            render={({ field }) => (
+                                <>
+                                    <SelectSubway handleChange={field.onChange} multiple={true} />
+                                </>
+                            )}
+                        />
                     </div>
+                    {errors.subway ? (
+                        <span className="add-restaurant-form__subway-error">
+                            {errors.subway.message}
+                        </span>
+                    ) : null}
                 </div>
                 <TextField
                     label="Координаты для Яндекс Карт (59.939868, 30.314547)"

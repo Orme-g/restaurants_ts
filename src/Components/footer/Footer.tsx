@@ -31,31 +31,26 @@ const Footer: React.FC = () => {
             <div className="footer__links">
                 <ul className="footer__navigation">
                     <li className="footer__navigation_item">
-                        {/* eslint-disable-next-line */}
                         <Link to={"/info/advert"}>
                             <ShowChartOutlinedIcon className="footer__icon" /> Реклама
                         </Link>
                     </li>
                     <li className="footer__navigation_item">
-                        {/* eslint-disable-next-line */}
                         <Link to={"/info/about"}>
                             <InfoOutlinedIcon className="footer__icon" /> О нас
                         </Link>
                     </li>
                     <li className="footer__navigation_item">
-                        {/* eslint-disable-next-line */}
                         <a href="#">
                             <SupportAgentOutlinedIcon className="footer__icon" /> Поддержка
                         </a>
                     </li>
                     <li className="footer__navigation_item">
-                        {/* eslint-disable-next-line */}
                         <a href="#">
                             <AccessibilityNewOutlinedIcon className="footer__icon" /> Сотрудничество
                         </a>
                     </li>
                     <li className="footer__navigation_item">
-                        {/* eslint-disable-next-line */}
                         <a href="#">
                             <QuizOutlinedIcon className="footer__icon" /> FAQ
                         </a>
@@ -63,25 +58,21 @@ const Footer: React.FC = () => {
                 </ul>
                 <ul className="footer__social">
                     <li className="footer__social_link">
-                        {/* eslint-disable-next-line */}
                         <a href="#">
                             <FontAwesomeIcon icon={faTwitter} />
                         </a>
                     </li>
                     <li className="footer__social_link">
-                        {/* eslint-disable-next-line */}
                         <a href="#">
                             <FontAwesomeIcon icon={faVk} />
                         </a>
                     </li>
                     <li className="footer__social_link">
-                        {/* eslint-disable-next-line */}
                         <a href="#">
                             <FontAwesomeIcon icon={faInstagram} />
                         </a>
                     </li>
                     <li className="footer__social_link">
-                        {/* eslint-disable-next-line */}
                         <a href="#">
                             <FontAwesomeIcon icon={faGithub} />
                         </a>

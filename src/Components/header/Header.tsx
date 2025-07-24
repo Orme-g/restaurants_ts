@@ -60,6 +60,9 @@ const Header: React.FC = () => {
                     onChange={(e) => handleChange(e)}
                     onFocus={handleFocus}
                     onBlur={handleBlur}
+                    sx={{
+                        backgroundColor: "#fff",
+                    }}
                 />
                 <ul className={`search-results__list ${display}`}>{results}</ul>
             </div>

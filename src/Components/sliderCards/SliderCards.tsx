@@ -37,13 +37,33 @@ const SliderCards: React.FC<ISliderCardsProps> = ({ sortType, cardsNumber }) => 
 
     return (
         <Swiper
-            slidesPerView={4}
-            spaceBetween={30}
+            spaceBetween={20}
             style={
                 {
                     "--swiper-navigation-color": "#c9c9c9",
+                    // height: "fit-content",
+                    paddingTop: "20px",
+                    paddingBottom: "20px",
                 } as React.CSSProperties
             }
+            breakpoints={{
+                0: {
+                    slidesPerView: 2,
+                },
+                480: {
+                    slidesPerView: 2,
+                },
+                760: {
+                    slidesPerView: 3,
+                },
+                980: {
+                    slidesPerView: 4,
+                },
+                1480: {
+                    slidesPerView: 5,
+                    spaceBetween: 40,
+                },
+            }}
             loop={true}
             navigation={true}
             freeMode={true}

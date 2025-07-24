@@ -14,7 +14,7 @@
     }
 }
 .selection {
-    height: 400px;
+    height: fit-content;
     margin-bottom: 80px;
 
     &__title {
@@ -23,5 +23,21 @@
         padding-bottom: 15px;
         border-bottom: variables.$divider-style;
         font-family: "Roboto Light", sans-serif;
+    }
+}
+
+@media (min-width: 1981px) {
+    .restaurants-selections {
+        width: 70%;
+    }
+}
+@media (max-width: 980px) {
+    .restaurants-selections {
+        width: 95%;
+    }
+}
+@media (max-width: 480px) {
+    .restaurants-selections {
+        width: 90%;
     }
 }

@@ -1,20 +1,18 @@
 .main-page-header {
     width: 100%;
-    height: 700px;
-    // background: linear-gradient(to left, rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0.5)), url('../../assets/header_photo.jpg') fixed
-    background: url("../../assets/Kazan_sketch.PNG") fixed;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center center;
+    height: 100vh;
+    background: url("../../assets/Kazan_sketch.PNG") fixed no-repeat;
+    background-size: 100% auto;
+    background-position: center bottom;
 }
 .search-bar {
     padding-top: 150px;
-    width: 700px;
+    width: 50%;
     margin: 0 auto;
 }
 .search-results {
     &__list {
-        width: 700px;
+        width: 100%;
         overflow: scroll;
         max-height: 150px;
         &.show {
@@ -42,5 +40,11 @@
                 color: #989898;
             }
         }
+    }
+}
+
+@media (max-width: 980px) {
+    .search-bar {
+        width: 70%;
     }
 }

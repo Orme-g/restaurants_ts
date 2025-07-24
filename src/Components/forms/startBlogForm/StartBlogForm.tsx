@@ -54,12 +54,6 @@ const StartBlogForm: React.FC = () => {
             setBlogAvatar(base64Image);
             setAvatarSizeError(null);
         }
-        // if (e.target.files) {
-        //     const uploadedFile = e.target.files[0];
-        //     setImageName(`"${uploadedFile.name}"`);
-        //     const file = (await convertToBase64(uploadedFile)) as string;
-        //     setBlogAvatar(file);
-        // }
     };
 
     const onSubmit = async (data: { blogerName: string; blogCity: string; aboutMe: string }) => {

@@ -109,25 +109,29 @@ const NavBar: React.FC = () => {
     return (
         <AppBar color="inherit" sx={{ backgroundColor: "rgb(244, 244, 244)", color: "#494949" }}>
             <Toolbar>
-                <IconButton onClick={() => dispatch(toggleSideMenu())} color="inherit">
-                    <MenuIcon />
-                </IconButton>
-                <Link to={"/"}>
-                    <Typography
-                        marginLeft="20px"
-                        variant="h5"
-                        component="span"
-                        sx={{ fontWeight: 500, letterSpacing: 1.25 }}
-                    >
-                        Weats
-                    </Typography>
-                </Link>
-                <div className="navbarItems">
-                    {isAuth === null ? isLoading : isAuth === false ? ifUnAuth : ifAuth}
+                <div className="navbar__items">
+                    <div className="navbar__items_left-side">
+                        <IconButton onClick={() => dispatch(toggleSideMenu())} color="inherit">
+                            <MenuIcon />
+                        </IconButton>
+                        <Link to={"/"}>
+                            <Typography
+                                marginLeft="20px"
+                                variant="h5"
+                                sx={{ fontWeight: 500, letterSpacing: 1.25 }}
+                            >
+                                Weats
+                            </Typography>
+                        </Link>
+                    </div>
 
-                    <Button color="inherit" sx={{ ml: "25px" }}>
-                        Помощь
-                    </Button>
+                    <div className="navbar__items_right-side">
+                        {isAuth === null ? isLoading : isAuth === false ? ifUnAuth : ifAuth}
+
+                        <Button color="inherit" sx={{ ml: "25px" }}>
+                            Помощь
+                        </Button>
+                    </div>
                 </div>
             </Toolbar>
         </AppBar>

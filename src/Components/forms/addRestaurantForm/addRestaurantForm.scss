@@ -44,6 +44,11 @@
             color: rgb(0, 125, 0);
         }
     }
+    &__subway-error {
+        color: rgb(221, 39, 39);
+        font-size: 12px;
+        padding-left: 12px;
+    }
     &__icon {
         color: variables.$green-color;
     }
