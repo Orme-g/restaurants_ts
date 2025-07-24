@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { EventHandler, MouseEventHandler, useEffect } from "react";
 
 import "./modalWindow.scss";
 
@@ -10,7 +10,7 @@ interface IModalWindow {
 const ModalWindow: React.FC<IModalWindow> = ({ modalController, children }) => {
     useEffect(() => {
         document.body.style.overflow = "hidden";
-        const keyHandler = (e: any) => {
+        const keyHandler = (e: KeyboardEvent) => {
             if (e.code === "Escape") {
                 modalController(false);
             }
@@ -21,8 +21,8 @@ const ModalWindow: React.FC<IModalWindow> = ({ modalController, children }) => {
             document.removeEventListener("keydown", keyHandler);
         };
     });
-    function handler(e: any) {
-        if (e.target.classList.contains("modal__window")) {
+    function handler(e: React.MouseEvent<HTMLDivElement>) {
+        if ((e.target as HTMLDivElement).classList.contains("modal__window")) {
             modalController(false);
         }
     }

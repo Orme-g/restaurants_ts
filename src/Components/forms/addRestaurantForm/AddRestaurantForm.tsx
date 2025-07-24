@@ -1,4 +1,3 @@
-// fix any
 import React, { useState, useEffect, useRef } from "react";
 import { nanoid } from "@reduxjs/toolkit";
 import { useForm } from "react-hook-form";
@@ -43,7 +42,7 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState }) 
     const [selectedFilesError, setSelectedFilesError] = useState<string | null>(null);
     const [titleImageName, setTitleImageName] = useState<string | null>(null);
     const [showAddImagesNotice, setShowAddImagesNotice] = useState<boolean>(false);
-    const [cousine, setCousine] = useState([]);
+    const [cousine, setCousine] = useState<string[]>([]);
     const [city, setCity] = useState("");
     const [subway, setSubway] = useState<string[] | null>(null);
     const [addRestaurant, { isLoading, isError, isSuccess }] = useAddNewRestaurantMutation();
@@ -91,7 +90,7 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState }) 
             <SmallSpinner />
         </div>
     );
-    const handleSelectCousine = (event: any) => {
+    const handleSelectCousine = (event: SelectChangeEvent<string[]>) => {
         const {
             target: { value },
         } = event;
