@@ -61,7 +61,6 @@
         justify-content: space-evenly;
         align-items: center;
         &_link {
-            // line-height: 120px;
             a {
                 font-size: 2.5rem;
                 color: #afafaf;
@@ -87,12 +86,21 @@
         }
         &__reg {
             font-size: 0.6rem;
+            p {
+                line-height: 15px;
+            }
         }
         &__navigation {
             flex-direction: column;
             height: fit-content;
+            margin-top: 20px;
+            gap: 5px;
+            &_item {
+                font-size: 1rem;
+            }
         }
         &__social {
+            margin-top: 30px;
             &_link {
                 a {
                     font-size: 2rem;

@@ -30,15 +30,40 @@
         text-indent: 25px;
         margin-bottom: 70px;
     }
-    &__add-topic_btn {
-        @include mixins.addPostButton;
-        position: absolute;
-        top: 30px;
-        right: 60px;
-    }
     &__cards {
         display: flex;
         flex-direction: column;
         gap: 50px;
+    }
+}
+
+@media (max-width: 980px) {
+    .best-doner {
+        &__container {
+            width: 95%;
+        }
+    }
+}
+@media (max-width: 768px) {
+}
+@media (max-width: 550px) {
+    .page_wrapper {
+        padding: 70px 0;
+    }
+    .best-doner {
+        &__container {
+            padding: 30px 25px 50px 25px;
+        }
+        &__title {
+            padding-left: 10px;
+            font-size: 2rem;
+        }
+        &__about {
+            font-size: 1rem;
+            margin-bottom: 40px;
+        }
+        &__cards {
+            gap: 30px;
+        }
     }
 }

@@ -3,7 +3,7 @@ import type { IDonerRestaurant, INewDonerArticle } from "../types/donersTypes";
 
 export const donersApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
-        getDonersList: builder.query<IDonerRestaurant[], null>({
+        getDonersList: builder.query<IDonerRestaurant[], void>({
             query: () => "/best-doner/getAllDonersList",
         }),
         getSingleDonerRestaurant: builder.query<IDonerRestaurant, string>({
