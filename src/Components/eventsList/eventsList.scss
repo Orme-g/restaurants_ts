@@ -9,3 +9,28 @@
         width: 60%;
     }
 }
+
+@media (max-width: 980px) {
+    .events-list {
+        &__container {
+            width: 80%;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .events-list {
+        &__container {
+            width: 90%;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .events-list {
+        &__container {
+            width: 100%;
+            gap: 20px;
+        }
+    }
+}

@@ -44,7 +44,7 @@ const RenderListWithPagination: React.FC<IRenderList> = ({ displayItems = 3, lis
                     disabled={buttonStatus}
                     size="large"
                     color="success"
-                    style={{ width: 200, alignSelf: "center" }}
+                    style={{ width: 200, alignSelf: "center", marginTop: "20px" }}
                 >
                     {buttonText}
                 </Button>

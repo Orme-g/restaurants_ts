@@ -64,7 +64,7 @@ const ReviewItem: React.FC<ReviewItemProps> = ({ data }) => {
                                 precision={0.5}
                                 readOnly
                                 sx={{
-                                    marginRight: "10px",
+                                    marginRight: "20px",
                                     "@media (max-width: 480px)": {
                                         fontSize: "14px",
                                     },

@@ -25,7 +25,11 @@ const RestaurantsTabs: React.FC<IRestaurantsTabsProps> = memo(({ description, co
             <Box sx={{ width: "100%" }}>
                 <TabContext value={activeTab}>
                     <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-                        <TabList onChange={handleChange} aria-label="Restaurant Tabs">
+                        <TabList
+                            onChange={handleChange}
+                            aria-label="Restaurant Tabs"
+                            variant="scrollable"
+                        >
                             <Tab label="О Ресторане" value="1" />
                             <Tab label="Меню" value="2" />
                             <Tab label="Отзывы" value="3" />
@@ -33,7 +37,7 @@ const RestaurantsTabs: React.FC<IRestaurantsTabsProps> = memo(({ description, co
                             <Tab label="Карта" value="5" />
                         </TabList>
                     </Box>
-                    <TabPanel value="1">
+                    <TabPanel value="1" sx={{ p: 0 }}>
                         <div className="restaurants-tabs__description">{description}</div>
                     </TabPanel>
                     <TabPanel value="2">

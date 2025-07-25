@@ -3,7 +3,7 @@
 
 .long-card-small {
     &__container {
-        height: 120px;
+        height: fit-content;
         box-shadow: 5px 3px 5px 0px rgba(34, 60, 80, 0.24);
         width: 100%;
         border-radius: 5px;
@@ -29,6 +29,10 @@
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
+        gap: 10px;
+        &_name {
+            font-size: 1.2rem;
+        }
 
         &_description {
             font-weight: 300;
@@ -37,6 +41,43 @@
         &_valid-dates {
             font-weight: 300;
             font-style: italic;
+            font-size: 1rem;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .long-card-small {
+        &__image {
+            width: 30%;
+        }
+        &__info {
+            width: 70%;
+            &_name {
+                font-size: 1rem;
+            }
+            &_description {
+                font-size: 0.9rem;
+            }
+            &_valid-dates {
+                font-size: 0.7rem;
+            }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .long-card-small {
+        &__info {
+            &_name {
+                font-size: 0.9rem;
+            }
+            &_description {
+                font-size: 0.7rem;
+            }
+            &_valid-dates {
+                font-size: 0.6rem;
+            }
         }
     }
 }
