@@ -25,3 +25,43 @@
         }
     }
 }
+.rest-side-info {
+    &__container {
+        position: relative;
+        width: 25%;
+        min-height: 555px;
+        background-color: #f4f4f4;
+        display: flex;
+        margin-left: 50px;
+        flex-direction: column;
+        color: variables.$primary-text;
+        border-radius: 15px;
+    }
+}
+
+@media (max-width: 1220px) {
+    .rest-side-info {
+        &__container {
+            width: 30%;
+        }
+    }
+}
+
+@media (max-width: 980px) {
+    .restaurant-info {
+        &__container {
+            flex-direction: column;
+        }
+        &__slider {
+            width: 100%;
+        }
+    }
+    .rest-side-info {
+        &__container {
+            width: 100%;
+            min-height: fit-content;
+            margin-top: 40px;
+            margin-left: 0;
+        }
+    }
+}

@@ -66,7 +66,7 @@ const AdditionalReviewForm: React.FC<IAdditionalReviewFormProps> = ({
             className={`additional-review-form ${currentFormStatus}`}
             onSubmit={handleSubmit(onSubmit)}
         >
-            <Stack spacing={3} sx={{ margin: "30px 30px" }}>
+            <Stack spacing={3} sx={{ margin: "20px" }}>
                 <div>Дополните ваш отзыв:</div>
                 <TextField
                     label="Что понравилось"
@@ -90,7 +90,8 @@ const AdditionalReviewForm: React.FC<IAdditionalReviewFormProps> = ({
                     multiline
                     minRows={3}
                 />
-                <Stack direction={"row"}>
+                {/* <Stack direction="row"> */}
+                <div className="additional-review-form__actions">
                     <Rating
                         size="large"
                         precision={0.5}
@@ -99,11 +100,13 @@ const AdditionalReviewForm: React.FC<IAdditionalReviewFormProps> = ({
                             setRating(newValue as number);
                         }}
                     />
-                    <Button style={{ marginLeft: "auto" }} type="submit">
-                        Отправить
-                    </Button>
-                    <Button onClick={toggleDisplayStatus}>Отмена</Button>
-                </Stack>
+                    <div className="additional-review-form__buttons">
+                        <Button type="submit">Отправить</Button>
+                        <Button onClick={toggleDisplayStatus}>Отмена</Button>
+                    </div>
+                </div>
+
+                {/* </Stack> */}
             </Stack>
         </form>
     );

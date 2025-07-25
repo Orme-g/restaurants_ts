@@ -44,32 +44,43 @@ const ReviewItem: React.FC<ReviewItemProps> = ({ data }) => {
     const { name, avatar, reviews } = userData;
     return (
         <>
-            <div className="feedback-card__container">
-                <div className="feedback-card__header">
-                    <div className="feedback-card__header_avatar">
+            <div className="review-item__container">
+                <div className="review-item__header">
+                    <div className="review-item__header_avatar">
                         <img src={avatar} alt={name} />
                     </div>
-                    <div className="feedback-card__header_user">
-                        <div className="feedback-card__header_username">{name}</div>
-                        <div className="feedback-card__header_userstatus">
+                    <div className="review-item__header_user">
+                        <div className="review-item__header_username">{name}</div>
+                        <div className="review-item__header_userstatus">
                             {calculateExperience(reviews)}
                         </div>
                     </div>
-                    <div className="feedback-card__header_middle-space"></div>
-                    <div className="feedback-card__header_rating-and-date">
-                        <div className="feedback-card__header_rating">
-                            <Rating name="rating" value={rating} precision={0.5} readOnly />
+                    <div className="review-item__header_middle-space"></div>
+                    <div className="review-item__header_rating-and-date">
+                        <div className="review-item__header_rating">
+                            <Rating
+                                name="rating"
+                                value={rating}
+                                precision={0.5}
+                                readOnly
+                                sx={{
+                                    marginRight: "10px",
+                                    "@media (max-width: 480px)": {
+                                        fontSize: "14px",
+                                    },
+                                }}
+                            />
                         </div>
-                        <div className="feedback-card__header_date">{date} </div>
+                        <div className="review-item__header_date">{date} </div>
                     </div>
                 </div>
-                <div className="feedback-card__body">
-                    <div className="feedback-card__body_title">Понравилось:</div>
-                    <div className="feedback-card__body_content">{like}</div>
-                    <div className="feedback-card__body_title">Не понравилось:</div>
-                    <div className="feedback-card__body_content">{dislike}</div>
-                    <div className="feedback-card__body_title">Оценка:</div>
-                    <div className="feedback-card__body_content">{rating}</div>
+                <div className="review-item__body">
+                    <div className="review-item__body_title">Понравилось:</div>
+                    <div className="review-item__body_content">{like}</div>
+                    <div className="review-item__body_title">Не понравилось:</div>
+                    <div className="review-item__body_content">{dislike}</div>
+                    <div className="review-item__body_title">Оценка:</div>
+                    <div className="review-item__body_content">{rating}</div>
                     {isMyReview && !additionalReview ? (
                         <Button
                             size="small"
@@ -79,14 +90,23 @@ const ReviewItem: React.FC<ReviewItemProps> = ({ data }) => {
                                 bottom: "15px",
                                 right: "30px",
                                 color: "#494949",
+                                "@media (max-width: 480px)": {
+                                    bottom: "5px",
+                                    right: "10px",
+                                },
                             }}
                         >
-                            Дополнить отзыв{" "}
+                            <span className="review-item__add-extra-review-button-text">
+                                Дополнить отзыв
+                            </span>
                             <EditIcon
                                 sx={{
                                     fontSize: "1.3rem",
                                     marginLeft: "5px",
                                     transform: "translateY(-3px)",
+                                    "@media (max-width: 480px)": {
+                                        fontSize: "0.9rem",
+                                    },
                                 }}
                             />
                         </Button>

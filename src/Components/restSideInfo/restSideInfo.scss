@@ -1,26 +1,12 @@
 @use "../../style/variables";
 
 .rest-side-info {
-    &__container {
-        position: relative;
-        width: 25%;
-        min-height: 555px;
-        background-color: #f4f4f4;
-        display: flex;
-        margin-left: 50px;
-        flex-direction: column;
-        justify-content: space-evenly;
-        align-items: flex-start;
-        align-content: center;
-        color: variables.$primary-text;
-        border-radius: 15px;
-    }
     &__rating {
         font-size: 1.7rem;
+        margin-top: 20px;
         margin-left: 30px;
         span {
             color: rgb(138, 191, 82);
-            font-size: 2.2rem;
         }
         &_stars-and-marks {
             display: flex;
@@ -34,6 +20,12 @@
             transform: translateY(-3px);
         }
     }
+    &__items-wrapper {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: space-evenly;
+    }
     &__item {
         font-size: 1.2rem;
         margin-left: 30px;
@@ -44,6 +36,33 @@
         }
         .subway {
             display: block;
+        }
+    }
+}
+
+@media (max-width: 980px) {
+    .rest-side-info {
+        &__items-wrapper {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(200px, 1fr));
+            grid-auto-rows: minmax(50px, 1fr);
+            gap: 20px;
+        }
+    }
+}
+@media (max-width: 768px) {
+    .rest-side-info {
+        &__items-wrapper {
+            grid-template-columns: repeat(3, minmax(100px, 1fr));
+        }
+    }
+}
+@media (max-width: 480px) {
+    .rest-side-info {
+        &__items-wrapper {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 30px;
         }
     }
 }

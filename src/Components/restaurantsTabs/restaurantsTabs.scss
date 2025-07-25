@@ -27,21 +27,6 @@
             color: inherit;
         }
     }
-    &__feedback {
-        display: flex;
-        flex-direction: column;
-        gap: 50px;
-
-        // .post-feedback {
-        //     width: 200px;
-        //     color: variables.$primary-text;
-        //     font-size: 1.1rem;
-        // }
-    }
-    &__add-event_btn {
-        @include mixins.addPostButton;
-        margin-bottom: 20px;
-    }
     &__map {
         height: 500px;
         width: 70%;

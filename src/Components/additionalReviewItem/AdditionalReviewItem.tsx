@@ -31,30 +31,35 @@ const AdditionalReviewItem: React.FC<IAdditionalReviewProps> = ({ additionalRevi
     return (
         <>
             <div className="toggle-display-extra-review" onClick={toggleDisplExtrtaReview}>
-                <div className="toggle-display-extra-review_text">{interactiveText}</div>
+                <div className="toggle-display-extra-review_text">
+                    <span>{interactiveText}</span>
+                </div>
             </div>
-            <div className={`feedback-card__additional_container ${displayExtraReview}`}>
+            <div className={`review-item__additional_container ${displayExtraReview}`}>
                 <Rating
                     sx={{
                         position: "absolute",
                         top: "20px",
                         right: "30px",
+                        "@media(max-width:480px)": {
+                            fontSize: "16px",
+                            top: "15px",
+                            right: "15px",
+                        },
                     }}
                     name="rating"
                     value={rating}
                     precision={0.5}
                     readOnly
                 />
-                <div className="feedback-card__additional_body">
-                    <div className="feedback-card__additional_body_title">Понравилось:</div>
-                    <div className="feedback-card__additional_body_content">{like}</div>
-                    <div className="feedback-card__additional_body_title">Не понравилось:</div>
-                    <div className="feedback-card__additional_body_content">{dislike}</div>
-                    <div className="feedback-card__additional_body_title">Оценка:</div>
-                    <div className="feedback-card__additional_body_content">{rating}</div>
-                    <div className="feedback-card__additional_body_added">
-                        Отзыв дополнен: {date}
-                    </div>
+                <div className="review-item__additional_body">
+                    <div className="review-item__additional_body_title">Понравилось:</div>
+                    <div className="review-item__additional_body_content">{like}</div>
+                    <div className="review-item__additional_body_title">Не понравилось:</div>
+                    <div className="review-item__additional_body_content">{dislike}</div>
+                    <div className="review-item__additional_body_title">Оценка:</div>
+                    <div className="review-item__additional_body_content">{rating}</div>
+                    <div className="review-item__additional_body_added">Отзыв дополнен: {date}</div>
                 </div>
             </div>
         </>

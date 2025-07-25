@@ -71,16 +71,17 @@ const SingleRestaurantPage: React.FC = () => {
                 <div className="restaurant-info__slider">
                     <Slider images={images} />
                 </div>
-                <RestSideInfo
-                    data={restaurantData}
-                    isFavourite={isFavourite}
-                    favouriteHandler={handleFavouriteButton}
-                    isRegistered={isAuth}
-                />
+                <div className="rest-side-info__container">
+                    <RestSideInfo
+                        data={restaurantData}
+                        isFavourite={isFavourite}
+                        favouriteHandler={handleFavouriteButton}
+                        isRegistered={isAuth}
+                    />
+                </div>
             </div>
             <RestaurantsTabs
                 description={description}
-                restId={restId}
                 restaurantName={name}
                 coordinates={coordinates}
             />
