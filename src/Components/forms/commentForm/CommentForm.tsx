@@ -53,10 +53,10 @@ const CommentForm: React.FC<ICommentProps> = ({ replyData, topicId, setReplyData
         setReplyData({ name: null, text: null, commentId: null });
     }
     const replyBlock = (
-        <div className="comments__reply">
+        <div className="comments-add-form__reply">
             Ответ на:
-            <div className="comments__reply_name">{replyData?.name}</div>
-            <div className="comments__reply_text">{replyData?.text}</div>
+            <div className="comments-add-form__reply_name">{replyData?.name}</div>
+            <div className="comments-add-form__reply_text">{replyData?.text}</div>
             <IconButton
                 sx={{
                     position: "absolute",
@@ -71,18 +71,20 @@ const CommentForm: React.FC<ICommentProps> = ({ replyData, topicId, setReplyData
     );
 
     return (
-        <form className="comments__add-form">
+        <form className="comments-add-form">
             {replyData.name ? replyBlock : null}
-            <TextField
-                sx={{ width: "500px" }}
-                label="Комментарий"
-                multiline
-                error={valid}
-                value={commentText}
-                onChange={(e) => setCommentText(e.target.value)}
-                helperText={valid ? "Минимум 10 символов" : ""}
-                minRows={4}
-            />
+            <div className="comments-add-form__input-field">
+                <TextField
+                    sx={{ width: "100%" }}
+                    label="Комментарий"
+                    multiline
+                    error={valid}
+                    value={commentText}
+                    onChange={(e) => setCommentText(e.target.value)}
+                    helperText={valid ? "Минимум 10 символов" : ""}
+                    minRows={4}
+                />
+            </div>
             <Button
                 variant="contained"
                 sx={{

@@ -38,7 +38,7 @@ const CommentsBlock: React.FC<CommentBlockProps> = ({ currentTopicId }) => {
             Войдите или зарегистрируйтесь, чтобы оставлять комментарии.
         </div>
     );
-    const noComments = <div className="no-comments">Комментариев пока нет. Отсавьте первый!</div>;
+    const noComments = <div className="no-comments">Комментариев пока нет. Оставьте первый!</div>;
     const scrollCommentFormIntoView = () => {
         const form = document.querySelector(".comments__add-form") as HTMLFormElement;
         form.scrollIntoView({ behavior: "smooth", block: "center" });
