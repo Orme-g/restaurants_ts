@@ -4,7 +4,6 @@
 .find-restaurant {
     &__container {
         margin: 100px auto 0 auto;
-        margin-top: 100px;
         width: 80%;
         min-height: 500px;
         color: variables.$primary-text;
@@ -27,12 +26,15 @@
         font-weight: 300;
         margin-top: 50px;
         display: flex;
-        flex-wrap: wrap;
-
+        flex-direction: column;
+        gap: 15px;
         &_wrapper {
             display: flex;
             align-items: center;
         }
+    }
+    &__search-button {
+        margin-top: 50px;
     }
     &__results_title {
         margin-top: 70px;
@@ -50,6 +52,54 @@
         span {
             font-size: 1.2rem;
             font-weight: 300;
+        }
+    }
+}
+
+@media (max-width: 980px) {
+    .find-restaurant {
+        &__container {
+            width: 90%;
+        }
+        &__results_output {
+            width: 90%;
+        }
+    }
+}
+
+@media (max-width: 650px) {
+    .find-restaurant {
+        &__title {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        &__subtitle {
+            font-size: 1.2rem;
+        }
+        &__search {
+            width: 100%;
+            font-size: 1.1rem;
+            gap: 10px;
+            &_wrapper {
+                flex-direction: column;
+                align-items: start;
+            }
+        }
+        &__search-button {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+        }
+        &__results_title {
+            font-size: 1.7rem;
+        }
+        &__results_output {
+            margin-top: 30px;
+            width: 100%;
+            gap: 30px;
+            span {
+                font-size: 1rem;
+            }
         }
     }
 }

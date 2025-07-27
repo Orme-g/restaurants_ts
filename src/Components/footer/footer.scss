@@ -25,6 +25,7 @@
     &__reg {
         @include mixins.light-text;
         margin-top: 20px;
+        padding-bottom: 20px;
         flex-grow: 1;
         p {
             color: #afafaf;
@@ -49,6 +50,10 @@
             color: #afafaf;
             font-size: 1.2rem;
         }
+    }
+    &__link {
+        display: flex;
+        align-items: baseline;
     }
     &__icon {
         transform: translateY(5px);

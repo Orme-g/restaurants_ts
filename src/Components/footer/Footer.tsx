@@ -31,51 +31,53 @@ const Footer: React.FC = () => {
             <div className="footer__links">
                 <ul className="footer__navigation">
                     <li className="footer__navigation_item">
-                        <Link to={"/info/advert"}>
-                            <ShowChartOutlinedIcon className="footer__icon" /> Реклама
+                        <Link to={"/info/advert"} className="footer__link">
+                            <ShowChartOutlinedIcon className="footer__icon" /> <span>Реклама</span>
                         </Link>
                     </li>
                     <li className="footer__navigation_item">
-                        <Link to={"/info/about"}>
-                            <InfoOutlinedIcon className="footer__icon" /> О нас
+                        <Link to={"/info/about"} className="footer__link">
+                            <InfoOutlinedIcon className="footer__icon" /> <span>О нас</span>
                         </Link>
                     </li>
                     <li className="footer__navigation_item">
-                        <a href="#">
-                            <SupportAgentOutlinedIcon className="footer__icon" /> Поддержка
-                        </a>
+                        <Link to={"#"} className="footer__link">
+                            <SupportAgentOutlinedIcon className="footer__icon" />
+                            <span>Поддержка</span>
+                        </Link>
                     </li>
                     <li className="footer__navigation_item">
-                        <a href="#">
-                            <AccessibilityNewOutlinedIcon className="footer__icon" /> Сотрудничество
-                        </a>
+                        <Link to={"#"} className="footer__link">
+                            <AccessibilityNewOutlinedIcon className="footer__icon" />{" "}
+                            <span>Сотрудничество</span>
+                        </Link>
                     </li>
                     <li className="footer__navigation_item">
-                        <a href="#">
-                            <QuizOutlinedIcon className="footer__icon" /> FAQ
-                        </a>
+                        <Link to={"#"} className="footer__link">
+                            <QuizOutlinedIcon className="footer__icon" /> <span>FAQ</span>
+                        </Link>
                     </li>
                 </ul>
                 <ul className="footer__social">
                     <li className="footer__social_link">
-                        <a href="#">
+                        <Link to={"#"}>
                             <FontAwesomeIcon icon={faTwitter} />
-                        </a>
+                        </Link>
                     </li>
                     <li className="footer__social_link">
-                        <a href="#">
+                        <Link to={"#"}>
                             <FontAwesomeIcon icon={faVk} />
-                        </a>
+                        </Link>
                     </li>
                     <li className="footer__social_link">
-                        <a href="#">
+                        <Link to={"#"}>
                             <FontAwesomeIcon icon={faInstagram} />
-                        </a>
+                        </Link>
                     </li>
                     <li className="footer__social_link">
-                        <a href="#">
+                        <Link to={"#"}>
                             <FontAwesomeIcon icon={faGithub} />
-                        </a>
+                        </Link>
                     </li>
                 </ul>
             </div>

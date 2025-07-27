@@ -81,11 +81,11 @@ const RestaurantSelectionPage: React.FC = () => {
                 </h3>
                 <div className="find-restaurant__search">
                     <div className="find-restaurant__search_wrapper">
-                        <div>Я около метро</div>
+                        <div>Я около метро:</div>
                         <SelectSubway handleChange={handleSelectSubway} multiple={false} />
                     </div>
                     <div className="find-restaurant__search_wrapper">
-                        <div>предпочтительная кухня</div>
+                        <div>Предпочтительная кухня:</div>
                         <Select
                             options={cousinesOptions}
                             onChange={handleSelectCousine}
@@ -132,7 +132,7 @@ const RestaurantSelectionPage: React.FC = () => {
                         />
                     </div>
                     <div className="find-restaurant__search_wrapper">
-                        <div>сначала показать рестораны</div>
+                        <div>Сначала показать рестораны:</div>
                         <Select
                             defaultValue={sortOptions[1]}
                             options={sortOptions}
@@ -164,15 +164,12 @@ const RestaurantSelectionPage: React.FC = () => {
                         />
                     </div>
                 </div>
-                <Button
-                    color="success"
-                    size="large"
-                    variant="contained"
-                    onClick={findRest}
-                    sx={{ marginTop: "50px" }}
-                >
-                    Поиск
-                </Button>
+                <div className="find-restaurant__search-button">
+                    <Button color="success" size="large" variant="contained" onClick={findRest}>
+                        Поиск
+                    </Button>
+                </div>
+
                 <div className="find-restaurant__results_title">Результаты поиска:</div>
                 <div className="find-restaurant__results_output">{searchResults}</div>
             </section>

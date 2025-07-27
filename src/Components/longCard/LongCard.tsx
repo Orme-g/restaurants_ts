@@ -10,11 +10,21 @@ interface ILongCardProps {
 }
 
 const LongCard: React.FC<ILongCardProps> = ({ data, type }) => {
-    const { name, title_image, short_description, rating, cousine, bill, createdAt, _id } = data;
+    const {
+        name,
+        title_image,
+        short_description,
+        averageRating,
+        rating,
+        cousine,
+        bill,
+        createdAt,
+        _id,
+    } = data;
     const link = type === "doner" ? `/best-doner/${_id}` : `/restaurant/${_id}`;
 
     const donerOrRestRating =
-        type === "restaurant" ? rating.overallRating : type === "doner" ? rating : null;
+        type === "restaurant" ? averageRating : type === "doner" ? rating : null;
     const date = transformDate(createdAt);
     const textField = (type: "restaurant" | "doner") => {
         switch (type) {
