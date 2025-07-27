@@ -9,7 +9,6 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 import { callSnackbar } from "../../reducers/interactive";
 import { useRegistrationMutation } from "../../services/authApi";
-// import { toggleRegisterWindowModal } from "../../reducers/interactive";
 
 import SmallSpinner from "../../Components/svg/SmallSpinner";
 import "./registerPage.scss";
@@ -167,11 +166,11 @@ const RegisterPage: React.FC = () => {
                             ) : (
                                 <Button type="submit">Зарегистрироваться</Button>
                             )}
+                            <Button />
                         </div>
                         <div className="register-page__error">{userExistError}</div>
                     </Stack>
                 </form>
-                {/* <button onClick={() => dispatch(toggleRegisterWindowModal())}>Check</button> */}
             </div>
         </div>
     );

@@ -58,15 +58,11 @@ const LoginPage: React.FC = () => {
             <div className="login-page__content">
                 <div className="login-page__title">Войдите в свой аккаунт на WEATS:</div>
                 <form className="login-page__form" onSubmit={handleSubmit(onSubmit)}>
-                    <Stack
-                        spacing={2}
-                        width={350}
-                        mb={2}
-                        sx={{ margin: "0 auto", marginTop: "30px" }}
-                    >
+                    <Stack spacing={2} width={"100%"}>
                         <TextField
                             label="Логин"
                             size="medium"
+                            fullWidth
                             {...register("login", {
                                 required: "Введите логин",
                             })}
@@ -77,20 +73,21 @@ const LoginPage: React.FC = () => {
                             label="Пароль"
                             type="password"
                             size="medium"
+                            fullWidth
                             {...register("password", {
                                 required: "Введите пароль",
                             })}
                             error={!!errors.password}
                             helperText={errors.password?.message}
                         />
-                        <div className="error-message">{errorMessage}</div>
+                        {errorMessage ? <div className="error-message">{errorMessage}</div> : null}
+                        <div className="login-page__actions">
+                            <Button type="submit">Войти</Button>
+                            <Link to={"/register"} className="login-page__link">
+                                Регистрация
+                            </Link>
+                        </div>
                     </Stack>
-                    <div className="login-page__actions">
-                        <Button type="submit">Войти</Button>
-                        <Link to={"/register"} className="login-page__link">
-                            Регистрация
-                        </Link>
-                    </div>
                 </form>
             </div>
         </div>
