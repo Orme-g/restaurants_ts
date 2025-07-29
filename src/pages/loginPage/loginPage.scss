@@ -36,8 +36,11 @@
         font-weight: 500;
         color: #1976d2;
         margin-left: 20px;
+        display: block;
     }
     &__actions {
         width: fit-content;
+        display: flex;
+        align-items: baseline;
     }
 }

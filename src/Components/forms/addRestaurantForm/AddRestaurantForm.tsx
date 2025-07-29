@@ -179,16 +179,16 @@ const AddRestaurantForm: React.FC<IAddRestaurantFormProps> = ({ displayState }) 
         // for (const [key, value] of formData) {
         //     console.log(key, ": ", value);
         // }
-        // addRestaurant(formData)
-        //     .unwrap()
-        //     .then(() => {
-        //         reset();
-        //         setCousine([]);
-        //         setSubway([]);
-        //         setCity("");
-        //         revokeURLs(selectedFiles);
-        //         setSelectedFiles([]);
-        //     });
+        addRestaurant(formData)
+            .unwrap()
+            .then(() => {
+                reset();
+                setCousine([]);
+                // setSubway([]);
+                setCity("");
+                revokeURLs(selectedFiles);
+                setSelectedFiles([]);
+            });
     };
     const imagePreviews = selectedFiles?.map(({ file, url }) => {
         const id = nanoid();
