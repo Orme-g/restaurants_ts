@@ -14,7 +14,7 @@ import "./footer.scss";
 
 const Footer: React.FC = () => {
     return (
-        <div className="footer">
+        <footer className="footer">
             <div className="footer__information">
                 <div className="footer__title">Weats</div>
                 <div className="footer__reg">
@@ -81,7 +81,7 @@ const Footer: React.FC = () => {
                     </li>
                 </ul>
             </div>
-        </div>
+        </footer>
     );
 };
 
