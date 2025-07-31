@@ -52,7 +52,7 @@ const LongCard: React.FC<ILongCardProps> = ({ data, type }) => {
         <Link to={link}>
             <div className="long-card__container">
                 <div className="long-card__picture">
-                    <img src={title_image} alt="doner" />
+                    <img src={title_image} loading="lazy" alt="doner" />
                 </div>
                 <div className="long-card__info">
                     <div className="long-card__header">

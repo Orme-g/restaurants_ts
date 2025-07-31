@@ -20,7 +20,7 @@ const LongCardSmall: React.FC<ICardData> = ({ data }) => {
         <Link to={`/event/${_id}`}>
             <div className={`long-card-small__container ${eventPassed ? "event-passed" : null}`}>
                 <div className="long-card-small__image">
-                    <img src={title_image} alt="event" />
+                    <img src={title_image} loading="lazy" alt="event" />
                 </div>
                 <div className="long-card-small__info">
                     <div className="long-card-small__info_name">{title}</div>

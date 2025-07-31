@@ -1,4 +1,4 @@
-import React, { useEffect, memo } from "react";
+import React, { useEffect } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { lazy, Suspense } from "react";
 import { useAppDispatch } from "../../types/store";

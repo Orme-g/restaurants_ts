@@ -52,6 +52,7 @@ const LoginPage: React.FC = () => {
                 navigate(from, { replace: true });
             })
             .catch((error) => setErrorMessage(error.data));
+        // .catch((error) => console.log(error.data));
     }
     return (
         <div className="login-page">
